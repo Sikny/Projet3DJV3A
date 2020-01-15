@@ -31,10 +31,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1441935793314570153}
+  - {fileID: 5392232499373327787}
   - {fileID: 1089070530660473833}
   - {fileID: 7657159800906789999}
-  - {fileID: 4259961224802223409}
-  - {fileID: 5392232499373327787}
+  - {fileID: 7665097408311110445}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -115,6 +115,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: ReturnButton
       objectReference: {fileID: 0}
+    - target: {fileID: 633210204896269902, guid: 2faac54c24c20714184c6ce8eaf41218,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 633210204896269902, guid: 2faac54c24c20714184c6ce8eaf41218,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 633210204896269902, guid: 2faac54c24c20714184c6ce8eaf41218,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 633210204896269902, guid: 2faac54c24c20714184c6ce8eaf41218,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7657159802675111798}
+    - target: {fileID: 633210204896269902, guid: 2faac54c24c20714184c6ce8eaf41218,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 633210204896269902, guid: 2faac54c24c20714184c6ce8eaf41218,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 633210204896269903, guid: 2faac54c24c20714184c6ce8eaf41218,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -153,7 +183,7 @@ PrefabInstance:
     - target: {fileID: 633210204896269903, guid: 2faac54c24c20714184c6ce8eaf41218,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 633210204896269903, guid: 2faac54c24c20714184c6ce8eaf41218,
         type: 3}
@@ -363,23 +393,13 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 815147607872096015}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &835893469504501210
+--- !u!1001 &6540474340227875972
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 7657159802675111802}
     m_Modifications:
-    - target: {fileID: 3497006108173238350, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 5.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3497006108173238350, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 6.199998
-      objectReference: {fileID: 0}
     - target: {fileID: 3497006108556717205, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -388,17 +408,7 @@ PrefabInstance:
     - target: {fileID: 3497006108653505374, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
       propertyPath: m_Text
-      value: Musiques
-      objectReference: {fileID: 0}
-    - target: {fileID: 3497006108653505375, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3497006108653505375, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.95
+      value: Sons
       objectReference: {fileID: 0}
     - target: {fileID: 3497006109807019982, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
@@ -498,7 +508,7 @@ PrefabInstance:
     - target: {fileID: 3497006109911429355, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3497006109911429355, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
@@ -513,17 +523,17 @@ PrefabInstance:
     - target: {fileID: 3497006109911429356, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
       propertyPath: m_Name
-      value: MusicsSlider
+      value: SoundsSlider
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66, type: 3}
---- !u!224 &4259961224802223409 stripped
+--- !u!224 &7657159800906789999 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3497006109911429355, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
     type: 3}
-  m_PrefabInstance: {fileID: 835893469504501210}
+  m_PrefabInstance: {fileID: 6540474340227875972}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6540474340227875972
+--- !u!1001 &6546045814245071814
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -538,7 +548,7 @@ PrefabInstance:
     - target: {fileID: 3497006108653505374, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
       propertyPath: m_Text
-      value: Sons
+      value: Musiques
       objectReference: {fileID: 0}
     - target: {fileID: 3497006109807019982, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
@@ -583,7 +593,7 @@ PrefabInstance:
     - target: {fileID: 3497006109911429355, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3497006109911429355, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
@@ -628,7 +638,7 @@ PrefabInstance:
     - target: {fileID: 3497006109911429355, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3497006109911429355, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
@@ -638,7 +648,7 @@ PrefabInstance:
     - target: {fileID: 3497006109911429355, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.8
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3497006109911429355, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
@@ -653,15 +663,15 @@ PrefabInstance:
     - target: {fileID: 3497006109911429356, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
         type: 3}
       propertyPath: m_Name
-      value: SoundsSlider
+      value: MusicsSlider
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66, type: 3}
---- !u!224 &7657159800906789999 stripped
+--- !u!224 &7665097408311110445 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3497006109911429355, guid: 653dd592a3f3a3f48ab0fa6fe3bd3e66,
     type: 3}
-  m_PrefabInstance: {fileID: 6540474340227875972}
+  m_PrefabInstance: {fileID: 6546045814245071814}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8635916926261136144
 PrefabInstance:
@@ -738,7 +748,7 @@ PrefabInstance:
     - target: {fileID: 4399452047555088059, guid: 98d365858f3ea2c408da6c9be4df8504,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4399452047555088059, guid: 98d365858f3ea2c408da6c9be4df8504,
         type: 3}
