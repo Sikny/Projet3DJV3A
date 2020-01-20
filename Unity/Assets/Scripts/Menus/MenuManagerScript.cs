@@ -6,13 +6,23 @@ namespace Menus {
     public class MenuManagerScript : MonoBehaviour {
         public GameObject optionsPanel;
         public ConnectForm connectionPanel;
-        public GameObject registerPanel;
+        public RegisterForm registerPanel;
         
         public void OnConnectConfirmPressed() {
-            connectionPanel.confirmButton.enabled = false;
-            StartCoroutine(ConnectModule.Instance.ConnectUser(connectionPanel.mail.text, connectionPanel.password.text, ProcessConnectionResult));
-            //StartCoroutine(ConnectModule.Instance.ConnectUser());
-            //  TODO CONNECT, LOADING, CONFIRM WINDOW
+            if(connectionPanel.ValidForm()) {
+                StartCoroutine(ConnectModule.Instance.ConnectUser(connectionPanel.mail.text, 
+                    connectionPanel.password.text, ProcessConnectionResult));
+                //  TODO CONNECT, LOADING, CONFIRM WINDOW
+            }
+        }
+
+        public void OnRegisterConfirmPressed() {
+            if (registerPanel.ValidForm()) {
+                StartCoroutine(ConnectModule.Instance.RegisterUser(registerPanel.firstName.text,
+                    registerPanel.lastName.text, registerPanel.mail.text, registerPanel.password.text,
+                    ProcessConnectionResult));
+                //  TODO CONNECT, LOADING, CONFIRM WINDOW
+            }
         }
 
         private void ProcessConnectionResult(UnityWebRequest www) {

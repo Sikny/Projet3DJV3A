@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Networking;
 
 namespace WebClient {
@@ -22,7 +21,6 @@ namespace WebClient {
                 new MultipartFormDataSection("mail", login),
                 new MultipartFormDataSection("psw", password)
             };
-            
             UnityWebRequest www = UnityWebRequest.Post("http://piwelengine.eu/sauron/WS/LOGIN.php", formData);
             yield return www.SendWebRequest();
             callback(www);
@@ -31,28 +29,19 @@ namespace WebClient {
         /**
          * Validates given token
          */
-        public IEnumerator ValidToken(string token) {
+        public IEnumerator ValidToken(string token, Action<UnityWebRequest> callback) {
             List<IMultipartFormSection> formData = new List<IMultipartFormSection> {
                 new MultipartFormDataSection("token", token),
             };
-            
             UnityWebRequest www = UnityWebRequest.Post("http://piwelengine.eu/sauron/WS/VALID_TOKEN.php", formData);
             yield return www.SendWebRequest();
-
-            if (www.isNetworkError || www.isHttpError) {
-                Debug.Log(www.error);
-            }
-            else {
-                Debug.Log("Connect success");
-                string result = www.downloadHandler.text;
-                Debug.Log("Received: " + result);
-            }
+            callback(www);
         }
 
         /**
          * Registers new user with given data
          */
-        public IEnumerator RegisterUser(string firstname, string lastname, string mail, string password, string confPassword) {
+        public IEnumerator RegisterUser(string firstname, string lastname, string mail, string password, Action<UnityWebRequest> callback) {
             // TODO VALUES CHECK
             List<IMultipartFormSection> formData = new List<IMultipartFormSection> {
                 new MultipartFormDataSection("firstname", firstname),
@@ -60,18 +49,9 @@ namespace WebClient {
                 new MultipartFormDataSection("mail", mail),
                 new MultipartFormDataSection("psw", password)
             };
-
             UnityWebRequest www = UnityWebRequest.Post("http://piwelengine.eu/sauron/WS/INSCRIPTION.php", formData);
             yield return www.SendWebRequest();
-
-            if (www.isNetworkError || www.isHttpError) {
-                Debug.Log(www.error);
-            }
-            else {
-                Debug.Log("Connect success");
-                string result = www.downloadHandler.text;
-                Debug.Log("Received: " + result);
-            }
+            callback(www);
             //{firstname:"xxx",lastname:"xxx",mail:"aaa@bbb.fr","psw":1234,psw2:"1234"
         }
     }
