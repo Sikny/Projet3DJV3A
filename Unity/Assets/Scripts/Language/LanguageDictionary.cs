@@ -9,68 +9,79 @@ namespace Language {
         Francais
     }
 
+    [Serializable]
     public class LanguageStringPair {
-        public Language Key;
-        public string Value;
+        public Language key;
+        public string value;
 
         public LanguageStringPair(Language lang, string val) {
-            Key = lang;
-            Value = val;
+            key = lang;
+            value = val;
+        }
+    }
+
+    [Serializable]
+    public class StringLanguagesPair {
+        public string key;
+        public List<LanguageStringPair> values;
+
+        public string GetTranslation(Language lang) {
+            int listLen = values.Count;
+            for (int i = 0; i < listLen; i++)
+                if (values[i].key == lang)
+                    return values[i].value;
+            return "UNDEFINED";
         }
     }
     
     public class LanguageDictionary : ScriptableObject {
-        private static LanguageDictionary _instance;
-        public static LanguageDictionary Instance {
-            get {
-                if(_instance == null) _instance = CreateInstance<LanguageDictionary>();
-                return _instance;
-            }
-        }
-        
-        public Dictionary<string, List<LanguageStringPair>> dictionary
-            = new Dictionary<string, List<LanguageStringPair>>();
+        public List<StringLanguagesPair> dictionary = new List<StringLanguagesPair>();
 
-        public string Translate(string value) {
-            foreach (var entry in dictionary) {
-                foreach (var lang in entry.Value) {
-                    if (lang.Value == value) {
-                        return GetString(value, GameSettings.Instance.language);
-                    }
-                }
-            }
-            return "Undefined";
+        private string GetString(string key, Language lang) {
+            int listLen = dictionary.Count;
+            for (int i = 0; i < listLen; i++)
+                if (dictionary[i].key == key)
+                    return dictionary[i].GetTranslation(lang);
+            return "UNDEFINED";
         }
 
-        public string GetString(string value, Language lang) {
-            var entry = dictionary[value];
-            foreach (var subEntry in entry) {
-                if (subEntry.Key == lang)
-                    return subEntry.Value;
-            }
-            return "Undefined";
+        public string GetString(string key) {
+            return GetString(key, GameSettings.Instance.language);
         }
 
-        public string GetString(string value) {
-            return GetString(value, GameSettings.Instance.language);
+        private bool Contains(string key) {
+            int listLen = dictionary.Count;
+            for (int i = 0; i < listLen; i++)
+                if (dictionary[i].key == key)
+                    return true;
+            return false;
         }
 
         public void AddEntry(string key = "") {
-            var entry = new List<LanguageStringPair>();
-            entry.Add(new LanguageStringPair(Language.English, ""));
-            entry.Add(new LanguageStringPair(Language.Francais, ""));
-            dictionary.Add(key, entry);
+            if (Contains(key)) return;
+            StringLanguagesPair entry = new StringLanguagesPair {
+                key = key, values = new List<LanguageStringPair>()
+            };
+            Array langArray = Enum.GetValues(typeof(Language));
+            int langLen = langArray.Length;
+            for(int i = 0; i < langLen; i++)
+                entry.values.Add(new LanguageStringPair((Language) langArray.GetValue(i), ""));
+            dictionary.Add(entry);
         }
 
-        public void DeleteEntry(string value) {
-            dictionary.Remove(value);
+        public void DeleteEntry(string key) {
+            int listLen = dictionary.Count;
+            for (int i = 0; i < listLen; i++)
+                if(dictionary[i].key == key)
+                    dictionary.RemoveAt(i);
         }
 
         public void ModifyKey(string key, string newKey) {
-            if (key == newKey) return;
-            AddEntry(newKey);
-            dictionary[newKey] = dictionary[key];
-            dictionary.Remove(key);
+            if (Contains(newKey)) return;
+            int listLen = dictionary.Count;
+            for (int i = 0; i < listLen; i++)
+                if (dictionary[i].key == key)
+                    dictionary[i].key = newKey;
         }
     }
 }
