@@ -10,8 +10,7 @@ namespace Editor {
         public static void Init(string value, int type) {
             LanguageDictionaryEditPopup window = CreateInstance<LanguageDictionaryEditPopup>();
             
-            var selection = Selection.GetFiltered<LanguageDictionary>(SelectionMode.Assets);
-            _languageDictionary = selection[0];
+            _languageDictionary = Resources.Load<LanguageDictionary>("Data/LanguagesDictionary");
             
             _oldValue = value;
             _value = value;
@@ -21,7 +20,7 @@ namespace Editor {
             r.x = position.x;
             r.y = position.y;
             r.width = 200f;
-            r.height = 50f;
+            r.height = 45f;
             window.position = r;
             window.ShowPopup();
         }
@@ -29,6 +28,7 @@ namespace Editor {
         void OnGUI()
         {
             _value = GUILayout.TextField(_value);
+            GUILayout.BeginHorizontal();
             if (GUILayout.Button("Ok")) {
                 if (_type == 0) {
                     // adding new entry
@@ -36,9 +36,13 @@ namespace Editor {
                 } else if (_type == 1) {
                     // modifying entry
                     _languageDictionary.ModifyKey(_oldValue, _value);
-                }//LanguageDictionary.Instance.ModifyKey(_oldValue, _value);
+                }
                 Close();
             }
+            if (GUILayout.Button("Cancel")) {
+                Close();
+            }
+            GUILayout.EndHorizontal();
         }
     }
 }

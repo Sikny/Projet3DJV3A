@@ -72,8 +72,10 @@ namespace Language {
         public void DeleteEntry(string key) {
             int listLen = dictionary.Count;
             for (int i = 0; i < listLen; i++)
-                if(dictionary[i].key == key)
+                if (dictionary[i].key == key) {
                     dictionary.RemoveAt(i);
+                    return;
+                }
         }
 
         public void ModifyKey(string key, string newKey) {

@@ -19,3 +19,9 @@ MonoBehaviour:
       value: A test
     - key: 1
       value: Un test
+  - key: addSection
+    values:
+    - key: 0
+      value: Add a section
+    - key: 1
+      value: Ajouter une section
