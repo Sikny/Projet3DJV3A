@@ -14,8 +14,8 @@ namespace Editor {
 
         private readonly GUIStyle _arrayStyle = new GUIStyle();
         private readonly GUIStyle _headerStyle = new GUIStyle();
-        private GUIStyle _linesStyle = new GUIStyle();
-        private GUIStyle _singleLStyle = new GUIStyle();
+        private readonly GUIStyle _linesStyle = new GUIStyle();
+        private readonly GUIStyle _singleLStyle = new GUIStyle();
 
         [MenuItem("Window/Languages Editor")]
         public static void ShowWindow() {
@@ -39,16 +39,14 @@ namespace Editor {
             _linesStyle.wordWrap = false;
             
             Texture2D lineBg = new Texture2D(1, 1);
-            lineBg.SetPixel(0, 0, Color.white);
-            arrayBg.Apply();
+            //lineBg.SetPixel(0, 0, Color.white);
+            lineBg.Apply();
             _singleLStyle.normal.background = lineBg;
             _singleLStyle.margin = new RectOffset(2, 2, 2, 2);
         }
 
         void GetScriptableObject() {
             _languageDictionary = Resources.Load<LanguageDictionary>("Data/LanguagesDictionary");
-            /*var selection = Selection.GetFiltered<LanguageDictionary>(SelectionMode.Assets);
-            _languageDictionary = selection[0];*/
         }
 
         void OnGUI() {
@@ -84,12 +82,16 @@ namespace Editor {
                 // one line (one dictionary entry)
                 GUILayout.BeginVertical(_singleLStyle);
                 GUILayout.BeginHorizontal();
-                GUILayout.BeginVertical();
-                GUILayout.Label(entry.key, GUILayout.Width(position.width*_columnsWidth[0]));
-                if (GUILayout.Button("Edit")) {
+                GUILayout.BeginVertical(GUILayout.Width(position.width*_columnsWidth[0]));
+                GUILayout.Label(entry.key);
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+                if (GUILayout.Button("Edit", GUILayout.Width(50f))) {
                     LanguageDictionaryEditPopup.Init(entry.key, 1);
                     break;
                 }
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
                 GUILayout.EndVertical();
                 GUILayout.BeginVertical();
                 var entryLen = entry.values.Count;
@@ -104,10 +106,16 @@ namespace Editor {
                 }
                 GUILayout.EndVertical();
                 GUILayout.EndHorizontal();
-                if (GUILayout.Button("Remove")) {
+                Color defaultBg = GUI.backgroundColor;
+                GUI.backgroundColor = Color.red;
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+                if (GUILayout.Button("-", GUILayout.Width(50f))) {
                     _languageDictionary.DeleteEntry(entry.key);
                     break;
                 }
+                GUILayout.EndHorizontal();
+                GUI.backgroundColor = defaultBg;
                 GUILayout.EndVertical();
             }
             if (GUILayout.Button("Add")) {
