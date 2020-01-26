@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b656f78dfe813f4585c19b019a55c95, type: 3}
   m_Name: LanguagesDictionary
   m_EditorClassIdentifier: 
+  dictionary:
+  - key: Test
+    values:
+    - key: 0
+      value: A test
+    - key: 1
+      value: Un test

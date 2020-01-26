@@ -5,10 +5,17 @@ using UnityEngine;
 namespace Editor {
     public class LanguageDictionaryEditPopup : EditorWindow {
         private static string _value, _oldValue;
-        public static void EditKey(string value) {
+        private static int _type;
+        private static LanguageDictionary _languageDictionary;
+        public static void Init(string value, int type) {
             LanguageDictionaryEditPopup window = CreateInstance<LanguageDictionaryEditPopup>();
+            
+            var selection = Selection.GetFiltered<LanguageDictionary>(SelectionMode.Assets);
+            _languageDictionary = selection[0];
+            
             _oldValue = value;
             _value = value;
+            _type = type;
             Rect r = window.position;
             Vector2 position = GUIUtility.GUIToScreenPoint(Event.current.mousePosition);
             r.x = position.x;
@@ -23,7 +30,13 @@ namespace Editor {
         {
             _value = GUILayout.TextField(_value);
             if (GUILayout.Button("Ok")) {
-                LanguageDictionary.Instance.ModifyKey(_oldValue, _value);
+                if (_type == 0) {
+                    // adding new entry
+                    _languageDictionary.AddEntry(_value);
+                } else if (_type == 1) {
+                    // modifying entry
+                    _languageDictionary.ModifyKey(_oldValue, _value);
+                }//LanguageDictionary.Instance.ModifyKey(_oldValue, _value);
                 Close();
             }
         }
