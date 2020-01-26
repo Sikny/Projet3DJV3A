@@ -1,7 +1,6 @@
 ﻿using System;
 using Language;
 using UnityEditor;
-using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
 namespace Editor {
@@ -15,18 +14,18 @@ namespace Editor {
 
         private readonly GUIStyle _arrayStyle = new GUIStyle();
         private readonly GUIStyle _headerStyle = new GUIStyle();
-        private GUIStyle _linesStyle = new GUIStyle();
-        private GUIStyle _singleLStyle = new GUIStyle();
+        private readonly GUIStyle _linesStyle = new GUIStyle();
+        private readonly GUIStyle _singleLStyle = new GUIStyle();
 
         [MenuItem("Window/Languages Editor")]
         public static void ShowWindow() {
-            GetWindow<LanguageDictionaryWindow>("Languages Editor")
-                .Show();
+            LanguageDictionaryWindow window = GetWindow<LanguageDictionaryWindow>("Languages Editor");
+            window.GetScriptableObject();
+            window.Show();
         }
-
         private void OnEnable() {
+            GetScriptableObject();
             _languagesList = Enum.GetValues(typeof(Language.Language));
-            _languageDictionary = LanguageDictionary.Instance;
             
             _arrayStyle.margin = new RectOffset(5, 5, 0, 0);
             
@@ -40,10 +39,14 @@ namespace Editor {
             _linesStyle.wordWrap = false;
             
             Texture2D lineBg = new Texture2D(1, 1);
-            lineBg.SetPixel(0, 0, Color.white);
-            arrayBg.Apply();
+            //lineBg.SetPixel(0, 0, Color.white);
+            lineBg.Apply();
             _singleLStyle.normal.background = lineBg;
             _singleLStyle.margin = new RectOffset(2, 2, 2, 2);
+        }
+
+        void GetScriptableObject() {
+            _languageDictionary = Resources.Load<LanguageDictionary>("Data/LanguagesDictionary");
         }
 
         void OnGUI() {
@@ -79,37 +82,51 @@ namespace Editor {
                 // one line (one dictionary entry)
                 GUILayout.BeginVertical(_singleLStyle);
                 GUILayout.BeginHorizontal();
-                GUILayout.BeginVertical();
-                GUILayout.Label(entry.Key, GUILayout.Width(position.width*_columnsWidth[0]));
-                if (GUILayout.Button("Edit")) {
-                    LanguageDictionaryEditPopup.EditKey(entry.Key);
+                GUILayout.BeginVertical(GUILayout.Width(position.width*_columnsWidth[0]));
+                GUILayout.Label(entry.key);
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+                if (GUILayout.Button("Edit", GUILayout.Width(50f))) {
+                    LanguageDictionaryEditPopup.Init(entry.key, 1);
                     break;
                 }
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
                 GUILayout.EndVertical();
                 GUILayout.BeginVertical();
-                var entryLen = entry.Value.Count;
+                var entryLen = entry.values.Count;
                 for (var i = 0; i < entryLen; i++) {
                     // one language
-                    var lang = entry.Value[i];
+                    var lang = entry.values[i];
                     GUILayout.BeginHorizontal();
-                    GUILayout.Label(lang.Key.ToString(), GUILayout.MaxWidth(position.width*_columnsWidth[1]), 
-                        GUILayout.MinWidth(60f));
-                    lang.Value = GUILayout.TextArea(lang.Value);
+                    GUILayout.Label(lang.key.ToString(),
+                        GUILayout.MaxWidth(position.width*_columnsWidth[1]), GUILayout.MinWidth(60f));
+                    lang.value = GUILayout.TextArea(lang.value);
                     GUILayout.EndHorizontal();
                 }
                 GUILayout.EndVertical();
                 GUILayout.EndHorizontal();
-                if (GUILayout.Button("Remove")) {
-                    _languageDictionary.DeleteEntry(entry.Key);
+                Color defaultBg = GUI.backgroundColor;
+                GUI.backgroundColor = Color.red;
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+                if (GUILayout.Button("-", GUILayout.Width(50f))) {
+                    _languageDictionary.DeleteEntry(entry.key);
                     break;
                 }
+                GUILayout.EndHorizontal();
+                GUI.backgroundColor = defaultBg;
                 GUILayout.EndVertical();
             }
             if (GUILayout.Button("Add")) {
-                _languageDictionary.AddEntry();
+                LanguageDictionaryEditPopup.Init("", 0);
             }
             GUILayout.EndVertical();
             GUILayout.EndVertical();
+            if (GUI.changed) {
+                Undo.RecordObject(_languageDictionary, "Dictionary edited");
+                EditorUtility.SetDirty(_languageDictionary);
+            }
         }
     }
 }
