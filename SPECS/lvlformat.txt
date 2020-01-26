@@ -1,0 +1,35 @@
+format des .lvl
+
+0:	globaldifficulty	[1o]	//Global difficulty (0->4)
+1:	maxBudget		[2o]	//Max Budget(0->32,0000)
+3:	ptrBeginModifier	[2o]	//offset to begin of file to read heightmap modifiers
+5:	sizeModifier		[2o]	//number region to modifier
+7:	ptrBeginLocalDifficulty	[2o]	//offset to begin of file to read local difficulties
+9:	sizeBeginLocalDifficulty[2o]	//number region to apply local difficulty
+11:	ptrBeginCastle		[2o]	//offset to begin of file to read placements of pieces of castle
+13:	sizeBeginCastle		[2o]	//number region to apply placement of pieces of castle
+
+ptrBeginModifier:		DATAS_modifierHeighMap	[8o * sizeModifier]
+ptrBeginLocalDifficulty	:	DATAS_localDifficulty	[5o * sizeBeginLocalDifficulty]
+ptrBeginCastle:			DATAS_castle		[7o * sizeBeginCastle]
+
+------------------------------------------------------------------------------------------------------------
+
+modifierHeightMap:		[8o]	
+	0:	xCoord		[2o]	//X Coord
+	2:	zCoord		[2o]	//Z Coord
+	4:	height		[4o]	//Heightmap
+
+
+localDifficulty:		[5o]	
+	0:	xCoord		[2o]	//X Coord
+	2:	zCoord		[2o]	//Z Coord
+	4:	difficulty	[1o]	//Difficulty (0->5)
+
+castle:		[7o]	
+	0:	xCoord		[2o]	//X Coord
+	2:	zCoord		[2o]	//Z Coord
+	4:	yCoord		[2o]	//Y Coord
+	6:	idPieces	[1o]	//ID of pieces of the castle
+
+

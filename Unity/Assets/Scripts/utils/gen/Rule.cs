@@ -56,6 +56,7 @@ public class Rule
 
             if(genRand.Next(0,5) == 0)
             {
+                // 5 levels of localdifficulty (0 = no spawn; 5 = max spawn)
                 this.localSpawnDifficulty.Add(posSpawner, genRand.Next(1, 5));
             }
 
