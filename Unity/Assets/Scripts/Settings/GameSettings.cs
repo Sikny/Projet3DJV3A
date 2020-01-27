@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 
 namespace Settings {
-    public class GameSettings : MonoBehaviour
-    {
-    
+    [CreateAssetMenu(fileName = "GameSettings", menuName = "ScriptableObjects/GameSettings")]
+    public class GameSettings : ScriptableObject {
+        public float soundVolume;
+        public float musicVolume;
+        public Language.Language language;
     }
 }
