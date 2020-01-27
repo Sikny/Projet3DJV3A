@@ -1,7 +1,5 @@
 <?php
-    
-    $salt = "SAURONTHEBEST";
-    
+
     $mail = $_POST["mail"];
     $psw = $_POST["psw"];
 
@@ -12,22 +10,22 @@
         echo "NOK-PASSWORD-NOT-FOUND";
     }else{
         try{
-            $bdd = new PDO('mysql:host=piwelengine.eu;dbname=piweleng_sauron', 'piweleng_root', 'atomic85340');
+            $bdd = new PDO('mysql:host=51.91.252.22:3306;dbname=projet_3djv', 'pa_3a_3djv', 'Khs6g4j8l9');
         }catch(Exception $ex){
             die("NOK-"+$ex);
         }
-        $psw = hash("sha256",$psw.$salt);
-        $req = $bdd->prepare('SELECT user FROM USERS WHERE
-        mail=:mail AND password=:psw');
+        $psw = crypt($psw,"-FFW_75~#"); // Todo: sha128
+        $req = $bdd->prepare('SELECT id FROM USER WHERE
+        mail=:mail AND psw=:psw');
         $req->execute(array("mail"=>$mail, "psw"=>$psw));
         $data = $req->fetch();
-        if(isset($data["user"])){
+        if(isset($data["id"])){
             $token = random(32);
-            session_id($token);
+            session_id($token); // init session with the generated token
             session_start();
             $_SESSION["token"] = $token;
-            $_SESSION["id"] = $data["user"];
-            echo $_SESSION["token"];
+            $_SESSION["id"] = $data["id"];
+            echo $_SESSION["token"]; 
         }else{
             echo "NOK-UNIDENTIFIED";
         }
