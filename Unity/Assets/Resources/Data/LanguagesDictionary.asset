@@ -31,3 +31,45 @@ MonoBehaviour:
       value: Language
     - key: 1
       value: Langue
+  - key: storyModeLabel
+    values:
+    - key: 0
+      value: Story mode
+    - key: 1
+      value: Mode histoire
+  - key: freeModeLabel
+    values:
+    - key: 0
+      value: Free mode
+    - key: 1
+      value: Mode libre
+  - key: levelEditorLabel
+    values:
+    - key: 0
+      value: Level editor
+    - key: 1
+      value: Editeur de niveaux
+  - key: settingsLabel
+    values:
+    - key: 0
+      value: Settings
+    - key: 1
+      value: Options
+  - key: exitLabel
+    values:
+    - key: 0
+      value: Exit
+    - key: 1
+      value: Quitter
+  - key: connectLabel
+    values:
+    - key: 0
+      value: Connect
+    - key: 1
+      value: Se connecter
+  - key: registerLabel
+    values:
+    - key: 0
+      value: Register
+    - key: 1
+      value: "Cr\xE9er un compte"

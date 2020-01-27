@@ -331,7 +331,7 @@ PrefabInstance:
     - target: {fileID: 1538591994930796200, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}
       propertyPath: m_Text
-      value: Mot de passe
+      value: passwordLabel
       objectReference: {fileID: 0}
     - target: {fileID: 3150058846161109342, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}
@@ -483,7 +483,7 @@ PrefabInstance:
     - target: {fileID: 1538591994930796200, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}
       propertyPath: m_Text
-      value: Nom
+      value: lNameLabel
       objectReference: {fileID: 0}
     - target: {fileID: 3150058846161109342, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}
@@ -640,7 +640,7 @@ PrefabInstance:
     - target: {fileID: 4399452047555088058, guid: 98d365858f3ea2c408da6c9be4df8504,
         type: 3}
       propertyPath: m_Text
-      value: "Cr\xE9er un compte"
+      value: registerLabel
       objectReference: {fileID: 0}
     - target: {fileID: 4399452047555088058, guid: 98d365858f3ea2c408da6c9be4df8504,
         type: 3}
@@ -1042,7 +1042,7 @@ PrefabInstance:
     - target: {fileID: 633210206118253867, guid: 2faac54c24c20714184c6ce8eaf41218,
         type: 3}
       propertyPath: m_Text
-      value: Confirmer
+      value: confirmLabel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2faac54c24c20714184c6ce8eaf41218, type: 3}
@@ -1229,7 +1229,7 @@ PrefabInstance:
     - target: {fileID: 1538591994930796200, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}
       propertyPath: m_Text
-      value: "Pr\xE9nom"
+      value: fNameLabel
       objectReference: {fileID: 0}
     - target: {fileID: 3150058846161109342, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}
@@ -1521,7 +1521,7 @@ PrefabInstance:
     - target: {fileID: 1538591994930796200, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}
       propertyPath: m_Text
-      value: Confirmer mot de passe
+      value: passwordRepeatLabel
       objectReference: {fileID: 0}
     - target: {fileID: 3150058846161109342, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}

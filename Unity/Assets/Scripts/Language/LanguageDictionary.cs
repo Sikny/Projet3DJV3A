@@ -30,7 +30,7 @@ namespace Language {
             for (int i = 0; i < listLen; i++)
                 if (values[i].key == lang)
                     return values[i].value;
-            return "UNDEFINED";
+            return key;
         }
     }
     
@@ -43,7 +43,7 @@ namespace Language {
                 if (dictionary[i].key == key)
                     return dictionary[i].GetTranslation(lang);
             }
-            return "UNDEFINED";
+            return key;
         }
 
         private bool Contains(string key) {
