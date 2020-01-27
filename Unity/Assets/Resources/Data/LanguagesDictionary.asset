@@ -73,3 +73,51 @@ MonoBehaviour:
       value: Register
     - key: 1
       value: "Cr\xE9er un compte"
+  - key: returnLabel
+    values:
+    - key: 0
+      value: Return
+    - key: 1
+      value: Retour
+  - key: connectBLabel
+    values:
+    - key: 0
+      value: Log in
+    - key: 1
+      value: Connexion
+  - key: passwordLabel
+    values:
+    - key: 0
+      value: Password
+    - key: 1
+      value: Mot de passe
+  - key: mailLabel
+    values:
+    - key: 0
+      value: Email
+    - key: 1
+      value: Email
+  - key: confirmLabel
+    values:
+    - key: 0
+      value: Confirm
+    - key: 1
+      value: Confirmer
+  - key: fNameLabel
+    values:
+    - key: 0
+      value: First name
+    - key: 1
+      value: "Pr\xE9nom"
+  - key: lNameLabel
+    values:
+    - key: 0
+      value: Last name
+    - key: 1
+      value: Nom
+  - key: passwordRepeatLabel
+    values:
+    - key: 0
+      value: Confirm password
+    - key: 1
+      value: Confirmer mot de passe
