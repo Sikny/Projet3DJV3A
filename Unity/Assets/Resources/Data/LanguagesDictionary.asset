@@ -13,15 +13,21 @@ MonoBehaviour:
   m_Name: LanguagesDictionary
   m_EditorClassIdentifier: 
   dictionary:
-  - key: Test
+  - key: soundsLabel
     values:
     - key: 0
-      value: A test
+      value: Sounds
     - key: 1
-      value: Un test
-  - key: addSection
+      value: Sons
+  - key: musicLabel
     values:
     - key: 0
-      value: Add a section
+      value: Music
     - key: 1
-      value: Ajouter une section
+      value: Musique
+  - key: langLabel
+    values:
+    - key: 0
+      value: Language
+    - key: 1
+      value: Langue

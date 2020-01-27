@@ -1,18 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Language;
+using Settings;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class OptionsPanel : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
+namespace Menus {
+    public class OptionsPanel : MonoBehaviour {
+        public Slider soundsSlider;
         
-    }
+        public Slider musicSlider;
+        
+        public Dropdown languageDropdown;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private GameSettings _gameSettings;
+        private LanguageDictionary _langDict;
+
+        private void Awake() {
+            if(_gameSettings == null) _gameSettings = Resources.Load<GameSettings>("Data/GameSettings");
+            if (_langDict == null) _langDict = Resources.Load<LanguageDictionary>("Data/LanguagesDictionary");
+            soundsSlider.value = _gameSettings.soundVolume;
+            musicSlider.value = _gameSettings.musicVolume;
+            
+            Text[] texts = FindObjectsOfType<Text>();
+            int textsCount = texts.Length;
+            for (int i = 0; i < textsCount; i++) {
+                texts[i].text = _langDict.GetString(texts[i].text, _gameSettings.language);
+            }
+        }
     }
 }
