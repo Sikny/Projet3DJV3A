@@ -28,6 +28,7 @@ public class Rule
     {
         mapModifierHeightmap = new Dictionary<SeriaVector2, float>();
         localSpawnDifficulty = new Dictionary<SeriaVector2, int>();
+        mapCastlePiecesPlacement = new Dictionary<int, Castle>();
     }
     // Random gen
     /*
