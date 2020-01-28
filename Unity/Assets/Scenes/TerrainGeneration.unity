@@ -393,5 +393,10 @@ PrefabInstance:
       propertyPath: waterCount
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5637388254737945374, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: rules.SeedWorld
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 023c5a39670951d49be3c39d866d3307, type: 3}

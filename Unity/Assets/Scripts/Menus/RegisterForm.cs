@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace WebClient {
+namespace Menus {
     public class RegisterForm : MonoBehaviour {
         public InputField firstName;
         public InputField lastName;

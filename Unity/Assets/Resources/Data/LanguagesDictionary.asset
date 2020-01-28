@@ -13,15 +13,111 @@ MonoBehaviour:
   m_Name: LanguagesDictionary
   m_EditorClassIdentifier: 
   dictionary:
-  - key: Test
+  - key: soundsLabel
     values:
     - key: 0
-      value: A test
+      value: Sounds
     - key: 1
-      value: Un test
-  - key: addSection
+      value: Sons
+  - key: musicLabel
     values:
     - key: 0
-      value: Add a section
+      value: Music
     - key: 1
-      value: Ajouter une section
+      value: Musique
+  - key: langLabel
+    values:
+    - key: 0
+      value: Language
+    - key: 1
+      value: Langue
+  - key: storyModeLabel
+    values:
+    - key: 0
+      value: Story mode
+    - key: 1
+      value: Mode histoire
+  - key: freeModeLabel
+    values:
+    - key: 0
+      value: Free mode
+    - key: 1
+      value: Mode libre
+  - key: levelEditorLabel
+    values:
+    - key: 0
+      value: Level editor
+    - key: 1
+      value: Editeur de niveaux
+  - key: settingsLabel
+    values:
+    - key: 0
+      value: Settings
+    - key: 1
+      value: Options
+  - key: exitLabel
+    values:
+    - key: 0
+      value: Exit
+    - key: 1
+      value: Quitter
+  - key: connectLabel
+    values:
+    - key: 0
+      value: Connect
+    - key: 1
+      value: Se connecter
+  - key: registerLabel
+    values:
+    - key: 0
+      value: Register
+    - key: 1
+      value: "Cr\xE9er un compte"
+  - key: returnLabel
+    values:
+    - key: 0
+      value: Return
+    - key: 1
+      value: Retour
+  - key: connectBLabel
+    values:
+    - key: 0
+      value: Log in
+    - key: 1
+      value: Connexion
+  - key: passwordLabel
+    values:
+    - key: 0
+      value: Password
+    - key: 1
+      value: Mot de passe
+  - key: mailLabel
+    values:
+    - key: 0
+      value: Email
+    - key: 1
+      value: Email
+  - key: confirmLabel
+    values:
+    - key: 0
+      value: Confirm
+    - key: 1
+      value: Confirmer
+  - key: fNameLabel
+    values:
+    - key: 0
+      value: First name
+    - key: 1
+      value: "Pr\xE9nom"
+  - key: lNameLabel
+    values:
+    - key: 0
+      value: Last name
+    - key: 1
+      value: Nom
+  - key: passwordRepeatLabel
+    values:
+    - key: 0
+      value: Confirm password
+    - key: 1
+      value: Confirmer mot de passe

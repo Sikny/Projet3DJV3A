@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -50,7 +48,7 @@ namespace TerrainGeneration {
          * Builds water areas into array
          */
         private void BuildArray() {
-            Random.InitState(terrainOptions.seed);
+            Random.InitState(terrainOptions.rules.seedWorld);
             // build water areas
             for (int i = 0; i < terrainOptions.waterCount; i++) {
                 BuildOneWaterArea();

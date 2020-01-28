@@ -30,23 +30,20 @@ namespace Language {
             for (int i = 0; i < listLen; i++)
                 if (values[i].key == lang)
                     return values[i].value;
-            return "UNDEFINED";
+            return key;
         }
     }
     
     public class LanguageDictionary : ScriptableObject {
         public List<StringLanguagesPair> dictionary = new List<StringLanguagesPair>();
 
-        private string GetString(string key, Language lang) {
+        public string GetString(string key, Language lang) {
             int listLen = dictionary.Count;
-            for (int i = 0; i < listLen; i++)
+            for (int i = 0; i < listLen; i++) {
                 if (dictionary[i].key == key)
                     return dictionary[i].GetTranslation(lang);
-            return "UNDEFINED";
-        }
-
-        public string GetString(string key) {
-            return GetString(key, GameSettings.Instance.language);
+            }
+            return key;
         }
 
         private bool Contains(string key) {

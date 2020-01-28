@@ -352,7 +352,7 @@ PrefabInstance:
     - target: {fileID: 633210206118253867, guid: 2faac54c24c20714184c6ce8eaf41218,
         type: 3}
       propertyPath: m_Text
-      value: Options
+      value: settingsLabel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2faac54c24c20714184c6ce8eaf41218, type: 3}
@@ -482,7 +482,7 @@ PrefabInstance:
     - target: {fileID: 633210206118253867, guid: 2faac54c24c20714184c6ce8eaf41218,
         type: 3}
       propertyPath: m_Text
-      value: Se connecter
+      value: connectLabel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2faac54c24c20714184c6ce8eaf41218, type: 3}
@@ -612,7 +612,7 @@ PrefabInstance:
     - target: {fileID: 633210206118253867, guid: 2faac54c24c20714184c6ce8eaf41218,
         type: 3}
       propertyPath: m_Text
-      value: Editeur de niveaux
+      value: levelEditorLabel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2faac54c24c20714184c6ce8eaf41218, type: 3}
@@ -867,7 +867,7 @@ PrefabInstance:
     - target: {fileID: 633210206118253867, guid: 2faac54c24c20714184c6ce8eaf41218,
         type: 3}
       propertyPath: m_Text
-      value: "Mode sc\xE9naris\xE9"
+      value: storyModeLabel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2faac54c24c20714184c6ce8eaf41218, type: 3}
@@ -997,7 +997,7 @@ PrefabInstance:
     - target: {fileID: 633210206118253867, guid: 2faac54c24c20714184c6ce8eaf41218,
         type: 3}
       propertyPath: m_Text
-      value: Quitter
+      value: exitLabel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2faac54c24c20714184c6ce8eaf41218, type: 3}
@@ -1127,7 +1127,7 @@ PrefabInstance:
     - target: {fileID: 633210206118253867, guid: 2faac54c24c20714184c6ce8eaf41218,
         type: 3}
       propertyPath: m_Text
-      value: Mode libre
+      value: freeModeLabel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2faac54c24c20714184c6ce8eaf41218, type: 3}
@@ -1257,7 +1257,7 @@ PrefabInstance:
     - target: {fileID: 633210206118253867, guid: 2faac54c24c20714184c6ce8eaf41218,
         type: 3}
       propertyPath: m_Text
-      value: "Cr\xE9er un compte"
+      value: registerLabel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2faac54c24c20714184c6ce8eaf41218, type: 3}

@@ -12,6 +12,8 @@ namespace Editor {
             0.3f, 0.1f
         };
 
+        private Vector2 _scrollPosition;
+
         private readonly GUIStyle _arrayStyle = new GUIStyle();
         private readonly GUIStyle _headerStyle = new GUIStyle();
         private readonly GUIStyle _linesStyle = new GUIStyle();
@@ -77,6 +79,7 @@ namespace Editor {
                 GUILayout.Label("Value");
             GUILayout.EndHorizontal();
             // array
+            _scrollPosition = GUILayout.BeginScrollView(_scrollPosition);
             GUILayout.BeginVertical(_linesStyle);
             foreach (var entry in _languageDictionary.dictionary) {
                 // one line (one dictionary entry)
@@ -116,12 +119,13 @@ namespace Editor {
                 }
                 GUILayout.EndHorizontal();
                 GUI.backgroundColor = defaultBg;
-                GUILayout.EndVertical();
+                GUILayout.EndVertical();    // line end
             }
             if (GUILayout.Button("Add")) {
                 LanguageDictionaryEditPopup.Init("", 0);
             }
             GUILayout.EndVertical();
+            GUILayout.EndScrollView();
             GUILayout.EndVertical();
             if (GUI.changed) {
                 Undo.RecordObject(_languageDictionary, "Dictionary edited");
