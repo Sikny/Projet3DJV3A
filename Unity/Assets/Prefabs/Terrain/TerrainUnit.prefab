@@ -106,6 +106,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09b8ab17996e254093bc474e522b4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materialDict: {fileID: 11400000, guid: 743c386429cc1cd4290cf07a85ba3cc1, type: 2}
-  type: 0
-  selfRenderer: {fileID: 324159078092572739}

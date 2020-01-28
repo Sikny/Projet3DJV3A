@@ -17,6 +17,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrassUnit
       objectReference: {fileID: 0}
+    - target: {fileID: 3487256774769238499, guid: 93981e64efbaf18419aa084396131e71,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4778775657262614236, guid: 93981e64efbaf18419aa084396131e71,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -77,5 +82,21 @@ PrefabInstance:
       propertyPath: type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5286798445490785008, guid: 93981e64efbaf18419aa084396131e71,
+        type: 3}
+      propertyPath: rendrer
+      value: 
+      objectReference: {fileID: 4943029662160198263}
+    - target: {fileID: 5286798445490785008, guid: 93981e64efbaf18419aa084396131e71,
+        type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 4943029662160198263}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93981e64efbaf18419aa084396131e71, type: 3}
+--- !u!23 &4943029662160198263 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 324159078092572739, guid: 93981e64efbaf18419aa084396131e71,
+    type: 3}
+  m_PrefabInstance: {fileID: 4676583314028106292}
+  m_PrefabAsset: {fileID: 0}
