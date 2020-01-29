@@ -11,7 +11,7 @@ namespace TerrainGeneration {
         const int ENNEMY_SPAWN_RADIUS = 100; // Temporary
 
 
-        public int seedWorld; // used in free-mode(0 in level mode)
+        public int seedWorld;    // used in free-mode(0 in level mode)
 
         // This following is set from .lvl file or randomize based on seedWorl in free-mode
         int maxBudget;

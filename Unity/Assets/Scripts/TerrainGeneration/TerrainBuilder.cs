@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,7 +13,13 @@ namespace TerrainGeneration {
 
         private readonly List<KeyValuePair<ZoneType, UnitList>> _terrainData = new List<KeyValuePair<ZoneType, UnitList>>();
         
+        private int[,] grid;
+        private String printGrid = "\n";
+
+        //private Grid grid;
+
         private void Start() {
+            grid = new int[terrainOptions.height, terrainOptions.width];
             BuildArray();
             BuildTerrain();
         }
@@ -26,6 +34,7 @@ namespace TerrainGeneration {
             // basic fill
             for (int i = 0; i < terrainOptions.width; i++) {
                 for (int j = 0; j < terrainOptions.height; j++) {
+                    grid[j, i] = 0;
                     position = transform.position + new Vector3(unitScale*i+xModifier, 0,
                                    unitScale*j+yModifier);
                     GameObject unit = Instantiate(unitDict.GetPrefab(ZoneType.Grass), position, Quaternion.identity);
@@ -81,8 +90,23 @@ namespace TerrainGeneration {
                     || !waterList.HasNeighbour(randomX, randomY))
                     continue;
                 waterList.Add(randomX, randomY);
+                grid[randomY, randomX] = 1;
             }
             _terrainData.Add(new KeyValuePair<ZoneType, UnitList>(ZoneType.Water, waterList));
         }
+       
+        private void DisplayGrid()
+        {
+            for (int i = 0; i < terrainOptions.height; i++) {
+                for (int j = 0; j < terrainOptions.width; j++)
+                {
+                    printGrid += grid[terrainOptions.height-i-1, j];
+                }
+
+                printGrid += "\n";
+            }
+            Debug.Log(printGrid);
+        }
     }
 }
+
