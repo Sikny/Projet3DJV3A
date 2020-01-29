@@ -14,12 +14,15 @@ namespace TerrainGeneration {
         private readonly List<KeyValuePair<ZoneType, UnitList>> _terrainData = new List<KeyValuePair<ZoneType, UnitList>>();
         private int[,] grid;
         private String printGrid = "\n";
+        private Renderer[,] cubeRenderers;
 
-        //private Grid grid;
+        private Grid gridObject;
 
 
         private void Start() {
+            gridObject = Grid.getInstance();
             grid = new int[terrainOptions.height, terrainOptions.width];
+            cubeRenderers = new Renderer[terrainOptions.height, terrainOptions.width];
             BuildArray();
             BuildTerrain();
         }
@@ -41,8 +44,8 @@ namespace TerrainGeneration {
                                    unitScale*j+yModifier);
                     GameObject unit = Instantiate(unitDict.GetPrefab(ZoneType.Grass), position, Quaternion.identity);
                     unit.transform.SetParent(transform);
+                    cubeRenderers[j, i] = unit.GetComponent<Renderer>();
                 }
-
             }
 
 
@@ -53,7 +56,9 @@ namespace TerrainGeneration {
                                    unitScale * value.Value.Get(i).y+yModifier);
                     GameObject unit = Instantiate(unitDict.GetPrefab(value.Key), position, Quaternion.identity);
                     unit.transform.SetParent(transform);
+
                 }
+                
             }
         }
         
@@ -100,6 +105,9 @@ namespace TerrainGeneration {
                 grid[randomY, randomX] = 1;
             }
             _terrainData.Add(new KeyValuePair<ZoneType, UnitList>(ZoneType.Water, waterList));
+            gridObject.GridArray = grid;
+            gridObject.PrintGrid = printGrid;
+            gridObject.CubeRenderers = cubeRenderers;
         }
 
         private void DisplayGrid()
@@ -114,5 +122,6 @@ namespace TerrainGeneration {
             }
             Debug.Log(printGrid);
         }
+        
     }
 }

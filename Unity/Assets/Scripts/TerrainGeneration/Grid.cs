@@ -3,10 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grid : MonoBehaviour
+public class Grid
 {
+    private static Grid instance;
+
     private int[,] gridArray;
-    private String printGrid = "\n";
+    private String printGrid;
+
+    private int tileX;
+    private int tileZ;
+
+    private Renderer[,] cubeRenderers;
+
+    private Grid()
+    {
+        gridArray = new int[500,500];
+        printGrid = "\n";
+
+        tileX = 5;
+        tileZ = 5;
+        
+        cubeRenderers = new Renderer[500,500];
+    }
+
+        
 
     public string PrintGrid
     {
@@ -20,8 +40,29 @@ public class Grid : MonoBehaviour
         set => gridArray = value;
     }
 
-    private void Start()    
+    public int TileX
     {
+        get => tileX;
+        set => tileX = value;
+    }
+
+    public int TileZ
+    {
+        get => tileZ;
+        set => tileZ = value;
+    }
+
+    public Renderer[,] CubeRenderers
+    {
+        get => cubeRenderers;
+        set => cubeRenderers = value;
+    }
+
+    public static Grid getInstance()
+    {
+        if(instance == null)
+            instance = new Grid();
         
+        return instance;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using TerrainGeneration;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -29,9 +30,12 @@ public class UnitController : MonoBehaviour
     private bool isTurning = false;
     private bool isRight = false;
 
+    private Grid gridObject;
+
     private void Start()
     {
         offsetPosition = new Vector3(0f, this.gameObject.transform.localScale.y + 0.5f, 0f);
+        gridObject = Grid.getInstance();
     }
 
     // Update is called once per frame
@@ -56,13 +60,19 @@ public class UnitController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 100))
         {
             Debug.Log("hit : " + hit.transform.gameObject.layer);
-            if (hit.transform.gameObject.layer == 9)
-            {
+            //if (hit.transform.gameObject.layer == 9)
+            //{
                 float xHit = Mathf.Floor(hit.transform.position.x);
                 float zHit = Mathf.Floor(hit.transform.position.z);
+                gridObject.TileX = (int)xHit + 15 ;
+                gridObject.TileZ = (int)zHit + 15 ;
+                Debug.Log("tileX from gridObject : " + gridObject.TileX);
                 Debug.Log("xhit: " + xHit);
                 Debug.Log("zhit:" + zHit);
-            }
+                //gridObject.CubeRenderers[xHit,zHit].material.color = Color.green;
+                Debug.Log("cubeRenderers:" + gridObject.CubeRenderers[5, 5].material.color);
+            //}
+                
 
             //targetPosition = hit.point + offsetPosition;
             targetPosition = new Vector3(Mathf.Floor(hit.transform.position.x) + 0.5f, 0, Mathf.Floor(hit.transform.position.z)+0.5f) + offsetPosition; 
