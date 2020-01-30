@@ -289,13 +289,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 850134319}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.26404136, y: 0, z: 0, w: 0.96451133}
+  m_LocalPosition: {x: 0, y: 61.7, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30.62, y: 0, z: 0}
 --- !u!1 &898829790
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +308,7 @@ GameObject:
   - component: {fileID: 898829793}
   - component: {fileID: 898829792}
   - component: {fileID: 898829791}
+  - component: {fileID: 898829795}
   m_Layer: 0
   m_Name: terrain
   m_TagString: Untagged
@@ -341,7 +342,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 3fa2c8c1d2d7ecd43890695814ba0900, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -374,7 +375,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb9d0589aa0dcae41ab5ae608288050a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 850134321}
   meshFilter: {fileID: 898829791}
+  meshCollider: {fileID: 898829795}
 --- !u!4 &898829794
 Transform:
   m_ObjectHideFlags: 0
@@ -389,6 +392,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &898829795
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898829790}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &2097106087
 GameObject:
   m_ObjectHideFlags: 0
