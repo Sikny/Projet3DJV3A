@@ -17,7 +17,7 @@ namespace TerrainGeneration {
         int maxBudget;
         int globalDifficulty;
 
-        Dictionary<Vector2, float> mapModifierHeightmap;
+        public Dictionary<Vector2, float> mapModifierHeightmap;
         Dictionary<Vector2, int> localSpawnDifficulty; //SPEC : to avoid the gen into the castle
         Dictionary<Vector3, int> mapCastlePiecesPlacement; 
 

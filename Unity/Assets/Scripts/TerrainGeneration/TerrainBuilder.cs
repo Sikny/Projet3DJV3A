@@ -35,8 +35,8 @@ namespace TerrainGeneration {
             for (int i = 0; i < terrainOptions.width; i++) {
                 for (int j = 0; j < terrainOptions.height; j++) {
                     grid[j, i] = 0;
-                    position = transform.position + new Vector3(unitScale*i+xModifier, 0,
-                                   unitScale*j+yModifier);
+                    Vector2Int pos2d = new Vector2Int((int) (unitScale*i+xModifier), (int) (unitScale*j+yModifier));
+                    position = transform.position + new Vector3(pos2d.x, CalculateHeight(pos2d), pos2d.y);
                     GameObject unit = Instantiate(unitDict.GetPrefab(ZoneType.Grass), position, Quaternion.identity);
                     unit.transform.SetParent(transform);
                 }
@@ -51,6 +51,12 @@ namespace TerrainGeneration {
                     unit.transform.SetParent(transform);
                 }
             }
+        }
+
+        private float CalculateHeight(Vector2Int pos) {
+            if (terrainOptions.rules.mapModifierHeightmap.ContainsKey(pos))
+                return terrainOptions.rules.mapModifierHeightmap[pos];
+            return 0;
         }
         
         /**
