@@ -54,6 +54,22 @@ public class Map
                  }
              }
          }
+
+         if (Input.GetKeyDown(KeyCode.S))
+         {
+             Rule r = new Rule(mapVertices, localDifficulty);
+             Rule.saveLevel("test", r);
+         }
+
+         if (Input.GetKeyDown(KeyCode.L))
+         {
+             Rule r = Rule.readLevel("test");
+             mapVertices = r.loadHeightmap(mapVertices, SIZE);
+             localDifficulty = r.loadDifficulty(localDifficulty, SIZE);
+             meshFilter.mesh.vertices = mapVertices;
+             meshCollider.sharedMesh.vertices = mapVertices;
+             meshFilter.mesh.colors = localDifficulty;
+         }
      }
 
      public void UpdateHeighmapRegion(RaycastHit hit,int radiusTool, int amplitude, int mode)
