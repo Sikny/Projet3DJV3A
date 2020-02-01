@@ -4,74 +4,100 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Map : MonoBehaviour
+public class Map
 {
     public const int SIZE = 100;
-    public const int RADIUSCURVE = 20;
-    public const int AMPLITUDE = 10;
-    public Camera camera;
-    public MeshFilter meshFilter;
-    public MeshCollider meshCollider;
+    private Camera camera;
+    private MeshFilter meshFilter;
+    private MeshCollider meshCollider;
     private GameObject map;
 
     private Vector3[] mapVertices;
     private Color[] localDifficulty;
-    
-     void Start()
+
+    public Map(Camera camera, GameObject map)
     {
+
+        this.map = map;
+        this.meshCollider = map.GetComponent<MeshCollider>();
+        this.meshFilter = map.GetComponent<MeshFilter>();
+        this.camera = camera;
+        
         init();
     }
 
-     void Update()
+     public void UpdateMap(EditorMap.ToolsEnum currentTool, int radiusTool, int amplitude)
      {
          RaycastHit hit;
-         if (Input.GetKey(KeyCode.Mouse0) && meshCollider.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit,1000))
-         {
-             for (int x = -RADIUSCURVE; x <= RADIUSCURVE; x++)
+         if(meshCollider.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit,1000)){
+             if (Input.GetKey(KeyCode.Mouse0))
              {
-                 for (int z = -RADIUSCURVE; z <= RADIUSCURVE; z++)
+                 switch (currentTool)
                  {
-                     int globalX = (int)hit.point.x + SIZE + x;
-                     int globalZ = (int) hit.point.z + SIZE + z;
-                     float heightmapOffset = AMPLITUDE * (float)Math.Exp(-1f/RADIUSCURVE*(x * x + z * z));
-                     if(0 <= globalX && globalX <= SIZE*2 && 0 <= globalZ && globalZ <= SIZE*2)
-                        mapVertices[globalX * (SIZE*2+1) + globalZ ].y += heightmapOffset*Time.deltaTime;
+                     case EditorMap.ToolsEnum.MAP_BRUSH:
+                         UpdateHeighmapRegion(hit, radiusTool, amplitude,0);
+                         break;
+                     case EditorMap.ToolsEnum.DIFFICULTY_PAINTING:
+                         UpdateLocalDifficulty(hit, radiusTool, amplitude,0);
+                         break;
+                 }
+             }else if (Input.GetKey(KeyCode.Mouse1))
+             {
+                 switch (currentTool)
+                 {
+                     case EditorMap.ToolsEnum.MAP_BRUSH:
+                         UpdateHeighmapRegion(hit, radiusTool, amplitude,1);
+                         break;
+                     case EditorMap.ToolsEnum.DIFFICULTY_PAINTING:
+                         UpdateLocalDifficulty(hit, radiusTool, amplitude,1);
+                         break;
                  }
              }
-             UpdateMesh();
-         }
-
-         if (Input.GetKey(KeyCode.Mouse1) && meshCollider.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit,1000))
-         {
-             for (int x = -RADIUSCURVE; x <= RADIUSCURVE; x++)
-              {
-                  for (int z = -RADIUSCURVE; z <= RADIUSCURVE; z++)
-                  {
-                      if (Math.Sqrt(x * x + z * z) <= RADIUSCURVE)
-                      {
-                          int globalX = (int) hit.point.x + SIZE + x;
-                          int globalZ = (int) hit.point.z + SIZE + z;
-                          float heightmapOffset =  (float) Math.Exp(-1f / RADIUSCURVE * (x * x + z * z));
-                          if (0 <= globalX && globalX <= SIZE * 2 && 0 <= globalZ && globalZ <= SIZE * 2)
-                              localDifficulty[globalX * (SIZE * 2 + 1) + globalZ].r += heightmapOffset*Time.deltaTime;
-                      }
-                  }
-              }
-              UpdateColor();
          }
      }
 
-     public void UpdateMesh()
+     public void UpdateHeighmapRegion(RaycastHit hit,int radiusTool, int amplitude, int mode)
      {
+         for (int x = -radiusTool; x <= radiusTool; x++)
+         {
+             for (int z = -radiusTool; z <= radiusTool; z++)
+             {
+                 int globalX = (int)hit.point.x + SIZE + x;
+                 int globalZ = (int) hit.point.z + SIZE + z;
+                 float heightmapOffset = amplitude * (float)Math.Exp(-1f/radiusTool*(x * x + z * z));
+                 if(0 <= globalX && globalX <= SIZE*2 && 0 <= globalZ && globalZ <= SIZE*2)
+                     if(mode == 0)
+                        mapVertices[globalX * (SIZE*2+1) + globalZ ].y += heightmapOffset*Time.deltaTime;
+                    else if(mode == 1)
+                         mapVertices[globalX * (SIZE*2+1) + globalZ ].y -= heightmapOffset*Time.deltaTime;
+             }
+         }
          meshFilter.mesh.vertices = mapVertices;
          meshCollider.sharedMesh.vertices = mapVertices;
      }
 
-     public void UpdateColor()
+     public void UpdateLocalDifficulty(RaycastHit hit,int radiusTool, int amplitude, int mode)
      {
+         for (int x = -radiusTool; x <= radiusTool; x++)
+         {
+             for (int z = -radiusTool; z <= radiusTool; z++)
+             {
+                 if (Math.Sqrt(x * x + z * z) <= radiusTool)
+                 {
+                     int globalX = (int) hit.point.x + SIZE + x;
+                     int globalZ = (int) hit.point.z + SIZE + z;
+                     float heightmapOffset =  amplitude * (float) Math.Exp(-1f / radiusTool * (x * x + z * z));
+                     if (0 <= globalX && globalX <= SIZE * 2 && 0 <= globalZ && globalZ <= SIZE * 2)
+                         if(mode==0)
+                            localDifficulty[globalX * (SIZE * 2 + 1) + globalZ].r += heightmapOffset*Time.deltaTime;
+                        else if(mode==1)
+                             localDifficulty[globalX * (SIZE * 2 + 1) + globalZ].r -= heightmapOffset*Time.deltaTime;
+                 }
+             }
+         }
          meshFilter.mesh.colors = localDifficulty;
      }
-
+     
      public void init()
     {
         var generalMesh = new Mesh();
