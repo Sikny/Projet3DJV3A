@@ -54,8 +54,8 @@ namespace TerrainGeneration {
         }
 
         private float CalculateHeight(Vector2Int pos) {
-            if (terrainOptions.rules.mapModifierHeightmap.ContainsKey(pos))
-                return terrainOptions.rules.mapModifierHeightmap[pos];
+            if (terrainOptions.rules.mapModifierHeightMap.ContainsKey(pos))
+                return terrainOptions.rules.mapModifierHeightMap[pos];
             return 0;
         }
         
