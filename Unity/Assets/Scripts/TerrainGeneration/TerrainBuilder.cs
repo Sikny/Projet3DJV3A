@@ -14,11 +14,19 @@ namespace TerrainGeneration {
         
         private int[,] grid;
         private String printGrid = "\n";
+        private Renderer[,] cubeRenderers;
+
+        private Grid gridObject;
+
 
         //private Grid grid;
 
         private void Start() {
+            gridObject = Grid.getInstance();
             grid = new int[terrainOptions.height, terrainOptions.width];
+            cubeRenderers = new Renderer[terrainOptions.height, terrainOptions.width];
+            gridObject.Width = terrainOptions.width;
+            gridObject.Height = terrainOptions.height;
             BuildArray();
             BuildTerrain();
         }
@@ -37,8 +45,9 @@ namespace TerrainGeneration {
                     Vector2Int pos2d = new Vector2Int((int) (unitScale*i), (int) (unitScale*j));
                     position = transform.position + new Vector3(pos2d.x+xModifier, 0, pos2d.y+yModifier);
                     position.y = CalculateHeight(pos2d, position);
-                    GameObject unit = Instantiate(unitDict.GetPrefab(ZoneType.Grass), position, Quaternion.identity);
+                    TerrainUnit unit = Instantiate(unitDict.GetPrefab(ZoneType.Grass), position, Quaternion.identity);
                     unit.transform.SetParent(transform);
+                    cubeRenderers[j, i] = unit.renderer;
                 }
             }
 
@@ -47,7 +56,7 @@ namespace TerrainGeneration {
                 for (int i = 0; i < listLen; i++) {
                     position = transform.position + new Vector3(unitScale * value.Value.Get(i).x+xModifier, 0,
                                    unitScale * value.Value.Get(i).y+yModifier);
-                    GameObject unit = Instantiate(unitDict.GetPrefab(value.Key), position, Quaternion.identity);
+                    TerrainUnit unit = Instantiate(unitDict.GetPrefab(value.Key), position, Quaternion.identity);
                     unit.transform.SetParent(transform);
                 }
             }
@@ -59,7 +68,7 @@ namespace TerrainGeneration {
                 float value = terrainOptions.modifierHeightMap[pos];
                 for (float i = value-1; i >= 0; i--) {
                     position.y = i;
-                    GameObject unit = Instantiate(unitDict.GetPrefab(ZoneType.Grass), position, Quaternion.identity);
+                    TerrainUnit unit = Instantiate(unitDict.GetPrefab(ZoneType.Grass), position, Quaternion.identity);
                     unit.transform.SetParent(transform);
                     
                 }
@@ -81,6 +90,7 @@ namespace TerrainGeneration {
             for (int i = 0; i < terrainOptions.mountainCount; i++) {
                 BuildOneMountain();
             }
+            DisplayGrid();
         }
 
         private void BuildOneWaterArea() {
@@ -112,6 +122,9 @@ namespace TerrainGeneration {
                 grid[randomY, randomX] = 1;
             }
             _terrainData.Add(new KeyValuePair<ZoneType, UnitList>(ZoneType.Water, waterList));
+            gridObject.GridArray = grid;
+            gridObject.PrintGrid = printGrid;
+            gridObject.CubeRenderers = cubeRenderers;
         }
        
         private void DisplayGrid()
@@ -156,4 +169,3 @@ namespace TerrainGeneration {
         }
     }
 }
-
