@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace TerrainGeneration {
     public class TerrainOptions : MonoBehaviour {
@@ -10,6 +11,8 @@ namespace TerrainGeneration {
         public int maxWaterSize;
         public int width = 10;
         public int height = 10;
+
+        public Dictionary<Vector2, float> modifierHeightMap;
 
         [HideInInspector]
         public int crashLoopLimit = 1000;    // Iteration limit for stopping generation -> at least 10*waterSize

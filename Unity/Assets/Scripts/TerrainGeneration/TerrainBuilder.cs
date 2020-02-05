@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -29,14 +28,16 @@ namespace TerrainGeneration {
          */
         private void BuildTerrain() {
             Vector3 position;
-            float xModifier = -unitScale * (terrainOptions.width - 1) / 2;
-            float yModifier = -unitScale * (terrainOptions.height - 1) / 2;
+            float xModifier = -unitScale*terrainOptions.width/2f + unitScale/2f;//-unitScale * (terrainOptions.width - 1) / 2f;
+            float yModifier = -unitScale*terrainOptions.height/2f + unitScale/2f;
+            Debug.Log(xModifier);
+            Debug.Log(yModifier);
             // basic fill
             for (int i = 0; i < terrainOptions.width; i++) {
                 for (int j = 0; j < terrainOptions.height; j++) {
                     grid[j, i] = 0;
-                    Vector2Int pos2d = new Vector2Int((int) (unitScale*i+xModifier), (int) (unitScale*j+yModifier));
-                    position = transform.position + new Vector3(pos2d.x, CalculateHeight(pos2d), pos2d.y);
+                    Vector2Int pos2d = new Vector2Int((int) (unitScale*i), (int) (unitScale*j));
+                    position = transform.position + new Vector3(pos2d.x+xModifier, CalculateHeight(pos2d), pos2d.y+yModifier);
                     GameObject unit = Instantiate(unitDict.GetPrefab(ZoneType.Grass), position, Quaternion.identity);
                     unit.transform.SetParent(transform);
                 }

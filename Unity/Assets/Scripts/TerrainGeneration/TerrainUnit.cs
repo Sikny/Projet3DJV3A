@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace TerrainGeneration {
     public class TerrainUnit : MonoBehaviour {
-        private Color startcolor;
+        private Color _startColor;
         public MeshRenderer renderer;
         
 
@@ -12,12 +12,12 @@ namespace TerrainGeneration {
         }
         void OnMouseEnter()
         {
-            startcolor = renderer.material.color;
+            _startColor = renderer.material.color;
             renderer.material.color = Color.yellow;
         }
         void OnMouseExit()
         {
-            renderer.material.color = startcolor;
+            renderer.material.color = _startColor;
         }
     }
     

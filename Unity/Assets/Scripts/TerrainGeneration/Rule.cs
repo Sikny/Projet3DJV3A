@@ -24,11 +24,11 @@ namespace TerrainGeneration {
         //TODO
         public Rule()
         {
-
+            mapModifierHeightMap = new Dictionary<Vector2, float>();
         }
         // Free-mode
-        public Rule(string seedUser)
-        {
+        public Rule(string seedUser) : this(){
+            
             if (!string.IsNullOrWhiteSpace(seedUser))
             {
                 if (!int.TryParse(seedUser, out this.seedWorld))
