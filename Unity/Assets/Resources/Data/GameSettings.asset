@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundVolume: 0
   musicVolume: 0
-  language: 0
+  language: 1

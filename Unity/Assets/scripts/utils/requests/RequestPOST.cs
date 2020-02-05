@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Login : MonoBehaviour
-{
-    public static string Post(string address, Dictionary<string, string>  param)
+namespace Utils.Requests {
+    public class Login : MonoBehaviour
     {
-        //TODO 
-        return "";
+        public static string Post(string address, Dictionary<string, string>  param)
+        {
+            //TODO 
+            return "";
+        }
     }
 }

@@ -33,7 +33,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
+  m_AnchoredPosition: {x: -4.9999924, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3497006108173238351
@@ -71,7 +71,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.35, y: 0.8}
-  m_AnchorMax: {x: 0.75, y: 0.9}
+  m_AnchorMax: {x: 0.85, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -339,7 +339,7 @@ RectTransform:
   m_Father: {fileID: 3497006109911429355}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.225, y: 0.8}
+  m_AnchorMin: {x: 0.15, y: 0.8}
   m_AnchorMax: {x: 0.35, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -383,7 +383,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Slider Text
+  m_Text: Label
 --- !u!1 &3497006109807019983
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,7 +467,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3497006109911429355}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: OptionValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -489,8 +489,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 288}
+  m_AnchorMin: {x: 0.220585, y: 0.8216678}
+  m_AnchorMax: {x: 0.7594151, y: 0.896}
+  m_AnchoredPosition: {x: 4.5, y: -101.5}
+  m_SizeDelta: {x: 209, y: 267}
   m_Pivot: {x: 0.5, y: 0.5}
