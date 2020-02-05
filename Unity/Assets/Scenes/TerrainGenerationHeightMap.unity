@@ -391,7 +391,7 @@ PrefabInstance:
     - target: {fileID: 5637388254737945374, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
       propertyPath: waterCount
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5637388254737945374, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
@@ -406,7 +406,12 @@ PrefabInstance:
     - target: {fileID: 5637388254737945374, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
       propertyPath: mountainCount
-      value: 4
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5637388254737945374, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: rules.seedWorld
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
