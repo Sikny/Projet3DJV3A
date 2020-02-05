@@ -1,86 +1,95 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Runtime.InteropServices;
-using TerrainGeneration;
-using UnityEngine;
-using UnityEngine.Animations;
+﻿using UnityEngine;
+using Grid = TerrainGeneration.Grid;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-public class UnitController : Interactable
-{
-    private Camera cam;
+namespace Units {
+    public class UnitController : Interactable {
+        private UnitsManager _manager;
+    
+        private Camera cam;
    
-    public LayerMask groundMask;
+        public LayerMask groundMask;
 
-    public Interactable focus;
+        public Interactable focus;
    
-    public float rotationSpeed = 300f;
-    public float speed = 5f;
+        public float rotationSpeed = 300f;
+        public float speed = 5f;
 
-    public MeshRenderer renderer;
+        public MeshRenderer renderer;
     
-    private float rotationAngle;
+        private float rotationAngle;
     
-    private Vector3 lookAtTarget;
-    private Vector3 targetPosition;
-    private Vector3 offsetPosition;
+        private Vector3 lookAtTarget;
+        public Vector3 targetPosition;
+        private Vector3 offsetPosition;
 
-    private int rotationTolerance = 1;
+        private int rotationTolerance = 1;
 
-    private Color startColor;
-    private Quaternion unitRotation;
+        private Color startColor;
+        private Quaternion unitRotation;
 
-    private bool isMoving = false;
-    private bool isTurning = false;
-    private bool isRight = false;
+        private bool isMoving = false;
+        private bool isTurning = false;
+        private bool isRight = false;
     
-    private int isWalkable = 1; // 0 = not walkable 1 = normally walkable 2 = slow walk 
+        private int isWalkable = 1; // 0 = not walkable 1 = normally walkable 2 = slow walk 
     
-    private Grid gridObject;
+        private Grid gridObject;
 
-    private PathFinderAstar pathFinder;
+        private PathFinderAstar pathFinder;
 
-    public override void Interact()
-    {
-        base.Interact();
-    }
-
-    private void Start()
-    {
-        offsetPosition = new Vector3(0f, this.gameObject.transform.localScale.y + 0.5f, 0f);
-        gridObject = Grid.getInstance();
-        cam = Camera.main;
-        pathFinder = PathFinderAstar.GetInstance();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
+        public override void Interact()
         {
-            SetTargetPosition();
+            base.Interact();
         }
 
-        if (isTurning)
-            Turn();
-        if(isMoving)
-            Move();  
-    }
-
-    private void SetTargetPosition()
-    {
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-
-
-        if (Physics.Raycast(ray, out hit, 100))
+        private void Start()
         {
-            /*Interactable interactable = hit.collider.GetComponent<Interactable>();
+            offsetPosition = new Vector3(0f, this.gameObject.transform.localScale.y + 0.5f, 0f);
+            gridObject = Grid.getInstance();
+            cam = Camera.main;
+            pathFinder = PathFinderAstar.GetInstance();
+        }
+
+        public void SetManager(UnitsManager manager) {
+            _manager = manager;
+        }
+        
+        // Update is called once per frame
+        void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                _manager.SetSelected(this);
+                //SetTargetPosition();
+            }
+
+            if (isTurning)
+                Turn();
+            if(isMoving)
+                Move();  
+        }
+
+        public void SetTargetPosition(Vector3 position)
+        {
+            targetPosition = position;
+
+            isMoving = true;
+            isTurning = true;
+        }
+        
+        public void SetTargetPosition()
+        {
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+
+
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                /*Interactable interactable = hit.collider.GetComponent<Interactable>();
             if (interactable != null)
             {
                 SetFocus(interactable);
@@ -88,8 +97,8 @@ public class UnitController : Interactable
             else
                 RemoveFocus();
 */
-            //if (isFocus)
-            //{
+                //if (isFocus)
+                //{
                 //Debug.Log("hit : " + hit.transform.gameObject.layer);
                 if (hit.transform.gameObject.layer == 4) //water 
                     isWalkable = 0;
@@ -105,7 +114,7 @@ public class UnitController : Interactable
                     Mathf.Floor(transform.position.z) + (gridObject.Height / 2));
                 Vector2 endPosition = new Vector2(gridObject.TileX, gridObject.TileZ);
 
-                pathFinder.BuildPath(startPosition, endPosition, isWalkable);
+                //pathFinder.BuildPath(startPosition, endPosition, isWalkable);
 
 
                 //targetPosition = hit.point + offsetPosition;
@@ -127,55 +136,56 @@ public class UnitController : Interactable
                 isMoving = true;
                 isTurning = true;
             }
-        //}
-    }
-
-    private void Move()
-    {
-
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-        
-        if (transform.position == targetPosition)
-        {
-            isMoving = false;
+            //}
         }
-    }
 
-    private void Turn()
-    {
-        int factor = isRight ? 1 : -1;
-        rotationAngle -= rotationSpeed * Time.deltaTime;
-        
-        gameObject.transform.Rotate(gameObject.transform.up, rotationSpeed * Time.deltaTime * factor);
-        
-        if (rotationAngle <= 0)
+        private void Move()
         {
-            isTurning = false;
+            
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        
+            if (transform.position == targetPosition)
+            {
+                isMoving = false;
+            }
         }
-    }
 
-    private void SetFocus(Interactable newFocus)
-    {
-        if (focus != newFocus)
+        private void Turn()
+        {
+            int factor = isRight ? 1 : -1;
+            rotationAngle -= rotationSpeed * Time.deltaTime;
+        
+            gameObject.transform.Rotate(gameObject.transform.up, rotationSpeed * Time.deltaTime * factor);
+        
+            if (rotationAngle <= 0)
+            {
+                isTurning = false;
+            }
+        }
+
+        private void SetFocus(Interactable newFocus)
+        {
+            if (focus != newFocus)
+            {
+                if(focus != null)
+                    focus.OnDefocused();
+                focus = newFocus;
+            
+            }
+            Debug.Log("hi");
+            newFocus.OnFocused();
+            startColor = renderer.material.color;
+            renderer.material.color = Color.yellow;
+        }
+
+        private void RemoveFocus()
         {
             if(focus != null)
                 focus.OnDefocused();
-            focus = newFocus;
-            
+
+            focus = null;
+            renderer.material.color = startColor;
+
         }
-        Debug.Log("hi");
-        newFocus.OnFocused();
-        startColor = renderer.material.color;
-        renderer.material.color = Color.yellow;
-    }
-
-    private void RemoveFocus()
-    {
-        if(focus != null)
-            focus.OnDefocused();
-
-        focus = null;
-        renderer.material.color = startColor;
-
     }
 }

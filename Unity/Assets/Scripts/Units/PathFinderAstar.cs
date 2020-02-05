@@ -5,6 +5,7 @@ using System.Net;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
+using Grid = TerrainGeneration.Grid;
 using Vector2 = UnityEngine.Vector2;
 
 public class PathFinderAstar
