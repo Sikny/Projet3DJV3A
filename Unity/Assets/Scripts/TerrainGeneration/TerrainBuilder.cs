@@ -30,14 +30,13 @@ namespace TerrainGeneration {
             Vector3 position;
             float xModifier = -unitScale*terrainOptions.width/2f + unitScale/2f;//-unitScale * (terrainOptions.width - 1) / 2f;
             float yModifier = -unitScale*terrainOptions.height/2f + unitScale/2f;
-            Debug.Log(xModifier);
-            Debug.Log(yModifier);
             // basic fill
             for (int i = 0; i < terrainOptions.width; i++) {
                 for (int j = 0; j < terrainOptions.height; j++) {
                     grid[j, i] = 0;
                     Vector2Int pos2d = new Vector2Int((int) (unitScale*i), (int) (unitScale*j));
-                    position = transform.position + new Vector3(pos2d.x+xModifier, CalculateHeight(pos2d), pos2d.y+yModifier);
+                    position = transform.position + new Vector3(pos2d.x+xModifier, 0, pos2d.y+yModifier);
+                    position.y = CalculateHeight(pos2d, position);
                     GameObject unit = Instantiate(unitDict.GetPrefab(ZoneType.Grass), position, Quaternion.identity);
                     unit.transform.SetParent(transform);
                 }
@@ -54,9 +53,18 @@ namespace TerrainGeneration {
             }
         }
 
-        private float CalculateHeight(Vector2Int pos) {
-            if (terrainOptions.rules.mapModifierHeightMap.ContainsKey(pos))
-                return terrainOptions.rules.mapModifierHeightMap[pos];
+        private float CalculateHeight(Vector2Int pos, Vector3 unitPos) {
+            if (terrainOptions.modifierHeightMap.ContainsKey(pos)) {
+                Vector3 position = unitPos;
+                float value = terrainOptions.modifierHeightMap[pos];
+                for (float i = value-1; i >= 0; i--) {
+                    position.y = i;
+                    GameObject unit = Instantiate(unitDict.GetPrefab(ZoneType.Grass), position, Quaternion.identity);
+                    unit.transform.SetParent(transform);
+                    
+                }
+                return terrainOptions.modifierHeightMap[pos];
+            }
             return 0;
         }
         
@@ -68,6 +76,10 @@ namespace TerrainGeneration {
             // build water areas
             for (int i = 0; i < terrainOptions.waterCount; i++) {
                 BuildOneWaterArea();
+            }
+            // build mountains
+            for (int i = 0; i < terrainOptions.mountainCount; i++) {
+                BuildOneMountain();
             }
         }
 
@@ -113,6 +125,34 @@ namespace TerrainGeneration {
                 printGrid += "\n";
             }
             Debug.Log(printGrid);
+        }
+
+        private void BuildOneMountain() {
+            int posX = Random.Range(0, terrainOptions.width);
+            int posZ = Random.Range(0, terrainOptions.height);
+            Vector2 mountainSource = new Vector2(posX, posZ);
+            int mountTipHeight = Random.Range(terrainOptions.minMountainHeight, terrainOptions.maxMountainHeight + 1);
+            if(!terrainOptions.modifierHeightMap.ContainsKey(mountainSource))
+                terrainOptions.modifierHeightMap.Add(mountainSource, mountTipHeight);
+            int radius = 1;
+            for (int i = mountTipHeight-1; i > 0; i--) {
+                SetMountainFloor(i, mountainSource, radius++);
+            }
+        }
+
+        private void SetMountainFloor(int yPos, Vector2 center, int radius) {
+            int y = yPos;
+            for (float x = center.x - radius; x <= center.x + radius; x++) {
+                for (float z = center.y - radius; z <= center.y + radius; z++) {
+                    if (Random.Range(0f, 1f) > 0.6f) y = yPos-1;
+                    Vector2 currentUnit = new Vector2(x, z);
+                    if (!terrainOptions.modifierHeightMap.ContainsKey(currentUnit)) {
+                        terrainOptions.modifierHeightMap.Add(currentUnit, y);
+                    }
+
+                    y = yPos;
+                }
+            }
         }
     }
 }
