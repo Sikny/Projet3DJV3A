@@ -62,7 +62,7 @@ public class PathFinderAstar
         return path;
     }
     
-    private List<Vector2>GetAdjacent(int centerZ, int centerX)
+    public List<Vector2>GetAdjacent(int centerZ, int centerX)
     {
         List<Vector2> adjacents = new List<Vector2>();
 
@@ -70,14 +70,14 @@ public class PathFinderAstar
         int maxX = Grid.getInstance().GridArray.GetLength(1);
         for (int i = -3/2; i <= 3/2; i++)
         {
-            if((centerX-Mathf.Abs(i) < 0 && i < 0) || (centerX+Mathf.Abs(i) >= maxX && i > 0))
-                continue;
+            /*if((centerX-Mathf.Abs(i) < 0 && i < 0) || (centerX+Mathf.Abs(i) >= maxX && i > 0))
+                continue;*/
             for (int j = -3/2; j <= 3/2; j++)
             {
-                if ((centerZ - Mathf.Abs(j) < 0 && j < 0)|| (centerZ + Mathf.Abs(j) >= maxZ && j > 0))
-                    continue;
+                /*if ((centerZ - Mathf.Abs(j) < 0 && j < 0)|| (centerZ + Mathf.Abs(j) >= maxZ && j > 0))
+                    continue;*/
 
-                adjacents.Append(new Vector2(centerZ + j, centerX + i));
+                adjacents.Add(new Vector2(centerZ + j, centerX + i));
             }
         }
 

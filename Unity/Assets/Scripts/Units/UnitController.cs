@@ -80,14 +80,15 @@ namespace Units {
             isTurning = true;
         }
         
-        public void SetTargetPosition()
+        public bool SetTargetPosition()
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
 
-
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Physics.Raycast(ray, out hit, 100, 1 << 4) ||
+                !Physics.Raycast(ray, out hit, 100, groundMask)) return false;
+            else
             {
                 /*Interactable interactable = hit.collider.GetComponent<Interactable>();
             if (interactable != null)
@@ -135,6 +136,7 @@ namespace Units {
 
                 isMoving = true;
                 isTurning = true;
+                return true;
             }
             //}
         }
