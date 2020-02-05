@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using TerrainGeneration;
 using UnityEngine;
 using UnityEngine.Animations;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
-public class UnitController : MonoBehaviour
+public class UnitController : Interactable
 {
-    public Camera cam;
+    private Camera cam;
    
     public LayerMask groundMask;
+
+    public Interactable focus;
    
-   
-    public float rotationSpeed = 5f;
+    public float rotationSpeed = 300f;
     public float speed = 5f;
+
+    public MeshRenderer renderer;
     
     private float rotationAngle;
     
@@ -23,19 +30,31 @@ public class UnitController : MonoBehaviour
     private Vector3 offsetPosition;
 
     private int rotationTolerance = 1;
-    
+
+    private Color startColor;
     private Quaternion unitRotation;
 
     private bool isMoving = false;
     private bool isTurning = false;
     private bool isRight = false;
-
+    
+    private int isWalkable = 1; // 0 = not walkable 1 = normally walkable 2 = slow walk 
+    
     private Grid gridObject;
+
+    private PathFinderAstar pathFinder;
+
+    public override void Interact()
+    {
+        base.Interact();
+    }
 
     private void Start()
     {
         offsetPosition = new Vector3(0f, this.gameObject.transform.localScale.y + 0.5f, 0f);
         gridObject = Grid.getInstance();
+        cam = Camera.main;
+        pathFinder = PathFinderAstar.GetInstance();
     }
 
     // Update is called once per frame
@@ -57,43 +76,58 @@ public class UnitController : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
+
+
         if (Physics.Raycast(ray, out hit, 100))
         {
-            Debug.Log("hit : " + hit.transform.gameObject.layer);
-            //if (hit.transform.gameObject.layer == 9)
+            /*Interactable interactable = hit.collider.GetComponent<Interactable>();
+            if (interactable != null)
+            {
+                SetFocus(interactable);
+            }
+            else
+                RemoveFocus();
+*/
+            //if (isFocus)
             //{
+                //Debug.Log("hit : " + hit.transform.gameObject.layer);
+                if (hit.transform.gameObject.layer == 4) //water 
+                    isWalkable = 0;
+                else if (hit.transform.gameObject.layer == 8) //ground 
+                    isWalkable = 1;
+
                 float xHit = Mathf.Floor(hit.transform.position.x);
                 float zHit = Mathf.Floor(hit.transform.position.z);
-                gridObject.TileX = (int)xHit + 15 ;
-                gridObject.TileZ = (int)zHit + 15 ;
-                Debug.Log("tileX from gridObject : " + gridObject.TileX);
-                Debug.Log("xhit: " + xHit);
-                Debug.Log("zhit:" + zHit);
-                //gridObject.CubeRenderers[xHit,zHit].material.color = Color.green;
-                Debug.Log("cubeRenderers:" + gridObject.CubeRenderers[5, 5].material.color);
-            //}
-                
+                gridObject.TileX = (int) xHit + (gridObject.Width / 2);
+                gridObject.TileZ = (int) zHit + (gridObject.Height / 2);
 
-            //targetPosition = hit.point + offsetPosition;
-            targetPosition = new Vector3(Mathf.Floor(hit.transform.position.x) + 0.5f, 0, Mathf.Floor(hit.transform.position.z)+0.5f) + offsetPosition; 
+                Vector2 startPosition = new Vector2(Mathf.Floor(transform.position.x) + (gridObject.Width / 2),
+                    Mathf.Floor(transform.position.z) + (gridObject.Height / 2));
+                Vector2 endPosition = new Vector2(gridObject.TileX, gridObject.TileZ);
+
+                pathFinder.BuildPath(startPosition, endPosition, isWalkable);
 
 
-            lookAtTarget = new Vector3(targetPosition.x - transform.position.x, transform.position.y,
-                targetPosition.z - transform.position.z);
-            
-            //Vector of unit to point 
-            Vector3 unitToTarget = (targetPosition - transform.position);
-            unitToTarget.Normalize();
-            //Dot product of the two vectors and Acos 
-            rotationAngle = (Mathf.Acos(Vector3.Dot(unitToTarget, gameObject.transform.forward)) * (180/Mathf.PI));
-            isRight = Vector3.Dot(unitToTarget, gameObject.transform.right) > 0;
+                //targetPosition = hit.point + offsetPosition;
+                targetPosition = new Vector3(Mathf.Floor(hit.transform.position.x) + 0.5f, 0,
+                                     Mathf.Floor(hit.transform.position.z) + 0.5f) + offsetPosition;
 
-            Debug.Log("rotation angle:" + rotationAngle);
-            Debug.Log("unitToTarget" + unitToTarget);
-            Debug.Log("transform.front" + gameObject.transform.forward);
-            isMoving = true;
-            isTurning = true;
-        }
+
+                lookAtTarget = new Vector3(targetPosition.x - transform.position.x, transform.position.y,
+                    targetPosition.z - transform.position.z);
+
+                //Vector of unit to point 
+                Vector3 unitToTarget = (targetPosition - transform.position);
+                unitToTarget.Normalize();
+                //Dot product of the two vectors and Acos 
+                rotationAngle = (Mathf.Acos(Vector3.Dot(unitToTarget, gameObject.transform.forward)) *
+                                 (180 / Mathf.PI));
+                isRight = Vector3.Dot(unitToTarget, gameObject.transform.right) > 0;
+
+                isMoving = true;
+                isTurning = true;
+            }
+        //}
     }
 
     private void Move()
@@ -119,5 +153,29 @@ public class UnitController : MonoBehaviour
             isTurning = false;
         }
     }
-    
+
+    private void SetFocus(Interactable newFocus)
+    {
+        if (focus != newFocus)
+        {
+            if(focus != null)
+                focus.OnDefocused();
+            focus = newFocus;
+            
+        }
+        Debug.Log("hi");
+        newFocus.OnFocused();
+        startColor = renderer.material.color;
+        renderer.material.color = Color.yellow;
+    }
+
+    private void RemoveFocus()
+    {
+        if(focus != null)
+            focus.OnDefocused();
+
+        focus = null;
+        renderer.material.color = startColor;
+
+    }
 }

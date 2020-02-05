@@ -23,6 +23,8 @@ namespace TerrainGeneration {
             gridObject = Grid.getInstance();
             grid = new int[terrainOptions.height, terrainOptions.width];
             cubeRenderers = new Renderer[terrainOptions.height, terrainOptions.width];
+            gridObject.Width = terrainOptions.width;
+            gridObject.Height = terrainOptions.height;
             BuildArray();
             BuildTerrain();
         }

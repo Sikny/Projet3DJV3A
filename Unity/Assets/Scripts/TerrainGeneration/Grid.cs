@@ -13,6 +13,10 @@ public class Grid
     private int tileX;
     private int tileZ;
 
+    private int width;
+    private int height;
+
+
     private Renderer[,] cubeRenderers;
 
     private Grid()
@@ -40,6 +44,18 @@ public class Grid
         set => gridArray = value;
     }
 
+    public int Width
+    {
+        get => width;
+        set => width = value;
+    }
+
+    public int Height
+    {
+        get => height;
+        set => height = value;
+    }
+
     public int TileX
     {
         get => tileX;
@@ -65,4 +81,6 @@ public class Grid
         
         return instance;
     }
+    
+    
 }
