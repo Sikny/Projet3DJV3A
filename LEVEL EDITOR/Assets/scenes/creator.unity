@@ -313,9 +313,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 386249412}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 100
+  m_MaxValue: 500
   m_WholeNumbers: 1
-  m_Value: 20
+  m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1991347538}
   m_HandleRect: {fileID: 1954286417}
   m_Direction: 0
-  m_MinValue: 1
+  m_MinValue: -100
   m_MaxValue: 100
   m_WholeNumbers: 1
   m_Value: 10
@@ -2394,7 +2394,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2097106089}
-  - component: {fileID: 2097106088}
   m_Layer: 0
   m_Name: SAVELOAD
   m_TagString: Untagged
@@ -2402,18 +2401,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2097106088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097106087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dcd40469ecb7b5469a782b081d53866, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2097106089
 Transform:
   m_ObjectHideFlags: 0
