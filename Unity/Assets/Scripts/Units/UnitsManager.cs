@@ -5,6 +5,7 @@ namespace Units {
     {
         public UnitController unitController;
         public int unitCount;
+        public bool isRemote;
         
         [SerializeField] private UnitController[] units;
         private UnitController _selected;
@@ -13,7 +14,7 @@ namespace Units {
         // Start is called before the first frame update
         void Start()
         {
-            units = new UnitController[9];
+            units = new UnitController[unitCount];
             var positions = PathFinderAstar.GetInstance()
                 .GetAdjacent((int) transform.position.z, (int) transform.position.x);
             unitSpawnPosition = new Vector3(0,1,0);
@@ -33,8 +34,13 @@ namespace Units {
             _selected = main;
             if (!main.SetTargetPosition()) return;
             foreach (var t in units) {
-                if (t != main) {
-                    t.SetTargetPosition(main.targetPosition + t.transform.position - main.transform.position);
+                if (t != main && t != null) {
+                    if(isRemote)
+                        t.SetTargetPosition(main.targetPosition + t.transform.position - main.transform.position);
+                    else
+                    {
+                        t.SetTargetPosition(main.targetPosition + t.transform.position - main.transform.position);
+                    }
                 }
             }
         }
