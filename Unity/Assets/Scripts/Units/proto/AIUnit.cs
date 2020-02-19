@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Units.proto;
 using UnityEngine;
 
 namespace  UnitSystem
@@ -16,6 +17,11 @@ namespace  UnitSystem
         {
             
             return true;
+        }
+
+        public override void update()
+        {
+            
         }
 
         public override bool kill()

@@ -1,15 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Units.proto;
 using UnityEngine;
 
 namespace UnitSystem
 {
     public abstract class AbstractUnit
     {
-        public int numberEntity;
-        public Entity[] entity;
-        public Vector3 position;
-        public Quaternion rotation; //todo
+        private int numberEntity;
+        protected Entity[] entity;
+        protected Vector3 position;
+        protected Quaternion rotation; //todo
+
+        protected Vector3 targetPosition;
+        protected Vector3 lookAtTarget;
+        
+        protected bool isMoving = false;
+        protected bool isTurning = false;
         
         public AbstractUnit(int numberEntity, Vector3 position)
         {
@@ -50,6 +57,8 @@ namespace UnitSystem
 
             return true;
         }
+
+        public abstract void update();
 
         public abstract bool kill();
     }
