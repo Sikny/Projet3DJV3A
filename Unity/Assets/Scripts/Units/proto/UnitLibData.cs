@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnitSystem;
+using UnityEngine;
 
 namespace Units.proto
 {
@@ -13,5 +15,7 @@ namespace Units.proto
         public static float speed;
 
         public static MeshRenderer renderer;
+        
+        public static List<AbstractUnit> units = new List<AbstractUnit>();
     }
 }

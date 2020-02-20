@@ -49,6 +49,7 @@ namespace Units.proto
             UnitLibData.renderer = renderer;
             UnitLibData.speed = speed;
             UnitLibData.groundMask = groundMask;
+            UnitLibData.units = units; // Penser à update si 
 
         }
 

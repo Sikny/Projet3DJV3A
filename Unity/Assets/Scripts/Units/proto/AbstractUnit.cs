@@ -17,6 +17,9 @@ namespace UnitSystem
         
         protected bool isMoving = false;
         protected bool isTurning = false;
+
+        // On peu imaginer que les ennemis vont moins vite
+        protected float speedEntity;
         
         public AbstractUnit(int numberEntity, Vector3 position)
         {
@@ -39,6 +42,7 @@ namespace UnitSystem
                         GameObject entityGO = null;
                         if (leader == null)
                         {
+                            // le premier sera le leader et le parent des n-1 autres
                             leader = (GameObject) Object.Instantiate(entityModel,
                                 new Vector3(position.x+0.5f, position.y, position.z+0.5f), Quaternion.identity);
                             entityGO = leader;
@@ -61,5 +65,29 @@ namespace UnitSystem
         public abstract void update();
 
         public abstract bool kill();
+
+        public Vector3 getPosition()
+        {
+            return position;
+        }
+        
+        protected virtual void Move()
+        {
+            if (targetPosition == null) return;
+            position = Vector3.MoveTowards(position, targetPosition, UnitLibData.speed * Time.deltaTime * speedEntity);
+
+            
+            
+            if (position == targetPosition)
+            {
+                isMoving = false;
+            }
+        }
+
+        protected void updateGameobject()
+        {
+            entity[0].associedGameObject.transform.position = position;
+        }
     }
+    
 }

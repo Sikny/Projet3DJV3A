@@ -13,11 +13,12 @@ public class RemotedUnit : AbstractUnit
     public RemotedUnit(int numberEntity) : 
         base(numberEntity,new Vector3(-2,1,0))
     {
+        speedEntity = 1.0f;
         isSelected = true;
         gridObject = Grid.getInstance();
     }
         
-    public bool init(GameObject gameobjectModel)
+    public override bool init(GameObject gameobjectModel)
     {
         return base.init(gameobjectModel);
     }
@@ -33,7 +34,7 @@ public class RemotedUnit : AbstractUnit
         }
         if(isMoving)
             Move();
-        entity[0].associedGameObject.transform.position = position;
+        updateGameobject();
     }
 
     public override bool kill()
@@ -87,17 +88,6 @@ public class RemotedUnit : AbstractUnit
             isMoving = true;
             isTurning = true;
             return true;
-        }
-    }
-
-    private void Move()
-    {
-
-        position = Vector3.MoveTowards(position, targetPosition, UnitLibData.speed * Time.deltaTime);
-
-        if (position == targetPosition)
-        {
-            isMoving = false;
         }
     }
 }
