@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-[Serializable]
 public class Rule
 {
     const int MAX_BUDGET = 2000;
@@ -16,9 +14,8 @@ public class Rule
 
     // This following is set from .lvl file or randomize based on seedWorl in free-mode
     int maxBudget;
-    int globalDifficulty;
-
-    //TODO : Serialize Vector2 into a new class (heritage?)
+    char globalDifficulty;
+    
     Dictionary<SeriaVector2, float> mapModifierHeightmap;
     Dictionary<SeriaVector2, int> localSpawnDifficulty; //SPEC : to avoid the gen into the castle
     Dictionary<int, Castle> mapCastlePiecesPlacement;
@@ -30,6 +27,64 @@ public class Rule
         localSpawnDifficulty = new Dictionary<SeriaVector2, int>();
         mapCastlePiecesPlacement = new Dictionary<int, Castle>();
     }
+
+    public Rule(Vector3[] heightmap, Color[] difficulty) : this()
+    {
+        float accurancyEpsilon = 0.1f;
+        for (int i = 0; i < heightmap.Length; i++)
+        {
+            
+            if (!(-accurancyEpsilon <= heightmap[i].y && heightmap[i].y <= accurancyEpsilon ))
+            {
+                mapModifierHeightmap.Add(new SeriaVector2(heightmap[i].x, heightmap[i].z), heightmap[i].y);
+            }
+            if (accurancyEpsilon <= difficulty[i].r)
+            {
+                localSpawnDifficulty.Add(new SeriaVector2(heightmap[i].x,heightmap[i].z),(int)(difficulty[i].r*4) );
+            }
+        }
+    }
+
+    public Vector3[] loadHeightmap(Vector3[] heightmap, int size)
+    {
+
+        foreach (var entry in mapModifierHeightmap)
+        {
+            try
+            {
+                heightmap[(int) (entry.Key.X+size) * (size*2+1) + (int) entry.Key.Z+size] =
+                    new Vector3(entry.Key.X, entry.Value, entry.Key.Z);
+                
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
+        return heightmap;
+    }
+    
+    public Color[] loadDifficulty(Color[] difficulty, int size)
+    {
+
+        foreach (var entry in localSpawnDifficulty)
+        {
+            try
+            {
+                difficulty[(int) (entry.Key.X+size) * (size*2+1) + (int) entry.Key.Z+size] =
+                    new Color(entry.Value/4f,0f,0f);
+                
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
+        return difficulty;
+    }
+    
     // Random gen
     /*
     public Rule(string seedUser)
@@ -79,20 +134,97 @@ public class Rule
         }
     }*/
 
+    // CALMEZ VOUS
     public static void saveLevel(string file, Rule r)
     {
         using (Stream stream = File.Open("levels/"+file+".lvl", FileMode.Create))
         {
-            var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            binaryFormatter.Serialize(stream, r);
+            var bw = new BinaryWriter(stream);
+
+            var sizeModifier = 12 * r.mapModifierHeightmap.Count;
+            var sizeLocalDifficulty = 5 * r.localSpawnDifficulty.Count;
+            var sizeCastle = 7 * r.mapCastlePiecesPlacement.Count;
+
+            var ptrModifier = 27;
+            var ptrLocalDifficulty = ptrModifier + sizeModifier;
+            var ptrCastle = ptrLocalDifficulty + sizeLocalDifficulty;
+            
+            
+            bw.Write(r.globalDifficulty);
+            bw.Write((short)r.maxBudget);
+            
+            bw.Write((int)ptrModifier);
+            bw.Write((int)sizeModifier);
+            
+            bw.Write((int)ptrLocalDifficulty);
+            bw.Write((int)sizeLocalDifficulty);
+            
+            bw.Write((int)ptrCastle);
+            bw.Write((int)sizeCastle);
+            
+            foreach (var vertex in r.mapModifierHeightmap)
+            {
+                bw.Write((short)vertex.Key.X);
+                bw.Write((short)vertex.Key.Z);
+                bw.Write((double)vertex.Value);
+            }
+            
+            foreach (var difficulty in r.localSpawnDifficulty)
+            {
+                bw.Write((short)difficulty.Key.X);
+                bw.Write((short)difficulty.Key.Z);
+                bw.Write((char)difficulty.Value);
+            }
+            
+            bw.Close();
+            stream.Close();
+            
         }
+        
     }
     public static Rule readLevel(string file)
     {
         using (Stream stream = File.Open("levels/" + file + ".lvl", FileMode.Open))
         {
-            var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            Rule r = (Rule)binaryFormatter.Deserialize(stream);
+            var br = new BinaryReader(stream);
+            Rule r = new Rule();
+
+            var i = 0;
+            
+            r.globalDifficulty = br.ReadChar();
+            i += 1;
+            r.maxBudget = br.ReadInt16();
+            i += 2;
+            
+            var ptrModifier = br.ReadInt32();
+            var sizeModifier = br.ReadInt32();
+            var ptrLocalDifficulty = br.ReadInt32();
+            var sizeLocalDifficulty = br.ReadInt32();
+            var ptrCastle = br.ReadInt32();
+            var sizeCastle = br.ReadInt32();
+            i += 24;
+
+            for (; i < sizeModifier; i += 12)
+            {
+                var xCoord = br.ReadInt16();
+                var zCoord = br.ReadInt16();
+                var heightmap = br.ReadDouble();
+
+                r.mapModifierHeightmap.Add(new SeriaVector2(xCoord, zCoord), (float) heightmap);
+            }
+
+            for (; i < sizeLocalDifficulty; i += 5)
+            {
+                var xCoord = br.ReadInt16();
+                var zCoord = br.ReadInt16();
+                var difficulty = br.ReadChar();
+
+                r.localSpawnDifficulty.Add(new SeriaVector2(xCoord, zCoord), difficulty);
+            }
+
+            br.Close();
+            stream.Close();
+            
             return r;
         }
     }

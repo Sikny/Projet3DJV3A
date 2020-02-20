@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6467442092549639592}
   - component: {fileID: 8455583571053709740}
   - component: {fileID: 2536444902719847648}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,12 +113,17 @@ PrefabInstance:
     - target: {fileID: 1891237799306205025, guid: 93981e64efbaf18419aa084396131e71,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3487256774769238499, guid: 93981e64efbaf18419aa084396131e71,
         type: 3}
       propertyPath: m_Name
       value: WaterUnit
+      objectReference: {fileID: 0}
+    - target: {fileID: 3487256774769238499, guid: 93981e64efbaf18419aa084396131e71,
+        type: 3}
+      propertyPath: m_Layer
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4778775657262614236, guid: 93981e64efbaf18419aa084396131e71,
         type: 3}
@@ -175,7 +180,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5286798445490785008, guid: 93981e64efbaf18419aa084396131e71,
+        type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 8455583571053709740}
+    m_RemovedComponents:
+    - {fileID: 324159078092572739, guid: 93981e64efbaf18419aa084396131e71, type: 3}
+    - {fileID: 3556976325335562798, guid: 93981e64efbaf18419aa084396131e71, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 93981e64efbaf18419aa084396131e71, type: 3}
 --- !u!4 &8811875181592958418 stripped
 Transform:

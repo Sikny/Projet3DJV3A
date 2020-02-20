@@ -11,24 +11,24 @@ namespace TerrainGeneration {
         const int ENNEMY_SPAWN_RADIUS = 100; // Temporary
 
 
-        public int seedWorld; // used in free-mode(0 in level mode)
+        public int seedWorld;    // used in free-mode(0 in level mode)
 
         // This following is set from .lvl file or randomize based on seedWorl in free-mode
         int maxBudget;
         int globalDifficulty;
 
-        Dictionary<Vector2, float> mapModifierHeightmap;
+        public Dictionary<Vector2, float> mapModifierHeightMap;
         Dictionary<Vector2, int> localSpawnDifficulty; //SPEC : to avoid the gen into the castle
         Dictionary<Vector3, int> mapCastlePiecesPlacement; 
 
         //TODO
         public Rule()
         {
-
+            mapModifierHeightMap = new Dictionary<Vector2, float>();
         }
         // Free-mode
-        public Rule(string seedUser)
-        {
+        public Rule(string seedUser) : this(){
+            
             if (!string.IsNullOrWhiteSpace(seedUser))
             {
                 if (!int.TryParse(seedUser, out this.seedWorld))

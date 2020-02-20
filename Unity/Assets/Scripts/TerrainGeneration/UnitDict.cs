@@ -14,14 +14,14 @@ namespace TerrainGeneration {
     [Serializable]
     public class ZoneMaterial {
         public ZoneType type;
-        public GameObject unitPrefab;
+        public TerrainUnit unitPrefab;
     }
 
     [CreateAssetMenu(fileName = "UnitDict", menuName = "ScriptableObjects/UnitDict")]
     public class UnitDict : ScriptableObject {
         public List<ZoneMaterial> unitZoneMaterials;
 
-        public GameObject GetPrefab(ZoneType type) {
+        public TerrainUnit GetPrefab(ZoneType type) {
             for (int i = 0; i < unitZoneMaterials.Count; i++) {
                 if (unitZoneMaterials[i].type == type)
                     return unitZoneMaterials[i].unitPrefab;

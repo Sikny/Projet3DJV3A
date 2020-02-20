@@ -6,5 +6,6 @@ namespace Settings {
         public float soundVolume;
         public float musicVolume;
         public Language.Language language;
+        public bool invertCameraX;
     }
 }
