@@ -43,4 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99efe0ece1472bd488060a1bdd766f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateLoop:
+    m_PersistentCalls:
+      m_Calls: []
+  fixedUpdateLoop:
+    m_PersistentCalls:
+      m_Calls: []
+  lateUpdateLoop:
+    m_PersistentCalls:
+      m_Calls: []
   gameSettings: {fileID: 11400000, guid: dfbe9b8a7b0398646aedb0eb9776d315, type: 2}
+  languageDictionary: {fileID: 11400000, guid: 0d6cf9341b33a57479eaa5b00a4243f6, type: 2}
