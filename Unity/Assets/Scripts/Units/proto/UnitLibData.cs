@@ -15,5 +15,7 @@ namespace Units.proto
         public static float speed;
 
         public static List<AbstractUnit> units = new List<AbstractUnit>();
+
+        public static float deltaTime;
     }
 }

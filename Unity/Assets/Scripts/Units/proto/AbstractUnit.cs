@@ -4,7 +4,7 @@ using UnityEngine;
 namespace UnitSystem {
     public abstract class AbstractUnit
     {
-        private int numberEntity;
+        protected int numberEntity;
         protected Entity[] entity;
         protected Vector3 position;
         protected Quaternion rotation; //todo
@@ -14,6 +14,10 @@ namespace UnitSystem {
         
         protected bool isMoving = false;
         protected bool isTurning = false;
+        /**
+         * Utile pour savoir si le leader doit être attrapé
+         */
+        protected int numberAlive;
 
         // On peu imaginer que les ennemis vont moins vite
         protected float speedEntity;
@@ -21,6 +25,7 @@ namespace UnitSystem {
         public AbstractUnit(int numberEntity, Vector3 position)
         {
             this.numberEntity = numberEntity;
+            this.numberAlive = numberEntity;
             this.entity = new Entity[numberEntity];
             this.position = position;
             this.rotation = Quaternion.identity;
@@ -59,6 +64,8 @@ namespace UnitSystem {
             return true;
         }
 
+        protected abstract void attack(AbstractUnit anotherUnit);
+
         public abstract void update();
 
         public abstract bool kill();
@@ -83,7 +90,24 @@ namespace UnitSystem {
 
         protected void updateGameobject()
         {
-            entity[0].associedGameObject.transform.position = position;
+            if(numberAlive > 0)
+                entity[0].associedGameObject.transform.position = position;
+        }
+
+        public Entity getEntity(int index)
+        {
+            return entity[index];
+        }
+
+        public void popEntity(int index)
+        {
+            numberAlive--;
+            entity[index] = null;
+        }
+
+        public int getNumberAlive()
+        {
+            return numberAlive;
         }
     }
     
