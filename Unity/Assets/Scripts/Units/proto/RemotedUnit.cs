@@ -1,19 +1,18 @@
-﻿using Units.proto;
+﻿using TerrainGeneration;
+using Units.proto;
 using UnitSystem;
 using UnityEngine;
-using Grid = TerrainGeneration.Grid;
 
 public class RemotedUnit : AbstractUnit
 {
     private int isWalkable = 1;
     protected bool isSelected;
-    private Grid gridObject;
+    
     public RemotedUnit(int numberEntity) : 
         base(numberEntity,new Vector3(-2,1,0))
     {
         speedEntity = 1.0f;
         isSelected = true;
-        gridObject = Grid.GetInstance();
     }
         
     public override bool init(GameObject gameobjectModel)
@@ -62,12 +61,12 @@ public class RemotedUnit : AbstractUnit
 
             float xHit = Mathf.Floor(hit.transform.position.x);
             float zHit = Mathf.Floor(hit.transform.position.z);
-            gridObject.TileX = (int) xHit + (gridObject.Width / 2);
-            gridObject.TileZ = (int) zHit + (gridObject.Height / 2);
+            TerrainGrid.Instance.TileX = (int) xHit + (TerrainGrid.Width / 2);
+            TerrainGrid.Instance.TileZ = (int) zHit + (TerrainGrid.Height / 2);
 
-            Vector2 startPosition = new Vector2(Mathf.Floor(position.x) + (gridObject.Width / 2),
-                Mathf.Floor(position.z) + (gridObject.Height / 2));
-            Vector2 endPosition = new Vector2(gridObject.TileX, gridObject.TileZ);
+            Vector2 startPosition = new Vector2(Mathf.Floor(position.x) + (TerrainGrid.Width / 2),
+                Mathf.Floor(position.z) + (TerrainGrid.Height / 2));
+            Vector2 endPosition = new Vector2(TerrainGrid.Instance.TileX, TerrainGrid.Instance.TileZ);
 
             //pathFinder.BuildPath(startPosition, endPosition, isWalkable);
 

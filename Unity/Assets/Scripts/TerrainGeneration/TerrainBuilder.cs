@@ -14,19 +14,13 @@ namespace TerrainGeneration {
         
         private int[,] grid;
         private String printGrid = "\n";
-        private Renderer[,] cubeRenderers;
-
-        private Grid gridObject;
-
-
-        //private Grid grid;
 
         private void Start() {
-            gridObject = Grid.GetInstance();
+            TerrainGrid.Height = terrainOptions.height;
+            TerrainGrid.Width = terrainOptions.width;
+            
             grid = new int[terrainOptions.height, terrainOptions.width];
-            cubeRenderers = new Renderer[terrainOptions.height, terrainOptions.width];
-            gridObject.Width = terrainOptions.width;
-            gridObject.Height = terrainOptions.height;
+            
             BuildArray();
             BuildTerrain();
         }
@@ -47,7 +41,8 @@ namespace TerrainGeneration {
                     position.y = CalculateHeight(pos2d, position);
                     TerrainUnit unit = Instantiate(unitDict.GetPrefab(ZoneType.Grass), position, Quaternion.identity);
                     unit.transform.SetParent(transform);
-                    cubeRenderers[j, i] = unit.renderer;
+                    
+                    TerrainGrid.Instance.AddTerrainUnit(unit, j, i);
                 }
             }
 
@@ -70,7 +65,6 @@ namespace TerrainGeneration {
                     position.y = i;
                     TerrainUnit unit = Instantiate(unitDict.GetPrefab(ZoneType.Grass), position, Quaternion.identity);
                     unit.transform.SetParent(transform);
-                    
                 }
                 return terrainOptions.modifierHeightMap[pos];
             }
@@ -115,26 +109,22 @@ namespace TerrainGeneration {
                     randomX = Random.Range(tmp.x - 1, tmp.y + 2);
                 }
                 if (waterList.Contains(randomX, randomY) || randomX < 0 || randomY < 0
-                    || randomX >= terrainOptions.width || randomY >= terrainOptions.height
-                    || !waterList.HasNeighbour(randomX, randomY))
+                        || randomX >= terrainOptions.width || randomY >= terrainOptions.height
+                        || !waterList.HasNeighbour(randomX, randomY))
                     continue;
                 waterList.Add(randomX, randomY);
                 grid[randomY, randomX] = 1;
             }
             _terrainData.Add(new KeyValuePair<ZoneType, UnitList>(ZoneType.Water, waterList));
-            gridObject.GridArray = grid;
-            gridObject.PrintGrid = printGrid;
-            gridObject.CubeRenderers = cubeRenderers;
+            
+            TerrainGrid.Instance.GridArray = grid;
         }
        
-        private void DisplayGrid()
-        {
+        private void DisplayGrid() {
             for (int i = 0; i < terrainOptions.height; i++) {
-                for (int j = 0; j < terrainOptions.width; j++)
-                {
+                for (int j = 0; j < terrainOptions.width; j++) {
                     printGrid += grid[terrainOptions.height-i-1, j];
                 }
-
                 printGrid += "\n";
             }
             Debug.Log(printGrid);
@@ -162,7 +152,6 @@ namespace TerrainGeneration {
                     if (!terrainOptions.modifierHeightMap.ContainsKey(currentUnit)) {
                         terrainOptions.modifierHeightMap.Add(currentUnit, y);
                     }
-
                     y = yPos;
                 }
             }

@@ -1,24 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Numerics;
+using TerrainGeneration;
 using UnityEngine;
-using UnityEngine.AI;
-using Grid = TerrainGeneration.Grid;
 using Vector2 = UnityEngine.Vector2;
 
-public class PathFinderAstar
-{
+public class PathFinderAstar {
     private static PathFinderAstar instance;
 
-    private Grid gridObject;
     private List<Vector2> path;
-
-    public List<Vector2> BuildPath(Vector2 startPoint, Vector2 endPoint, int isWalkable)
-    {
-        gridObject = Grid.GetInstance();
-        
+    public List<Vector2> BuildPath(Vector2 startPoint, Vector2 endPoint, int isWalkable) {
         Debug.Log("start point:" + startPoint);
         Debug.Log("end point:" + endPoint);
         Debug.Log("isWalkable" + isWalkable);
@@ -45,7 +35,7 @@ public class PathFinderAstar
             
             foreach (Vector2 neighboor in adjacents)
             {
-                bool walkable = gridObject.GridArray[(int)currentPoint.x, (int)currentPoint.y] == 0 ? true : false;
+                bool walkable = TerrainGrid.Instance.GridArray[(int)currentPoint.x, (int)currentPoint.y] == 0 ? true : false;
                 
                 if (!closedPaths.Contains(neighboor) && walkable)
                 {
@@ -66,17 +56,8 @@ public class PathFinderAstar
     {
         List<Vector2> adjacents = new List<Vector2>();
 
-        int maxZ = Grid.GetInstance().GridArray.GetLength(0);
-        int maxX = Grid.GetInstance().GridArray.GetLength(1);
-        for (int i = -3/2; i <= 3/2; i++)
-        {
-            /*if((centerX-Mathf.Abs(i) < 0 && i < 0) || (centerX+Mathf.Abs(i) >= maxX && i > 0))
-                continue;*/
-            for (int j = -3/2; j <= 3/2; j++)
-            {
-                /*if ((centerZ - Mathf.Abs(j) < 0 && j < 0)|| (centerZ + Mathf.Abs(j) >= maxZ && j > 0))
-                    continue;*/
-
+        for (int i = -3/2; i <= 3/2; i++) {
+            for (int j = -3/2; j <= 3/2; j++) {
                 adjacents.Add(new Vector2(centerZ + j, centerX + i));
             }
         }
@@ -91,40 +72,4 @@ public class PathFinderAstar
         
         return instance;
     }
-        
-    
-
 }
-/*
-public class Tile()
-{
-    Vector2 parent;
-    int distanceToTarget = -1;
-    int cost = 1;
-
-    public Tile(Vector2 parent, int distanceToTarget, int cost)
-    {
-        this.parent = parent;
-        this.distanceToTarget = distanceToTarget;
-        this.cost = cost; 
-    }
-
-    public Vector2 Parent
-    {
-        get => parent;
-        set => parent = value;
-    }
-
-    public int DistanceToTarget
-    {
-        get => distanceToTarget;
-        set => distanceToTarget = value;
-    }
-
-    public int Cost
-    {
-        get => cost;
-        set => cost = value;
-    }
-}
-*/
