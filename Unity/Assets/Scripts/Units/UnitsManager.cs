@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 namespace Units {
+    // group of units
     public class UnitsManager : MonoBehaviour
     {
         public UnitController unitController;
@@ -15,8 +16,9 @@ namespace Units {
         void Start()
         {
             units = new UnitController[unitCount];
+            Vector3 tPos = transform.position;
             var positions = PathFinderAstar.GetInstance()
-                .GetAdjacent((int) transform.position.z, (int) transform.position.x);
+                .GetAdjacent((int) tPos.z, (int) tPos.x);
             unitSpawnPosition = new Vector3(0,1,0);
             //unit.transform.SetParent(transform);
             for (int i = 0; i < units.Length; i++)

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-namespace Settings {
+namespace Game {
+    /**
+     * <summary>Global game settings</summary>
+     */
     [CreateAssetMenu(fileName = "GameSettings", menuName = "ScriptableObjects/GameSettings")]
     public class GameSettings : ScriptableObject {
         public float soundVolume;

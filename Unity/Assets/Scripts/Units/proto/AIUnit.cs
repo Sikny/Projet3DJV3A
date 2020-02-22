@@ -1,34 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Units.proto;
+﻿using Units.proto;
 using UnityEngine;
 
-namespace  UnitSystem
-{    
-    public class AIUnit : AbstractUnit
-    {
-        
+namespace UnitSystem {    
+    public class AIUnit : AbstractUnit {
         private RemotedUnit unitTarget;
-        public AIUnit(int numberEntity) : 
-            base(numberEntity,new Vector3(10,1,0))
-        {
+        public AIUnit(int numberEntity) : base(numberEntity,new Vector3(10,1,0)) {
             speedEntity = 0.7f;
             unitTarget = null;
         }
-        
-        public override bool init(GameObject gameobjectModel)
-        {
+        public override bool init(GameObject gameobjectModel) {
             return base.init(gameobjectModel);
         }
-
-        public override void update()
-        {
-            if (unitTarget == null)
-            {
-                unitTarget = guessTheBestUnitToTarget();
+        public override void update() {
+            if (unitTarget == null) {
+                unitTarget = GuessTheBestUnitToTarget();
             }
-            else
-            {
+            else {
                 targetPosition = unitTarget.getPosition();
                 isMoving = true;
             }
@@ -36,42 +23,28 @@ namespace  UnitSystem
                 Move();
             updateGameobject();
         }
-
-        private RemotedUnit guessTheBestUnitToTarget()
-        {
-            
+        private RemotedUnit GuessTheBestUnitToTarget() {
             RemotedUnit best = null;
             float bestDistance = float.PositiveInfinity;
-            foreach (var unit in UnitLibData.units)
-            {
-                if (unit is RemotedUnit)
-                {
+            foreach (var unit in UnitLibData.units) {
+                if (unit is RemotedUnit) {
                     float distance = Vector3.Distance(this.position, unit.getPosition());
-                    if (distance < bestDistance)
-                    {
+                    if (distance < bestDistance) {
                         bestDistance = distance;
                         best = (RemotedUnit)unit;
                     }
                 }
             }
-            
             return best;
         }
-
-        protected override void Move()
-        {
-            if (Vector3.Distance(position, targetPosition) <= 3)
-            {
+        protected override void Move() {
+            if (Vector3.Distance(position, targetPosition) <= 3) {
                 return;
             }
             base.Move();
-            
         }
-        
-        public override bool kill()
-        {
+        public override bool kill() {
             return true;
         }
     }
 }
-

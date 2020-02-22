@@ -1,7 +1,9 @@
-﻿using Game;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CameraMovement {
+    /**
+     * <summary>Camera control with right click & move</summary>
+     */
     public class CameraController : MonoBehaviour
     {
         public Transform centerPoint;
@@ -9,7 +11,7 @@ namespace CameraMovement {
         public float speed = 100f;
         public float pitch = 2f;
 
-        private float currentYaw = 0f;
+        private float currentYaw;
 
         private bool _mousePressed;
         // Update is called once per frame
@@ -26,10 +28,12 @@ namespace CameraMovement {
                 currentYaw += Input.GetAxis("Mouse X") * speed * Time.deltaTime;
         }
 
+        private Vector3 centerPointPos;
         private void LateUpdate()
         {
-            transform.LookAt(centerPoint.position + Vector3.up * pitch);
-            transform.RotateAround(centerPoint.position,Vector3.up, currentYaw);
+            centerPointPos = centerPoint.position;
+            transform.LookAt(centerPointPos + Vector3.up * pitch);
+            transform.RotateAround(centerPointPos,Vector3.up, currentYaw);
             currentYaw = 0;
         }
     }

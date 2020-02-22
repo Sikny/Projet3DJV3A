@@ -1,84 +1,33 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace TerrainGeneration {
     public class Grid
     {
-        private static Grid instance;
-
-        private int[,] gridArray;
-        private String printGrid;
-
-        private int tileX;
-        private int tileZ;
-
-        private int width;
-        private int height;
-
-
-        private Renderer[,] cubeRenderers;
-
+        private static Grid _instance;
         private Grid()
         {
-            gridArray = new int[500,500];
-            printGrid = "\n";
+            GridArray = new int[500,500];
+            PrintGrid = "\n";
 
-            tileX = 5;
-            tileZ = 5;
+            TileX = 5;
+            TileZ = 5;
         
-            cubeRenderers = new Renderer[500,500];
+            CubeRenderers = new Renderer[500,500];
         }
-
         
-
-        public string PrintGrid
+        public string PrintGrid { get; set; }
+        public int[,] GridArray { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public int TileX { get; set; }
+        public int TileZ { get; set; }
+        public Renderer[,] CubeRenderers { get; set; }
+        public static Grid GetInstance()
         {
-            get => printGrid;
-            set => printGrid = value;
-        }
-
-        public int[,] GridArray
-        {
-            get => gridArray;
-            set => gridArray = value;
-        }
-
-        public int Width
-        {
-            get => width;
-            set => width = value;
-        }
-
-        public int Height
-        {
-            get => height;
-            set => height = value;
-        }
-
-        public int TileX
-        {
-            get => tileX;
-            set => tileX = value;
-        }
-
-        public int TileZ
-        {
-            get => tileZ;
-            set => tileZ = value;
-        }
-
-        public Renderer[,] CubeRenderers
-        {
-            get => cubeRenderers;
-            set => cubeRenderers = value;
-        }
-
-        public static Grid getInstance()
-        {
-            if(instance == null)
-                instance = new Grid();
+            if(_instance == null)
+                _instance = new Grid();
         
-            return instance;
+            return _instance;
         }
     
     

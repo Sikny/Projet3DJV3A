@@ -17,7 +17,7 @@ public class PathFinderAstar
 
     public List<Vector2> BuildPath(Vector2 startPoint, Vector2 endPoint, int isWalkable)
     {
-        gridObject = Grid.getInstance();
+        gridObject = Grid.GetInstance();
         
         Debug.Log("start point:" + startPoint);
         Debug.Log("end point:" + endPoint);
@@ -66,8 +66,8 @@ public class PathFinderAstar
     {
         List<Vector2> adjacents = new List<Vector2>();
 
-        int maxZ = Grid.getInstance().GridArray.GetLength(0);
-        int maxX = Grid.getInstance().GridArray.GetLength(1);
+        int maxZ = Grid.GetInstance().GridArray.GetLength(0);
+        int maxX = Grid.GetInstance().GridArray.GetLength(1);
         for (int i = -3/2; i <= 3/2; i++)
         {
             /*if((centerX-Mathf.Abs(i) < 0 && i < 0) || (centerX+Mathf.Abs(i) >= maxX && i > 0))

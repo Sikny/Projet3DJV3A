@@ -15,7 +15,7 @@ public class RemotedUnit : AbstractUnit
     {
         speedEntity = 1.0f;
         isSelected = true;
-        gridObject = Grid.getInstance();
+        gridObject = Grid.GetInstance();
     }
         
     public override bool init(GameObject gameobjectModel)

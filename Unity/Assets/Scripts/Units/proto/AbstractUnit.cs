@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Units.proto;
+﻿using Units.proto;
 using UnityEngine;
 
-namespace UnitSystem
-{
+namespace UnitSystem {
     public abstract class AbstractUnit
     {
         private int numberEntity;

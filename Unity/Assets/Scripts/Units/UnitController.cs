@@ -5,6 +5,7 @@ using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Units {
+    // Class for a single unit
     public class UnitController : Interactable {
         private UnitsManager _manager;
     
@@ -48,7 +49,7 @@ namespace Units {
         private void Start()
         {
             offsetPosition = new Vector3(0f, this.gameObject.transform.localScale.y + 0.5f, 0f);
-            gridObject = Grid.getInstance();
+            gridObject = Grid.GetInstance();
             cam = Camera.main;
             pathFinder = PathFinderAstar.GetInstance();
         }
@@ -143,7 +144,6 @@ namespace Units {
 
         private void Move()
         {
-            
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
         
             if (transform.position == targetPosition)

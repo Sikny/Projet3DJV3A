@@ -22,7 +22,7 @@ namespace TerrainGeneration {
         //private Grid grid;
 
         private void Start() {
-            gridObject = Grid.getInstance();
+            gridObject = Grid.GetInstance();
             grid = new int[terrainOptions.height, terrainOptions.width];
             cubeRenderers = new Renderer[terrainOptions.height, terrainOptions.width];
             gridObject.Width = terrainOptions.width;

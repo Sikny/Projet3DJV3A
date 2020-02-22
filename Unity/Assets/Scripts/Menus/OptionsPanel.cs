@@ -1,6 +1,6 @@
 ﻿using System;
+using Game;
 using Language;
-using Settings;
 using UnityEngine;
 using UnityEngine.UI;
 

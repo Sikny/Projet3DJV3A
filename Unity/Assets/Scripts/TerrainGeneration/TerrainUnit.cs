@@ -1,6 +1,4 @@
-﻿using System;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace TerrainGeneration {
     public class TerrainUnit : MonoBehaviour {
@@ -15,7 +13,7 @@ namespace TerrainGeneration {
         private void Start()
         {
             cam = Camera.main;
-            gridObject = Grid.getInstance();
+            gridObject = Grid.GetInstance();
         }
         
 
@@ -50,8 +48,8 @@ namespace TerrainGeneration {
             //Debug.Log("cursor size:" + cursorSize);
             //Debug.Log("cursor size divided" + -cursorSize/2);
 
-            int maxZ = Grid.getInstance().GridArray.GetLength(0);
-            int maxX = Grid.getInstance().GridArray.GetLength(1);
+            int maxZ = Grid.GetInstance().GridArray.GetLength(0);
+            int maxX = Grid.GetInstance().GridArray.GetLength(1);
             for (int i = -cursorSize/2; i <= cursorSize/2; i++)
             {
                 if((centerX-Mathf.Abs(i) < 0 && i < 0) || (centerX+Mathf.Abs(i) >= maxX && i > 0))
@@ -63,7 +61,12 @@ namespace TerrainGeneration {
                     {
                         continue;
                     }
-                    Grid.getInstance().CubeRenderers[(centerZ+j),(centerX+i)].material.color = color;
+
+                    var cubeRenderers = Grid.GetInstance().CubeRenderers;
+                    var cubeRenderer = cubeRenderers[centerZ + j, centerX + i];
+                    var mat = cubeRenderer.material;
+                    mat.color = color;
+                    //Grid.getInstance().CubeRenderers[(centerZ+j),(centerX+i)].material.color = color;
                 }
             }
 
