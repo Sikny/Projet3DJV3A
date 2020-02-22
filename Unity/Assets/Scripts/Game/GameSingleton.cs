@@ -8,7 +8,7 @@ namespace Game {
      * <summary>Game Manager, should handle scenes transitions</summary>
      */
     public class GameSingleton : MonoBehaviour {
-        private static GameSingleton _instance = null;
+        private static GameSingleton _instance;
         public static GameSingleton Instance => _instance;
 
         public UnityEvent updateLoop;
@@ -28,6 +28,8 @@ namespace Game {
 
             LoadScene("Menu");
         }
+        
+        // optimizations purposes
         private void Update() {
             updateLoop.Invoke();
         }

@@ -24,8 +24,6 @@ namespace Units.proto {
         public float rotationSpeed = 300f;
         public float speed = 5f;
 
-        public MeshRenderer renderer;
-
         public void Start() {
             //On fabrique nos 2 entités rivales
             AbstractUnit remoteUnit = new RemotedUnit(sizeUnit);
@@ -40,7 +38,6 @@ namespace Units.proto {
             /** On se servira de ça pour appeler les updates des units*/
             UnitLibData.cam = cam;
             UnitLibData.focus = focus;
-            UnitLibData.renderer = renderer;
             UnitLibData.speed = speed;
             UnitLibData.groundMask = groundMask;
             UnitLibData.units = units; // Penser à update si
