@@ -7,8 +7,11 @@ namespace  UnitSystem
 {    
     public class AIUnit : AbstractUnit
     {
-        
+        private float deltaTime;
         private RemotedUnit unitTarget;
+
+        private const float TICK_ATTACK = 0.10f; //PARAM OF DIFFICULTY
+        
         public AIUnit(int numberEntity) : 
             base(numberEntity,new Vector3(10,1,0))
         {
@@ -18,11 +21,15 @@ namespace  UnitSystem
         
         public override bool init(GameObject gameobjectModel)
         {
+            deltaTime = 0.0f;
             return base.init(gameobjectModel);
         }
 
         public override void update()
         {
+
+            deltaTime += UnitLibData.deltaTime;
+            
             if (unitTarget == null)
             {
                 unitTarget = guessTheBestUnitToTarget();
@@ -34,9 +41,38 @@ namespace  UnitSystem
             }
             if(isMoving)
                 Move();
+
+            if (deltaTime >= TICK_ATTACK)
+            {
+                if (Vector3.Distance(position, targetPosition) <= 3)
+                {
+                    attack(unitTarget);
+                }
+
+                
+                deltaTime -= TICK_ATTACK;
+            }
             updateGameobject();
         }
 
+        protected override void attack(AbstractUnit anotherUnit)
+        {
+            int indexEntityAttack = Random.Range(1, numberEntity);
+            int indexEntityDefense = Random.Range(1, numberEntity);
+
+            Entity entityAttack = this.getEntity(indexEntityAttack);
+            Entity entityDefense = anotherUnit.getEntity(indexEntityDefense);
+
+            if (entityAttack == null || entityDefense == null) return;
+            
+            int life = entityDefense.changeLife(-1*entityAttack.getStrength());
+            Debug.Log("attack");
+            if (life == 0)
+            {
+                popEntity(indexEntityDefense);
+            }
+        }
+        
         private RemotedUnit guessTheBestUnitToTarget()
         {
             

@@ -50,12 +50,13 @@ namespace Units.proto
             UnitLibData.speed = speed;
             UnitLibData.groundMask = groundMask;
             UnitLibData.units = units; // Penser à update si 
+            UnitLibData.deltaTime = 0;
 
         }
 
         public void Update()
         {
-            
+            UnitLibData.deltaTime = Time.deltaTime;
             
             foreach (var unit in units)
             {

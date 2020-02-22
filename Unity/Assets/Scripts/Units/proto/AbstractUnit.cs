@@ -7,7 +7,7 @@ namespace UnitSystem
 {
     public abstract class AbstractUnit
     {
-        private int numberEntity;
+        protected int numberEntity;
         protected Entity[] entity;
         protected Vector3 position;
         protected Quaternion rotation; //todo
@@ -62,6 +62,8 @@ namespace UnitSystem
             return true;
         }
 
+        protected abstract void attack(AbstractUnit anotherUnit);
+
         public abstract void update();
 
         public abstract bool kill();
@@ -87,6 +89,16 @@ namespace UnitSystem
         protected void updateGameobject()
         {
             entity[0].associedGameObject.transform.position = position;
+        }
+
+        public Entity getEntity(int index)
+        {
+            return entity[index];
+        }
+
+        public void popEntity(int index)
+        {
+            entity[index] = null;
         }
     }
     

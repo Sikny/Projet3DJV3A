@@ -17,5 +17,7 @@ namespace Units.proto
         public static MeshRenderer renderer;
         
         public static List<AbstractUnit> units = new List<AbstractUnit>();
+
+        public static float deltaTime;
     }
 }
