@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI currencyText;
     private int currency;
+
+    public GameObject InventoryUI;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -14,9 +18,8 @@ public class UIManager : MonoBehaviour
         currencyText.SetText(currency.ToString() + "g");
     }
     
-    // Update is called once per frame
-    void Update()
+    public void CallButtonInventory()
     {
-        
+        InventoryUI.SetActive(!InventoryUI.activeSelf);
     }
 }
