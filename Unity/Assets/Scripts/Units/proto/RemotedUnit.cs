@@ -42,6 +42,11 @@ public class RemotedUnit : AbstractUnit
         return true;
     }
 
+    protected override void attack(AbstractUnit anotherUnit)
+    {
+            
+    }
+    
     public bool SetTargetPosition()
     {
         Ray ray = UnitLibData.cam.ScreenPointToRay(Input.mousePosition);

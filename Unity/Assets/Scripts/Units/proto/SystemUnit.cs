@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 using System.Windows.Markup;
+using Settings;
 using UnitSystem;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Units.proto
 {
@@ -30,6 +33,9 @@ namespace Units.proto
 
         public MeshRenderer renderer;
 
+        private int numberAI = 1;
+        private int numberRemote = 1;
+        
         public void Start()
         {
             //On fabrique nos 2 entités rivales
@@ -50,16 +56,35 @@ namespace Units.proto
             UnitLibData.speed = speed;
             UnitLibData.groundMask = groundMask;
             UnitLibData.units = units; // Penser à update si 
+            UnitLibData.deltaTime = 0;
 
         }
 
         public void Update()
         {
-            
+            UnitLibData.deltaTime = Time.deltaTime;
             
             foreach (var unit in units)
             {
                 unit.update();
+                if (unit.getNumberAlive() <= 0)
+                {
+                    if (unit is AIUnit) numberAI--;
+                    else if (unit is RemotedUnit) numberRemote--;
+                    unit.kill();
+                    units.Remove(unit);
+                }
+            }
+
+            if (numberRemote == 0)
+            {
+                EndGameManager.typeEndGame = 0;
+                SceneManager.LoadScene(2);
+            }
+            else if (numberAI == 0)
+            {
+                EndGameManager.typeEndGame = 1;
+                SceneManager.LoadScene(2);
             }
         }
         
