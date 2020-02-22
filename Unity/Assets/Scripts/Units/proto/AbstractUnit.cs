@@ -17,6 +17,10 @@ namespace UnitSystem
         
         protected bool isMoving = false;
         protected bool isTurning = false;
+        /**
+         * Utile pour savoir si le leader doit être attrapé
+         */
+        protected int numberAlive;
 
         // On peu imaginer que les ennemis vont moins vite
         protected float speedEntity;
@@ -24,6 +28,7 @@ namespace UnitSystem
         public AbstractUnit(int numberEntity, Vector3 position)
         {
             this.numberEntity = numberEntity;
+            this.numberAlive = numberEntity;
             this.entity = new Entity[numberEntity];
             this.position = position;
             this.rotation = Quaternion.identity;
@@ -88,7 +93,8 @@ namespace UnitSystem
 
         protected void updateGameobject()
         {
-            entity[0].associedGameObject.transform.position = position;
+            if(numberAlive > 0)
+                entity[0].associedGameObject.transform.position = position;
         }
 
         public Entity getEntity(int index)
@@ -98,7 +104,13 @@ namespace UnitSystem
 
         public void popEntity(int index)
         {
+            numberAlive--;
             entity[index] = null;
+        }
+
+        public int getNumberAlive()
+        {
+            return numberAlive;
         }
     }
     

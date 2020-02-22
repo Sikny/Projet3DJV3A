@@ -48,8 +48,6 @@ namespace  UnitSystem
                 {
                     attack(unitTarget);
                 }
-
-                
                 deltaTime -= TICK_ATTACK;
             }
             updateGameobject();
@@ -57,19 +55,30 @@ namespace  UnitSystem
 
         protected override void attack(AbstractUnit anotherUnit)
         {
-            int indexEntityAttack = Random.Range(1, numberEntity);
-            int indexEntityDefense = Random.Range(1, numberEntity);
-
+            int indexEntityAttack = Random.Range(0, numberEntity);
             Entity entityAttack = this.getEntity(indexEntityAttack);
-            Entity entityDefense = anotherUnit.getEntity(indexEntityDefense);
-
-            if (entityAttack == null || entityDefense == null) return;
-            
-            int life = entityDefense.changeLife(-1*entityAttack.getStrength());
-            Debug.Log("attack");
-            if (life == 0)
+            Debug.Log(anotherUnit.getNumberAlive());
+            if (anotherUnit.getNumberAlive() > 1)
             {
-                popEntity(indexEntityDefense);
+                
+                int indexEntityDefense = Random.Range(1, numberEntity);
+                Entity entityDefense = anotherUnit.getEntity(indexEntityDefense);
+
+                if (entityAttack == null || entityDefense == null) return;
+
+                int life = entityDefense.changeLife(-1 * entityAttack.getStrength());
+                if (life == 0)
+                {
+                    anotherUnit.popEntity(indexEntityDefense);
+                }
+            }
+            else if(anotherUnit.getNumberAlive() == 1)
+            {
+                if (entityAttack != null)
+                {
+                    anotherUnit.getEntity(0).changeLife(-100);
+                    anotherUnit.popEntity(0); // Le leader est attrapé
+                }
             }
         }
         
