@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace TerrainGeneration {
     public class TerrainUnit : MonoBehaviour {

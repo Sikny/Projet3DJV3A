@@ -3,29 +3,22 @@ using Units.proto;
 using UnitSystem;
 using UnityEngine;
 
-public class RemotedUnit : AbstractUnit
-{
+public class RemotedUnit : AbstractUnit {
     private int isWalkable = 1;
     protected bool isSelected;
     
-    public RemotedUnit(int numberEntity) : 
-        base(numberEntity,new Vector3(-2,1,0))
-    {
+    public RemotedUnit(int numberEntity, Vector3 pos) : base(numberEntity, pos) {
         speedEntity = 1.0f;
         isSelected = true;
     }
         
-    public override bool init(GameObject gameobjectModel)
-    {
+    public override bool init(GameObject gameobjectModel) {
         return base.init(gameobjectModel);
     }
 
-    public override void update()
-    {
-        if (isSelected)
-        {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
+    public override void update() {
+        if (isSelected) {
+            if (Input.GetKeyDown(KeyCode.Mouse0)) {
                 if (!SetTargetPosition()) return;
             }
         }
@@ -34,26 +27,21 @@ public class RemotedUnit : AbstractUnit
         updateGameobject();
     }
 
-    public override bool kill()
-    {
+    public override bool kill() {
         return true;
     }
 
-    protected override void attack(AbstractUnit anotherUnit)
-    {
+    protected override void attack(AbstractUnit anotherUnit) {
             
     }
     
-    public bool SetTargetPosition()
-    {
+    public bool SetTargetPosition() {
         Ray ray = UnitLibData.cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
-
+        
         if (Physics.Raycast(ray, out hit, 100, 1 << 4) ||
             !Physics.Raycast(ray, out hit, 100, UnitLibData.groundMask)) return false;
-        else
-        {
+        else {
             if (hit.transform.gameObject.layer == 4) //water 
                 isWalkable = 0;
             else if (hit.transform.gameObject.layer == 8) //ground 

@@ -1,23 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class EndGameManager : MonoBehaviour
-{
+public class EndGameManager : MonoBehaviour {
     public const int ID_SCENE_MENU = 0;
     public const int ID_SCENE_GAME = 1;
     
     public TextMeshProUGUI msgTextMesh;
 
-    public static int typeEndGame = 0;
+    public static int typeEndGame;
     
     // Start is called before the first frame update
-    void Start()
-    {
-        switch (typeEndGame)
-        {
+    void Start() {
+        switch (typeEndGame) {
             case 0:
                 msgTextMesh.SetText("Game Over");
                 msgTextMesh.color = Color.red;
@@ -29,10 +24,8 @@ public class EndGameManager : MonoBehaviour
         }
     }
 
-    public void callBtn(int idBtn)
-    {
-        switch (idBtn)
-        {
+    public void callBtn(int idBtn) {
+        switch (idBtn) {
             case 0:
                 SceneManager.LoadScene(ID_SCENE_MENU);
                 break;
@@ -42,8 +35,7 @@ public class EndGameManager : MonoBehaviour
         }
     }
 
-    public static void setTypeEndGame(int type)
-    {
+    public static void setTypeEndGame(int type) {
         typeEndGame = type;
     }
 }

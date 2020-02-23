@@ -9,39 +9,42 @@ namespace Units.proto {
         /*
          * Ok ici sera mis toutes les unités instanciées (de type AI ou Remoted)
          */
-        [NonSerialized]
-        public List<AbstractUnit> units = new List<AbstractUnit>();
-        
-        [SerializeField] public GameObject entityModel;
-        [SerializeField] public int sizeUnit = 9;
+        [NonSerialized] private readonly List<AbstractUnit> units = new List<AbstractUnit>();
+        [SerializeField] private GameObject entityModel;
+        [SerializeField] private int sizeUnit = 9;
 
         /** Données de l'ancien système nécessaire aux unités*/
         public Camera cam;
-   
         public LayerMask groundMask;
-
         public Interactable focus;
-   
         public float rotationSpeed = 300f;
         public float speed = 5f;
 
-        public MeshRenderer renderer;
-
-        private int numberAI = 1;
+        private int numberAi = 1;
         private int numberRemote = 1;
-        
-        public void Start() {
-            //On fabrique nos 2 entités rivales
-            AbstractUnit remoteUnit = new RemotedUnit(sizeUnit);
-            AbstractUnit aiUnit = new AIUnit(sizeUnit);
 
-            if (remoteUnit.init(entityModel) && aiUnit.init(entityModel)) {
-                // On les met dans la liste. On mettra que ces 2 là pour l'instant..
-                units.Add(remoteUnit);
-                units.Add(aiUnit);
+        private const int YPos = 1;
+
+        public void Start() {
+            AbstractUnit[] playerUnits = {
+                new RemotedUnit(sizeUnit, new Vector3(3, YPos, 5)),
+                new RemotedUnit(sizeUnit, new Vector3(5, YPos, 3))
+            };
+            AbstractUnit[] aiUnits = {
+                new AIUnit(sizeUnit, new Vector3(1, YPos, 1))
+            };
+
+            foreach (var unit in playerUnits) {
+                unit.init(entityModel);
+                units.Add(unit);
             }
 
-            /** On se servira de ça pour appeler les updates des units*/
+            foreach (var unit in aiUnits) {
+                unit.init(entityModel);
+                units.Add(unit);
+            }
+
+            /* On se servira de ça pour appeler les updates des units */
             UnitLibData.cam = cam;
             UnitLibData.focus = focus;
             UnitLibData.speed = speed;
@@ -55,9 +58,8 @@ namespace Units.proto {
             
             foreach (var unit in units) {
                 unit.update();
-                if (unit.getNumberAlive() <= 0)
-                {
-                    if (unit is AIUnit) numberAI--;
+                if (unit.getNumberAlive() <= 0) {
+                    if (unit is AIUnit) numberAi--;
                     else if (unit is RemotedUnit) numberRemote--;
                     unit.kill();
                     units.Remove(unit);
@@ -68,7 +70,7 @@ namespace Units.proto {
                 EndGameManager.typeEndGame = 0;
                 SceneManager.LoadScene(2);
             }
-            else if (numberAI == 0) {
+            else if (numberAi == 0) {
                 EndGameManager.typeEndGame = 1;
                 SceneManager.LoadScene(2);
             }

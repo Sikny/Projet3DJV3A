@@ -1,6 +1,5 @@
 ﻿using System;
 using Game;
-using Language;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,13 +11,18 @@ namespace Menus {
         
         public Dropdown languageDropdown;
 
-        private GameSettings _gameSettings;
-
         private void Awake() {
-            if(_gameSettings == null) _gameSettings = Resources.Load<GameSettings>("Data/GameSettings");
-            soundsSlider.value = _gameSettings.soundVolume;
-            musicSlider.value = _gameSettings.musicVolume;
-            
+            soundsSlider.value = GameSingleton.Instance.gameSettings.soundVolume;
+            musicSlider.value = GameSingleton.Instance.gameSettings.musicVolume;
+
+            int value = 0;
+            foreach (Language.Language lang in Enum.GetValues(typeof(Language.Language))) {
+                languageDropdown.options.Add(new Dropdown.OptionData(lang.ToString()));
+                if (lang == GameSingleton.Instance.gameSettings.language) {
+                    languageDropdown.value = value;
+                }
+                value++;
+            }
         }
     }
 }

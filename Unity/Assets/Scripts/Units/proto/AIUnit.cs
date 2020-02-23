@@ -8,7 +8,7 @@ namespace  UnitSystem  {
 
         private const float TICK_ATTACK = 0.10f; //PARAM OF DIFFICULTY
         
-        public AIUnit(int numberEntity) : base(numberEntity,new Vector3(10,1,0)) {
+        public AIUnit(int numberEntity, Vector3 pos) : base(numberEntity, pos) {
             speedEntity = 0.7f;
             unitTarget = null;
         }
@@ -49,14 +49,14 @@ namespace  UnitSystem  {
 
                 if (entityAttack == null || entityDefense == null) return;
 
-                int life = entityDefense.changeLife(-1 * entityAttack.getStrength());
+                int life = entityDefense.ChangeLife(-1 * entityAttack.GetStrength());
                 if (life == 0) {
                     anotherUnit.popEntity(indexEntityDefense);
                 }
             }
             else if(anotherUnit.getNumberAlive() == 1) {
                 if (entityAttack != null) {
-                    anotherUnit.getEntity(0).changeLife(-100);
+                    anotherUnit.getEntity(0).ChangeLife(-100);
                     anotherUnit.popEntity(0); // Le leader est attrapé
                 }
             }

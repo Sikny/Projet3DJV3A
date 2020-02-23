@@ -38,7 +38,7 @@ namespace TerrainGeneration {
         }
         
         public void SelectZone(int posZ, int posX) {
-            if (TileZ > 0 && TileZ > 0) {
+            if (TileZ >= 0 && TileZ >= 0) {
                 for (int i = -CursorSize / 2; i <= CursorSize / 2; i++) {
                     if (TileX - Mathf.Abs(i) < 0 && i < 0 || TileX + Mathf.Abs(i) >= Width && i > 0)
                         continue;
@@ -51,8 +51,8 @@ namespace TerrainGeneration {
             }
             TileZ = posZ;
             TileX = posX;
-            for (int i = -CursorSize/2; i <= CursorSize/2; i++) {
-                if(TileX-Mathf.Abs(i) < 0 && i < 0 || TileX+Mathf.Abs(i) >= Width && i > 0)
+            for (int i = -CursorSize / 2; i <= CursorSize / 2; i++) {
+                if(TileX - Mathf.Abs(i) < 0 && i < 0 || TileX + Mathf.Abs(i) >= Width && i > 0)
                     continue;
                 for (int j = -CursorSize/2; j <= CursorSize/2; j++) {
                     if (TileZ - Mathf.Abs(j) < 0 && j < 0 || TileZ + Mathf.Abs(j) >= Height && j > 0)

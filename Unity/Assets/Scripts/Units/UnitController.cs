@@ -7,7 +7,7 @@ using Vector3 = UnityEngine.Vector3;
 namespace Units {
     // Class for a single unit
     public class UnitController : Interactable {
-        private UnitsManager _manager;
+        private UnitGroupController controller;
     
         private Camera cam;
    
@@ -46,14 +46,14 @@ namespace Units {
             cam = Camera.main;
         }
 
-        public void SetManager(UnitsManager manager) {
-            _manager = manager;
+        public void SetManager(UnitGroupController controller) {
+            this.controller = controller;
         }
         
         // Update is called once per frame
         void Update() {
             if (Input.GetMouseButtonDown(0)) {
-                _manager.SetSelected(this);
+                controller.SetSelected(this);
                 //SetTargetPosition();
             }
 

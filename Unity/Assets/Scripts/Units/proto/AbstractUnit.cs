@@ -12,8 +12,8 @@ namespace UnitSystem {
         protected Vector3 targetPosition;
         protected Vector3 lookAtTarget;
         
-        protected bool isMoving = false;
-        protected bool isTurning = false;
+        protected bool isMoving;
+        protected bool isTurning;
         /**
          * Utile pour savoir si le leader doit être attrapé
          */
@@ -79,11 +79,8 @@ namespace UnitSystem {
         {
             if (targetPosition == null) return;
             position = Vector3.MoveTowards(position, targetPosition, UnitLibData.speed * Time.deltaTime * speedEntity);
-
             
-            
-            if (position == targetPosition)
-            {
+            if (position == targetPosition) {
                 isMoving = false;
             }
         }
