@@ -13,9 +13,9 @@ namespace  UnitSystem  {
             unitTarget = null;
         }
         
-        public override bool init(GameObject gameobjectModel) {
+        public override bool init(Entity entityModel) {
             deltaTime = 0.0f;
-            return base.init(gameobjectModel);
+            return base.init(entityModel);
         }
 
         public override void update() {

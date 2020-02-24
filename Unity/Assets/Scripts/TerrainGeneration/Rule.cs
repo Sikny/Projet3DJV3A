@@ -25,7 +25,7 @@ namespace TerrainGeneration {
         }
         // Free-mode
         public Rule(string seedUser) : this(){
-            if (!string.IsNullOrWhiteSpace(seedUser)) {
+            if (!string.IsNullOrEmpty(seedUser)) {
                 if (!int.TryParse(seedUser, out this.seedWorld)) {
                     this.seedWorld = seedUser.GetHashCode();
                 }
@@ -49,7 +49,6 @@ namespace TerrainGeneration {
                     // 5 levels of localdifficulty (0 = no spawn; 5 = max spawn)
                     this.localSpawnDifficulty.Add(posSpawner, genRand.Next(1, 5));
                 }
-
             }
         }
     }

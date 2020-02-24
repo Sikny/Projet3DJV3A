@@ -31,7 +31,7 @@ public class Rule
     // Free-mode
     public Rule(string seedUser)
     {
-        if (!string.IsNullOrWhiteSpace(seedUser))
+        if (!string.IsNullOrEmpty(seedUser))
         {
             if (!int.TryParse(seedUser, out this.seedWorld))
             {

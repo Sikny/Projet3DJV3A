@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using TerrainGeneration;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
@@ -22,7 +21,7 @@ public class PathFinderAstar {
         List<Vector2> closedPaths = new List<Vector2>();
         List<Vector2> adjacents = new List<Vector2>();
         Dictionary<Vector2, Vector2> parentPath = new Dictionary<Vector2, Vector2>();
-        openPaths.Append(startPoint);
+        openPaths.Add(startPoint);
 
         while (openPaths.Count != 0 && isWalkable == 0)
         {

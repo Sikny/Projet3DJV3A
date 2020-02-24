@@ -2,10 +2,9 @@
 using UnityEngine;
 
 namespace UnitSystem {
-    public abstract class AbstractUnit
-    {
+    public abstract class AbstractUnit {
         protected int numberEntity;
-        protected Entity[] entity;
+        protected Entity[] entities;
         protected Vector3 position;
         protected Quaternion rotation; //todo
 
@@ -26,37 +25,38 @@ namespace UnitSystem {
         {
             this.numberEntity = numberEntity;
             this.numberAlive = numberEntity;
-            this.entity = new Entity[numberEntity];
+            this.entities = new Entity[numberEntity];
             this.position = position;
             this.rotation = Quaternion.identity;
         }
 
-        public virtual bool init(GameObject entityModel) // pas très propre mais bon...
+        public virtual bool init(Entity entityModel) // pas très propre mais bon...
         {
             int counterInstance = 0;
-            GameObject leader = null;
+            Entity leader = null;
             for (int i = 0; i < Mathf.Sqrt(numberEntity); i++)
             {
                 for (int j = 0; j < Mathf.Sqrt(numberEntity); j++)
                 {
                     if (counterInstance < numberEntity)
                     {
-                        GameObject entityGO = null;
+                        Entity entityGo;
                         if (leader == null)
                         {
                             // le premier sera le leader et le parent des n-1 autres
-                            leader = (GameObject) Object.Instantiate(entityModel,
+                            leader = Object.Instantiate(entityModel,
                                 new Vector3(position.x+0.5f, position.y, position.z+0.5f), Quaternion.identity);
-                            entityGO = leader;
+                            entityGo = leader;
                         }
                         else
                         {
-                            entityGO = (GameObject) Object.Instantiate(entityModel,
+                            entityGo = Object.Instantiate(entityModel,
                                 new Vector3(i,0,j), Quaternion.identity);
-                            entityGO.transform.parent = leader.transform;
-                            entityGO.transform.localPosition = new Vector3(i*2f,0,j*2f);
+                            entityGo.transform.SetParent(leader.transform);
+                            entityGo.SetParent(this);
+                            entityGo.transform.localPosition = new Vector3(i*2f,0,j*2f);
                         }
-                        entity[counterInstance++] = new Entity(entityGO);
+                        entities[counterInstance++] = entityGo;
                     }
                 }
             }
@@ -88,18 +88,18 @@ namespace UnitSystem {
         protected void updateGameobject()
         {
             if(numberAlive > 0)
-                entity[0].associedGameObject.transform.position = position;
+                entities[0].transform.position = position;
         }
 
         public Entity getEntity(int index)
         {
-            return entity[index];
+            return entities[index];
         }
 
         public void popEntity(int index)
         {
             numberAlive--;
-            entity[index] = null;
+            entities[index] = null;
         }
 
         public int getNumberAlive()

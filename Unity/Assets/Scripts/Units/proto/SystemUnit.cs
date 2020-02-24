@@ -10,8 +10,10 @@ namespace Units.proto {
          * Ok ici sera mis toutes les unités instanciées (de type AI ou Remoted)
          */
         [NonSerialized] private readonly List<AbstractUnit> units = new List<AbstractUnit>();
-        [SerializeField] private GameObject entityModel;
+        [SerializeField] private Entity entityModel;
         [SerializeField] private int sizeUnit = 9;
+
+        private RemotedUnit _selectedUnit;
 
         /** Données de l'ancien système nécessaire aux unités*/
         public Camera cam;
@@ -26,6 +28,7 @@ namespace Units.proto {
         private const int YPos = 1;
 
         public void Start() {
+            _selectedUnit = null;
             AbstractUnit[] playerUnits = {
                 new RemotedUnit(sizeUnit, new Vector3(3, YPos, 5)),
                 new RemotedUnit(sizeUnit, new Vector3(5, YPos, 3))
@@ -73,6 +76,21 @@ namespace Units.proto {
             else if (numberAi == 0) {
                 EndGameManager.typeEndGame = 1;
                 SceneManager.LoadScene(2);
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Mouse0)) {
+                if (_selectedUnit != null)
+                    _selectedUnit.SetTargetPosition();
+            }
+        }
+
+        public void SelectUnit(RemotedUnit unit) {
+            if (_selectedUnit != null) {
+                _selectedUnit.Deselect();
+            }
+            _selectedUnit = unit;
+            if (_selectedUnit != null) {
+                _selectedUnit.Select();
             }
         }
     }

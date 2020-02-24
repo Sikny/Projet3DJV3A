@@ -7,21 +7,32 @@ public class RemotedUnit : AbstractUnit {
     private int isWalkable = 1;
     protected bool isSelected;
     
+    private Color _color = Color.cyan;
+    
     public RemotedUnit(int numberEntity, Vector3 pos) : base(numberEntity, pos) {
         speedEntity = 1.0f;
         isSelected = true;
+        
+        
     }
         
-    public override bool init(GameObject gameobjectModel) {
-        return base.init(gameobjectModel);
+    public override bool init(Entity entityModel) {
+        bool value = base.init(entityModel);
+        
+        foreach (var entity in entities) {
+            entity.InitColor(_color);
+            entity.selectable = true;
+        }
+
+        return value;
     }
 
     public override void update() {
-        if (isSelected) {
+        /*if (isSelected) {
             if (Input.GetKeyDown(KeyCode.Mouse0)) {
                 if (!SetTargetPosition()) return;
             }
-        }
+        }*/
         if(isMoving)
             Move();
         updateGameobject();
@@ -78,6 +89,18 @@ public class RemotedUnit : AbstractUnit {
             isMoving = true;
             isTurning = true;
             return true;
+        }
+    }
+
+    public void Select() {
+        foreach (var entity in entities) {
+            entity.meshRenderer.material.color = Color.yellow;
+        }
+    }
+
+    public void Deselect() {
+        foreach (var entity in entities) {
+            entity.ResetColor();
         }
     }
 }
