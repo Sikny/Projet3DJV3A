@@ -1,12 +1,13 @@
-﻿using UnityEngine;
-using Grid = TerrainGeneration.Grid;
+﻿using TerrainGeneration;
+using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Units {
+    // Class for a single unit
     public class UnitController : Interactable {
-        private UnitsManager _manager;
+        private UnitGroupController controller;
     
         private Camera cam;
    
@@ -30,39 +31,29 @@ namespace Units {
         private Color startColor;
         private Quaternion unitRotation;
 
-        private bool isMoving = false;
-        private bool isTurning = false;
-        private bool isRight = false;
+        private bool isMoving;
+        private bool isTurning;
+        private bool isRight;
     
-        private int isWalkable = 1; // 0 = not walkable 1 = normally walkable 2 = slow walk 
-    
-        private Grid gridObject;
+        private int isWalkable = 1; // 0 = not walkable 1 = normally walkable 2 = slow walk
 
-        private PathFinderAstar pathFinder;
-
-        public override void Interact()
-        {
+        public override void Interact() {
             base.Interact();
         }
 
-        private void Start()
-        {
+        private void Start() {
             offsetPosition = new Vector3(0f, this.gameObject.transform.localScale.y + 0.5f, 0f);
-            gridObject = Grid.getInstance();
             cam = Camera.main;
-            pathFinder = PathFinderAstar.GetInstance();
         }
 
-        public void SetManager(UnitsManager manager) {
-            _manager = manager;
+        public void SetManager(UnitGroupController controller) {
+            this.controller = controller;
         }
         
         // Update is called once per frame
-        void Update()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                _manager.SetSelected(this);
+        void Update() {
+            if (Input.GetMouseButtonDown(0)) {
+                controller.SetSelected(this);
                 //SetTargetPosition();
             }
 
@@ -83,67 +74,47 @@ namespace Units {
         public bool SetTargetPosition()
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
 
-
-            if (Physics.Raycast(ray, out hit, 100, 1 << 4) ||
-                !Physics.Raycast(ray, out hit, 100, groundMask)) return false;
+            if (Physics.Raycast(ray, out RaycastHit hit, 100, 1 << 4) 
+                || !Physics.Raycast(ray, out hit, 100, groundMask))
+                return false;
+            
+            if (hit.transform.gameObject.layer == 4) //water
+                isWalkable = 0;
             else
-            {
-                /*Interactable interactable = hit.collider.GetComponent<Interactable>();
-            if (interactable != null)
-            {
-                SetFocus(interactable);
-            }
-            else
-                RemoveFocus();
-*/
-                //if (isFocus)
-                //{
-                //Debug.Log("hit : " + hit.transform.gameObject.layer);
-                if (hit.transform.gameObject.layer == 4) //water 
-                    isWalkable = 0;
-                else if (hit.transform.gameObject.layer == 8) //ground 
-                    isWalkable = 1;
+                isWalkable = 1;
 
-                float xHit = Mathf.Floor(hit.transform.position.x);
-                float zHit = Mathf.Floor(hit.transform.position.z);
-                gridObject.TileX = (int) xHit + (gridObject.Width / 2);
-                gridObject.TileZ = (int) zHit + (gridObject.Height / 2);
+            float xHit = Mathf.Floor(hit.transform.position.x);
+            float zHit = Mathf.Floor(hit.transform.position.z);
+            TerrainGrid.Instance.TileX = (int) xHit + (TerrainGrid.Width / 2);
+            TerrainGrid.Instance.TileZ = (int) zHit + (TerrainGrid.Height / 2);
 
-                Vector2 startPosition = new Vector2(Mathf.Floor(transform.position.x) + (gridObject.Width / 2),
-                    Mathf.Floor(transform.position.z) + (gridObject.Height / 2));
-                Vector2 endPosition = new Vector2(gridObject.TileX, gridObject.TileZ);
+            Vector2 startPosition = new Vector2(Mathf.Floor(transform.position.x) + (TerrainGrid.Width / 2),
+                Mathf.Floor(transform.position.z) + (TerrainGrid.Height / 2));
+            Vector2 endPosition = new Vector2(TerrainGrid.Instance.TileX, TerrainGrid.Instance.TileZ);
 
-                //pathFinder.BuildPath(startPosition, endPosition, isWalkable);
+            targetPosition = new Vector3(Mathf.Floor(hit.transform.position.x) + 0.5f, 0,
+                                 Mathf.Floor(hit.transform.position.z) + 0.5f) + offsetPosition;
 
 
-                //targetPosition = hit.point + offsetPosition;
-                targetPosition = new Vector3(Mathf.Floor(hit.transform.position.x) + 0.5f, 0,
-                                     Mathf.Floor(hit.transform.position.z) + 0.5f) + offsetPosition;
+            lookAtTarget = new Vector3(targetPosition.x - transform.position.x, transform.position.y,
+                targetPosition.z - transform.position.z);
 
+            //Vector of unit to point 
+            Vector3 unitToTarget = (targetPosition - transform.position);
+            unitToTarget.Normalize();
+            //Dot product of the two vectors and Acos 
+            rotationAngle = (Mathf.Acos(Vector3.Dot(unitToTarget, gameObject.transform.forward)) *
+                             (180 / Mathf.PI));
+            isRight = Vector3.Dot(unitToTarget, gameObject.transform.right) > 0;
 
-                lookAtTarget = new Vector3(targetPosition.x - transform.position.x, transform.position.y,
-                    targetPosition.z - transform.position.z);
-
-                //Vector of unit to point 
-                Vector3 unitToTarget = (targetPosition - transform.position);
-                unitToTarget.Normalize();
-                //Dot product of the two vectors and Acos 
-                rotationAngle = (Mathf.Acos(Vector3.Dot(unitToTarget, gameObject.transform.forward)) *
-                                 (180 / Mathf.PI));
-                isRight = Vector3.Dot(unitToTarget, gameObject.transform.right) > 0;
-
-                isMoving = true;
-                isTurning = true;
-                return true;
-            }
-            //}
+            isMoving = true;
+            isTurning = true;
+            return true;
         }
 
         private void Move()
         {
-            
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
         
             if (transform.position == targetPosition)

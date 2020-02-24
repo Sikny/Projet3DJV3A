@@ -15,3 +15,4 @@ MonoBehaviour:
   soundVolume: 0
   musicVolume: 0
   language: 1
+  invertCameraX: 0

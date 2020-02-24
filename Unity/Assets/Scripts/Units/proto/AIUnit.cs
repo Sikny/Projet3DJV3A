@@ -1,51 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Units.proto;
+﻿using Units.proto;
 using UnityEngine;
 
-namespace  UnitSystem
-{    
-    public class AIUnit : AbstractUnit
-    {
+namespace  UnitSystem  {
+    public class AIUnit : AbstractUnit {
         private float deltaTime;
         private RemotedUnit unitTarget;
 
         private const float TICK_ATTACK = 0.10f; //PARAM OF DIFFICULTY
         
-        public AIUnit(int numberEntity) : 
-            base(numberEntity,new Vector3(10,1,0))
-        {
+        public AIUnit(int numberEntity, Vector3 pos) : base(numberEntity, pos) {
             speedEntity = 0.7f;
             unitTarget = null;
         }
         
-        public override bool init(GameObject gameobjectModel)
-        {
+        public override bool init(Entity entityModel) {
             deltaTime = 0.0f;
-            return base.init(gameobjectModel);
+            return base.init(entityModel);
         }
 
-        public override void update()
-        {
-
+        public override void update() {
             deltaTime += UnitLibData.deltaTime;
             
-            if (unitTarget == null)
-            {
-                unitTarget = guessTheBestUnitToTarget();
+            if (unitTarget == null) {
+                unitTarget = GuessTheBestUnitToTarget();
             }
-            else
-            {
+            else {
                 targetPosition = unitTarget.getPosition();
                 isMoving = true;
             }
             if(isMoving)
                 Move();
-
-            if (deltaTime >= TICK_ATTACK)
-            {
-                if (Vector3.Distance(position, targetPosition) <= 3)
-                {
+            if (deltaTime >= TICK_ATTACK) {
+                if (Vector3.Distance(position, targetPosition) <= 3) {
                     attack(unitTarget);
                 }
                 deltaTime -= TICK_ATTACK;
@@ -53,70 +39,51 @@ namespace  UnitSystem
             updateGameobject();
         }
 
-        protected override void attack(AbstractUnit anotherUnit)
-        {
+        protected override void attack(AbstractUnit anotherUnit) {
             int indexEntityAttack = Random.Range(0, numberEntity);
             Entity entityAttack = this.getEntity(indexEntityAttack);
             Debug.Log(anotherUnit.getNumberAlive());
-            if (anotherUnit.getNumberAlive() > 1)
-            {
-                
+            if (anotherUnit.getNumberAlive() > 1) {
                 int indexEntityDefense = Random.Range(1, numberEntity);
                 Entity entityDefense = anotherUnit.getEntity(indexEntityDefense);
 
                 if (entityAttack == null || entityDefense == null) return;
 
-                int life = entityDefense.changeLife(-1 * entityAttack.getStrength());
-                if (life == 0)
-                {
+                int life = entityDefense.ChangeLife(-1 * entityAttack.GetStrength());
+                if (life == 0) {
                     anotherUnit.popEntity(indexEntityDefense);
                 }
             }
-            else if(anotherUnit.getNumberAlive() == 1)
-            {
-                if (entityAttack != null)
-                {
-                    anotherUnit.getEntity(0).changeLife(-100);
+            else if(anotherUnit.getNumberAlive() == 1) {
+                if (entityAttack != null) {
+                    anotherUnit.getEntity(0).ChangeLife(-100);
                     anotherUnit.popEntity(0); // Le leader est attrapé
                 }
             }
         }
         
-        private RemotedUnit guessTheBestUnitToTarget()
-        {
-            
+        private RemotedUnit GuessTheBestUnitToTarget() {
             RemotedUnit best = null;
             float bestDistance = float.PositiveInfinity;
-            foreach (var unit in UnitLibData.units)
-            {
-                if (unit is RemotedUnit)
-                {
+            foreach (var unit in UnitLibData.units) {
+                if (unit is RemotedUnit) {
                     float distance = Vector3.Distance(this.position, unit.getPosition());
-                    if (distance < bestDistance)
-                    {
+                    if (distance < bestDistance) {
                         bestDistance = distance;
                         best = (RemotedUnit)unit;
                     }
                 }
             }
-            
             return best;
         }
-
-        protected override void Move()
-        {
-            if (Vector3.Distance(position, targetPosition) <= 3)
-            {
+        protected override void Move() {
+            if (Vector3.Distance(position, targetPosition) <= 3) {
                 return;
             }
             base.Move();
-            
         }
-        
-        public override bool kill()
-        {
+        public override bool kill() {
             return true;
         }
     }
 }
-

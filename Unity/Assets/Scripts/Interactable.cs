@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
 public class Interactable : MonoBehaviour
@@ -11,7 +9,9 @@ public class Interactable : MonoBehaviour
 
     public virtual void Interact()
     {
-        Debug.Log("interacting with " + transform.name);
+        #if UNITY_EDITOR
+            Debug.Log("interacting with " + transform.name);
+        #endif
     }
 
     // Update is called once per frame

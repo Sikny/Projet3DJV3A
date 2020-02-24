@@ -119,7 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundsSlider: {fileID: 722997662660481572}
   musicSlider: {fileID: 4096290158963389245}
-  languageDropdown: {fileID: 0}
+  languageDropdown: {fileID: 1127501775562937763}
 --- !u!1001 &564281132122869158
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -884,6 +884,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5680888242059429082}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1127501775562937763 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4716149681018130809, guid: 8910300a818d8f04ab558585f6c0eafd,
+    type: 3}
+  m_PrefabInstance: {fileID: 5680888242059429082}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0b652f32a2cc243917e4028fa0f046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8635916926261136144
 PrefabInstance:
   m_ObjectHideFlags: 0

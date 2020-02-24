@@ -1,62 +1,58 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TerrainGeneration;
 using Units.proto;
 using UnitSystem;
 using UnityEngine;
-using Grid = TerrainGeneration.Grid;
 
-public class RemotedUnit : AbstractUnit
-{
+public class RemotedUnit : AbstractUnit {
     private int isWalkable = 1;
     protected bool isSelected;
-    private Grid gridObject;
-    public RemotedUnit(int numberEntity) : 
-        base(numberEntity,new Vector3(-2,1,0))
-    {
+    
+    private Color _color = Color.cyan;
+    
+    public RemotedUnit(int numberEntity, Vector3 pos) : base(numberEntity, pos) {
         speedEntity = 1.0f;
         isSelected = true;
-        gridObject = Grid.getInstance();
+        
+        
     }
         
-    public override bool init(GameObject gameobjectModel)
-    {
-        return base.init(gameobjectModel);
+    public override bool init(Entity entityModel) {
+        bool value = base.init(entityModel);
+        
+        foreach (var entity in entities) {
+            entity.InitColor(_color);
+            entity.selectable = true;
+        }
+
+        return value;
     }
 
-    public override void update()
-    {
-        if (isSelected)
-        {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
+    public override void update() {
+        /*if (isSelected) {
+            if (Input.GetKeyDown(KeyCode.Mouse0)) {
                 if (!SetTargetPosition()) return;
             }
-        }
+        }*/
         if(isMoving)
             Move();
         updateGameobject();
     }
 
-    public override bool kill()
-    {
+    public override bool kill() {
         return true;
     }
 
-    protected override void attack(AbstractUnit anotherUnit)
-    {
+    protected override void attack(AbstractUnit anotherUnit) {
             
     }
     
-    public bool SetTargetPosition()
-    {
+    public bool SetTargetPosition() {
         Ray ray = UnitLibData.cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
-
+        
         if (Physics.Raycast(ray, out hit, 100, 1 << 4) ||
             !Physics.Raycast(ray, out hit, 100, UnitLibData.groundMask)) return false;
-        else
-        {
+        else {
             if (hit.transform.gameObject.layer == 4) //water 
                 isWalkable = 0;
             else if (hit.transform.gameObject.layer == 8) //ground 
@@ -64,12 +60,12 @@ public class RemotedUnit : AbstractUnit
 
             float xHit = Mathf.Floor(hit.transform.position.x);
             float zHit = Mathf.Floor(hit.transform.position.z);
-            gridObject.TileX = (int) xHit + (gridObject.Width / 2);
-            gridObject.TileZ = (int) zHit + (gridObject.Height / 2);
+            TerrainGrid.Instance.TileX = (int) xHit + (TerrainGrid.Width / 2);
+            TerrainGrid.Instance.TileZ = (int) zHit + (TerrainGrid.Height / 2);
 
-            Vector2 startPosition = new Vector2(Mathf.Floor(position.x) + (gridObject.Width / 2),
-                Mathf.Floor(position.z) + (gridObject.Height / 2));
-            Vector2 endPosition = new Vector2(gridObject.TileX, gridObject.TileZ);
+            Vector2 startPosition = new Vector2(Mathf.Floor(position.x) + (TerrainGrid.Width / 2),
+                Mathf.Floor(position.z) + (TerrainGrid.Height / 2));
+            Vector2 endPosition = new Vector2(TerrainGrid.Instance.TileX, TerrainGrid.Instance.TileZ);
 
             //pathFinder.BuildPath(startPosition, endPosition, isWalkable);
 
@@ -93,6 +89,18 @@ public class RemotedUnit : AbstractUnit
             isMoving = true;
             isTurning = true;
             return true;
+        }
+    }
+
+    public void Select() {
+        foreach (var entity in entities) {
+            entity.meshRenderer.material.color = Color.yellow;
+        }
+    }
+
+    public void Deselect() {
+        foreach (var entity in entities) {
+            entity.ResetColor();
         }
     }
 }

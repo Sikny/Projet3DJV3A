@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3967875226360929328
+--- !u!1 &1406515577152823728
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6181469023538514474}
-  - component: {fileID: 2401955478023234010}
+  - component: {fileID: 1406515577152823729}
+  - component: {fileID: 910083300732840378}
   m_Layer: 0
-  m_Name: Units
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6181469023538514474
+--- !u!4 &1406515577152823729
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3967875226360929328}
+  m_GameObject: {fileID: 1406515577152823728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,20 +31,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2401955478023234010
+--- !u!114 &910083300732840378
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3967875226360929328}
+  m_GameObject: {fileID: 1406515577152823728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c87d8430541c0347a0f28d690a34698, type: 3}
+  m_Script: {fileID: 11500000, guid: 99efe0ece1472bd488060a1bdd766f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitControllerPrefab: {fileID: 2633175725685055792, guid: 2869a4ddc78ec384aa381910b4b2a65d,
-    type: 3}
-  unitCount: 0
-  isRemote: 0
-  units: []
+  updateLoop:
+    m_PersistentCalls:
+      m_Calls: []
+  fixedUpdateLoop:
+    m_PersistentCalls:
+      m_Calls: []
+  lateUpdateLoop:
+    m_PersistentCalls:
+      m_Calls: []
+  gameSettings: {fileID: 11400000, guid: dfbe9b8a7b0398646aedb0eb9776d315, type: 2}
+  languageDictionary: {fileID: 11400000, guid: 0d6cf9341b33a57479eaa5b00a4243f6, type: 2}

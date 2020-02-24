@@ -3,10 +3,17 @@ using UnityEditor;
 using UnityEngine;
 
 namespace Editor {
+    /**
+     * <summary>Popup when editing language dictionary key</summary>
+     */
     public class LanguageDictionaryEditPopup : EditorWindow {
         private static string _value, _oldValue;
         private static int _type;
         private static LanguageDictionary _languageDictionary;
+        
+        /**
+         * <param name="type">0: add new entry, 1: edit existing key</param>
+         */
         public static void Init(string value, int type) {
             LanguageDictionaryEditPopup window = CreateInstance<LanguageDictionaryEditPopup>();
             
