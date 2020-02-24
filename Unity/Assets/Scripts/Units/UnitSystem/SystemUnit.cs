@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using UnitSystem;
+﻿using System.Collections.Generic;
+using Units.proto;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Units.proto {
+namespace Units.UnitSystem {
     public class SystemUnit : MonoBehaviour {
-        /*
-         * Ok ici sera mis toutes les unités instanciées (de type AI ou Remoted)
-         */
-        [NonSerialized] private readonly List<AbstractUnit> units = new List<AbstractUnit>();
         [SerializeField] private Entity entityModel;
         [SerializeField] private int sizeUnit = 9;
+        
+        private readonly List<AbstractUnit> _units = new List<AbstractUnit>();
 
         private RemotedUnit _selectedUnit;
 
@@ -22,29 +19,36 @@ namespace Units.proto {
         public float rotationSpeed = 300f;
         public float speed = 5f;
 
-        private int numberAi = 1;
-        private int numberRemote = 1;
+        private int _numberAi;
+        private int _numberRemote;
 
         private const int YPos = 1;
 
         public void Start() {
             _selectedUnit = null;
-            AbstractUnit[] playerUnits = {
-                new RemotedUnit(sizeUnit, new Vector3(3, YPos, 5)),
-                new RemotedUnit(sizeUnit, new Vector3(5, YPos, 3))
+            Vector3[] playerUnitsPositions = {
+                new Vector3(3, YPos, 5),
+                new Vector3(5, YPos, 3)
             };
-            AbstractUnit[] aiUnits = {
-                new AIUnit(sizeUnit, new Vector3(1, YPos, 1))
+            _numberRemote = playerUnitsPositions.Length;
+            Vector3[] aiUnitsPositions = {
+                new Vector3(1, YPos, 1)
             };
+            _numberAi = aiUnitsPositions.Length;
 
-            foreach (var unit in playerUnits) {
-                unit.init(entityModel);
-                units.Add(unit);
+            foreach (var unitPos in playerUnitsPositions) {
+                RemotedUnit unit = new GameObject("Allied Unit").AddComponent<RemotedUnit>();
+                unit.SetPosition(unitPos);
+                unit.transform.position = unitPos;
+                unit.Init(entityModel, sizeUnit);
+                _units.Add(unit);
             }
 
-            foreach (var unit in aiUnits) {
-                unit.init(entityModel);
-                units.Add(unit);
+            foreach (var unitPos in aiUnitsPositions) {
+                AiUnit unit = new GameObject("Enemy Unit").AddComponent<AiUnit>();
+                unit.SetPosition(unitPos);
+                unit.Init(entityModel, sizeUnit);
+                _units.Add(unit);
             }
 
             /* On se servira de ça pour appeler les updates des units */
@@ -52,28 +56,28 @@ namespace Units.proto {
             UnitLibData.focus = focus;
             UnitLibData.speed = speed;
             UnitLibData.groundMask = groundMask;
-            UnitLibData.units = units; // Penser à update si 
+            UnitLibData.units = _units; // Penser à update si 
             UnitLibData.deltaTime = 0;
         }
 
         public void Update() {
             UnitLibData.deltaTime = Time.deltaTime;
             
-            foreach (var unit in units) {
-                unit.update();
-                if (unit.getNumberAlive() <= 0) {
-                    if (unit is AIUnit) numberAi--;
-                    else if (unit is RemotedUnit) numberRemote--;
-                    unit.kill();
-                    units.Remove(unit);
+            foreach (var unit in _units) {
+                unit.UpdateUnit();
+                if (unit.GetNumberAlive() <= 0) {
+                    if (unit is AiUnit) _numberAi--;
+                    else if (unit is RemotedUnit) _numberRemote--;
+                    unit.Kill();
+                    _units.Remove(unit);
                 }
             }
 
-            if (numberRemote == 0) {
+            if (_numberRemote == 0) {
                 EndGameManager.typeEndGame = 0;
                 SceneManager.LoadScene(2);
             }
-            else if (numberAi == 0) {
+            else if (_numberAi == 0) {
                 EndGameManager.typeEndGame = 1;
                 SceneManager.LoadScene(2);
             }
