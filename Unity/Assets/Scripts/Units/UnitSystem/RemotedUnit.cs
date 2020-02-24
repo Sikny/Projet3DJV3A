@@ -7,38 +7,93 @@ namespace Units.UnitSystem {
         private int _isWalkable = 1;
         private bool _isSelected;
     
+        protected AiUnit _unitTarget;
+        
         private Color _color = Color.cyan;
+        
+        private float _deltaTime;
+
+        private const float TickAttack = 0.10f; //PARAM OF DIFFICULTY
     
         public override bool Init(Entity entityModel, int entityCountP) {
             bool value = base.Init(entityModel, entityCountP);
             speedEntity = 1.0f;
             _isSelected = true;
+            _deltaTime = 0.0f;
         
             foreach (var entity in entities) {
                 print(entity);
                 entity.InitColor(_color);
             }
+            
 
             return value;
         }
 
         public override void UpdateUnit() {
-            /*if (isSelected) {
-            if (Input.GetKeyDown(KeyCode.Mouse0)) {
-                if (!SetTargetPosition()) return;
+            _deltaTime += UnitLibData.deltaTime;
+            
+            if (this._isSelected) {
+                if (Input.GetKeyDown(KeyCode.Mouse0)) {
+                    if (!SetTargetPosition()) return;
+                }
             }
-        }*/
-            if(isMoving)
+
+            if (_unitTarget == null) _unitTarget = GuessTheBestUnitToTarget();
+            if(isMoving && canMove(1.0f))
                 Move();
+            if (_deltaTime >= TickAttack) {
+                if (Vector3.Distance(position, _unitTarget.GetPosition()) <= 3) {
+                    Attack(_unitTarget);
+                }
+                _deltaTime -= TickAttack;
+            }
             UpdateGameObject();
+            
         }
 
-        public override bool Kill() {
+        public override bool Kill()
+        {
             return true;
         }
 
         protected override void Attack(AbstractUnit anotherUnit) {
-            
+            int indexEntityAttack = Random.Range(0, entityCount);
+            Entity entityAttack = this.GetEntity(indexEntityAttack);
+            Debug.Log(anotherUnit.GetNumberAlive());
+            if (anotherUnit.GetNumberAlive() > 1) {
+                int indexEntityDefense = Random.Range(1, entityCount);
+                Entity entityDefense = anotherUnit.GetEntity(indexEntityDefense);
+
+                if (entityAttack == null || entityDefense == null) return;
+
+                int life = entityDefense.ChangeLife(-1 * entityAttack.GetStrength());
+                if (life == 0) {
+                    anotherUnit.PopEntity(indexEntityDefense);
+                }
+            }
+            else if(anotherUnit.GetNumberAlive() == 1) {
+                if (entityAttack != null) {
+                    anotherUnit.GetEntity(0).ChangeLife(-100);
+                    anotherUnit.PopEntity(0); // Le leader est attrapé
+                    _unitTarget = null; //important pour indiquer à l'IA de commencer de nouvelles recherches
+                }
+            }
+        }
+        
+        private AiUnit GuessTheBestUnitToTarget() {
+            AiUnit best = null;
+            float bestDistance = float.PositiveInfinity;
+            foreach (var unit in UnitLibData.units) {
+                if (unit is AiUnit) {
+                    float distance = Vector3.Distance(this.position, unit.GetPosition());
+                    if (distance < bestDistance) {
+                        bestDistance = distance;
+                        best = (AiUnit)unit;
+                    }
+                }
+            }
+            return best;
         }
     
         public bool SetTargetPosition() {

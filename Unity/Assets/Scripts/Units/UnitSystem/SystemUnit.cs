@@ -8,7 +8,7 @@ namespace Units.UnitSystem {
         [SerializeField] private Entity entityModel;
         [SerializeField] private int sizeUnit = 9;
         
-        private readonly List<AbstractUnit> _units = new List<AbstractUnit>();
+        private AbstractUnit[] _units = new AbstractUnit[16];
 
         private RemotedUnit _selectedUnit;
 
@@ -30,7 +30,7 @@ namespace Units.UnitSystem {
             _selectedUnit = null;
             Vector3[] playerUnitsPositions = {
                 new Vector3(3, YPos, 5),
-                new Vector3(5, YPos, 3)
+                new Vector3(7, YPos, 3)
             };
             _numberRemote = playerUnitsPositions.Length;
             Vector3[] aiUnitsPositions = {
@@ -38,19 +38,21 @@ namespace Units.UnitSystem {
             };
             _numberAi = aiUnitsPositions.Length;
 
+            int i = 0;
+            
             foreach (var unitPos in playerUnitsPositions) {
                 RemotedUnit unit = new GameObject("Allied Unit").AddComponent<RemotedUnit>();
                 unit.SetPosition(unitPos);
                 unit.transform.position = unitPos;
                 unit.Init(entityModel, sizeUnit);
-                _units.Add(unit);
+                _units[i++] = unit;
             }
 
             foreach (var unitPos in aiUnitsPositions) {
                 AiUnit unit = new GameObject("Enemy Unit").AddComponent<AiUnit>();
                 unit.SetPosition(unitPos);
                 unit.Init(entityModel, sizeUnit);
-                _units.Add(unit);
+                _units[i++] = unit;
             }
 
             /* On se servira de ça pour appeler les updates des units */
@@ -64,14 +66,16 @@ namespace Units.UnitSystem {
 
         public void Update() {
             UnitLibData.deltaTime = Time.deltaTime;
-            
-            foreach (var unit in _units) {
-                unit.UpdateUnit();
-                if (unit.GetNumberAlive() <= 0) {
-                    if (unit is AiUnit) _numberAi--;
-                    else if (unit is RemotedUnit) _numberRemote--;
-                    unit.Kill();
-                    _units.Remove(unit);
+            int i = 0;
+            for (i = 0; i < _units.Length ; i++) {
+                if(_units[i] == null) continue;
+                
+                _units[i].UpdateUnit();
+                if (_units[i].GetNumberAlive() <= 0) {
+                    if (_units[i] is AiUnit) _numberAi--;
+                    else if (_units[i] is RemotedUnit) _numberRemote--;
+                    _units[i].Kill();
+                    _units[i] = null;
                 }
             }
 

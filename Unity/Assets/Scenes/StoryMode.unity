@@ -138,6 +138,11 @@ PrefabInstance:
       propertyPath: numberRemote
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 678431467393923812, guid: df1ad11a2ccf53a45a280522fc3640de,
+        type: 3}
+      propertyPath: _numberRemote
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 678431467393923813, guid: df1ad11a2ccf53a45a280522fc3640de,
         type: 3}
       propertyPath: m_LocalPosition.x

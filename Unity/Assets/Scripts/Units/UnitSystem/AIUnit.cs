@@ -4,8 +4,8 @@ using UnityEngine;
 namespace Units.UnitSystem  {
     public class AiUnit : AbstractUnit {
         private float _deltaTime;
-        private RemotedUnit _unitTarget;
-
+        protected RemotedUnit _unitTarget;
+        
         private const float TickAttack = 0.10f; //PARAM OF DIFFICULTY
 
         public override bool Init(Entity entityModel, int entityCountP) {
@@ -25,7 +25,7 @@ namespace Units.UnitSystem  {
                 targetPosition = _unitTarget.GetPosition();
                 isMoving = true;
             }
-            if(isMoving)
+            if(isMoving && canMove(1.0f))
                 Move();
             if (_deltaTime >= TickAttack) {
                 if (Vector3.Distance(position, targetPosition) <= 3) {
@@ -55,6 +55,7 @@ namespace Units.UnitSystem  {
                 if (entityAttack != null) {
                     anotherUnit.GetEntity(0).ChangeLife(-100);
                     anotherUnit.PopEntity(0); // Le leader est attrapé
+                    _unitTarget = null; //important pour indiquer à l'IA de commencer de nouvelles recherches
                 }
             }
         }
@@ -74,9 +75,6 @@ namespace Units.UnitSystem  {
             return best;
         }
         protected override void Move() {
-            if (Vector3.Distance(position, targetPosition) <= 3) {
-                return;
-            }
             base.Move();
         }
         public override bool Kill() {
