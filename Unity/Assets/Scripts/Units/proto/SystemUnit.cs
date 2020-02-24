@@ -22,8 +22,10 @@ namespace Units.proto {
         public float rotationSpeed = 300f;
         public float speed = 5f;
 
-        private int numberAi = 1;
-        private int numberRemote = 1;
+        [SerializeField]
+        public int numberAi = 1;
+        [SerializeField]
+        public int numberRemote = 1;
 
         private const int YPos = 1;
 
