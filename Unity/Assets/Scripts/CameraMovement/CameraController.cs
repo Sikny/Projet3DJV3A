@@ -8,7 +8,7 @@ namespace CameraMovement {
         
         public float speed = 100f;
         public float pitch = 2f;
-
+        
         private float currentYaw = 0f;
 
         private bool _mousePressed;

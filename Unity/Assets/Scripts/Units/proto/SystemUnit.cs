@@ -72,7 +72,7 @@ namespace Units.proto
                     if (unit is AIUnit) numberAI--;
                     else if (unit is RemotedUnit) numberRemote--;
                     unit.kill();
-                    units.Remove(unit);
+                    units.Remove(unit); // a revoir
                 }
             }
 
