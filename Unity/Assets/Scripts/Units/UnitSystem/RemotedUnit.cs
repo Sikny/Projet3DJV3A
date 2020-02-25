@@ -8,9 +8,7 @@ namespace Units.UnitSystem {
     public class RemotedUnit : AbstractUnit {
         private int _isWalkable = 1;
         private bool _isSelected;
-    
-        protected AiUnit _unitTarget;
-        
+
         private Color _color = Color.cyan;
         
         private float _deltaTime;
@@ -24,7 +22,6 @@ namespace Units.UnitSystem {
             _deltaTime = 0.0f;
         
             foreach (var entity in entities) {
-                print(entity);
                 entity.InitColor(_color);
             }
             gameObject.layer = 9;    // allied units
@@ -55,7 +52,6 @@ namespace Units.UnitSystem {
         protected override void Attack(AbstractUnit anotherUnit) {
             int indexEntityAttack = Random.Range(0, entityCount);
             Entity entityAttack = this.GetEntity(indexEntityAttack);
-            Debug.Log(anotherUnit.GetNumberAlive());
             if (anotherUnit.GetNumberAlive() > 1) {
                 int indexEntityDefense = Random.Range(1, entityCount);
                 Entity entityDefense = anotherUnit.GetEntity(indexEntityDefense);
@@ -75,6 +71,7 @@ namespace Units.UnitSystem {
                 }
             }
         }
+        
         
         private AiUnit GuessTheBestUnitToTarget() {
             AiUnit best = null;

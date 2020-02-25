@@ -10,6 +10,8 @@ namespace Units.UnitSystem {
         protected Vector3 targetPosition;
         protected Vector3 lookAtTarget;
 
+        protected AbstractUnit _unitTarget;
+        
         protected Vector3 velocity;
         
         protected bool isMoving;
@@ -29,7 +31,7 @@ namespace Units.UnitSystem {
             livingEntityCount = entityCountP;
             entities = new Entity[entityCountP];
             
-            velocity = new Vector3();
+            velocity = new Vector3(0.0f,0.0f,0.0f);
             
             Vector3 entityScale = entityModel.transform.localScale;
             
@@ -48,9 +50,21 @@ namespace Units.UnitSystem {
             BoxCollider col = gameObject.AddComponent<BoxCollider>();
             col.size = new Vector3(sqrtEntityCount, 1, sqrtEntityCount);
             rigidBody = gameObject.AddComponent<Rigidbody>();
-            rigidBody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            rigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            rigidBody.constraints = RigidbodyConstraints.FreezePositionY|RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ ;
             return true;
         }
+
+        public void OnCollisionEnter(Collision c)
+        {
+            if (c.gameObject.layer == 9 || c.gameObject.layer == 10 )  
+            {
+                isMoving = false;
+                targetPosition = transform.position;
+                Debug.Log("ok");
+            }
+        }
+
 
         public void SetPosition(Vector3 pos) {
             position = pos;
@@ -67,17 +81,18 @@ namespace Units.UnitSystem {
             return position;
         }
         
-        protected virtual void Move() {
+        protected void Move() {
             if (targetPosition == null) return;
             Vector3 last = position;
             position = Vector3.MoveTowards(position, targetPosition, UnitLibData.speed * Time.deltaTime * speedEntity);
-
+            
             velocity = position - last;
         }
 
-        protected void UpdateGameObject() {
-            if(livingEntityCount > 0)
-                rigidBody.position = position;
+        protected void UpdateGameObject()
+        {
+            if (livingEntityCount > 0)
+                rigidBody.MovePosition(position);
         }
 
         public Entity GetEntity(int index)

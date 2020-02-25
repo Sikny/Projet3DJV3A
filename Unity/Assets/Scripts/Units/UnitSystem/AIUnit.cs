@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Units.UnitSystem  {
     public class AiUnit : AbstractUnit {
         private float _deltaTime;
-        protected RemotedUnit _unitTarget;
+        
         
         private const float TickAttack = 0.10f; //PARAM OF DIFFICULTY
 
@@ -16,6 +16,7 @@ namespace Units.UnitSystem  {
             gameObject.layer = 10;    // enemy units
             return initState;
         }
+        
 
         public override void UpdateUnit() {
             _deltaTime += UnitLibData.deltaTime;
@@ -27,7 +28,7 @@ namespace Units.UnitSystem  {
                 targetPosition = _unitTarget.GetPosition();
                 isMoving = true;
             }
-            if(isMoving)
+            if(isMoving && Vector3.Distance(position, targetPosition) >= 3)
                 Move();
             if (_deltaTime >= TickAttack) {
                 if (Vector3.Distance(position, targetPosition) <= 3) {
@@ -41,7 +42,6 @@ namespace Units.UnitSystem  {
         protected override void Attack(AbstractUnit anotherUnit) {
             int indexEntityAttack = Random.Range(0, entityCount);
             Entity entityAttack = this.GetEntity(indexEntityAttack);
-            Debug.Log(anotherUnit.GetNumberAlive());
             if (anotherUnit.GetNumberAlive() > 1) {
                 int indexEntityDefense = Random.Range(1, entityCount);
                 Entity entityDefense = anotherUnit.GetEntity(indexEntityDefense);
@@ -80,5 +80,6 @@ namespace Units.UnitSystem  {
         public override bool Kill() {
             return true;
         }
+        
     }
 }
