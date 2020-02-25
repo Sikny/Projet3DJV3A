@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2e3007fd4fb834bac135c2bad60b91, type: 3}
+  m_Name: UnitDict
+  m_EditorClassIdentifier: 
+  unitZoneMaterials:
+  - type: 0
+    unitPrefab: {fileID: 5811452494852123272, guid: c62e1eb4febbad544a3badc8f9ab77c7,
+      type: 3}
+  - type: 1
+    unitPrefab: {fileID: 700578658376145092, guid: 577ea6e2918de314e8afa8d1d56a3d1b,
+      type: 3}
+  - type: 2
+    unitPrefab: {fileID: 4951274618923674584, guid: 177df649ca78da3468a2f6ea86e8a73c,
+      type: 3}
+  - type: 3
+    unitPrefab: {fileID: 8162200115752278526, guid: d248bdbe3d2d3a04ba3a97c402b68865,
+      type: 3}
