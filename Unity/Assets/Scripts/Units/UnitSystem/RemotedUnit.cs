@@ -1,4 +1,5 @@
-﻿using TerrainGeneration;
+﻿using System;
+using TerrainGeneration;
 using Units.proto;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ namespace Units.UnitSystem {
                 print(entity);
                 entity.InitColor(_color);
             }
+
+            gameObject.layer = 9;    // allied units
 
             return value;
         }
