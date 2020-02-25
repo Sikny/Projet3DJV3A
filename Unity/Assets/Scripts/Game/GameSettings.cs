@@ -1,11 +1,5 @@
 ﻿using UnityEngine;
 
-<<<<<<< HEAD:Unity/Assets/Scripts/Settings/GameSettings.cs
-namespace Settings {
-    public class GameSettings : MonoBehaviour
-    {
-    
-=======
 namespace Game {
     /**
      * <summary>Global game settings</summary>
@@ -16,6 +10,5 @@ namespace Game {
         public float musicVolume;
         public Language.Language language;
         public bool invertCameraX;
->>>>>>> PREPROD:Unity/Assets/Scripts/Game/GameSettings.cs
     }
 }
