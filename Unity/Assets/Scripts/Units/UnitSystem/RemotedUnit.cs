@@ -2,6 +2,7 @@
 using TerrainGeneration;
 using Units.proto;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Units.UnitSystem {
     public class RemotedUnit : AbstractUnit {
@@ -35,12 +36,6 @@ namespace Units.UnitSystem {
 
         public override void UpdateUnit() {
             _deltaTime += UnitLibData.deltaTime;
-            
-            if (this._isSelected) {
-                if (Input.GetKeyDown(KeyCode.Mouse0)) {
-                    if (!SetTargetPosition()) return;
-                }
-            }
 
             if (_unitTarget == null) _unitTarget = GuessTheBestUnitToTarget();
             if(isMoving && canMove(1.0f))

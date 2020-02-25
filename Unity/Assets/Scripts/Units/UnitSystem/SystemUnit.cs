@@ -103,15 +103,5 @@ namespace Units.UnitSystem {
                 }
             }
         }
-
-        public void SelectUnit(RemotedUnit unit) {
-            if (_selectedUnit != null) {
-                _selectedUnit.Deselect();
-            }
-            _selectedUnit = unit;
-            if (_selectedUnit != null) {
-                _selectedUnit.Select();
-            }
-        }
     }
 }
