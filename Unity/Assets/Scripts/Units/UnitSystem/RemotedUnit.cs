@@ -27,10 +27,7 @@ namespace Units.UnitSystem {
                 print(entity);
                 entity.InitColor(_color);
             }
-            
-
             gameObject.layer = 9;    // allied units
-
             return value;
         }
 
@@ -38,7 +35,7 @@ namespace Units.UnitSystem {
             _deltaTime += UnitLibData.deltaTime;
 
             if (_unitTarget == null) _unitTarget = GuessTheBestUnitToTarget();
-            if(isMoving && canMove(1.0f))
+            if(isMoving)
                 Move();
             if (_deltaTime >= TickAttack) {
                 if (Vector3.Distance(position, _unitTarget.GetPosition()) <= 3) {

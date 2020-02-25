@@ -9,10 +9,12 @@ namespace Units.UnitSystem  {
         private const float TickAttack = 0.10f; //PARAM OF DIFFICULTY
 
         public override bool Init(Entity entityModel, int entityCountP) {
+            bool initState = base.Init(entityModel, entityCountP);
             _deltaTime = 0.0f;
             speedEntity = 0.7f;
             _unitTarget = null;
-            return base.Init(entityModel, entityCountP);
+            gameObject.layer = 10;    // enemy units
+            return initState;
         }
 
         public override void UpdateUnit() {
@@ -25,7 +27,7 @@ namespace Units.UnitSystem  {
                 targetPosition = _unitTarget.GetPosition();
                 isMoving = true;
             }
-            if(isMoving && canMove(1.0f))
+            if(isMoving)
                 Move();
             if (_deltaTime >= TickAttack) {
                 if (Vector3.Distance(position, targetPosition) <= 3) {
@@ -74,9 +76,7 @@ namespace Units.UnitSystem  {
             }
             return best;
         }
-        protected override void Move() {
-            base.Move();
-        }
+        
         public override bool Kill() {
             return true;
         }

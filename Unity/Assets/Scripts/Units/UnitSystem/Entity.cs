@@ -6,6 +6,7 @@ namespace Units.UnitSystem {
         private int _life;
 
         public MeshRenderer meshRenderer;
+        public Rigidbody rigidBody;
 
         private Color _firstColor;
 

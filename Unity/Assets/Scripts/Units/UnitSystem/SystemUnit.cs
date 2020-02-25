@@ -81,11 +81,11 @@ namespace Units.UnitSystem {
 
             if (_numberRemote == 0) {
                 EndGameManager.typeEndGame = 0;
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(3);
             }
             else if (_numberAi == 0) {
                 EndGameManager.typeEndGame = 1;
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(3);
             }
             
             if (Input.GetKeyDown(KeyCode.Mouse0)) {

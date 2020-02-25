@@ -3,8 +3,8 @@ using TMPro;
 using UnityEngine.SceneManagement;
 
 public class EndGameManager : MonoBehaviour {
-    public const int ID_SCENE_MENU = 0;
-    public const int ID_SCENE_GAME = 1;
+    public const int ID_SCENE_MENU = 1;
+    public const int ID_SCENE_GAME = 2;
     
     public TextMeshProUGUI msgTextMesh;
 

@@ -22,6 +22,8 @@ namespace Units.UnitSystem {
         // On peu imaginer que les ennemis vont moins vite
         protected float speedEntity;
 
+        protected Rigidbody rigidBody;
+
         public virtual bool Init(Entity entityModel, int entityCountP) {
             entityCount = entityCountP;
             livingEntityCount = entityCountP;
@@ -45,6 +47,8 @@ namespace Units.UnitSystem {
 
             BoxCollider col = gameObject.AddComponent<BoxCollider>();
             col.size = new Vector3(sqrtEntityCount, 1, sqrtEntityCount);
+            rigidBody = gameObject.AddComponent<Rigidbody>();
+            rigidBody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             return true;
         }
 
@@ -71,28 +75,9 @@ namespace Units.UnitSystem {
             velocity = position - last;
         }
 
-        protected bool canMove(float ratio)
-        {
-            for (int i = 0; i < UnitLibData.units.Length; i++)
-            {
-                if (UnitLibData.units[i] != null && UnitLibData.units[i] != this)
-                {
-                    float deltaDistance = Vector3.Distance(this.position + velocity, UnitLibData.units[i].GetPosition())
-                                          - Vector3.Distance(this.position, UnitLibData.units[i].GetPosition());
-                    /*if (Vector3.Distance(this.position, UnitLibData.units[i].GetPosition()) < Math.Sqrt(this.entityCount) * ratio && deltaDistance < 0)
-                    {
-                        isMoving = false;
-                        return false;
-                    }*/
-                }
-            }
-
-            return true;
-        }
-
         protected void UpdateGameObject() {
             if(livingEntityCount > 0)
-                transform.position = position;
+                rigidBody.position = position;
         }
 
         public Entity GetEntity(int index)
