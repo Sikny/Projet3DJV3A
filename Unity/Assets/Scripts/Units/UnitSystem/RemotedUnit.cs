@@ -142,12 +142,15 @@ namespace Units.UnitSystem {
 
         public void Select() {
             foreach (var entity in entities) {
+                if (entity == null) continue;
                 entity.meshRenderer.material.color = Color.yellow;
             }
         }
 
         public void Deselect() {
-            foreach (var entity in entities) {
+            foreach (var entity in entities)
+            {
+                if (entity == null) continue;
                 entity.ResetColor();
             }
         }
