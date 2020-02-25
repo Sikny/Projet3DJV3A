@@ -1,6 +1,5 @@
 ﻿using System;
 using Units.proto;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace Units.UnitSystem {
@@ -33,15 +32,19 @@ namespace Units.UnitSystem {
             Vector3 entityScale = entityModel.transform.localScale;
             
             int counterInstance = 0;
-            for (int i = 0; i < Mathf.Sqrt(entityCount); i++) {
-                for (int j = 0; j < Mathf.Sqrt(entityCount); j++) {
+            float sqrtEntityCount = (float) Math.Sqrt(entityCount);
+            for (int i = 0; i < sqrtEntityCount; i++) {
+                for (int j = 0; j < sqrtEntityCount; j++) {
                     if (counterInstance <= entityCount) {
                         Entity entityGo = Instantiate(entityModel, transform);
-                        entityGo.transform.localPosition = new Vector3(i+entityScale.x,0,j+entityScale.z);
+                        entityGo.transform.localPosition = new Vector3(i-entityScale.x*2,0,j-entityScale.z*2);
                         entities[counterInstance++] = entityGo;
                     }
                 }
             }
+
+            BoxCollider col = gameObject.AddComponent<BoxCollider>();
+            col.size = new Vector3(sqrtEntityCount, 1, sqrtEntityCount);
             return true;
         }
 

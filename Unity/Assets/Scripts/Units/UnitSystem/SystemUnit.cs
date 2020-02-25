@@ -89,8 +89,18 @@ namespace Units.UnitSystem {
             }
             
             if (Input.GetKeyDown(KeyCode.Mouse0)) {
-                if (_selectedUnit != null)
-                    _selectedUnit.SetTargetPosition();
+                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 100f, 1 << 9)) {
+                    if(_selectedUnit != null)
+                        _selectedUnit.Deselect();
+                    _selectedUnit = hit.transform.GetComponent<RemotedUnit>();
+                    _selectedUnit.Select();
+                } else if (_selectedUnit != null) {
+                    if (Physics.Raycast(ray, out hit, 100f, 1 << 8)) {
+                        _selectedUnit.SetTargetPosition();
+                    }
+                }
             }
         }
 
