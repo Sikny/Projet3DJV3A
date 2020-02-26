@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Units.proto;
+﻿using Units.proto;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -34,7 +33,8 @@ namespace Units.UnitSystem {
             };
             _numberRemote = playerUnitsPositions.Length;
             Vector3[] aiUnitsPositions = {
-                new Vector3(1, YPos, 1)
+                new Vector3(1, YPos, 1),
+                new Vector3(10, YPos, 8)
             };
             _numberAi = aiUnitsPositions.Length;
 
