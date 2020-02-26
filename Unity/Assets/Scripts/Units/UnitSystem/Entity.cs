@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Units.UnitSystem {
     public class Entity : MonoBehaviour {
@@ -6,7 +7,6 @@ namespace Units.UnitSystem {
         private int _life;
 
         public MeshRenderer meshRenderer;
-        public Rigidbody rigidBody;
 
         private Color _firstColor;
 
@@ -33,8 +33,23 @@ namespace Units.UnitSystem {
             _life += deltaValue;
             if (_life > 100) _life = 100;
             else if (_life < 0) _life = 0;
+            if (deltaValue < 0) {
+                StartCoroutine(Blink());
+            }
             if (_life == 0) KillEntity();
             return _life;
+        }
+        
+        private readonly WaitForSeconds blinkTime = new WaitForSeconds(0.2f);
+        private float blinkAlpha = 0.5f;
+        private IEnumerator Blink() {
+            var material = meshRenderer.material;
+            Color meshCol = material.color;
+            meshCol.a = blinkAlpha;
+            material.color = meshCol;
+            yield return blinkTime;
+            meshCol.a = 1f;
+            material.color = meshCol;
         }
 
         public int GetStrength() {
