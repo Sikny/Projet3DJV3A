@@ -7,7 +7,7 @@ namespace Language {
     public class Traducer : MonoBehaviour {
         public List<Text> notTranslated;
 
-        private void Awake() {
+        private void Start() {
             TranslateView();
         }
 
