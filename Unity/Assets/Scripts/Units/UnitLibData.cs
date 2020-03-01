@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
-using Units.UnitSystem;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Units.proto
+namespace Units
 {
     public static class UnitLibData
     {
         public static Camera cam;
         public static LayerMask groundMask;
-
-        public static Interactable focus;
 
         public static float rotationSpeed;
         public static float speed;

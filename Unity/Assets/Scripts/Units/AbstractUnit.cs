@@ -1,14 +1,13 @@
 ﻿using System;
-using Units.proto;
+using Units;
 using UnityEngine;
 
-namespace Units.UnitSystem {
+namespace Units {
     public abstract class AbstractUnit : MonoBehaviour {
         protected int entityCount;
         protected Entity[] entities;
         protected Vector3 position;
         protected Vector3 targetPosition;
-        protected Vector3 lookAtTarget;
 
         protected AbstractUnit _unitTarget;
         

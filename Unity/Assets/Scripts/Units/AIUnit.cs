@@ -1,7 +1,7 @@
-﻿using Units.proto;
+﻿using Units;
 using UnityEngine;
 
-namespace Units.UnitSystem  {
+namespace Units  {
     public class AiUnit : AbstractUnit {
         private float _deltaTime;
         

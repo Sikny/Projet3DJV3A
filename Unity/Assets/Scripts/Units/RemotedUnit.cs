@@ -1,10 +1,10 @@
 ﻿using System;
 using TerrainGeneration;
-using Units.proto;
+using Units;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Units.UnitSystem {
+namespace Units {
     public class RemotedUnit : AbstractUnit {
         private int _isWalkable = 1;
         private bool _isSelected;
@@ -88,50 +88,32 @@ namespace Units.UnitSystem {
             return best;
         }
     
-        public bool SetTargetPosition() {
+        public void SetTargetPosition() {
             Ray ray = UnitLibData.cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-        
-            if (Physics.Raycast(ray, out hit, 100, 1 << 4) ||
-                !Physics.Raycast(ray, out hit, 100, UnitLibData.groundMask)) return false;
-            else {
-                if (hit.transform.gameObject.layer == 4) //water 
-                    _isWalkable = 0;
-                else if (hit.transform.gameObject.layer == 8) //ground 
-                    _isWalkable = 1;
 
-                float xHit = Mathf.Floor(hit.transform.position.x);
-                float zHit = Mathf.Floor(hit.transform.position.z);
-                TerrainGrid.Instance.TileX = (int) xHit + (TerrainGrid.Width / 2);
-                TerrainGrid.Instance.TileZ = (int) zHit + (TerrainGrid.Height / 2);
+            if (Physics.Raycast(ray, out var hit, 100, 1 << 4) ||
+                !Physics.Raycast(ray, out hit, 100, UnitLibData.groundMask))
+                return;
+            if (hit.transform.gameObject.layer == 4) //water 
+                _isWalkable = 0;
+            else if (hit.transform.gameObject.layer == 8) //ground 
+                _isWalkable = 1;
 
-                Vector2 startPosition = new Vector2(Mathf.Floor(position.x) + (TerrainGrid.Width / 2),
-                    Mathf.Floor(position.z) + (TerrainGrid.Height / 2));
-                Vector2 endPosition = new Vector2(TerrainGrid.Instance.TileX, TerrainGrid.Instance.TileZ);
+            float xHit = Mathf.Floor(hit.transform.position.x);
+            float zHit = Mathf.Floor(hit.transform.position.z);
+            TerrainGrid.Instance.TileX = (int) xHit + (TerrainGrid.Width / 2);
+            TerrainGrid.Instance.TileZ = (int) zHit + (TerrainGrid.Height / 2);
 
-                //pathFinder.BuildPath(startPosition, endPosition, isWalkable);
+            targetPosition = new Vector3(Mathf.Floor(hit.transform.position.x)-0.5f, 1,
+                Mathf.Floor(hit.transform.position.z)-0.5f) ;
 
 
-                //targetPosition = hit.point + offsetPosition;
-                targetPosition = new Vector3(Mathf.Floor(hit.transform.position.x)-0.5f, 1,
-                    Mathf.Floor(hit.transform.position.z)-0.5f) ;
+            //Vector of unit to point 
+            Vector3 unitToTarget = (targetPosition - position);
+            unitToTarget.Normalize();
 
-
-                lookAtTarget = new Vector3(targetPosition.x - position.x, position.y,
-                    targetPosition.z - position.z);
-
-                //Vector of unit to point 
-                Vector3 unitToTarget = (targetPosition - position);
-                unitToTarget.Normalize();
-                //Dot product of the two vectors and Acos 
-                //rotationAngle = (Mathf.Acos(Vector3.Dot(unitToTarget, gameObject.transform.forward)) *
-                //      (180 / Mathf.PI));
-                //isRight = Vector3.Dot(unitToTarget, gameObject.transform.right) > 0;
-
-                isMoving = true;
-                isTurning = true;
-                return true;
-            }
+            isMoving = true;
+            isTurning = true;
         }
 
         public void Select() {
