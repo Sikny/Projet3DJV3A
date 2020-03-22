@@ -1,4 +1,5 @@
-﻿using Language;
+﻿using System.Collections.Generic;
+using Language;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -44,5 +45,7 @@ namespace Game {
         public void LoadScene(string sceneName) {
             SceneManager.LoadScene(sceneName);
         }
+        
+        
     }
 }

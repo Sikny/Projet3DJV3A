@@ -1,11 +1,9 @@
-﻿using System;
-using TerrainGeneration;
-using Units;
+﻿using TerrainGeneration;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Units {
-    public class RemotedUnit : AbstractUnit {
+    public class PlayerUnit : AbstractUnit {
         private int _isWalkable = 1;
         private bool _isSelected;
 

@@ -62,15 +62,15 @@ namespace Units  {
             }
         }
         
-        private RemotedUnit GuessTheBestUnitToTarget() {
-            RemotedUnit best = null;
+        private PlayerUnit GuessTheBestUnitToTarget() {
+            PlayerUnit best = null;
             float bestDistance = float.PositiveInfinity;
             foreach (var unit in UnitLibData.units) {
-                if (unit is RemotedUnit) {
+                if (unit is PlayerUnit) {
                     float distance = Vector3.Distance(this.position, unit.GetPosition());
                     if (distance < bestDistance) {
                         bestDistance = distance;
-                        best = (RemotedUnit)unit;
+                        best = (PlayerUnit)unit;
                     }
                 }
             }

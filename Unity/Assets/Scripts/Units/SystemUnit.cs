@@ -5,10 +5,12 @@ namespace Units {
     public class SystemUnit : MonoBehaviour {
         [SerializeField] private Entity entityModel;
         [SerializeField] private int sizeUnit = 9;
-        
+
+        public PlayerUnit playerUnitPrefab;
+        public AiUnit aiUnitPrefab;
         private AbstractUnit[] _units = new AbstractUnit[16];
 
-        private RemotedUnit _selectedUnit;
+        private PlayerUnit _selectedUnit;
 
         /** Données de l'ancien système nécessaire aux unités*/
         public Camera cam;
@@ -37,7 +39,7 @@ namespace Units {
             int i = 0;
             
             foreach (var unitPos in playerUnitsPositions) {
-                RemotedUnit unit = new GameObject("Allied Unit").AddComponent<RemotedUnit>();
+                PlayerUnit unit = new GameObject("Allied Unit").AddComponent<PlayerUnit>();
                 unit.SetPosition(unitPos);
                 unit.transform.position = unitPos;
                 unit.Init(entityModel, sizeUnit);
@@ -68,7 +70,7 @@ namespace Units {
                 _units[i].UpdateUnit();
                 if (_units[i].GetNumberAlive() <= 0) {
                     if (_units[i] is AiUnit) numberAi--;
-                    else if (_units[i] is RemotedUnit) numberRemote--;
+                    else if (_units[i] is PlayerUnit) numberRemote--;
                     _units[i].Kill();
                     _units[i] = null;
                 }
@@ -89,7 +91,7 @@ namespace Units {
                 if (Physics.Raycast(ray, out hit, 100f, 1 << 9)) {
                     if(_selectedUnit != null)
                         _selectedUnit.Deselect();
-                    _selectedUnit = hit.transform.GetComponent<RemotedUnit>();
+                    _selectedUnit = hit.transform.GetComponent<PlayerUnit>();
                     _selectedUnit.Select();
                 } else if (_selectedUnit != null) {
                     if (Physics.Raycast(ray, out hit, 100f, 1 << 8)) {
