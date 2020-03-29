@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using Game;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utility;
 
 namespace Units {
     public class SystemUnit : MonoBehaviour {
@@ -77,12 +79,10 @@ namespace Units {
             }
 
             if (numberRemote == 0) {
-                EndGameManager.typeEndGame = 0;
-                SceneManager.LoadScene(3);
+                GameSingleton.Instance.EndGame(0);
             }
             else if (numberAi == 0) {
-                EndGameManager.typeEndGame = 1;
-                SceneManager.LoadScene(3);
+                GameSingleton.Instance.EndGame(1);
             }
             
             if (Input.GetKeyDown(KeyCode.Mouse0)) {

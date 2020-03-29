@@ -3,6 +3,7 @@ using Language;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Utility;
 
 namespace Game {
     /**
@@ -18,6 +19,8 @@ namespace Game {
 
         public GameSettings gameSettings;
         public LanguageDictionary languageDictionary;
+
+        public EndGamePanel endGamePanel;
 
         private void Awake() {
             if (_instance != null && _instance != this) {
@@ -45,7 +48,10 @@ namespace Game {
         public void LoadScene(string sceneName) {
             SceneManager.LoadScene(sceneName);
         }
-        
-        
+
+        public void EndGame(int status) {
+            endGamePanel.TypeEndGame = status;
+            endGamePanel.gameObject.SetActive(true);
+        }
     }
 }
