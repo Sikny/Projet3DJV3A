@@ -40,14 +40,14 @@ namespace Units {
                 RemotedUnit unit = new GameObject("Allied Unit").AddComponent<RemotedUnit>();
                 unit.SetPosition(unitPos);
                 unit.transform.position = unitPos;
-                unit.Init(entityModel, sizeUnit);
+                unit.Init(0,entityModel, sizeUnit);
                 _units[i++] = unit;
             }
 
             foreach (var unitPos in aiUnitsPositions) {
                 AiUnit unit = new GameObject("Enemy Unit").AddComponent<AiUnit>();
                 unit.SetPosition(unitPos);
-                unit.Init(entityModel, sizeUnit);
+                unit.Init(0,entityModel, sizeUnit);
                 _units[i++] = unit;
             }
 
@@ -74,12 +74,13 @@ namespace Units {
                 }
             }
 
+            // Condition of victory
             if (numberRemote == 0) {
-                EndGameManager.typeEndGame = 0;
+                EndGameManager.typeEndGame = 0; // lose
                 SceneManager.LoadScene(3);
             }
             else if (numberAi == 0) {
-                EndGameManager.typeEndGame = 1;
+                EndGameManager.typeEndGame = 1; // win
                 SceneManager.LoadScene(3);
             }
             

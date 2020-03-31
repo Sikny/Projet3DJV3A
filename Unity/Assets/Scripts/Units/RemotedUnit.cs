@@ -15,8 +15,8 @@ namespace Units {
 
         private const float TickAttack = 0.10f; //PARAM OF DIFFICULTY
     
-        public override bool Init(Entity entityModel, int entityCountP) {
-            bool value = base.Init(entityModel, entityCountP);
+        public override bool Init(int idType, Entity entityModel, int entityCountP) {
+            bool value = base.Init(idType, entityModel, entityCountP);
             speedEntity = 1.0f;
             _isSelected = true;
             _deltaTime = 0.0f;
@@ -32,14 +32,9 @@ namespace Units {
             _deltaTime += UnitLibData.deltaTime;
 
             if (_unitTarget == null) _unitTarget = GuessTheBestUnitToTarget();
-            if(isMoving)
-                Move();
-            if (_deltaTime >= TickAttack) {
-                if (Vector3.Distance(position, _unitTarget.GetPosition()) <= 3) {
-                    Attack(_unitTarget);
-                }
-                _deltaTime -= TickAttack;
-            }
+
+            brain.interract(true,_unitTarget, targetPosition);
+            
             UpdateGameObject();
             
         }
@@ -49,7 +44,7 @@ namespace Units {
             return true;
         }
 
-        protected override void Attack(AbstractUnit anotherUnit) {
+        public override void Attack(AbstractUnit anotherUnit) {
             int indexEntityAttack = Random.Range(0, entityCount);
             Entity entityAttack = this.GetEntity(indexEntityAttack);
             if (anotherUnit.GetNumberAlive() > 1) {
