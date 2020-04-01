@@ -4,12 +4,17 @@ using UnityEngine;
 namespace Utility {
     public class LevelManager : MonoBehaviour {
         [SerializeField] private LevelList levelList;
-        public int currentLevel;
 
         private Level _loadedLevel;
 
         private void Awake() {
-            _loadedLevel = Instantiate(levelList.GetLevel(currentLevel));
+            GameSingleton.Instance.levelManager = this;
+            _loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.gameVariables.currentLevel));
+        }
+
+        public void NextLevel() {
+            GameSingleton.Instance.gameVariables.currentLevel = 
+                (GameSingleton.Instance.gameVariables.currentLevel + 1) % levelList.LevelCount;
         }
     }
 }

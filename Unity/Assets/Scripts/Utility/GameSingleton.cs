@@ -11,11 +11,13 @@ namespace Utility {
         private static GameSingleton _instance;
         public static GameSingleton Instance => _instance;
 
-        [SerializeField, HideInInspector] public SceneManager sceneManager;
-
         public UnityEvent updateLoop;
         public UnityEvent fixedUpdateLoop;
         public UnityEvent lateUpdateLoop;
+        
+        [HideInInspector] public SceneManager sceneManager;
+        public GameVariables gameVariables;
+        [HideInInspector] public LevelManager levelManager;
 
         public GameSettings gameSettings;
         public LanguageDictionary languageDictionary;

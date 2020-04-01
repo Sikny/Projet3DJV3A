@@ -7,6 +7,8 @@ namespace Utility {
     public class LevelList : ScriptableObject {
         [SerializeField] private List<Level> levels;
 
+        public int LevelCount => levels.Count;
+
         public Level GetLevel(int index) {
             return levels[index];
         }

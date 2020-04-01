@@ -12,13 +12,15 @@ namespace UI {
             set {
                 _typeEndGame = value;
                 switch (_typeEndGame) {
-                    case 0:
+                    case 0:    // Lose
                         winMessage.gameObject.SetActive(false);
                         loseMessage.gameObject.SetActive(true);
                         break;
-                    case 1:
+                    case 1:    // Win
                         winMessage.gameObject.SetActive(true);
                         loseMessage.gameObject.SetActive(false);
+                        if (GameSingleton.Instance.levelManager != null)
+                            GameSingleton.Instance.levelManager.NextLevel();
                         break;
                 }
             }

@@ -54,6 +54,7 @@ MonoBehaviour:
   lateUpdateLoop:
     m_PersistentCalls:
       m_Calls: []
+  gameVariables: {fileID: 11400000, guid: 228004ee795077c4d8223abcede2c5f5, type: 2}
   gameSettings: {fileID: 11400000, guid: dfbe9b8a7b0398646aedb0eb9776d315, type: 2}
   languageDictionary: {fileID: 11400000, guid: 0d6cf9341b33a57479eaa5b00a4243f6, type: 2}
   endGamePanel: {fileID: 44291853314280001}
