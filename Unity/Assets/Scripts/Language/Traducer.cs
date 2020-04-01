@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Settings;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
 namespace Language {
     public class Traducer : MonoBehaviour {
