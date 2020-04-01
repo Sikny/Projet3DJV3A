@@ -20,6 +20,9 @@ public class ShopManager : MonoBehaviour
 
     private ShopContent _shopContent;
     
+    
+    //-----------------------------------------------------------------------------
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,11 +30,14 @@ public class ShopManager : MonoBehaviour
         gold = 10;
         goldText.SetText(gold.ToString() + "g");
         
-        GameObject currentSlot = prefab;
+        /*GameObject currentSlot = prefab;
         TextMeshProUGUI[] test = currentSlot.GetComponentsInChildren<TextMeshProUGUI>();
         test[0].SetText("item name");
-        test[1].SetText("price");
-
+        test[1].SetText("price");*/
+        _shopContent.AddAllItems();
+        _shopContent.AddAllEquipments();
+        UpdateUIItems();
+        UpdateUIEquipments();
     }
     
     
@@ -56,18 +62,41 @@ public class ShopManager : MonoBehaviour
         equipmentsPanel.SetActive(true);
     }
 
-    public void UpdateUI()
+    public void UpdateUIItems()
     {
-        for (int i = 0; i < _shopContent.itemSlotsConsumable.Count - 1; i++)
+        List<Item> shopItems = _shopContent.GetShopItems();
+
+        for (int i = 0; i < shopItems.Count - 1; i++)
         {
             
             GameObject currentSlot = prefab;
+            currentSlot.transform.SetParent(itemsPanel.transform);
             TextMeshProUGUI[] texts = currentSlot.GetComponentsInChildren<TextMeshProUGUI>();
             Image icon = currentSlot.GetComponentInChildren<Image>(); 
             
-            texts[0].SetText(_shopContent.itemSlotsConsumable[i].item.name);
-            texts[1].SetText(_shopContent.itemSlotsConsumable[i].item.price.ToString());
-            icon.sprite = _shopContent.itemSlotsConsumable[i].item.icon;
+            texts[0].SetText(shopItems[i].name);
+            texts[1].SetText(shopItems[i].price.ToString());
+            icon.sprite = shopItems[i].icon;
+            
+            Instantiate(currentSlot);
+        }
+    }
+    
+    public void UpdateUIEquipments()
+    {
+        List<Equipment> shopEquipments = _shopContent.GetShopEquipments();
+
+        for (int i = 0; i < shopEquipments.Count - 1; i++)
+        {
+            
+            GameObject currentSlot = prefab;
+            currentSlot.transform.SetParent(equipmentsPanel.transform);
+            TextMeshProUGUI[] texts = currentSlot.GetComponentsInChildren<TextMeshProUGUI>();
+            Image icon = currentSlot.GetComponentInChildren<Image>(); 
+            
+            texts[0].SetText(shopEquipments[i].name);
+            texts[1].SetText(shopEquipments[i].price.ToString());
+            icon.sprite = shopEquipments[i].icon;
             
             Instantiate(currentSlot);
         }

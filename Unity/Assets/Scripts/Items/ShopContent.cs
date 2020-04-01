@@ -11,11 +11,16 @@ public class ShopContent : MonoBehaviour
 
     public List<ItemSlot> itemSlotsConsumable = new List<ItemSlot>();
 
-    public List<Item> allItems;
+
+    public List<Item> shopItems = new List<Item>();
+    public List<Equipment> shopEquipments = new List<Equipment>();
+
+    
     
     #region Singleton
     
     public static ShopContent instance;
+    
     
     private void Awake()
     {
@@ -27,10 +32,11 @@ public class ShopContent : MonoBehaviour
         instance = this;
     }
 
-
     #endregion
 
-
+    
+    
+    
     public void ClearAllItems()
     {
         itemSlotsConsumable.Clear();
@@ -44,6 +50,47 @@ public class ShopContent : MonoBehaviour
         
         if(itemSlotsConsumable[nextIndex].onItemChangedCallback != null)
             itemSlotsConsumable[nextIndex].onItemChangedCallback.Invoke();
+    }
+
+    public void AddItem(Item item)
+    {
+        shopItems.Add(item);
+    }
+
+    public void AddEquipment(Equipment equipment)
+    {
+        shopEquipments.Add(equipment);
+    }
+
+    public void AddAllItems()
+    {
+        
+        List<Item>allItems = StoreItems.instance.GetAllItems();
+
+        for(int i = 0; i < allItems.Count - 1; i++)
+        {
+            shopItems.Add(allItems[i]);
+        }
+    }
+
+    public void AddAllEquipments()
+    {
+        List<Equipment>allEquipments = StoreItems.instance.GetAllEquipments();
+
+        for(int i = 0; i < allEquipments.Count - 1; i++)
+        {
+            shopEquipments.Add(allEquipments[i]);
+        }
+    }
+    
+    public List<Item> GetShopItems()
+    {
+        return shopItems;
+    }
+
+    public List<Equipment> GetShopEquipments()
+    {
+        return shopEquipments;
     }
 
 /*
