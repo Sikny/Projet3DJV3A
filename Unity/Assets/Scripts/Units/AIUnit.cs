@@ -34,7 +34,7 @@ namespace Units  {
             UpdateGameObject();
         }
 
-        public override void Attack(AbstractUnit anotherUnit) {
+        public override void Attack(AbstractUnit anotherUnit, float damage) {
             int indexEntityAttack = Random.Range(0, entityCount);
             Entity entityAttack = this.GetEntity(indexEntityAttack);
             if (anotherUnit.GetNumberAlive() > 1) {
@@ -43,7 +43,7 @@ namespace Units  {
 
                 if (entityAttack == null || entityDefense == null) return;
 
-                int life = entityDefense.ChangeLife(-1 * entityAttack.GetStrength());
+                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength() * damage));
                 if (life == 0) {
                     anotherUnit.PopEntity(indexEntityDefense);
                 }

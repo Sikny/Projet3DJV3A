@@ -11,7 +11,8 @@ namespace Units{
         
         public Zombie(AbstractUnit body) : base(body)
         {
-            speedEntity = 0.7f;
+            speedEntity = 0.8f;
+            basisAttack = 1.0f;
         }
         
         public override void interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget)
@@ -24,7 +25,7 @@ namespace Units{
             if (deltaTime >= TICK_ATTACK)
             {
                 if (Vector3.Distance(body.GetPosition(), target.GetPosition()) <= 3) {
-                    body.Attack(target);
+                    body.Attack(target, basisAttack);
                 }
                 deltaTime -= TICK_ATTACK;
             }
