@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6634753564065595858}
   - component: {fileID: 3587885641838927765}
   m_Layer: 8
-  m_Name: BottomDirt
+  m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 1608474490012729902}
   - component: {fileID: 2211964374724240685}
   m_Layer: 8
-  m_Name: TopGrass
+  m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,11 +253,6 @@ PrefabInstance:
     - target: {fileID: 5286798445490785008, guid: 93981e64efbaf18419aa084396131e71,
         type: 3}
       propertyPath: renderer
-      value: 
-      objectReference: {fileID: 2211964374724240685}
-    - target: {fileID: 5286798445490785008, guid: 93981e64efbaf18419aa084396131e71,
-        type: 3}
-      propertyPath: meshRenderer
       value: 
       objectReference: {fileID: 2211964374724240685}
     m_RemovedComponents:

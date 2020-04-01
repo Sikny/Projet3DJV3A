@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 
 namespace CameraMovement {
-    /**
-     * <summary>Camera zoom with mouse wheel</summary>
-     */
     public class CameraZoom : MonoBehaviour {
         public Transform centerPoint;
         public Vector3 offset;

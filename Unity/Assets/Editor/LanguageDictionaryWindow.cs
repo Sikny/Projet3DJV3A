@@ -1,12 +1,9 @@
-﻿using System;
+using System;
 using Language;
 using UnityEditor;
 using UnityEngine;
 
 namespace Editor {
-    /**
-     * <summary>Editor Window for language dictionary (for traducing)</summary>
-     */
     public class LanguageDictionaryWindow : EditorWindow {
         private Array _languagesList;
         private LanguageDictionary _languageDictionary;

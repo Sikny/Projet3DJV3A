@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -31,7 +31,7 @@ public class Rule
     // Free-mode
     public Rule(string seedUser)
     {
-        if (!string.IsNullOrEmpty(seedUser))
+        if (!string.IsNullOrWhiteSpace(seedUser))
         {
             if (!int.TryParse(seedUser, out this.seedWorld))
             {

@@ -25,10 +25,6 @@ namespace Menus {
             }
         }
 
-        public void OnExitPressed() {
-            Application.Quit();
-        }
-
         private void ProcessConnectionResult(UnityWebRequest www) {
             if (www.isNetworkError || www.isHttpError) {
                 Debug.Log(www.error);
