@@ -1,7 +1,7 @@
-﻿using Game;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Utility;
+using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace UI {
     public class EndGamePanel : MonoBehaviour {

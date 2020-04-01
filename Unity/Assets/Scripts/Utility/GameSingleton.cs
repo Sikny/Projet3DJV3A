@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using JetBrains.Annotations;
-using Language;
+﻿using Language;
 using UI;
 using UnityEngine;
 using UnityEngine.Events;
-using Utility;
 
-namespace Game {
+namespace Utility {
     /**
      * <summary>Game Manager, should handle scenes transitions</summary>
      */
@@ -31,10 +28,10 @@ namespace Game {
                 return;
             }
             _instance = this;
+            DontDestroyOnLoad(gameObject);
+            
             sceneManager = new SceneManager();
             sceneManager.LoadScene("Menu");
-            DontDestroyOnLoad(gameObject);
-
         }
         
         // optimizations purposes

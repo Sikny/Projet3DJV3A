@@ -1,7 +1,7 @@
 ﻿using System;
-using Game;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
 namespace UI {
     public class OptionsPanel : MonoBehaviour {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game {
+namespace Utility {
     /**
      * <summary>Global game settings</summary>
      */
