@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 using Language;
+using UI;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using Utility;
 
 namespace Game {
@@ -12,6 +13,8 @@ namespace Game {
     public class GameSingleton : MonoBehaviour {
         private static GameSingleton _instance;
         public static GameSingleton Instance => _instance;
+
+        [SerializeField, HideInInspector] public SceneManager sceneManager;
 
         public UnityEvent updateLoop;
         public UnityEvent fixedUpdateLoop;
@@ -28,9 +31,10 @@ namespace Game {
                 return;
             }
             _instance = this;
+            sceneManager = new SceneManager();
+            sceneManager.LoadScene("Menu");
             DontDestroyOnLoad(gameObject);
 
-            LoadScene("Menu");
         }
         
         // optimizations purposes
@@ -44,9 +48,9 @@ namespace Game {
             lateUpdateLoop.Invoke();
         }
 
-        // dont make private, used by events
+        // Do not delete or make private (used by events)
         public void LoadScene(string sceneName) {
-            SceneManager.LoadScene(sceneName);
+            sceneManager.LoadScene(sceneName);
         }
 
         public void EndGame(int status) {

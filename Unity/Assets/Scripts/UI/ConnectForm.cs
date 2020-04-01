@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Menus {
+namespace UI {
     public class ConnectForm : MonoBehaviour {
         public InputField mail;
         public InputField password;

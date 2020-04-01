@@ -1,7 +1,6 @@
 ﻿using Game;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Utility;
 
 namespace Units {
     public class SystemUnit : MonoBehaviour {

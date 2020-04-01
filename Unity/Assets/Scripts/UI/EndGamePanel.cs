@@ -1,17 +1,14 @@
-﻿using TMPro;
+﻿using Game;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Utility {
+namespace UI {
     public class EndGamePanel : MonoBehaviour {
-        public const int ID_SCENE_MENU = 1;
-        public const int ID_SCENE_GAME = 2;
-    
         public TextMeshProUGUI winMessage;
         public TextMeshProUGUI loseMessage;
 
         public int TypeEndGame {
-            get => _typeEndGame;
             set {
                 _typeEndGame = value;
                 switch (_typeEndGame) {
@@ -31,10 +28,10 @@ namespace Utility {
         public void CallBtn(int idBtn) {
             switch (idBtn) {
                 case 0:
-                    SceneManager.LoadScene(ID_SCENE_MENU);
+                    GameSingleton.Instance.sceneManager.LoadScene("Menu");
                     break;
                 case 1:
-                    SceneManager.LoadScene(ID_SCENE_GAME);
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                     break;
             }
             gameObject.SetActive(false);

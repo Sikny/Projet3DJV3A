@@ -3,7 +3,7 @@ using Game;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Menus {
+namespace UI {
     public class OptionsPanel : MonoBehaviour {
         public Slider soundsSlider;
         
