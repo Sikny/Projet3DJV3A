@@ -13,13 +13,18 @@ public class ShopManager : MonoBehaviour
     public GameObject equipmentsPanel;
     public GameObject ShopPanel;
 
-    public GameObject prefab; 
-    
+    public GameObject prefab;
+    public ItemSlot prefabSlot; 
+        
     public delegate void onUpdateUI(); 
     public onUpdateUI onUpdateUICallback;
 
     private ShopContent _shopContent;
-    
+    public Transform itemsParent;
+    public Transform equipmentsParent;
+    public Transform unitsParent;
+
+    public Image slotBackground;
     
     //-----------------------------------------------------------------------------
 
@@ -65,40 +70,41 @@ public class ShopManager : MonoBehaviour
     public void UpdateUIItems()
     {
         List<Item> shopItems = _shopContent.GetShopItems();
-
-        for (int i = 0; i < shopItems.Count - 1; i++)
+        //Debug.Log("shop items count: " + shopItems.Count);
+        for (int i = 0; i < shopItems.Count; i++)
         {
             
-            GameObject currentSlot = prefab;
-            currentSlot.transform.SetParent(itemsPanel.transform);
-            TextMeshProUGUI[] texts = currentSlot.GetComponentsInChildren<TextMeshProUGUI>();
-            Image icon = currentSlot.GetComponentInChildren<Image>(); 
-            
-            texts[0].SetText(shopItems[i].name);
-            texts[1].SetText(shopItems[i].price.ToString());
-            icon.sprite = shopItems[i].icon;
-            
-            Instantiate(currentSlot);
+            ItemSlot currentSlot = prefabSlot;
+
+            currentSlot.itemName.SetText(shopItems[i].name);
+            currentSlot.icon.sprite = shopItems[i].icon;
+            currentSlot.price.SetText(shopItems[i].price.ToString());
+            //Debug.Log("put item :" + shopItems[i].name);
+
+            Instantiate(currentSlot, itemsParent, false);
+            //Canvas.ForceUpdateCanvases();
         }
     }
     
     public void UpdateUIEquipments()
     {
         List<Equipment> shopEquipments = _shopContent.GetShopEquipments();
+        //Debug.Log("shop EQUIPMENTS count: " + shopEquipments.Count);
 
-        for (int i = 0; i < shopEquipments.Count - 1; i++)
+        for (int i = 0; i < shopEquipments.Count; i++)
         {
+
+            ItemSlot currentSlot = prefabSlot;
             
-            GameObject currentSlot = prefab;
-            currentSlot.transform.SetParent(equipmentsPanel.transform);
-            TextMeshProUGUI[] texts = currentSlot.GetComponentsInChildren<TextMeshProUGUI>();
-            Image icon = currentSlot.GetComponentInChildren<Image>(); 
-            
-            texts[0].SetText(shopEquipments[i].name);
-            texts[1].SetText(shopEquipments[i].price.ToString());
-            icon.sprite = shopEquipments[i].icon;
-            
-            Instantiate(currentSlot);
+            currentSlot.itemName.SetText(shopEquipments[i].name);
+            currentSlot.icon.sprite = shopEquipments[i].icon;
+            currentSlot.price.SetText(shopEquipments[i].price.ToString());
+            //Debug.Log("put equipment :" + shopEquipments[i].name);
+
+            Instantiate(currentSlot, equipmentsParent, false);
+            //Canvas.ForceUpdateCanvases();
+           
+
         }
     }
     

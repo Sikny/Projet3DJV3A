@@ -7,18 +7,18 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour
 {
-
-    public delegate void onItemChanged();
-    public onItemChanged onItemChangedCallback;
-
-    public GameObject prefab;
     
     public Image icon;
 
+    public TextMeshProUGUI itemName;
 
+    public TextMeshProUGUI price; 
+ 
+    //-------------------------
+ 
     public Item item;
-
-    private ShopManager _shopManager;
+ 
+    //private ShopManager _shopManager;
 
     public void BuyItem()
     {

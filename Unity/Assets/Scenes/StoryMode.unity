@@ -1852,7 +1852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Content: {fileID: 0}
+  m_Content: {fileID: 1030725381}
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
@@ -25867,7 +25867,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1370698919}
-  - component: {fileID: 1370698920}
   - component: {fileID: 1370698918}
   m_Layer: 0
   m_Name: GameManager
@@ -25911,21 +25910,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1370698920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1370698917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e0a14766bd1afe47b6bd46ad43e2506, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemSlotsConsumable: []
-  shopItems: []
-  shopEquipments: []
 --- !u!1 &1380395436
 GameObject:
   m_ObjectHideFlags: 0

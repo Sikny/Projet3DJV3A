@@ -48,8 +48,7 @@ public class ShopContent : MonoBehaviour
         int nextIndex = itemSlotsConsumable.Count + 1;
         itemSlotsConsumable[nextIndex].AddItem(newItem);
         
-        if(itemSlotsConsumable[nextIndex].onItemChangedCallback != null)
-            itemSlotsConsumable[nextIndex].onItemChangedCallback.Invoke();
+
     }
 
     public void AddItem(Item item)
