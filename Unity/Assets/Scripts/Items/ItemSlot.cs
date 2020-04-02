@@ -12,8 +12,10 @@ public class ItemSlot : MonoBehaviour
 
     public TextMeshProUGUI itemName;
 
-    public TextMeshProUGUI price; 
- 
+    public TextMeshProUGUI price;
+
+    public bool isBought;
+    
     //-------------------------
  
     public Item item;
@@ -41,5 +43,11 @@ public class ItemSlot : MonoBehaviour
         item = null;
         icon.sprite = null;
         icon.enabled = false;
+    }
+
+
+    public void UseItem()
+    {
+        item.Use();
     }
 }

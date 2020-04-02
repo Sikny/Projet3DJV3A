@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StoreItems : MonoBehaviour
 {
-    public List<Item> allItems;
+    public List<Consummable> allConssumables;
     public List<Equipment> allEquipments;
 
     
@@ -25,9 +25,9 @@ public class StoreItems : MonoBehaviour
     }
 
     #endregion
-    public List<Item> GetAllItems()
+    public List<Consummable> GetAllItems()
     {
-        return allItems;
+        return allConssumables;
     }
 
     public List<Equipment> GetAllEquipments()
@@ -35,9 +35,6 @@ public class StoreItems : MonoBehaviour
         return allEquipments;
     }
 
-    public void helloworld()
-    { 
-        Debug.Log("hey there");
-    }
+
     
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 namespace Units {
@@ -60,13 +61,16 @@ namespace Units {
             UnitLibData.deltaTime = 0;
         }
 
-        public void Update() {
+        public void Update()
+        {
             UnitLibData.deltaTime = Time.deltaTime;
-            for (int i = 0; i < _units.Length ; i++) {
-                if(_units[i] == null) continue;
-                
+            for (int i = 0; i < _units.Length; i++)
+            {
+                if (_units[i] == null) continue;
+
                 _units[i].UpdateUnit();
-                if (_units[i].GetNumberAlive() <= 0) {
+                if (_units[i].GetNumberAlive() <= 0)
+                {
                     if (_units[i] is AiUnit) numberAi--;
                     else if (_units[i] is RemotedUnit) numberRemote--;
                     _units[i].Kill();
@@ -74,29 +78,42 @@ namespace Units {
                 }
             }
 
-            if (numberRemote == 0) {
+            if (numberRemote == 0)
+            {
                 EndGameManager.typeEndGame = 0;
                 SceneManager.LoadScene(3);
             }
-            else if (numberAi == 0) {
+            else if (numberAi == 0)
+            {
                 EndGameManager.typeEndGame = 1;
                 SceneManager.LoadScene(3);
             }
-            
-            if (Input.GetKeyDown(KeyCode.Mouse0)) {
-                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 100f, 1 << 9)) {
-                    if(_selectedUnit != null)
-                        _selectedUnit.Deselect();
-                    _selectedUnit = hit.transform.GetComponent<RemotedUnit>();
-                    _selectedUnit.Select();
-                } else if (_selectedUnit != null) {
-                    if (Physics.Raycast(ray, out hit, 100f, 1 << 8)) {
-                        _selectedUnit.SetTargetPosition();
+
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
+                    {
+                        if (_selectedUnit != null)
+                            _selectedUnit.Deselect();
+                        _selectedUnit = hit.transform.GetComponent<RemotedUnit>();
+                        _selectedUnit.Select();
+                    }
+                    else if (_selectedUnit != null)
+                    {
+                        if (Physics.Raycast(ray, out hit, 100f, 1 << 8))
+                        {
+                            _selectedUnit.SetTargetPosition();
+                        }
                     }
                 }
             }
+
+
         }
     }
 }
+    

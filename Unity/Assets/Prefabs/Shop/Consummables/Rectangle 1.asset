@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d7b404c257ea14ebe2f323104da704, type: 3}
-  m_Name: Square
+  m_Script: {fileID: 11500000, guid: c3ce34e00e6f49f8be28758b22999896, type: 3}
+  m_Name: Rectangle 1
   m_EditorClassIdentifier: 
-  name: Sqaure
-  icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  price: 50
+  name: New item
+  icon: {fileID: 0}
+  price: 10

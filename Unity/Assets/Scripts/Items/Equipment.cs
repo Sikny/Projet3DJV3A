@@ -4,12 +4,15 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "New Equipment", menuName = "ScriptableObjects/Equipment")]
-public class Equipment : ScriptableObject
+public class Equipment : Item
 {
-    new public string name = "New Equipment";
-    public Sprite icon = null;
-    public int price = 10;
+    public int stat;
     //public String description = ""; 
     //public int statDif
-    
+
+    public override void Use()
+    {
+        base.Use();
+        //do stuff
+    }
 }

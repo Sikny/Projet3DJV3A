@@ -12,7 +12,7 @@ public class ShopContent : MonoBehaviour
     public List<ItemSlot> itemSlotsConsumable = new List<ItemSlot>();
 
 
-    public List<Item> shopItems = new List<Item>();
+    public List<Consummable> shopConsummables = new List<Consummable>();
     public List<Equipment> shopEquipments = new List<Equipment>();
 
     
@@ -51,9 +51,9 @@ public class ShopContent : MonoBehaviour
 
     }
 
-    public void AddItem(Item item)
+    public void AddConsummables(Consummable item)
     {
-        shopItems.Add(item);
+        shopConsummables.Add(item);
     }
 
     public void AddEquipment(Equipment equipment)
@@ -61,14 +61,14 @@ public class ShopContent : MonoBehaviour
         shopEquipments.Add(equipment);
     }
 
-    public void AddAllItems()
+    public void AddAllConsummables()
     {
         
-        List<Item>allItems = StoreItems.instance.GetAllItems();
+        List<Consummable>allConsummables = StoreItems.instance.GetAllItems();
 
-        for(int i = 0; i < allItems.Count - 1; i++)
+        for(int i = 0; i < allConsummables.Count - 1; i++)
         {
-            shopItems.Add(allItems[i]);
+            shopConsummables.Add(allConsummables[i]);
         }
     }
 
@@ -82,9 +82,9 @@ public class ShopContent : MonoBehaviour
         }
     }
     
-    public List<Item> GetShopItems()
+    public List<Consummable> GetShopItems()
     {
-        return shopItems;
+        return shopConsummables;
     }
 
     public List<Equipment> GetShopEquipments()
