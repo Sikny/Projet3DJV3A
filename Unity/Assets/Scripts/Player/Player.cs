@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-   public int gold;
+   public int gold = 0;
    //private List<Units> units;
    //private Inventory inventory;
-   public List<Item> items;
-   public List<Item> equipments;
+   //public List<Item> items;
+   //public List<Item> equipments;
    //private List<Units> units; 
+   
+   
    public static Player instance;
 
    private void Awake()
@@ -21,5 +23,12 @@ public class Player : MonoBehaviour
       }
       instance = this;
    }
+
+   public int GetGold()
+   {
+      return gold;
+   }
+
+
 
 }

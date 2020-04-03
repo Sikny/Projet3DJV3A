@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -20,24 +21,46 @@ public class ShopManager : MonoBehaviour
     public Transform equipmentsParent;
     public Transform unitsParent;
 
+    private Player _player;
     
     //-----------------------------------------------------------------------------
 
+    #region Singleton
+    
+    public static ShopManager instance;
+    
+    
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.Log("Several instances");
+            return;
+        }
+        instance = this;
+    }
+
+    #endregion
     // Start is called before the first frame update
     void Start()
     {
+        
         _shopContent = ShopContent.instance;
+        _player = Player.instance;
         gold = 10;
-        goldText.SetText(gold.ToString() + "g");
+        goldText.SetText(gold + "g");
         
 
         _shopContent.AddAllConsummables();
         _shopContent.AddAllEquipments();
         UpdateUIItems();
         UpdateUIEquipments();
+        UpdateGold();
+        shopPanel.SetActive(false);
     }
-    
-    
+
+
+
     public void ShowUnitsPanel()
     {
         itemsPanel.SetActive(false);
@@ -61,7 +84,7 @@ public class ShopManager : MonoBehaviour
 
     public void UpdateUIItems()
     {
-        List<Consummable> shopConsummables = _shopContent.GetShopItems();
+        List<Consummable> shopConsummables = _shopContent.GetShopConsummables();
         //List<Item> shopConsummables = _shopContent.GetShopItems().Cast<Item>().ToList();
 
         //Debug.Log("shop items count: " + shopConsummables.Count);
@@ -93,7 +116,7 @@ public class ShopManager : MonoBehaviour
             currentSlot.item = shopEquipments[i];
             currentSlot.itemName.SetText(shopEquipments[i].name);
             currentSlot.icon.sprite = shopEquipments[i].icon;
-            currentSlot.price.SetText(shopEquipments[i].price.ToString());
+
             //Debug.Log("put equipment :" + shopEquipments[i].name);
             
             Instantiate(currentSlot, equipmentsParent, false);
@@ -102,7 +125,12 @@ public class ShopManager : MonoBehaviour
 
         }
     }
-    
+
+    public void UpdateGold()
+    {
+        goldText.SetText(_player.GetGold() + "g");   
+    }
+
     public void Fight()
     {
         shopPanel.SetActive(false);

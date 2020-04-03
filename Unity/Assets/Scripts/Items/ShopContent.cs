@@ -51,7 +51,7 @@ public class ShopContent : MonoBehaviour
 
     }
 
-    public void AddConsummables(Consummable item)
+    public void AddConsummable(Consummable item)
     {
         shopConsummables.Add(item);
     }
@@ -82,7 +82,7 @@ public class ShopContent : MonoBehaviour
         }
     }
     
-    public List<Consummable> GetShopItems()
+    public List<Consummable> GetShopConsummables()
     {
         return shopConsummables;
     }
