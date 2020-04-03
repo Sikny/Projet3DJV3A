@@ -8,7 +8,7 @@ namespace Units {
         private int _maxLife;
 
         public MeshRenderer meshRenderer;
-        public Transform fillBar;
+        public RectTransform fillBar;
 
         private Color _firstColor;
 
@@ -46,14 +46,14 @@ namespace Units {
             return _life;
         }
         
-        private readonly WaitForSeconds blinkTime = new WaitForSeconds(0.2f);
+        private readonly WaitForSeconds _blinkTime = new WaitForSeconds(0.2f);
         private float blinkAlpha = 0.5f;
         private IEnumerator Blink() {
             var material = meshRenderer.material;
             Color meshCol = material.color;
             meshCol.a = blinkAlpha;
             material.color = meshCol;
-            yield return blinkTime;
+            yield return _blinkTime;
             meshCol.a = 1f;
             material.color = meshCol;
         }
