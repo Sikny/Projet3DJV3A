@@ -68,6 +68,8 @@ namespace Units {
                 // Lister ici les controlleurs possibles
                 case 0x0:   
                     return new Zombie(this);
+                case 0x1:   
+                    return new Archer(this);
             }
 
             return null;
@@ -89,7 +91,7 @@ namespace Units {
             transform.position = pos;
         }
 
-        public abstract void Attack(AbstractUnit anotherUnit);
+        public abstract void Attack(AbstractUnit anotherUnit, float damage);
 
         public abstract void UpdateUnit();
 

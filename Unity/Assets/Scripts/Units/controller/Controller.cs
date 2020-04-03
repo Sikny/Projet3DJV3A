@@ -9,6 +9,7 @@ namespace Units
 
         protected AbstractUnit body;
         protected float speedEntity;
+        protected float basisAttack;
         
         protected float deltaTime;
         protected Controller(AbstractUnit body)

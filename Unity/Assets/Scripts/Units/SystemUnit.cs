@@ -44,14 +44,14 @@ namespace Units {
                 PlayerUnit unit = new GameObject("Allied Unit").AddComponent<PlayerUnit>();
                 unit.SetPosition(unitPos);
                 unit.transform.position = unitPos;
-                unit.Init(0, entityModel, sizeUnit);
+                unit.Init(1, entityModel, sizeUnit);
                 _units[i++] = unit;
             }
 
             foreach (var unitPos in aiUnitsPositions) {
                 AiUnit unit = new GameObject("Enemy Unit").AddComponent<AiUnit>();
                 unit.SetPosition(unitPos);
-                unit.Init(0, entityModel, sizeUnit);
+                unit.Init(1, entityModel, sizeUnit);
                 _units[i++] = unit;
             }
 
