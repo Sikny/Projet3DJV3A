@@ -45,11 +45,8 @@ public class InventoryManager : MonoBehaviour
         _inventoryContent = InventoryContent.instance;
         
         inventoryPanel.SetActive(false);
+        UpdateGold();
 
-        /*_inventoryContent.AddAllConsummables();
-        _inventoryContent.AddAllEquipments();
-        UpdateUIItems();
-        UpdateUIEquipments();*/
     }
 
     public void ShowUnitsPanel()
@@ -71,6 +68,11 @@ public class InventoryManager : MonoBehaviour
         itemsPanel.SetActive(false);
         unitPanel.SetActive(false);
         equipmentsPanel.SetActive(true);
+    }
+
+    public void ActivateSelf()
+    {
+        gameObject.SetActive(!gameObject.activeSelf);
     }
 
     public void UpdateUIItems()

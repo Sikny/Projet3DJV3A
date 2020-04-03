@@ -81,6 +81,12 @@ public class ShopManager : MonoBehaviour
         unitPanel.SetActive(false);
         equipmentsPanel.SetActive(true);
     }
+    
+    public void ActivateSelf()
+    {
+        gameObject.SetActive(!gameObject.activeSelf);
+    }
+
 
     public void UpdateUIItems()
     {
