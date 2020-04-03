@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 417939943950987774}
   - component: {fileID: 417939943950987775}
   m_Layer: 5
-  m_Name: Item
+  m_Name: Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,8 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2db1350b0e46784995c041937535f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 417939943950987773}
   icon: {fileID: 417939943301975024}
+  itemName: {fileID: 417939944790082165}
+  price: {fileID: 417939943970257302}
+  isBought: 0
   item: {fileID: 0}
 --- !u!1 &417939943970257300
 GameObject:
@@ -401,11 +403,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 417939943950987775}
-        m_MethodName: BuyItem
-        m_Mode: 2
+        m_MethodName: UseItem
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
