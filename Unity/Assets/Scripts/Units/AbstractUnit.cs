@@ -12,6 +12,7 @@ namespace Units {
 
         // The interaction controller (zombie, bowman, giant...)
         protected Controller brain;
+        private int idBrain;
         
         protected Vector3 velocity;
         
@@ -61,8 +62,9 @@ namespace Units {
         }
 
         // Init of unit's controller
-        public Controller getControllerFromId(int id)
+        private Controller getControllerFromId(int id)
         {
+            this.idBrain = id;
             switch (id) 
             {
                 // Lister ici les controlleurs possibles
@@ -70,9 +72,23 @@ namespace Units {
                     return new Zombie(this);
                 case 0x1:   
                     return new Archer(this);
+                case 0x2:   
+                    return new Illusionnist(this);
             }
 
             return null;
+        }
+
+        protected static float getEfficientCoef(AbstractUnit from, AbstractUnit to)
+        {
+            float[,] matrixEfficient = new float[,]
+            {
+                {1.0f, 1.5f, 0.5f},
+                {0.5f, 1.0f, 1.5f},
+                {1.5f, 0.5f, 1.0f}
+            };
+
+            return matrixEfficient[from.idBrain, to.idBrain];
         }
 
         public void OnCollisionEnter(Collision c)

@@ -49,7 +49,7 @@ namespace Units {
             foreach (var unitPos in aiUnitsPositions) {
                 AiUnit unit = new GameObject("Enemy Unit").AddComponent<AiUnit>();
                 unit.SetPosition(unitPos);
-                unit.Init(1, entityModel, sizeUnit);
+                unit.Init(0, entityModel, sizeUnit);
                 _units[i++] = unit;
             }
 

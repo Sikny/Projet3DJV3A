@@ -51,7 +51,7 @@ namespace Units {
 
                 if (entityAttack == null || entityDefense == null) return;
 
-                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength()*damage));
+                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength()*damage* getEfficientCoef(this, anotherUnit)));
                 if (life == 0) {
                     anotherUnit.PopEntity(indexEntityDefense);
                 }
