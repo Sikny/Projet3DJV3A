@@ -10,7 +10,7 @@ namespace Units {
         public AiUnit aiUnitPrefab;
         private AbstractUnit[] _units = new AbstractUnit[16];
 
-        private PlayerUnit _selectedUnit;
+        
 
         /** Données de l'ancien système nécessaire aux unités*/
         public Camera cam;
@@ -24,7 +24,7 @@ namespace Units {
         private const int YPos = 1;
 
         public void Start() {
-            _selectedUnit = null;
+            UnitLibData._selectedUnit = null;
             Vector3[] playerUnitsPositions = {
                 new Vector3(3, YPos, 5),
                 new Vector3(7, YPos, 3)
@@ -87,13 +87,13 @@ namespace Units {
                 Ray ray = cam.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 100f, 1 << 9)) {
-                    if(_selectedUnit != null)
-                        _selectedUnit.Deselect();
-                    _selectedUnit = hit.transform.GetComponent<PlayerUnit>();
-                    _selectedUnit.Select();
-                } else if (_selectedUnit != null) {
+                    if(UnitLibData._selectedUnit != null)
+                        UnitLibData._selectedUnit.Deselect();
+                    UnitLibData._selectedUnit = hit.transform.GetComponent<PlayerUnit>();
+                    UnitLibData._selectedUnit.Select();
+                } else if (UnitLibData._selectedUnit != null) {
                     if (Physics.Raycast(ray, out hit, 100f, 1 << 8)) {
-                        _selectedUnit.SetTargetPosition();
+                        UnitLibData._selectedUnit.SetTargetPosition();
                     }
                 }
             }
