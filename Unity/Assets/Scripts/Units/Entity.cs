@@ -28,6 +28,16 @@ namespace Units {
             meshRenderer.material.color = _firstColor;
         }
 
+        public void ResetLife()
+        {
+            _life = 100;
+        }
+
+        public int getLife()
+        {
+            return _life;
+        }
+        
         private void KillEntity() {
             Destroy(gameObject);
         }

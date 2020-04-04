@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Units;
 using UnityEngine;
 
 /*
@@ -17,19 +18,15 @@ public class Potion : Consummable  //hérite de consommable ou équipement dépe
     public int healAmount = 100;
     public override void Use()
     {
+        if (UnitLibData._selectedUnit != null)
+        {
+            for (int i = 0; i < UnitLibData._selectedUnit.entityCount; i++)
+            {
+                if (UnitLibData._selectedUnit.GetEntity(i).getLife() > 0) // REGEN IF LIFE > 0
+                    UnitLibData._selectedUnit.GetEntity(i).ResetLife();
+            }
+        }
+
         base.Use();
-        /*
-         * met ton code pour appliquer les changement ici, comme c'est un scriptable object tu ne peux pas faire de référence direct dans unity
-         * mais tu peux récupérer des instances tel que :
-         *
-         * private Exemple _exemple
-         *
-         *
-         * private void Start()
-         * {
-         *    _exemple = Exemple.instance;   <-- récupère l'instance du singleton 
-         *     
-         * }
-        */
     }
 }

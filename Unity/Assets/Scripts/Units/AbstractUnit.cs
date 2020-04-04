@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Units {
     public abstract class AbstractUnit : MonoBehaviour {
-        protected int entityCount;
+        public int entityCount;
         protected Entity[] entities;
         protected Vector3 position;
         protected Vector3 targetPosition;
