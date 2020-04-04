@@ -1,5 +1,4 @@
 ﻿using System;
-using Units;
 using UnityEngine;
 
 namespace Units {
@@ -10,10 +9,13 @@ namespace Units {
         protected Vector3 targetPosition;
 
         protected AbstractUnit _unitTarget;
+
+        // The interaction controller (zombie, bowman, giant...)
+        protected Controller brain;
         
         protected Vector3 velocity;
         
-        protected bool isMoving;
+        public bool isMoving;
         protected bool isTurning;
         /**
          * Utile pour savoir si le leader doit être attrapé
@@ -25,7 +27,11 @@ namespace Units {
 
         protected Rigidbody rigidBody;
 
-        public virtual bool Init(Entity entityModel, int entityCountP) {
+        public virtual bool Init(int idType,Entity entityModel, int entityCountP)
+        {
+
+            this.brain = getControllerFromId(idType);
+            
             entityCount = entityCountP;
             livingEntityCount = entityCountP;
             entities = new Entity[entityCountP];
@@ -54,6 +60,21 @@ namespace Units {
             return true;
         }
 
+        // Init of unit's controller
+        public Controller getControllerFromId(int id)
+        {
+            switch (id) 
+            {
+                // Lister ici les controlleurs possibles
+                case 0x0:   
+                    return new Zombie(this);
+                case 0x1:   
+                    return new Archer(this);
+            }
+
+            return null;
+        }
+
         public void OnCollisionEnter(Collision c)
         {
             if (c.gameObject.layer == 9 || c.gameObject.layer == 10 )  
@@ -70,7 +91,7 @@ namespace Units {
             transform.position = pos;
         }
 
-        protected abstract void Attack(AbstractUnit anotherUnit);
+        public abstract void Attack(AbstractUnit anotherUnit, float damage);
 
         public abstract void UpdateUnit();
 
@@ -80,13 +101,6 @@ namespace Units {
             return position;
         }
         
-        protected void Move() {
-            if (targetPosition == null) return;
-            Vector3 last = position;
-            position = Vector3.MoveTowards(position, targetPosition, UnitLibData.speed * Time.deltaTime * speedEntity);
-            
-            velocity = position - last;
-        }
 
         protected void UpdateGameObject()
         {

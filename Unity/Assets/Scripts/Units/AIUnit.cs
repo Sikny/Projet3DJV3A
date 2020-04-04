@@ -2,16 +2,16 @@
 using UnityEngine;
 
 namespace Units  {
+    /**
+     * Cette classe répresente les unités contrôlées par une "IA" 
+     */
     public class AiUnit : AbstractUnit {
         private float _deltaTime;
-        
-        
         private const float TickAttack = 0.10f; //PARAM OF DIFFICULTY
 
-        public override bool Init(Entity entityModel, int entityCountP) {
-            bool initState = base.Init(entityModel, entityCountP);
+        public override bool Init(int idType, Entity entityModel, int entityCountP) {
+            bool initState = base.Init(idType, entityModel, entityCountP);
             _deltaTime = 0.0f;
-            speedEntity = 0.7f;
             _unitTarget = null;
             gameObject.layer = 10;    // enemy units
             return initState;
@@ -28,18 +28,13 @@ namespace Units  {
                 targetPosition = _unitTarget.GetPosition();
                 isMoving = true;
             }
-            if(isMoving && Vector3.Distance(position, targetPosition) >= 3)
-                Move();
-            if (_deltaTime >= TickAttack) {
-                if (Vector3.Distance(position, targetPosition) <= 3) {
-                    Attack(_unitTarget);
-                }
-                _deltaTime -= TickAttack;
-            }
+            
+            brain.interract(false, _unitTarget, targetPosition);
+            
             UpdateGameObject();
         }
 
-        protected override void Attack(AbstractUnit anotherUnit) {
+        public override void Attack(AbstractUnit anotherUnit, float damage) {
             int indexEntityAttack = Random.Range(0, entityCount);
             Entity entityAttack = this.GetEntity(indexEntityAttack);
             if (anotherUnit.GetNumberAlive() > 1) {
@@ -48,7 +43,7 @@ namespace Units  {
 
                 if (entityAttack == null || entityDefense == null) return;
 
-                int life = entityDefense.ChangeLife(-1 * entityAttack.GetStrength());
+                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength() * damage));
                 if (life == 0) {
                     anotherUnit.PopEntity(indexEntityDefense);
                 }
@@ -62,15 +57,15 @@ namespace Units  {
             }
         }
         
-        private RemotedUnit GuessTheBestUnitToTarget() {
-            RemotedUnit best = null;
+        private PlayerUnit GuessTheBestUnitToTarget() {
+            PlayerUnit best = null;
             float bestDistance = float.PositiveInfinity;
             foreach (var unit in UnitLibData.units) {
-                if (unit is RemotedUnit) {
+                if (unit is PlayerUnit) {
                     float distance = Vector3.Distance(this.position, unit.GetPosition());
                     if (distance < bestDistance) {
                         bestDistance = distance;
-                        best = (RemotedUnit)unit;
+                        best = (PlayerUnit)unit;
                     }
                 }
             }
