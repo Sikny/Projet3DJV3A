@@ -157,7 +157,7 @@ namespace Units {
         {
             for (int i = 0; i < effect.Length; i++)
             {
-                if (effect[i].IdEffect != -1)
+                if (effect[i].IdEffect != -1 && float.IsPositiveInfinity(effect[i].Timeout))
                 {
                     effect[i].Timeout -= Time.deltaTime;
                     if (effect[i].Timeout <= 0)

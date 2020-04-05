@@ -29,7 +29,7 @@ public class Illusionnist : Controller
             
         if (canShoot && deltaTime >= TICK_ATTACK)
         {
-            body.Attack(target, basisAttack);
+            body.Attack(target, getAttackUnit(target));
 
             deltaTime -= TICK_ATTACK;
         }

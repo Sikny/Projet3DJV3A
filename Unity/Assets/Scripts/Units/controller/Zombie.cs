@@ -25,7 +25,7 @@ namespace Units{
             if (deltaTime >= TICK_ATTACK)
             {
                 if (Vector3.Distance(body.GetPosition(), target.GetPosition()) <= 3) {
-                    body.Attack(target, basisAttack);
+                    body.Attack(target, getAttackUnit(target));
                 }
                 deltaTime -= TICK_ATTACK;
             }

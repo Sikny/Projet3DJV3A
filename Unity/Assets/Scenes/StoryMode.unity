@@ -7508,12 +7508,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allConssumables:
   - {fileID: 11400000, guid: 45b2d4959514bca41b1bc99a1493fc57, type: 2}
-  - {fileID: 11400000, guid: 45b2d4959514bca41b1bc99a1493fc57, type: 2}
+  - {fileID: 11400000, guid: 32e5c4bdeb00e0d4b83bc8fedea14800, type: 2}
   - {fileID: 11400000, guid: 9bc4fae9441e02240bada6e933d245a4, type: 2}
   allEquipments:
-  - {fileID: 0}
   - {fileID: 11400000, guid: 562d4cdd855182b4aaba4df92b254a72, type: 2}
-  - {fileID: 11400000, guid: 6f8609e69060c7e45a15ba294d47aff7, type: 2}
   - {fileID: 11400000, guid: 6f8609e69060c7e45a15ba294d47aff7, type: 2}
 --- !u!4 &1370698919
 Transform:

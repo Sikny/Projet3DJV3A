@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdeb2f9861404dc0822470751b0307ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 823ca192b4472ab4083c820edc7fb3ab, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
   name: Shield
-  icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  price: 250
+  icon: {fileID: 21300000, guid: b38100a3ec2912641b4f021d0bcd9efa, type: 3}
+  price: 4100
+  stat: 100
