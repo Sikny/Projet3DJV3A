@@ -19,5 +19,17 @@ namespace Units
         }
 
         public abstract void interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget);
+
+        protected float getVitessUnit()
+        {
+            float baseVitess = UnitLibData.speed * Time.deltaTime * speedEntity;
+
+            Effect effect = body.getEffect(0);
+
+            int bonusLevel = effect.IdEffect == -1 ? 0 : effect.LevelEffect;
+
+
+            return baseVitess + bonusLevel * baseVitess * 0.5f;
+        }
     }
 }

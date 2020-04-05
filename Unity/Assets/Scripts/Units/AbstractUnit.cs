@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Units {
@@ -28,6 +29,9 @@ namespace Units {
 
         protected Rigidbody rigidBody;
 
+        private Effect[] effect = new Effect[16]; // max
+        private int nbEffectApplied = 0;
+        
         public virtual bool Init(int idType,Entity entityModel, int entityCountP)
         {
 
@@ -58,6 +62,12 @@ namespace Units {
             rigidBody = gameObject.AddComponent<Rigidbody>();
             rigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             rigidBody.constraints = RigidbodyConstraints.FreezePositionY|RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ ;
+
+            for (int i = 0; i < effect.Length; i++)
+            {
+                effect[i].IdEffect = -1;
+            }
+            
             return true;
         }
 
@@ -136,6 +146,31 @@ namespace Units {
 
         public int GetNumberAlive() {
             return livingEntityCount;
+        }
+        
+        public void addEffect(int idEffect, int level, float timeout)
+        {
+            effect[idEffect] = new Effect(idEffect, level, timeout);
+        }
+
+        protected void updateTimeoutEffects()
+        {
+            for (int i = 0; i < effect.Length; i++)
+            {
+                if (effect[i].IdEffect != -1)
+                {
+                    effect[i].Timeout -= Time.deltaTime;
+                    if (effect[i].Timeout <= 0)
+                    {
+                        effect[i].IdEffect = -1;
+                    }
+                }
+            }
+        }
+
+        public Effect getEffect(int id)
+        {
+            return effect[id];
         }
     }
     

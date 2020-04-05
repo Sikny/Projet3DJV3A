@@ -42,7 +42,7 @@ public class Illusionnist : Controller
         {
             Vector3 last = body.GetPosition();
             Vector3 posTarget = positionTarget;
-            body.SetPosition(Vector3.MoveTowards(last, posTarget, UnitLibData.speed * Time.deltaTime * speedEntity));
+            body.SetPosition(Vector3.MoveTowards(last, posTarget, getVitessUnit()));
             float dist = Vector3.Distance(last, posTarget);
             if (OPTIMAL_DISTANCE - 1f <= dist && dist <= 1f + OPTIMAL_DISTANCE)
                 canShoot = true;
@@ -55,11 +55,11 @@ public class Illusionnist : Controller
             Vector3 posTarget = target.GetPosition();
             if(Vector3.Distance(last, posTarget) <= OPTIMAL_DISTANCE-1f)
             {
-                body.SetPosition(Vector3.MoveTowards(last, posTarget, -UnitLibData.speed * Time.deltaTime * speedEntity));
+                body.SetPosition(Vector3.MoveTowards(last, posTarget, -getVitessUnit()));
                 canShoot = false;
             }else if (Vector3.Distance(last, posTarget) >= OPTIMAL_DISTANCE + 1f)
             {
-                body.SetPosition(Vector3.MoveTowards(last, posTarget, UnitLibData.speed * Time.deltaTime * speedEntity));
+                body.SetPosition(Vector3.MoveTowards(last, posTarget, getVitessUnit()));
                 canShoot = false;
             }
             else

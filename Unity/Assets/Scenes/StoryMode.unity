@@ -1078,6 +1078,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 755814114}
+        m_MethodName: setRunning
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &191335894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2916,6 +2927,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 755814114}
+        m_MethodName: setRunning
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &681606109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3025,6 +3047,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700308231}
   m_CullTransparentMesh: 0
+--- !u!114 &755814114 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 678431467393923812, guid: df1ad11a2ccf53a45a280522fc3640de,
+    type: 3}
+  m_PrefabInstance: {fileID: 443868579}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f158ea3ae7ffc4a8eb58e889c49706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &765435548
 GameObject:
   m_ObjectHideFlags: 0
@@ -7473,13 +7507,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allConssumables:
-  - {fileID: 11400000, guid: 395b27cc72d18f048ad3a41843b9f4b3, type: 2}
-  - {fileID: 11400000, guid: 6f53af7e80d26964fae26eeab5257aee, type: 2}
+  - {fileID: 11400000, guid: 45b2d4959514bca41b1bc99a1493fc57, type: 2}
+  - {fileID: 11400000, guid: 45b2d4959514bca41b1bc99a1493fc57, type: 2}
   - {fileID: 11400000, guid: 9bc4fae9441e02240bada6e933d245a4, type: 2}
-  - {fileID: 11400000, guid: 7720158c101f74d469b2cf32805da546, type: 2}
-  - {fileID: 0}
   allEquipments:
-  - {fileID: 11400000, guid: 0634df68911af174194ab669248a240f, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 562d4cdd855182b4aaba4df92b254a72, type: 2}
   - {fileID: 11400000, guid: 6f8609e69060c7e45a15ba294d47aff7, type: 2}
   - {fileID: 11400000, guid: 6f8609e69060c7e45a15ba294d47aff7, type: 2}
@@ -11018,6 +11050,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 755814114}
+        m_MethodName: setRunning
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1860715868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12535,22 +12578,22 @@ PrefabInstance:
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 4.5904e-41
+      value: 8.4e-43
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 4.51e-43
+      value: -1.4009777e-33
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 3.17e-43
+      value: 4.5904e-41
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: NaN
+      value: -1.4008998e-33
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613575, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}

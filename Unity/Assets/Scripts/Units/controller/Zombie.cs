@@ -40,7 +40,7 @@ namespace Units{
             }
             Vector3 last = body.GetPosition();
             Vector3 posTarget = isRemoted ? positionTarget : target.GetPosition();
-            body.SetPosition(Vector3.MoveTowards(last, posTarget, UnitLibData.speed * Time.deltaTime * speedEntity));
+            body.SetPosition(Vector3.MoveTowards(last, posTarget, getVitessUnit()));
             
             //velocity = position - last;
         }

@@ -33,6 +33,8 @@ namespace Units {
 
             brain.interract(true,_unitTarget, targetPosition);
             
+            updateTimeoutEffects();
+            
             UpdateGameObject();
             
         }

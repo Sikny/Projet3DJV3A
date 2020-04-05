@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Utility;
 
 namespace Units {
@@ -23,6 +24,13 @@ namespace Units {
 
         private const int YPos = 1;
 
+        public bool isRunning = false;
+
+        public void setRunning(bool run)
+        {
+            isRunning = run;
+        }
+        
         public void Start() {
             UnitLibData._selectedUnit = null;
             Vector3[] playerUnitsPositions = {
@@ -63,37 +71,49 @@ namespace Units {
         }
 
         public void Update() {
-            UnitLibData.deltaTime = Time.deltaTime;
-            for (int i = 0; i < _units.Length ; i++) {
-                if(_units[i] == null) continue;
-                
-                _units[i].UpdateUnit();
-                if (_units[i].GetNumberAlive() <= 0) {
-                    if (_units[i] is AiUnit) numberAi--;
-                    else if (_units[i] is PlayerUnit) numberRemote--;
-                    _units[i].Kill();
-                    _units[i] = null;
-                }
-            }
+            if (isRunning)
+            {
+                UnitLibData.deltaTime = Time.deltaTime;
+                for (int i = 0; i < _units.Length; i++)
+                {
+                    if (_units[i] == null) continue;
 
-            if (numberRemote == 0) {
-                GameSingleton.Instance.EndGame(0);
-            }
-            else if (numberAi == 0) {
-                GameSingleton.Instance.EndGame(1);
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Mouse0)) {
-                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 100f, 1 << 9)) {
-                    if(UnitLibData._selectedUnit != null)
-                        UnitLibData._selectedUnit.Deselect();
-                    UnitLibData._selectedUnit = hit.transform.GetComponent<PlayerUnit>();
-                    UnitLibData._selectedUnit.Select();
-                } else if (UnitLibData._selectedUnit != null) {
-                    if (Physics.Raycast(ray, out hit, 100f, 1 << 8)) {
-                        UnitLibData._selectedUnit.SetTargetPosition();
+                    _units[i].UpdateUnit();
+                    if (_units[i].GetNumberAlive() <= 0)
+                    {
+                        if (_units[i] is AiUnit) numberAi--;
+                        else if (_units[i] is PlayerUnit) numberRemote--;
+                        _units[i].Kill();
+                        _units[i] = null;
+                    }
+                }
+
+                if (numberRemote == 0)
+                {
+                    GameSingleton.Instance.EndGame(0);
+                }
+                else if (numberAi == 0)
+                {
+                    GameSingleton.Instance.EndGame(1);
+                }
+
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
+                    {
+                        if (UnitLibData._selectedUnit != null)
+                            UnitLibData._selectedUnit.Deselect();
+                        UnitLibData._selectedUnit = hit.transform.GetComponent<PlayerUnit>();
+                        UnitLibData._selectedUnit.Select();
+                    }
+                    else if (UnitLibData._selectedUnit != null)
+                    {
+                        if (Physics.Raycast(ray, out hit, 100f, 1 << 8))
+                        {
+                            UnitLibData._selectedUnit.SetTargetPosition();
+                        }
                     }
                 }
             }

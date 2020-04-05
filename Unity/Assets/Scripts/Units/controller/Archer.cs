@@ -50,7 +50,7 @@ public class Archer : Controller
         {
             Vector3 last = body.GetPosition();
             Vector3 posTarget = positionTarget;
-            body.SetPosition(Vector3.MoveTowards(last, posTarget, UnitLibData.speed * Time.deltaTime * speedEntity));
+            body.SetPosition(Vector3.MoveTowards(last, posTarget, getVitessUnit()));
             canShoot = true;
         }
         else
@@ -59,11 +59,11 @@ public class Archer : Controller
             Vector3 posTarget = target.GetPosition();
             if(Vector3.Distance(last, posTarget) <= OPTIMAL_DISTANCE-0.2f)
             {
-                body.SetPosition(Vector3.MoveTowards(last, posTarget, -UnitLibData.speed * Time.deltaTime * speedEntity));
+                body.SetPosition(Vector3.MoveTowards(last, posTarget, -getVitessUnit()));
                 canShoot = false;
             }else if (Vector3.Distance(last, posTarget) >= OPTIMAL_DISTANCE + 0.2f)
             {
-                body.SetPosition(Vector3.MoveTowards(last, posTarget, UnitLibData.speed * Time.deltaTime * speedEntity));
+                body.SetPosition(Vector3.MoveTowards(last, posTarget, getVitessUnit()));
                 canShoot = false;
             }
             else
