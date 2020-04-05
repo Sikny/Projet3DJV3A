@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -15,14 +16,16 @@ namespace TerrainGeneration {
         private int[,] grid;
         private String printGrid = "\n";
 
-        private void Start() {
+        public IEnumerator Init() {
             TerrainGrid.Height = terrainOptions.height;
             TerrainGrid.Width = terrainOptions.width;
             
             grid = new int[terrainOptions.height, terrainOptions.width];
             
             BuildArray();
+            yield return 50f;
             BuildTerrain();
+            yield return 100f;
         }
     
         /**

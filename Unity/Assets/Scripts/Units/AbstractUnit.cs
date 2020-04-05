@@ -28,7 +28,9 @@ namespace Units {
 
         protected Rigidbody rigidBody;
 
-        public virtual bool Init(int idType,Entity entityModel, int entityCountP)
+        public Material circleMaterial;
+
+        public virtual bool Init(EntityType idType,Entity entityModel, int entityCountP)
         {
 
             this.brain = getControllerFromId(idType);
@@ -47,6 +49,7 @@ namespace Units {
                 for (int j = 0; j < sqrtEntityCount; j++) {
                     if (counterInstance <= entityCount) {
                         Entity entityGo = Instantiate(entityModel, transform);
+                        entityGo.circleRenderer.material = circleMaterial;
                         entityGo.transform.localPosition = new Vector3(i-entityScale.x*2,0,j-entityScale.z*2);
                         entities[counterInstance++] = entityGo;
                     }
@@ -62,18 +65,18 @@ namespace Units {
         }
 
         // Init of unit's controller
-        private Controller getControllerFromId(int id)
+        private Controller getControllerFromId(EntityType id)
         {
-            this.idBrain = id;
-            switch (id) 
+            this.idBrain = (int) id;
+            switch (idBrain) 
             {
                 // Lister ici les controlleurs possibles
                 case 0x0:   
-                    return new Zombie(this);
+                    return new Soldier(this);
                 case 0x1:   
                     return new Archer(this);
                 case 0x2:   
-                    return new Illusionnist(this);
+                    return new Wizard(this);
             }
 
             return null;

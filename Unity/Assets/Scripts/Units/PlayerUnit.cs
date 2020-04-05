@@ -13,7 +13,7 @@ namespace Units {
 
         private const float TickAttack = 0.10f; //PARAM OF DIFFICULTY
     
-        public override bool Init(int idType, Entity entityModel, int entityCountP) {
+        public override bool Init(EntityType idType, Entity entityModel, int entityCountP) {
             bool value = base.Init(idType, entityModel, entityCountP);
             speedEntity = 1.0f;
             _isSelected = true;

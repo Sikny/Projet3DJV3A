@@ -1,35 +1,30 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Items;
 using UnityEngine;
 
-public class ShopContent : MonoBehaviour
+public class ShopContent
 {
     /*public List<Item> itemsConsummable = new List<Item>();
     public List<Item> itemsEquipment = new List<Item>();
     public List<Item> itemsUnits = new List<Item>();*/
 
-    public List<ItemSlot> itemSlotsConsumable = new List<ItemSlot>();
-
-
+    private List<ItemSlot> itemSlotsConsumable = new List<ItemSlot>();
+    
     public List<Consummable> shopConsummables = new List<Consummable>();
     public List<Equipment> shopEquipments = new List<Equipment>();
+    public List<StoreUnit> shopUnits = new List<StoreUnit>();
 
-    
-    
     #region Singleton
     
-    public static ShopContent instance;
-    
-    
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Debug.Log("Several instances");
-            return;
+    private static ShopContent _instance;
+
+    public static ShopContent Instance {
+        get {
+            if(_instance == null) _instance = new ShopContent();
+            return _instance;
         }
-        instance = this;
     }
 
     #endregion
@@ -61,6 +56,10 @@ public class ShopContent : MonoBehaviour
         shopEquipments.Add(equipment);
     }
 
+    public void AddStoreUnit(StoreUnit unit) {
+        shopUnits.Add(unit);
+    }
+
     public void AddAllConsummables()
     {
         
@@ -80,16 +79,6 @@ public class ShopContent : MonoBehaviour
         {
             shopEquipments.Add(allEquipments[i]);
         }
-    }
-    
-    public List<Consummable> GetShopConsummables()
-    {
-        return shopConsummables;
-    }
-
-    public List<Equipment> GetShopEquipments()
-    {
-        return shopEquipments;
     }
 
 /*
