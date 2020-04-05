@@ -12,6 +12,8 @@ namespace Units
 
         public static AbstractUnit[] units = new AbstractUnit[16];
 
+        public static PlayerUnit _selectedUnit;
+        
         public static float deltaTime;
     }
 }
