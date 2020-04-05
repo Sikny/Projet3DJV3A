@@ -25,7 +25,7 @@ namespace Units{
             if (deltaTime >= TICK_ATTACK)
             {
                 if (Vector3.Distance(body.GetPosition(), target.GetPosition()) <= 3) {
-                    body.Attack(target, basisAttack);
+                    body.Attack(target, getAttackUnit(target));
                 }
                 deltaTime -= TICK_ATTACK;
             }
@@ -40,7 +40,7 @@ namespace Units{
             }
             Vector3 last = body.GetPosition();
             Vector3 posTarget = isRemoted ? positionTarget : target.GetPosition();
-            body.SetPosition(Vector3.MoveTowards(last, posTarget, UnitLibData.speed * Time.deltaTime * speedEntity));
+            body.SetPosition(Vector3.MoveTowards(last, posTarget, getVitessUnit()));
             
             //velocity = position - last;
         }

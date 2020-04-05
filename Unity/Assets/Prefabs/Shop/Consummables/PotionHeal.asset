@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdeb2f9861404dc0822470751b0307ae, type: 3}
-  m_Name: Helmet
+  m_Script: {fileID: 11500000, guid: 2c92e361e7896504094ff37c61c01548, type: 3}
+  m_Name: PotionHeal
   m_EditorClassIdentifier: 
-  name: Helmet
-  icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  name: Potion de soin
+  icon: {fileID: 21300000, guid: 6999056a701cdfd44a16211baa0017c0, type: 3}
   price: 10

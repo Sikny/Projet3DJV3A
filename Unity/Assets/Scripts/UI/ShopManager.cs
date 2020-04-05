@@ -121,7 +121,8 @@ public class ShopManager : MonoBehaviour
         {
             ItemSlot currentSlot = prefabSlot;
             currentSlot.item = shopEquipments[i];
-            currentSlot.itemName.SetText(shopEquipments[i].name);
+            string itname = shopEquipments[i].name;
+            currentSlot.itemName.SetText(itname);
             currentSlot.icon.sprite = shopEquipments[i].icon;
 
             //Debug.Log("put equipment :" + shopEquipments[i].name);

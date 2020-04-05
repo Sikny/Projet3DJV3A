@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Units {
@@ -27,11 +28,12 @@ namespace Units {
         protected float speedEntity;
 
         protected Rigidbody rigidBody;
-
-        public Material circleMaterial;
-
-        public virtual bool Init(EntityType idType,Entity entityModel, int entityCountP)
-        {
+		public Material circleMaterial;
+		private Effect[] effect = new Effect[16]; // max
+   	    private int nbEffectApplied = 0;
+        
+		public virtual bool Init(EntityType idType,Entity entityModel, int entityCountP){
+	        
 
             this.brain = getControllerFromId(idType);
             
@@ -61,6 +63,12 @@ namespace Units {
             rigidBody = gameObject.AddComponent<Rigidbody>();
             rigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             rigidBody.constraints = RigidbodyConstraints.FreezePositionY|RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ ;
+
+            for (int i = 0; i < effect.Length; i++)
+            {
+                effect[i].IdEffect = -1;
+            }
+            
             return true;
         }
 
@@ -86,9 +94,9 @@ namespace Units {
         {
             float[,] matrixEfficient = new float[,]
             {
-                {1.0f, 1.5f, 0.5f},
-                {0.5f, 1.0f, 1.5f},
-                {1.5f, 0.5f, 1.0f}
+                {1.0f, 1.25f, 0.75f},
+                {0.75f, 1.0f, 1.25f},
+                {1.25f, 0.75f, 1.0f}
             };
 
             return matrixEfficient[from.idBrain, to.idBrain];
@@ -139,6 +147,31 @@ namespace Units {
 
         public int GetNumberAlive() {
             return livingEntityCount;
+        }
+        
+        public void addEffect(int idEffect, int level, float timeout)
+        {
+            effect[idEffect] = new Effect(idEffect, level, timeout);
+        }
+
+        protected void updateTimeoutEffects()
+        {
+            for (int i = 0; i < effect.Length; i++)
+            {
+                if (effect[i].IdEffect != -1 && float.IsPositiveInfinity(effect[i].Timeout))
+                {
+                    effect[i].Timeout -= Time.deltaTime;
+                    if (effect[i].Timeout <= 0)
+                    {
+                        effect[i].IdEffect = -1;
+                    }
+                }
+            }
+        }
+
+        public Effect getEffect(int id)
+        {
+            return effect[id];
         }
     }
     

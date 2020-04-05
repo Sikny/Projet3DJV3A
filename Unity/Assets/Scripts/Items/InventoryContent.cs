@@ -53,11 +53,13 @@ public class InventoryContent : MonoBehaviour
     {
         _inventoryManager.UpdateGold();
         _shopManager.UpdateGold();
-        if (item.GetType() == typeof(Equipment))
+        var itemType = item.GetType();
+        
+        if (itemType.IsSubclassOf(typeof(Equipment)) || itemType == typeof(Equipment))
         {
             AddEquipment((Equipment)item);
         }
-        else if(item.GetType() == typeof(Consummable))
+        else if(itemType.IsSubclassOf(typeof(Consummable)) || itemType == typeof(Consummable))
         {
             AddConsummable((Consummable)item);
         }
@@ -75,6 +77,12 @@ public class InventoryContent : MonoBehaviour
         _inventoryManager.UpdateUIEquipment(equipment);
     }
 
+
+    public void RemoveConsummable(Consummable item)
+    {
+        inventoryConsummables.Remove(item);
+        _inventoryManager.RemoveConsummable(item);
+    }
     public void AddAllConsummables()
     {
         

@@ -74,7 +74,6 @@ public class ItemSlot : MonoBehaviour
 
     public void UseItem()
     {
-        Debug.Log("using item");
         item.Use();
     }
 

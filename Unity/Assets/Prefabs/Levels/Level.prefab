@@ -48,7 +48,7 @@ MonoBehaviour:
   consumablesList:
   - {fileID: 11400000, guid: 7720158c101f74d469b2cf32805da546, type: 2}
   equipmentsList:
-  - {fileID: 11400000, guid: 0634df68911af174194ab669248a240f, type: 2}
+  - {fileID: 11400000, guid: 562d4cdd855182b4aaba4df92b254a72, type: 2}
   unitList:
   - {fileID: 11400000, guid: f31b04ebfc4748141af4d82e75d1c293, type: 2}
   enemySpawns:
