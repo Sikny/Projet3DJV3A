@@ -7,5 +7,15 @@ using UnityEngine;
 public class Consummable : Item
 {
     //public String description = ""; 
+
+    public override void Use()
+    {
+        base.Use();
+        RemoveFromInventory();
+    }
     
+    public void RemoveFromInventory ()
+    {
+        InventoryContent.instance.RemoveConsummable(this);
+    }
 }

@@ -15,9 +15,11 @@ public class Potion : Consummable  //hérite de consommable ou équipement dépe
 {
 
     //par défaut a un nom, prix, sprite, tu peux ajouter d'autre type en faisant des variables public comme healAmount ici 
-    public int healAmount = 100;
     public override void Use()
     {
+        
+        base.Use();
+        
         if (UnitLibData._selectedUnit != null)
         {
             for (int i = 0; i < UnitLibData._selectedUnit.entityCount; i++)
@@ -27,6 +29,5 @@ public class Potion : Consummable  //hérite de consommable ou équipement dépe
             }
         }
 
-        base.Use();
     }
 }

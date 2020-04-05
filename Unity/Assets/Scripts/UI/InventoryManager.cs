@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,9 @@ public class InventoryManager : MonoBehaviour
     
     //-----------------------------------------------------------------------------
 
+    private List<ItemSlot> _consummableSlots = new List<ItemSlot>();
+    private List<GameObject> _consummableGameObjects = new List<GameObject>();
+    
     #region Singleton
     
     public static InventoryManager instance;
@@ -89,7 +93,7 @@ public class InventoryManager : MonoBehaviour
             currentSlot.itemName.SetText(inventoryConsummables[i].name);
             currentSlot.icon.sprite = inventoryConsummables[i].icon;
 
-            Instantiate(currentSlot, itemsParent, false);
+            _consummableSlots.Add(Instantiate(currentSlot, itemsParent, false));
         }
     }
 
@@ -121,7 +125,9 @@ public class InventoryManager : MonoBehaviour
         currentSlot.itemName.SetText(consummable.name);
         currentSlot.icon.sprite = consummable.icon;
 
-        Instantiate(currentSlot, itemsParent, false);
+        _consummableSlots.Add(Instantiate(currentSlot, itemsParent, false));
+
+
     }
     public void UpdateUIEquipment(Equipment equipment)
     {
@@ -132,6 +138,22 @@ public class InventoryManager : MonoBehaviour
         currentSlot.icon.sprite = equipment.icon;
 
         Instantiate(currentSlot, equipmentsParent, false);
+    }
+
+    public void RemoveConsummable(Consummable consummable)
+    {
+        int targetIndex = 0;
+        for (int i = _consummableSlots.Count - 1; i > 0; i--)
+        {
+            if (_consummableSlots[i].item == consummable)
+            {
+                targetIndex = i;
+                break;
+            }
+        }
+        GameObject slotGameobject = _consummableSlots[targetIndex].gameObject;
+        Destroy(slotGameobject);
+        _consummableSlots.Remove(_consummableSlots[targetIndex]);
     }
     public void UpdateGold()
     {

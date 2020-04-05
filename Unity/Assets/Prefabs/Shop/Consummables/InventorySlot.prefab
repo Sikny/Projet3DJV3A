@@ -127,7 +127,7 @@ MonoBehaviour:
   icon: {fileID: 417939943301975024}
   itemName: {fileID: 417939944790082165}
   price: {fileID: 417939943970257302}
-  isBought: 0
+  inventoryPrefab: {fileID: 0}
   item: {fileID: 0}
 --- !u!1 &417939943970257300
 GameObject:
@@ -146,7 +146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &417939943970257301
 RectTransform:
   m_ObjectHideFlags: 0

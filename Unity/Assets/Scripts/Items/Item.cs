@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -9,16 +10,14 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public int price = 10;
     //public String description = ""; 
-    
+
+
     // Called when the item is pressed in the inventory
     public virtual void Use ()
     {
-        Debug.Log("Using " + name);
+        Popups.instance.Popup("using " + name);
     }
 
-    public void RemoveFromInventory ()
-    {
-        //TODO
-    }
+
     
 }
