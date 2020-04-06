@@ -33,14 +33,14 @@ namespace Units
         }
         protected float getAttackUnit(AbstractUnit target)
         {
-            float baseVitess = basisAttack;
+            float baseAttack = basisAttack;
 
             Effect effect = target.getEffect(1); //defense
 
             int bonusLevel = effect.IdEffect == -1 ? 1 : effect.LevelEffect + 1;
 
 
-            return baseVitess/bonusLevel;
+            return basisAttack/bonusLevel;
         }
     }
 }
