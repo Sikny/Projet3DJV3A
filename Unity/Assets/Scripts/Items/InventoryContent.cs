@@ -37,6 +37,16 @@ public class InventoryContent : MonoBehaviour
     {
         _inventoryManager = InventoryManager.instance;
         _shopManager = ShopManager.instance;
+
+        foreach (var unit in inventoryUnits) {
+            _inventoryManager.UpdateUIUnit(unit);
+        }
+        foreach (var cons in inventoryConsummables) {
+            _inventoryManager.UpdateUIConsummable(cons);
+        }
+        foreach (var equips in inventoryEquipments) {
+            _inventoryManager.UpdateUIEquipment(equips);
+        }
     }
 
     public void ClearAllItems()

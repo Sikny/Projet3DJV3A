@@ -1833,8 +1833,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1902986999}
   m_HandleRect: {fileID: 1902986997}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2718,8 +2718,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1985501628}
   m_HandleRect: {fileID: 1985501627}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2918,28 +2918,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1097806594}
         m_MethodName: Fight
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 755814114}
-        m_MethodName: setRunning
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 681606106}
-        m_MethodName: SetActive
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4049,8 +4027,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2038129254}
   m_HandleRect: {fileID: 2038129253}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5404,6 +5382,8 @@ MonoBehaviour:
   itemsParent: {fileID: 765435549}
   equipmentsParent: {fileID: 1030725381}
   unitsParent: {fileID: 1306556702}
+  fightButton: {fileID: 681606106}
+  systemUnit: {fileID: 755814114}
 --- !u!1 &1119501726
 GameObject:
   m_ObjectHideFlags: 0
@@ -7057,8 +7037,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1457580467}
   m_HandleRect: {fileID: 1457580466}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7543,7 +7523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0771588a31246044e977d7180c2beb47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 5000
+  gold: 0
 --- !u!114 &1370698922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7559,7 +7539,9 @@ MonoBehaviour:
   itemSlotsConsumable: []
   inventoryConsummables: []
   inventoryEquipments: []
-  inventoryUnits: []
+  inventoryUnits:
+  - {fileID: 11400000, guid: f31b04ebfc4748141af4d82e75d1c293, type: 2}
+  - {fileID: 11400000, guid: f31b04ebfc4748141af4d82e75d1c293, type: 2}
   selectedStoreUnit: {fileID: 0}
 --- !u!114 &1370698923
 MonoBehaviour:
@@ -8150,8 +8132,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1708402708}
   m_HandleRect: {fileID: 1708402707}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9510,8 +9492,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 250190868}
   m_HandleRect: {fileID: 250190867}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12573,7 +12555,7 @@ PrefabInstance:
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 5.7868e-41
+      value: 9.4963e-41
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
@@ -12583,7 +12565,7 @@ PrefabInstance:
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: NaN
+      value: 95
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613575, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}

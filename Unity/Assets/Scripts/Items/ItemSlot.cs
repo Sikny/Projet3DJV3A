@@ -38,7 +38,7 @@ public class ItemSlot : MonoBehaviour
 
     public void BuyItem()
     {
-        if (_player.gold > item.price)
+        if (_player.gold >= item.price)
         {
             _player.gold -= item.price;
             ItemSlot boughtSlot = inventoryPrefab;

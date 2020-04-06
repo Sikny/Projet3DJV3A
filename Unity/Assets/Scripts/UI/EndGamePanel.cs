@@ -7,6 +7,8 @@ namespace UI {
     public class EndGamePanel : MonoBehaviour {
         public TextMeshProUGUI winMessage;
         public TextMeshProUGUI loseMessage;
+        public GameObject retryBtn;
+        public GameObject nextBtn;
 
         public int TypeEndGame {
             set {
@@ -15,10 +17,14 @@ namespace UI {
                     case 0:    // Lose
                         winMessage.gameObject.SetActive(false);
                         loseMessage.gameObject.SetActive(true);
+                        retryBtn.SetActive(true);
+                        nextBtn.SetActive(false);
                         break;
                     case 1:    // Win
                         winMessage.gameObject.SetActive(true);
                         loseMessage.gameObject.SetActive(false);
+                        retryBtn.SetActive(false);
+                        nextBtn.SetActive(true);
                         if (GameSingleton.Instance.levelManager != null)
                             GameSingleton.Instance.levelManager.NextLevel();
                         break;

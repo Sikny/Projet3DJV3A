@@ -60,9 +60,13 @@ namespace Utility {
             }
         }
 
+        private bool _gameEnded;
         public void EndGame(int status) {
+            if (_gameEnded) return;
+            _gameEnded = true;
             endGamePanel.TypeEndGame = status;
             endGamePanel.gameObject.SetActive(true);
+            Player.instance.Save();
         }
     }
 }
