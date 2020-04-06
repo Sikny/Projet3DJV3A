@@ -50,7 +50,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 32e5c4bdeb00e0d4b83bc8fedea14800, type: 2}
   equipmentsList:
   - {fileID: 11400000, guid: 562d4cdd855182b4aaba4df92b254a72, type: 2}
-  - {fileID: 11400000, guid: 6f8609e69060c7e45a15ba294d47aff7, type: 2}
+  - {fileID: 11400000, guid: c6c585167ec9aa84ca22053c44395c1b, type: 2}
   unitList:
   - {fileID: 11400000, guid: f31b04ebfc4748141af4d82e75d1c293, type: 2}
   - {fileID: 11400000, guid: af1ecda70da49b34ca58f58124002d9d, type: 2}
