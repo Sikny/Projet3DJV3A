@@ -33,10 +33,10 @@ namespace Units {
         
         public void Start() {
             UnitLibData._selectedUnit = null;
-            Vector3[] playerUnitsPositions = {
+            /*Vector3[] playerUnitsPositions = {
                 new Vector3(3, YPos, 5),
                 new Vector3(7, YPos, 3)
-            };
+            };*/
             
             /*Vector3[] aiUnitsPositions = {
                 new Vector3(1, YPos, 1),
@@ -46,12 +46,12 @@ namespace Units {
 
             int i = 0;
             
-            foreach (var unitPos in playerUnitsPositions) {
+            /*foreach (var unitPos in playerUnitsPositions) {
                 PlayerUnit unit = Instantiate(playerUnitPrefab);
                 unit.SetPosition(unitPos);
                 unit.Init(EntityType.Soldier, entityDict.GetEntityType(EntityType.Soldier), sizeUnit);    // Archer
                 _units.Add(unit);
-            }
+            }*/
 
             /*foreach (var unitPos in aiUnitsPositions) {
                 AiUnit unit = Instantiate(aiUnitPrefab);
@@ -88,6 +88,7 @@ namespace Units {
                     Vector3 position = new Vector3(Mathf.Floor(hit.transform.position.x)-0.5f, 1,
                         Mathf.Floor(hit.transform.position.z)-0.5f) ;
                     StoreUnit unit = InventoryContent.instance.selectedStoreUnit;
+                    print(unit.entityType);
                     SpawnUnit(unit.entityType, playerUnitPrefab, position);
                     InventoryContent.instance.RemoveUnit(unit);
                     InventoryContent.instance.selectedStoreUnit = null;

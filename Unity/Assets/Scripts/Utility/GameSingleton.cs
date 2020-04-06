@@ -66,6 +66,7 @@ namespace Utility {
             _gameEnded = true;
             endGamePanel.TypeEndGame = status;
             endGamePanel.gameObject.SetActive(true);
+            Player.instance.Save();
         }
     }
 }

@@ -21,10 +21,12 @@ namespace Game {
 
         public TerrainBuilder terrainBuilder;
 
+        [Header("Shop content")]
         public List<Consummable> consumablesList = new List<Consummable>();
         public List<Equipment> equipmentsList = new List<Equipment>();
         public List<StoreUnit> unitList = new List<StoreUnit>();
-
+        
+        [Header("Enemies")]
         public List<EnemySpawn> enemySpawns;
         public List<Transform> livingEnemies;
 

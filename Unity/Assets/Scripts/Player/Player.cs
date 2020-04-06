@@ -22,6 +22,12 @@ public class Player : MonoBehaviour
          return;
       }
       instance = this;
+
+      Load();
+   }
+
+   public void Load() {
+      gold = PlayerPrefs.GetInt("PlayerGold", 0);
    }
 
    public int GetGold()
@@ -29,6 +35,8 @@ public class Player : MonoBehaviour
       return gold;
    }
 
-
-
+   public void Save() {
+      PlayerPrefs.SetInt("PlayerGold", gold);
+      PlayerPrefs.Save();
+   }
 }

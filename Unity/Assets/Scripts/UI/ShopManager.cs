@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Items;
 using TMPro;
+using Units;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility;
@@ -150,8 +151,14 @@ public class ShopManager : MonoBehaviour
         goldText.SetText(_player.GetGold() + "g");   
     }
 
-    public void Fight()
-    {
+    public GameObject fightButton;
+    public SystemUnit systemUnit;
+    
+    public void Fight() {
+        int playerCount = FindObjectsOfType<PlayerUnit>().Length;
+        if (playerCount == 0) return;
+        systemUnit.setRunning(true);
+        fightButton.SetActive(false);
         shopPanel.SetActive(false);
         GameSingleton.Instance.StartFight();
     }

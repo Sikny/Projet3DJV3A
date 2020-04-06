@@ -74,6 +74,10 @@ namespace Units  {
             }
             return best;
         }
-        
+
+        public override void Kill() {
+            Player.instance.gold += 150;
+            base.Kill();
+        }
     }
 }

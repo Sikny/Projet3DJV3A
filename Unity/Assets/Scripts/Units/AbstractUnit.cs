@@ -124,7 +124,7 @@ namespace Units {
 
         public abstract void UpdateUnit();
 
-        public void Kill() {
+        public virtual void Kill() {
             Destroy(gameObject);
         }
 

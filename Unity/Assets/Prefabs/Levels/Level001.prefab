@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1296933168775581950}
   - component: {fileID: 601485573115542228}
   m_Layer: 0
-  m_Name: Level
+  m_Name: Level001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,21 +46,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainBuilder: {fileID: 2739367744365421580}
   consumablesList:
-  - {fileID: 11400000, guid: 7720158c101f74d469b2cf32805da546, type: 2}
+  - {fileID: 11400000, guid: 45b2d4959514bca41b1bc99a1493fc57, type: 2}
+  - {fileID: 11400000, guid: 32e5c4bdeb00e0d4b83bc8fedea14800, type: 2}
   equipmentsList:
   - {fileID: 11400000, guid: 562d4cdd855182b4aaba4df92b254a72, type: 2}
+  - {fileID: 11400000, guid: 6f8609e69060c7e45a15ba294d47aff7, type: 2}
   unitList:
   - {fileID: 11400000, guid: f31b04ebfc4748141af4d82e75d1c293, type: 2}
+  - {fileID: 11400000, guid: af1ecda70da49b34ca58f58124002d9d, type: 2}
+  - {fileID: 11400000, guid: 8c3a0c3cc26ac294b9031c84ad619af0, type: 2}
   enemySpawns:
   - spawnTime: 0
     entityType: 0
     position: {x: -10, y: 1, z: 10}
-  - spawnTime: 0
-    entityType: 1
-    position: {x: -10, y: 1, z: -10}
-  - spawnTime: 0
-    entityType: 2
-    position: {x: -10, y: 1, z: 0}
   livingEnemies: []
 --- !u!1001 &1296933168781156492
 PrefabInstance:
