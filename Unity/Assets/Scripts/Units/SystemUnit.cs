@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System;
+using Items;
+using TerrainGeneration;
 using UnityEngine;
 using Utility;
 
@@ -77,6 +79,36 @@ namespace Units {
         }
 
         public void Update() {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (InventoryContent.instance.selectedStoreUnit != null
+                    && Physics.Raycast(ray, out hit, 100f, 1 << 8)) {
+                    Vector3 position = new Vector3(Mathf.Floor(hit.transform.position.x)-0.5f, 1,
+                        Mathf.Floor(hit.transform.position.z)-0.5f) ;
+                    StoreUnit unit = InventoryContent.instance.selectedStoreUnit;
+                    SpawnUnit(unit.entityType, playerUnitPrefab, position);
+                    InventoryContent.instance.RemoveUnit(unit);
+                    InventoryContent.instance.selectedStoreUnit = null;
+                }
+                if (!isRunning) return;
+                if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
+                {
+                    if (UnitLibData._selectedUnit != null)
+                        UnitLibData._selectedUnit.Deselect();
+                    UnitLibData._selectedUnit = hit.transform.GetComponent<PlayerUnit>();
+                    UnitLibData._selectedUnit.Select();
+                }
+                else if (UnitLibData._selectedUnit != null)
+                {
+                    if (Physics.Raycast(ray, out hit, 100f, 1 << 8))
+                    {
+                        UnitLibData._selectedUnit.SetTargetPosition();
+                    }
+                }
+            }
+            
             if (isRunning)
             {
                 UnitLibData.deltaTime = Time.deltaTime;
@@ -89,26 +121,6 @@ namespace Units {
                         _units[i].Kill();
                         _units.RemoveAt(i);
                         break;
-                    }
-                }
-
-                if (Input.GetKeyDown(KeyCode.Mouse0))
-                {
-                    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
-                    {
-                        if (UnitLibData._selectedUnit != null)
-                            UnitLibData._selectedUnit.Deselect();
-                        UnitLibData._selectedUnit = hit.transform.GetComponent<PlayerUnit>();
-                        UnitLibData._selectedUnit.Select();
-                    }
-                    else if (UnitLibData._selectedUnit != null)
-                    {
-                        if (Physics.Raycast(ray, out hit, 100f, 1 << 8))
-                        {
-                            UnitLibData._selectedUnit.SetTargetPosition();
-                        }
                     }
                 }
             }

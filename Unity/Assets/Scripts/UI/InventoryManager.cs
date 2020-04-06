@@ -17,7 +17,6 @@ public class InventoryManager : MonoBehaviour
 
     public ItemSlot prefabSlot; 
         
-    private InventoryContent _inventoryContent;
     public Transform itemsParent;
     public Transform equipmentsParent;
     public Transform unitsParent;
@@ -26,6 +25,8 @@ public class InventoryManager : MonoBehaviour
 
     private List<ItemSlot> _consummableSlots = new List<ItemSlot>();
     private List<GameObject> _consummableGameObjects = new List<GameObject>();
+    
+    private List<ItemSlot> _unitSlots = new List<ItemSlot>();
 
     #region Singleton
     
@@ -47,8 +48,6 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _inventoryContent = InventoryContent.instance;
-        
         inventoryPanel.SetActive(false);
         UpdateGold();
 
@@ -148,7 +147,7 @@ public class InventoryManager : MonoBehaviour
         currentSlot.itemName.SetText(unit.name);
         currentSlot.icon.sprite = unit.icon;
 
-        Instantiate(currentSlot, unitsParent, false);
+        _unitSlots.Add(Instantiate(currentSlot, unitsParent, false));
     }
 
     public void RemoveConsummable(Consummable consummable)
@@ -166,6 +165,21 @@ public class InventoryManager : MonoBehaviour
         Destroy(slotGameobject);
         _consummableSlots.Remove(_consummableSlots[targetIndex]);
     }
+
+    public void RemoveUnit(StoreUnit unit) {
+        int targetIndex = 0;
+        for (int i = _unitSlots.Count - 1; i > 0; i--) {
+            if (_unitSlots[i].item == unit) {
+                targetIndex = i;
+                break;
+            }
+        }
+
+        GameObject slotGameObject = _unitSlots[targetIndex].gameObject;
+        Destroy(slotGameObject);
+        _unitSlots.Remove(_unitSlots[targetIndex]);
+    }
+    
     public void UpdateGold()
     {
         goldText.SetText(Player.instance.gold.ToString() + "g");   

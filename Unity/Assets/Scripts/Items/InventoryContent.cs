@@ -11,6 +11,8 @@ public class InventoryContent : MonoBehaviour
     public List<Equipment> inventoryEquipments = new List<Equipment>();
     public List<StoreUnit> inventoryUnits = new List<StoreUnit>();
 
+    public StoreUnit selectedStoreUnit;
+
     private InventoryManager _inventoryManager;
     private ShopManager _shopManager;
     #region Singleton
@@ -93,6 +95,12 @@ public class InventoryContent : MonoBehaviour
         inventoryConsummables.Remove(item);
         _inventoryManager.RemoveConsummable(item);
     }
+
+    public void RemoveUnit(StoreUnit unit) {
+        inventoryUnits.Remove(unit);
+        _inventoryManager.UpdateUIUnit(unit);
+    }
+
     public void AddAllConsummables()
     {
         
