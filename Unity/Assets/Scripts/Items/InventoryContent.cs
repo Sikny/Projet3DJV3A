@@ -98,7 +98,7 @@ public class InventoryContent : MonoBehaviour
 
     public void RemoveUnit(StoreUnit unit) {
         inventoryUnits.Remove(unit);
-        _inventoryManager.UpdateUIUnit(unit);
+        _inventoryManager.RemoveUnit(unit);
     }
 
     public void AddAllConsummables()
