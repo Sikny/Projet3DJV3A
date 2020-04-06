@@ -31,7 +31,9 @@ namespace TerrainGeneration {
         
         private readonly TerrainUnit[,] terrainUnits;
         
-        private const int CursorSize = 3;
+        //private const int CursorSize = 3;
+
+        public Transform cursor;
         
         public void AddTerrainUnit(TerrainUnit tU, int posZ, int posX) {
             terrainUnits[posZ, posX] = tU;
@@ -39,7 +41,7 @@ namespace TerrainGeneration {
         
         public void SelectZone(int posZ, int posX) {
             if (TileZ >= 0 && TileZ >= 0) {
-                for (int i = -CursorSize / 2; i <= CursorSize / 2; i++) {
+                /*for (int i = -CursorSize / 2; i <= CursorSize / 2; i++) {
                     if (TileX - Mathf.Abs(i) < 0 && i < 0 || TileX + Mathf.Abs(i) >= Width && i > 0)
                         continue;
                     for (int j = -CursorSize / 2; j <= CursorSize / 2; j++) {
@@ -47,19 +49,22 @@ namespace TerrainGeneration {
                             continue;
                         terrainUnits[TileZ + j, TileX + i].DeselectUnit();
                     }
-                }
+                }*/
             }
             TileZ = posZ;
             TileX = posX;
-            for (int i = -CursorSize / 2; i <= CursorSize / 2; i++) {
+            Debug.Log(posX);
+            cursor.position = new Vector3(posX-Width/2, cursor.position.y, posZ-Height/2);
+            /*for (int i = -CursorSize / 2; i <= CursorSize / 2; i++) {
                 if(TileX - Mathf.Abs(i) < 0 && i < 0 || TileX + Mathf.Abs(i) >= Width && i > 0)
                     continue;
+                
                 for (int j = -CursorSize/2; j <= CursorSize/2; j++) {
                     if (TileZ - Mathf.Abs(j) < 0 && j < 0 || TileZ + Mathf.Abs(j) >= Height && j > 0)
                         continue;
                     terrainUnits[TileZ+j, TileX+i].SelectUnit();
                 }
-            }
+            }*/
         }
     }
 }

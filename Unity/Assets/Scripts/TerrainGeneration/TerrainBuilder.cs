@@ -16,10 +16,14 @@ namespace TerrainGeneration {
         private int[,] grid;
         private String printGrid = "\n";
 
+        public Transform cursor;
+
         public IEnumerator Init() {
             TerrainGrid.Height = terrainOptions.height;
             TerrainGrid.Width = terrainOptions.width;
             
+            TerrainGrid.Instance.cursor = cursor;
+
             grid = new int[terrainOptions.height, terrainOptions.width];
             
             BuildArray();

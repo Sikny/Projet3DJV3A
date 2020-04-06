@@ -25,15 +25,5 @@ namespace TerrainGeneration {
                 TerrainGrid.Instance.SelectZone(posZ, posX);
             }
         }
-
-        public void SelectUnit() {
-            Material mat = meshRenderer.material;
-            _startColor = mat.color;
-            mat.color = Color.yellow;
-        }
-
-        public void DeselectUnit() {
-            meshRenderer.material.color = _startColor;
-        }
     }
 }
