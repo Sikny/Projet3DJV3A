@@ -22,8 +22,8 @@ namespace Units{
             if(body.isMoving)
                 Move(isRemoted, target, positionTarget);
             
-            if (deltaTime >= TICK_ATTACK)
-            {
+            if (deltaTime >= TICK_ATTACK) {
+                if (target == null) return;
                 if (Vector3.Distance(body.GetPosition(), target.GetPosition()) <= 3) {
                     body.Attack(target, getAttackUnit(target));
                 }
