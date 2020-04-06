@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace Units {
     public class Entity : MonoBehaviour {
@@ -11,6 +12,10 @@ namespace Units {
         public MeshRenderer meshRenderer;
         public RectTransform fillBar;
         public MeshRenderer circleRenderer;
+
+        public GameObject hitParticles;
+        public GameObject effectiveHitParticles;
+        public GameObject notEffectiveHitParticles;
 
         private Color _firstColor;
 
@@ -45,6 +50,8 @@ namespace Units {
         }
 
         public int ChangeLife(int deltaValue) {
+            
+            
             _life += deltaValue;
             if (_life > _maxLife) _life = _maxLife;
             else if (_life < 0) _life = 0;
@@ -61,13 +68,11 @@ namespace Units {
         private readonly WaitForSeconds _blinkTime = new WaitForSeconds(0.2f);
         private float blinkAlpha = 0.5f;
         private IEnumerator Blink() {
-            var material = meshRenderer.material;
-            Color meshCol = material.color;
-            meshCol.a = blinkAlpha;
-            material.color = meshCol;
+            hitParticles.layer = 0;
             yield return _blinkTime;
-            meshCol.a = 1f;
-            material.color = meshCol;
+            hitParticles.layer = 31;
+            //meshCol.a = 1f;
+            //material.color = meshCol;
         }
 
         public int GetStrength() {
