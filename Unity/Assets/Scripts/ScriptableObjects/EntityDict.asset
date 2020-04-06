@@ -18,10 +18,10 @@ MonoBehaviour:
       type: 3}
     description: Soldier
   - idType: 1
-    entityPrefab: {fileID: 7468583631191037214, guid: 2869a4ddc78ec384aa381910b4b2a65d,
+    entityPrefab: {fileID: 3760056377490896563, guid: 097fddff0e450fc4d9c4cb35fb601d3b,
       type: 3}
     description: Archer
   - idType: 2
-    entityPrefab: {fileID: 7468583631191037214, guid: 2869a4ddc78ec384aa381910b4b2a65d,
+    entityPrefab: {fileID: 2622449584784750246, guid: 86d64b6af9149cb459b7a8337f34e338,
       type: 3}
     description: Mage

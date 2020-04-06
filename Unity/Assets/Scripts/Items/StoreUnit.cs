@@ -1,12 +1,17 @@
-﻿using UnityEngine;
+﻿using Units;
+using UnityEngine;
 
 namespace Items {
     [CreateAssetMenu(fileName = "New Unit", menuName = "ScriptableObjects/Unit")]
     public class StoreUnit : Item {
-        public GameObject inGamePrefab;
+        public EntityType entityType;
+        
+        public override void Use() {
+            base.Use();
 
-        public void Spawn(Vector3 position) {
-            Instantiate(inGamePrefab, position, Quaternion.identity);
+            InventoryContent.instance.selectedStoreUnit = this;
+            
+            Popups.instance.popupText.text = "Placing " + name;
         }
     }
 }

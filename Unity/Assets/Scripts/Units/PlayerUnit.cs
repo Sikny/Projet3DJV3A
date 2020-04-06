@@ -27,6 +27,7 @@ namespace Units {
         }
 
         public override void UpdateUnit() {
+            if (!initialized) return;
             _deltaTime += UnitLibData.deltaTime;
 
             if (_unitTarget == null) _unitTarget = GuessTheBestUnitToTarget();
@@ -37,11 +38,6 @@ namespace Units {
             
             UpdateGameObject();
             
-        }
-
-        public override bool Kill()
-        {
-            return true;
         }
 
         public override void Attack(AbstractUnit anotherUnit, float damage) {
@@ -66,7 +62,6 @@ namespace Units {
                 }
             }
         }
-        
         
         private AiUnit GuessTheBestUnitToTarget() {
             AiUnit best = null;
@@ -101,8 +96,7 @@ namespace Units {
 
             targetPosition = new Vector3(Mathf.Floor(hit.transform.position.x)-0.5f, 1,
                 Mathf.Floor(hit.transform.position.z)-0.5f) ;
-
-
+            
             //Vector of unit to point 
             Vector3 unitToTarget = (targetPosition - position);
             unitToTarget.Normalize();

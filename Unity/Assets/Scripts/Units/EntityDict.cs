@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Units {
     public enum EntityType {
-        Soldier, Archer, Wizard
+        Soldier, Archer, Mage
     }
     [Serializable]
     public class EntityStruct {

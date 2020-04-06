@@ -52,9 +52,16 @@ MonoBehaviour:
   unitList:
   - {fileID: 11400000, guid: f31b04ebfc4748141af4d82e75d1c293, type: 2}
   enemySpawns:
-  - spawnTime: 2
+  - spawnTime: 0
     entityType: 0
-    position: {x: 0, y: 0, z: 0}
+    position: {x: -10, y: 1, z: 10}
+  - spawnTime: 0
+    entityType: 1
+    position: {x: -10, y: 1, z: -10}
+  - spawnTime: 0
+    entityType: 2
+    position: {x: -10, y: 1, z: 0}
+  livingEnemies: []
 --- !u!1001 &1296933168781156492
 PrefabInstance:
   m_ObjectHideFlags: 0

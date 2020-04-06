@@ -19,6 +19,7 @@ namespace Units  {
         
 
         public override void UpdateUnit() {
+            if (!initialized) return;
             _deltaTime += UnitLibData.deltaTime;
             
             if (_unitTarget == null) {
@@ -72,10 +73,6 @@ namespace Units  {
                 }
             }
             return best;
-        }
-        
-        public override bool Kill() {
-            return true;
         }
         
     }

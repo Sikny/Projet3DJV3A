@@ -22,8 +22,8 @@ public class Archer : Controller
         
     }
 
-    public override void interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget)
-    {
+    public override void interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget) {
+        if (target == null) return;
         deltaTime += UnitLibData.deltaTime;
 
         if(body.isMoving)

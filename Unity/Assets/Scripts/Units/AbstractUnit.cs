@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace Units {
@@ -31,11 +32,11 @@ namespace Units {
 		public Material circleMaterial;
 		private Effect[] effect = new Effect[16]; // max
    	    private int nbEffectApplied = 0;
-        
-		public virtual bool Init(EntityType idType,Entity entityModel, int entityCountP){
-	        
 
-            this.brain = getControllerFromId(idType);
+        protected bool initialized;
+        
+		public virtual bool Init(EntityType idType,Entity entityModel, int entityCountP) {
+            brain = getControllerFromId(idType);
             
             entityCount = entityCountP;
             livingEntityCount = entityCountP;
@@ -68,6 +69,8 @@ namespace Units {
             {
                 effect[i].IdEffect = -1;
             }
+
+            initialized = true;
             
             return true;
         }
@@ -76,14 +79,14 @@ namespace Units {
         private Controller getControllerFromId(EntityType id)
         {
             this.idBrain = (int) id;
-            switch (idBrain) 
+            switch (id) 
             {
                 // Lister ici les controlleurs possibles
-                case 0x0:   
+                case EntityType.Soldier:   
                     return new Soldier(this);
-                case 0x1:   
+                case EntityType.Archer:
                     return new Archer(this);
-                case 0x2:   
+                case EntityType.Mage:
                     return new Wizard(this);
             }
 
@@ -108,7 +111,6 @@ namespace Units {
             {
                 isMoving = false;
                 targetPosition = transform.position;
-                Debug.Log("ok");
             }
         }
 
@@ -122,7 +124,9 @@ namespace Units {
 
         public abstract void UpdateUnit();
 
-        public abstract bool Kill();
+        public void Kill() {
+            Destroy(gameObject);
+        }
 
         public Vector3 GetPosition() {
             return position;
