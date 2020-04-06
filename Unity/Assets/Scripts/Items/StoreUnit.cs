@@ -10,6 +10,8 @@ namespace Items {
         public override void Use() {
             base.Use();
 
+            InventoryManager.instance.gameObject.SetActive(false);
+            ShopManager.instance.gameObject.SetActive(false);
             InventoryContent.instance.selectedStoreUnit = this;
             
             Popups.instance.popupText.text = "Placing " + name;
