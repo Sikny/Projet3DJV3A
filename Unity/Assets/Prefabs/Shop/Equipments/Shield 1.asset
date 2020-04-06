@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 823ca192b4472ab4083c820edc7fb3ab, type: 3}
-  m_Name: Shield
+  m_Name: Shield 1
   m_EditorClassIdentifier: 
-  name: Shield
+  name: Bouclier de force
   icon: {fileID: 21300000, guid: b38100a3ec2912641b4f021d0bcd9efa, type: 3}
-  price: 4100
-  stat: 100
-  level: 1
+  price: 10
+  stat: 0
+  level: 3
