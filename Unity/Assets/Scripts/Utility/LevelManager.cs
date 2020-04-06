@@ -3,13 +3,14 @@ using UnityEngine;
 
 namespace Utility {
     public class LevelManager : MonoBehaviour {
-        [SerializeField] private LevelList levelList;
+        public LevelList levelList;
 
-        private Level _loadedLevel;
+        public Level loadedLevel;
 
         private void Awake() {
             GameSingleton.Instance.levelManager = this;
-            _loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.gameVariables.currentLevel));
+            loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.gameVariables.currentLevel));
+            loadedLevel.Init();
         }
 
         public void NextLevel() {

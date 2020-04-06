@@ -1,9 +1,11 @@
 ﻿using System;
+using UnityEditor;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace Units {
     public abstract class AbstractUnit : MonoBehaviour {
-        protected int entityCount;
+        public int entityCount;
         protected Entity[] entities;
         protected Vector3 position;
         protected Vector3 targetPosition;
@@ -12,6 +14,7 @@ namespace Units {
 
         // The interaction controller (zombie, bowman, giant...)
         protected Controller brain;
+        private int idBrain;
         
         protected Vector3 velocity;
         
@@ -26,11 +29,14 @@ namespace Units {
         protected float speedEntity;
 
         protected Rigidbody rigidBody;
+		public Material circleMaterial;
+		private Effect[] effect = new Effect[16]; // max
+   	    private int nbEffectApplied = 0;
 
-        public virtual bool Init(int idType,Entity entityModel, int entityCountP)
-        {
-
-            this.brain = getControllerFromId(idType);
+        protected bool initialized;
+        
+		public virtual bool Init(EntityType idType,Entity entityModel, int entityCountP) {
+            brain = getControllerFromId(idType);
             
             entityCount = entityCountP;
             livingEntityCount = entityCountP;
@@ -46,6 +52,7 @@ namespace Units {
                 for (int j = 0; j < sqrtEntityCount; j++) {
                     if (counterInstance <= entityCount) {
                         Entity entityGo = Instantiate(entityModel, transform);
+                        entityGo.circleRenderer.material = circleMaterial;
                         entityGo.transform.localPosition = new Vector3(i-entityScale.x*2,0,j-entityScale.z*2);
                         entities[counterInstance++] = entityGo;
                     }
@@ -57,22 +64,45 @@ namespace Units {
             rigidBody = gameObject.AddComponent<Rigidbody>();
             rigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             rigidBody.constraints = RigidbodyConstraints.FreezePositionY|RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ ;
+
+            for (int i = 0; i < effect.Length; i++)
+            {
+                effect[i].IdEffect = -1;
+            }
+
+            initialized = true;
+            
             return true;
         }
 
         // Init of unit's controller
-        public Controller getControllerFromId(int id)
+        private Controller getControllerFromId(EntityType id)
         {
+            this.idBrain = (int) id;
             switch (id) 
             {
                 // Lister ici les controlleurs possibles
-                case 0x0:   
-                    return new Zombie(this);
-                case 0x1:   
+                case EntityType.Soldier:   
+                    return new Soldier(this);
+                case EntityType.Archer:
                     return new Archer(this);
+                case EntityType.Mage:
+                    return new Wizard(this);
             }
 
             return null;
+        }
+
+        protected static float getEfficientCoef(AbstractUnit from, AbstractUnit to)
+        {
+            float[,] matrixEfficient = new float[,]
+            {
+                {1.0f, 1.25f, 0.75f},
+                {0.75f, 1.0f, 1.25f},
+                {1.25f, 0.75f, 1.0f}
+            };
+
+            return matrixEfficient[from.idBrain, to.idBrain];
         }
 
         public void OnCollisionEnter(Collision c)
@@ -81,7 +111,6 @@ namespace Units {
             {
                 isMoving = false;
                 targetPosition = transform.position;
-                Debug.Log("ok");
             }
         }
 
@@ -95,7 +124,9 @@ namespace Units {
 
         public abstract void UpdateUnit();
 
-        public abstract bool Kill();
+        public void Kill() {
+            Destroy(gameObject);
+        }
 
         public Vector3 GetPosition() {
             return position;
@@ -120,6 +151,31 @@ namespace Units {
 
         public int GetNumberAlive() {
             return livingEntityCount;
+        }
+        
+        public void addEffect(int idEffect, int level, float timeout)
+        {
+            effect[idEffect] = new Effect(idEffect, level, timeout);
+        }
+
+        protected void updateTimeoutEffects()
+        {
+            for (int i = 0; i < effect.Length; i++)
+            {
+                if (effect[i].IdEffect != -1 && float.IsPositiveInfinity(effect[i].Timeout))
+                {
+                    effect[i].Timeout -= Time.deltaTime;
+                    if (effect[i].Timeout <= 0)
+                    {
+                        effect[i].IdEffect = -1;
+                    }
+                }
+            }
+        }
+
+        public Effect getEffect(int id)
+        {
+            return effect[id];
         }
     }
     

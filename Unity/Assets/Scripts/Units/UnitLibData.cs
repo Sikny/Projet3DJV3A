@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Units
 {
@@ -10,8 +11,10 @@ namespace Units
         public static float rotationSpeed;
         public static float speed;
 
-        public static AbstractUnit[] units = new AbstractUnit[16];
+        public static List<AbstractUnit> units = new List<AbstractUnit>();
 
+        public static PlayerUnit _selectedUnit;
+        
         public static float deltaTime;
     }
 }

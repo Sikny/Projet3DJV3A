@@ -46,10 +46,16 @@ MonoBehaviour:
   entityModel: {fileID: 7468583631191037214, guid: 2869a4ddc78ec384aa381910b4b2a65d,
     type: 3}
   sizeUnit: 9
+  entityDict: {fileID: 11400000, guid: 06127aa73b1792e4392b7c64f1b5cc88, type: 2}
+  playerUnitPrefab: {fileID: 1916052447807135498, guid: 72f849211454d5e4199c6ad27f9a1408,
+    type: 3}
+  aiUnitPrefab: {fileID: 2094734722187342622, guid: 728ddf25c15f7df48a69d3c8055d4cb6,
+    type: 3}
   cam: {fileID: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 256
-  focus: {fileID: 0}
   rotationSpeed: 300
   speed: 5
+  numberAi: 1
+  numberRemote: 1

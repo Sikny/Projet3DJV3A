@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Units {
@@ -9,6 +10,7 @@ namespace Units {
 
         public MeshRenderer meshRenderer;
         public RectTransform fillBar;
+        public MeshRenderer circleRenderer;
 
         private Color _firstColor;
 
@@ -18,7 +20,7 @@ namespace Units {
             _life = _maxLife;
             _firstColor = meshRenderer.material.color;
         }
-
+        
         public void InitColor(Color col) {
             meshRenderer.material.color = col;
             _firstColor = col;
@@ -28,6 +30,16 @@ namespace Units {
             meshRenderer.material.color = _firstColor;
         }
 
+        public void ResetLife()
+        {
+            _life = 100;
+        }
+
+        public int getLife()
+        {
+            return _life;
+        }
+        
         private void KillEntity() {
             Destroy(gameObject);
         }
@@ -61,5 +73,6 @@ namespace Units {
         public int GetStrength() {
             return _strength;
         }
+        
     }
 }

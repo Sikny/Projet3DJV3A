@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,21 +9,27 @@ namespace TerrainGeneration {
         public TerrainOptions terrainOptions;
         public UnitDict unitDict;
     
-        private float unitScale = 1;
+        [HideInInspector] public float unitScale = 1;
 
         private readonly List<KeyValuePair<ZoneType, UnitList>> _terrainData = new List<KeyValuePair<ZoneType, UnitList>>();
         
         private int[,] grid;
         private String printGrid = "\n";
 
-        private void Start() {
+        public Transform cursor;
+
+        public IEnumerator Init() {
             TerrainGrid.Height = terrainOptions.height;
             TerrainGrid.Width = terrainOptions.width;
             
+            TerrainGrid.Instance.cursor = cursor;
+
             grid = new int[terrainOptions.height, terrainOptions.width];
             
             BuildArray();
+            yield return 50f;
             BuildTerrain();
+            yield return 100f;
         }
     
         /**
@@ -127,7 +134,7 @@ namespace TerrainGeneration {
                 }
                 printGrid += "\n";
             }
-            Debug.Log(printGrid);
+            //Debug.Log(printGrid);
         }
 
         private void BuildOneMountain() {

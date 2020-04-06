@@ -13,7 +13,7 @@ namespace Units {
 
         private const float TickAttack = 0.10f; //PARAM OF DIFFICULTY
     
-        public override bool Init(int idType, Entity entityModel, int entityCountP) {
+        public override bool Init(EntityType idType, Entity entityModel, int entityCountP) {
             bool value = base.Init(idType, entityModel, entityCountP);
             speedEntity = 1.0f;
             _isSelected = true;
@@ -27,19 +27,17 @@ namespace Units {
         }
 
         public override void UpdateUnit() {
+            if (!initialized) return;
             _deltaTime += UnitLibData.deltaTime;
 
             if (_unitTarget == null) _unitTarget = GuessTheBestUnitToTarget();
 
             brain.interract(true,_unitTarget, targetPosition);
             
+            updateTimeoutEffects();
+            
             UpdateGameObject();
             
-        }
-
-        public override bool Kill()
-        {
-            return true;
         }
 
         public override void Attack(AbstractUnit anotherUnit, float damage) {
@@ -51,7 +49,7 @@ namespace Units {
 
                 if (entityAttack == null || entityDefense == null) return;
 
-                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength()*damage));
+                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength()*damage* getEfficientCoef(this, anotherUnit)));
                 if (life == 0) {
                     anotherUnit.PopEntity(indexEntityDefense);
                 }
@@ -64,7 +62,6 @@ namespace Units {
                 }
             }
         }
-        
         
         private AiUnit GuessTheBestUnitToTarget() {
             AiUnit best = null;
@@ -99,8 +96,7 @@ namespace Units {
 
             targetPosition = new Vector3(Mathf.Floor(hit.transform.position.x)-0.5f, 1,
                 Mathf.Floor(hit.transform.position.z)-0.5f) ;
-
-
+            
             //Vector of unit to point 
             Vector3 unitToTarget = (targetPosition - position);
             unitToTarget.Normalize();

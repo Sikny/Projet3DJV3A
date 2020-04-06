@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
+
 public class ShopManager : MonoBehaviour
 {
     public TextMeshProUGUI goldText;
@@ -45,16 +48,14 @@ public class ShopManager : MonoBehaviour
     void Start()
     {
         
-        _shopContent = ShopContent.instance;
+        _shopContent = ShopContent.Instance;
         _player = Player.instance;
         gold = 10;
         goldText.SetText(gold + "g");
         
-
-        _shopContent.AddAllConsummables();
-        _shopContent.AddAllEquipments();
         UpdateUIItems();
         UpdateUIEquipments();
+        UpdateUIUnits();
         UpdateGold();
         shopPanel.SetActive(false);
     }
@@ -88,9 +89,9 @@ public class ShopManager : MonoBehaviour
     }
 
 
-    public void UpdateUIItems()
+    private void UpdateUIItems()
     {
-        List<Consummable> shopConsummables = _shopContent.GetShopConsummables();
+        List<Consummable> shopConsummables = _shopContent.shopConsummables;
         //List<Item> shopConsummables = _shopContent.GetShopItems().Cast<Item>().ToList();
 
         //Debug.Log("shop items count: " + shopConsummables.Count);
@@ -110,14 +111,13 @@ public class ShopManager : MonoBehaviour
         }
     }
     
-    public void UpdateUIEquipments()
+    private void UpdateUIEquipments()
     {
-        List<Equipment> shopEquipments = _shopContent.GetShopEquipments();
+        List<Equipment> shopEquipments = _shopContent.shopEquipments;
         //Debug.Log("shop EQUIPMENTS count: " + shopEquipments.Count);
 
         for (int i = 0; i < shopEquipments.Count; i++)
         {
-
             ItemSlot currentSlot = prefabSlot;
             currentSlot.item = shopEquipments[i];
             currentSlot.itemName.SetText(shopEquipments[i].name);
@@ -132,6 +132,19 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    private void UpdateUIUnits() {
+        List<StoreUnit> shopUnits = _shopContent.shopUnits;
+
+        for (int i = 0; i < shopUnits.Count; i++) {
+            ItemSlot currentSlot = prefabSlot;
+            currentSlot.item = shopUnits[i];
+            currentSlot.itemName.SetText(shopUnits[i].name);
+            currentSlot.icon.sprite = shopUnits[i].icon;
+
+            Instantiate(currentSlot, unitsParent, false);
+        }
+    }
+
     public void UpdateGold()
     {
         goldText.SetText(_player.GetGold() + "g");   
@@ -140,6 +153,7 @@ public class ShopManager : MonoBehaviour
     public void Fight()
     {
         shopPanel.SetActive(false);
+        GameSingleton.Instance.StartFight();
     }
     
 

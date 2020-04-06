@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,12 +17,16 @@ public class InventoryManager : MonoBehaviour
 
     public ItemSlot prefabSlot; 
         
-    private InventoryContent _inventoryContent;
     public Transform itemsParent;
     public Transform equipmentsParent;
     public Transform unitsParent;
     
     //-----------------------------------------------------------------------------
+
+    private List<ItemSlot> _consummableSlots = new List<ItemSlot>();
+    private List<GameObject> _consummableGameObjects = new List<GameObject>();
+    
+    private List<ItemSlot> _unitSlots = new List<ItemSlot>();
 
     #region Singleton
     
@@ -42,8 +48,6 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _inventoryContent = InventoryContent.instance;
-        
         inventoryPanel.SetActive(false);
         UpdateGold();
 
@@ -75,7 +79,7 @@ public class InventoryManager : MonoBehaviour
         gameObject.SetActive(!gameObject.activeSelf);
     }
 
-    public void UpdateUIItems()
+    /*public void UpdateUIItems()
     {
         
         List<Consummable> inventoryConsummables = _inventoryContent.GetInventoryConsummables();
@@ -89,7 +93,7 @@ public class InventoryManager : MonoBehaviour
             currentSlot.itemName.SetText(inventoryConsummables[i].name);
             currentSlot.icon.sprite = inventoryConsummables[i].icon;
 
-            Instantiate(currentSlot, itemsParent, false);
+            _consummableSlots.Add(Instantiate(currentSlot, itemsParent, false));
         }
     }
 
@@ -111,7 +115,7 @@ public class InventoryManager : MonoBehaviour
             Instantiate(currentSlot, equipmentsParent, false);
            
         }
-    }
+    }*/
 
     public void UpdateUIConsummable(Consummable consummable)
     {
@@ -121,7 +125,9 @@ public class InventoryManager : MonoBehaviour
         currentSlot.itemName.SetText(consummable.name);
         currentSlot.icon.sprite = consummable.icon;
 
-        Instantiate(currentSlot, itemsParent, false);
+        _consummableSlots.Add(Instantiate(currentSlot, itemsParent, false));
+
+
     }
     public void UpdateUIEquipment(Equipment equipment)
     {
@@ -133,6 +139,47 @@ public class InventoryManager : MonoBehaviour
 
         Instantiate(currentSlot, equipmentsParent, false);
     }
+
+    public void UpdateUIUnit(StoreUnit unit) {
+        ItemSlot currentSlot = prefabSlot;
+
+        currentSlot.item = unit;
+        currentSlot.itemName.SetText(unit.name);
+        currentSlot.icon.sprite = unit.icon;
+
+        _unitSlots.Add(Instantiate(currentSlot, unitsParent, false));
+    }
+
+    public void RemoveConsummable(Consummable consummable)
+    {
+        int targetIndex = 0;
+        for (int i = _consummableSlots.Count - 1; i > 0; i--)
+        {
+            if (_consummableSlots[i].item == consummable)
+            {
+                targetIndex = i;
+                break;
+            }
+        }
+        GameObject slotGameobject = _consummableSlots[targetIndex].gameObject;
+        Destroy(slotGameobject);
+        _consummableSlots.Remove(_consummableSlots[targetIndex]);
+    }
+
+    public void RemoveUnit(StoreUnit unit) {
+        int targetIndex = 0;
+        for (int i = _unitSlots.Count - 1; i > 0; i--) {
+            if (_unitSlots[i].item == unit) {
+                targetIndex = i;
+                break;
+            }
+        }
+
+        GameObject slotGameObject = _unitSlots[targetIndex].gameObject;
+        Destroy(slotGameObject);
+        _unitSlots.Remove(_unitSlots[targetIndex]);
+    }
+    
     public void UpdateGold()
     {
         goldText.SetText(Player.instance.gold.ToString() + "g");   

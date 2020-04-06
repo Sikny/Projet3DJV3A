@@ -52,6 +52,14 @@ namespace Utility {
             sceneManager.LoadScene(sceneName);
         }
 
+        public void StartFight() {
+            if (levelManager != null) {
+                StartCoroutine(levelManager.loadedLevel.StartLevel());
+            } else {
+                // Wave mode ?
+            }
+        }
+
         public void EndGame(int status) {
             endGamePanel.TypeEndGame = status;
             endGamePanel.gameObject.SetActive(true);
