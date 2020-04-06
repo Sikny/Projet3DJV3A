@@ -39,11 +39,11 @@ namespace Units {
                 new Vector3(7, YPos, 3)
             };
             numberRemote = playerUnitsPositions.Length;
-            Vector3[] aiUnitsPositions = {
+            /*Vector3[] aiUnitsPositions = {
                 new Vector3(1, YPos, 1),
                 new Vector3(10, YPos, 8)
             };
-            numberAi = aiUnitsPositions.Length;
+            numberAi = aiUnitsPositions.Length;*/
 
             int i = 0;
             
@@ -54,12 +54,12 @@ namespace Units {
                 _units.Add(unit);
             }
 
-            foreach (var unitPos in aiUnitsPositions) {
+            /*foreach (var unitPos in aiUnitsPositions) {
                 AiUnit unit = Instantiate(aiUnitPrefab);
                 unit.SetPosition(unitPos);
                 unit.Init(EntityType.Archer, entityDict.GetEntityType(EntityType.Archer), sizeUnit);    // Zombie ?
                 _units.Add(unit);
-            }
+            }*/
 
             /* On se servira de ça pour appeler les updates des units */
             UnitLibData.cam = cam;
@@ -70,11 +70,12 @@ namespace Units {
             UnitLibData.deltaTime = 0;
         }
 
-        public void SpawnUnit(EntityType unitType, AbstractUnit unit, Vector3 position) {
-            AbstractUnit newUnit = Instantiate(unit);
+        public Transform SpawnUnit(EntityType unitType, AbstractUnit unit, Vector3 position) {
+            var newUnit = Instantiate(unit);
             newUnit.SetPosition(position);
             newUnit.Init(unitType, entityDict.GetEntityType(unitType), sizeUnit);
             _units.Add(unit);
+            return newUnit.transform;
         }
 
         public void Update() {

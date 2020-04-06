@@ -19,6 +19,7 @@ namespace Units  {
         
 
         public override void UpdateUnit() {
+            if (!initialized) return;
             _deltaTime += UnitLibData.deltaTime;
             
             if (_unitTarget == null) {

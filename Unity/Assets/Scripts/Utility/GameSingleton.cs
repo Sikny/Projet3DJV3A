@@ -52,6 +52,16 @@ namespace Utility {
             sceneManager.LoadScene(sceneName);
         }
 
+        public void StartFight() {
+            if (levelManager != null) {
+                print("level manager");
+                StartCoroutine(levelManager.loadedLevel.StartLevel());
+            }
+            else {
+                print("no level manager");
+            }
+        }
+
         public void EndGame(int status) {
             endGamePanel.TypeEndGame = status;
             endGamePanel.gameObject.SetActive(true);

@@ -213,7 +213,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 110, y: -250}
+  m_AnchoredPosition: {x: 197.99997, y: -188}
   m_SizeDelta: {x: 69.6, y: 63.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &27943475
@@ -1021,7 +1021,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 270, y: -250}
+  m_AnchoredPosition: {x: 358, y: -188}
   m_SizeDelta: {x: 69.6, y: 63.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &191335893
@@ -1998,7 +1998,6 @@ RectTransform:
   - {fileID: 1208444927}
   - {fileID: 1176434574}
   - {fileID: 883074553}
-  - {fileID: 681606107}
   m_Father: {fileID: 1309471605}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2865,12 +2864,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 975250257}
-  m_Father: {fileID: 378896330}
+  m_Father: {fileID: 834339587}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: 160}
+  m_AnchoredPosition: {x: 175, y: -188.29999}
   m_SizeDelta: {x: 115, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &681606108
@@ -2937,6 +2936,17 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 681606106}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &681606109
 MonoBehaviour:
@@ -3426,6 +3436,7 @@ RectTransform:
   - {fileID: 191335892}
   - {fileID: 1860715866}
   - {fileID: 27943474}
+  - {fileID: 681606107}
   m_Father: {fileID: 1867700863}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7490,13 +7501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a65f3a80febf2bb458d053e65551d2e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allConssumables:
-  - {fileID: 11400000, guid: 45b2d4959514bca41b1bc99a1493fc57, type: 2}
-  - {fileID: 11400000, guid: 32e5c4bdeb00e0d4b83bc8fedea14800, type: 2}
-  - {fileID: 11400000, guid: 9bc4fae9441e02240bada6e933d245a4, type: 2}
-  allEquipments:
-  - {fileID: 11400000, guid: 562d4cdd855182b4aaba4df92b254a72, type: 2}
-  - {fileID: 11400000, guid: 6f8609e69060c7e45a15ba294d47aff7, type: 2}
+  allConssumables: []
+  allEquipments: []
 --- !u!4 &1370698919
 Transform:
   m_ObjectHideFlags: 0
@@ -10975,7 +10981,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 190, y: -250}
+  m_AnchoredPosition: {x: 277.99997, y: -188}
   m_SizeDelta: {x: 69.6, y: 63.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1860715867
@@ -11147,7 +11153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -12560,22 +12566,22 @@ PrefabInstance:
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 9.98e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -1.5196809e-36
+      value: 5.7868e-41
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 9.96e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1e-45
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613575, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}

@@ -5,6 +5,8 @@ using Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
+
 public class ShopManager : MonoBehaviour
 {
     public TextMeshProUGUI goldText;
@@ -51,9 +53,6 @@ public class ShopManager : MonoBehaviour
         gold = 10;
         goldText.SetText(gold + "g");
         
-
-        _shopContent.AddAllConsummables();
-        _shopContent.AddAllEquipments();
         UpdateUIItems();
         UpdateUIEquipments();
         UpdateUIUnits();
@@ -121,8 +120,7 @@ public class ShopManager : MonoBehaviour
         {
             ItemSlot currentSlot = prefabSlot;
             currentSlot.item = shopEquipments[i];
-            string itname = shopEquipments[i].name;
-            currentSlot.itemName.SetText(itname);
+            currentSlot.itemName.SetText(shopEquipments[i].name);
             currentSlot.icon.sprite = shopEquipments[i].icon;
 
             //Debug.Log("put equipment :" + shopEquipments[i].name);
@@ -155,6 +153,7 @@ public class ShopManager : MonoBehaviour
     public void Fight()
     {
         shopPanel.SetActive(false);
+        GameSingleton.Instance.StartFight();
     }
     
 

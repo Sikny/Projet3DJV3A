@@ -9,7 +9,7 @@ namespace TerrainGeneration {
         public TerrainOptions terrainOptions;
         public UnitDict unitDict;
     
-        private float unitScale = 1;
+        [HideInInspector] public float unitScale = 1;
 
         private readonly List<KeyValuePair<ZoneType, UnitList>> _terrainData = new List<KeyValuePair<ZoneType, UnitList>>();
         

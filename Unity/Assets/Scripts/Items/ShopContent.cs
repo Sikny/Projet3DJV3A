@@ -28,22 +28,16 @@ public class ShopContent
     }
 
     #endregion
-
-    
-    
     
     public void ClearAllItems()
     {
         itemSlotsConsumable.Clear();
-        
     }
 
     public void FillItemSlot(Item newItem)
     {
         int nextIndex = itemSlotsConsumable.Count + 1;
         itemSlotsConsumable[nextIndex].AddItem(newItem);
-        
-
     }
 
     public void AddConsummable(Consummable item)
@@ -60,55 +54,9 @@ public class ShopContent
         shopUnits.Add(unit);
     }
 
-    public void AddAllConsummables()
-    {
-        
-        List<Consummable>allConsummables = StoreItems.instance.GetAllItems();
-
-        for(int i = 0; i < allConsummables.Count - 1; i++)
-        {
-            shopConsummables.Add(allConsummables[i]);
-        }
+    public void ClearShop() {
+        shopConsummables.Clear();
+        shopEquipments.Clear();
+        shopUnits.Clear();
     }
-
-    public void AddAllEquipments()
-    {
-        List<Equipment>allEquipments = StoreItems.instance.GetAllEquipments();
-
-        for(int i = 0; i < allEquipments.Count - 1; i++)
-        {
-            shopEquipments.Add(allEquipments[i]);
-        }
-    }
-
-/*
-    public void AddConsummable(Item item)
-    {
-        itemsConsummable.Add(item);
-    }
-
-    public void RemoveConsummable(Item item)
-    {
-        itemsConsummable.Remove(item);
-    }
-    
-    public void AddEquipment(Item item)
-    {
-        itemsEquipment.Add(item);
-    }
-
-    public void RemoveEquipment(Item item)
-    {
-        itemsEquipment.Remove(item);
-    }
-    public void AddUnit(Item item)
-    {
-        itemsUnits.Add(item);
-    }
-
-    public void RemoveUnit(Item item)
-    {
-        itemsUnits.Remove(item);
-    }*/
-    
 }

@@ -31,10 +31,10 @@ namespace Units {
 		public Material circleMaterial;
 		private Effect[] effect = new Effect[16]; // max
    	    private int nbEffectApplied = 0;
-        
-		public virtual bool Init(EntityType idType,Entity entityModel, int entityCountP){
-	        
 
+        protected bool initialized;
+        
+		public virtual bool Init(EntityType idType,Entity entityModel, int entityCountP) {
             this.brain = getControllerFromId(idType);
             
             entityCount = entityCountP;
@@ -68,6 +68,8 @@ namespace Units {
             {
                 effect[i].IdEffect = -1;
             }
+
+            initialized = true;
             
             return true;
         }
@@ -76,14 +78,14 @@ namespace Units {
         private Controller getControllerFromId(EntityType id)
         {
             this.idBrain = (int) id;
-            switch (idBrain) 
+            switch (id) 
             {
                 // Lister ici les controlleurs possibles
-                case 0x0:   
+                case EntityType.Soldier:   
                     return new Soldier(this);
-                case 0x1:   
+                case EntityType.Archer:
                     return new Archer(this);
-                case 0x2:   
+                case EntityType.Wizard:
                     return new Wizard(this);
             }
 
