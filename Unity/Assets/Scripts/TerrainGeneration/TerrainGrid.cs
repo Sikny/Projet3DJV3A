@@ -53,7 +53,6 @@ namespace TerrainGeneration {
             }
             TileZ = posZ;
             TileX = posX;
-            Debug.Log(posX);
             cursor.position = new Vector3(posX-Width/2, cursor.position.y, posZ-Height/2);
             /*for (int i = -CursorSize / 2; i <= CursorSize / 2; i++) {
                 if(TileX - Mathf.Abs(i) < 0 && i < 0 || TileX + Mathf.Abs(i) >= Width && i > 0)
