@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class ShopContent
 {
-    /*public List<Item> itemsConsummable = new List<Item>();
-    public List<Item> itemsEquipment = new List<Item>();
-    public List<Item> itemsUnits = new List<Item>();*/
 
     private List<ItemSlot> itemSlotsConsumable = new List<ItemSlot>();
     

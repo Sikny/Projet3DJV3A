@@ -40,11 +40,6 @@ namespace Units {
             
         }
 
-        public override bool Kill()
-        {
-            return true;
-        }
-
         public override void Attack(AbstractUnit anotherUnit, float damage) {
             int indexEntityAttack = Random.Range(0, entityCount);
             Entity entityAttack = this.GetEntity(indexEntityAttack);
@@ -67,7 +62,6 @@ namespace Units {
                 }
             }
         }
-        
         
         private AiUnit GuessTheBestUnitToTarget() {
             AiUnit best = null;
@@ -102,8 +96,7 @@ namespace Units {
 
             targetPosition = new Vector3(Mathf.Floor(hit.transform.position.x)-0.5f, 1,
                 Mathf.Floor(hit.transform.position.z)-0.5f) ;
-
-
+            
             //Vector of unit to point 
             Vector3 unitToTarget = (targetPosition - position);
             unitToTarget.Normalize();

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Items;
 using UnityEngine;
 
 public class InventoryContent : MonoBehaviour
@@ -8,6 +9,7 @@ public class InventoryContent : MonoBehaviour
 
     public List<Consummable> inventoryConsummables = new List<Consummable>();
     public List<Equipment> inventoryEquipments = new List<Equipment>();
+    public List<StoreUnit> inventoryUnits = new List<StoreUnit>();
 
     private InventoryManager _inventoryManager;
     private ShopManager _shopManager;
@@ -63,18 +65,26 @@ public class InventoryContent : MonoBehaviour
         {
             AddConsummable((Consummable)item);
         }
+        else if (itemType.IsSubclassOf(typeof(StoreUnit)) || itemType == typeof(StoreUnit)) {
+            AddUnit((StoreUnit) item);
+        }
     }
 
-    public void AddConsummable(Consummable item)
+    private void AddConsummable(Consummable item)
     {
         inventoryConsummables.Add(item);
         _inventoryManager.UpdateUIConsummable(item);
     }
 
-    public void AddEquipment(Equipment equipment)
+    private void AddEquipment(Equipment equipment)
     {
         inventoryEquipments.Add(equipment);
         _inventoryManager.UpdateUIEquipment(equipment);
+    }
+
+    private void AddUnit(StoreUnit unit) {
+        inventoryUnits.Add(unit);
+        _inventoryManager.UpdateUIUnit(unit);
     }
 
 
@@ -114,5 +124,7 @@ public class InventoryContent : MonoBehaviour
         return inventoryEquipments;
     }
 
-    
+    public List<StoreUnit> GetInventoryUnits() {
+        return inventoryUnits;
+    }
 }

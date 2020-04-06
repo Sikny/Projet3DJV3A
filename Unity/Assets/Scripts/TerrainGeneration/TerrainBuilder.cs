@@ -130,7 +130,7 @@ namespace TerrainGeneration {
                 }
                 printGrid += "\n";
             }
-            Debug.Log(printGrid);
+            //Debug.Log(printGrid);
         }
 
         private void BuildOneMountain() {

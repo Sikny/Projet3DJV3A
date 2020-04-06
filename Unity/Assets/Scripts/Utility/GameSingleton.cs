@@ -54,11 +54,9 @@ namespace Utility {
 
         public void StartFight() {
             if (levelManager != null) {
-                print("level manager");
                 StartCoroutine(levelManager.loadedLevel.StartLevel());
-            }
-            else {
-                print("no level manager");
+            } else {
+                // Wave mode ?
             }
         }
 

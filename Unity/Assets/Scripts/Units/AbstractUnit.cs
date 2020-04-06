@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace Units {
@@ -35,7 +36,7 @@ namespace Units {
         protected bool initialized;
         
 		public virtual bool Init(EntityType idType,Entity entityModel, int entityCountP) {
-            this.brain = getControllerFromId(idType);
+            brain = getControllerFromId(idType);
             
             entityCount = entityCountP;
             livingEntityCount = entityCountP;
@@ -85,7 +86,7 @@ namespace Units {
                     return new Soldier(this);
                 case EntityType.Archer:
                     return new Archer(this);
-                case EntityType.Wizard:
+                case EntityType.Mage:
                     return new Wizard(this);
             }
 
@@ -110,7 +111,6 @@ namespace Units {
             {
                 isMoving = false;
                 targetPosition = transform.position;
-                Debug.Log("ok");
             }
         }
 
@@ -124,7 +124,9 @@ namespace Units {
 
         public abstract void UpdateUnit();
 
-        public abstract bool Kill();
+        public void Kill() {
+            Destroy(gameObject);
+        }
 
         public Vector3 GetPosition() {
             return position;

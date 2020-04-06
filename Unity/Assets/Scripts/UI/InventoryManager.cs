@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +26,7 @@ public class InventoryManager : MonoBehaviour
 
     private List<ItemSlot> _consummableSlots = new List<ItemSlot>();
     private List<GameObject> _consummableGameObjects = new List<GameObject>();
-    
+
     #region Singleton
     
     public static InventoryManager instance;
@@ -79,7 +80,7 @@ public class InventoryManager : MonoBehaviour
         gameObject.SetActive(!gameObject.activeSelf);
     }
 
-    public void UpdateUIItems()
+    /*public void UpdateUIItems()
     {
         
         List<Consummable> inventoryConsummables = _inventoryContent.GetInventoryConsummables();
@@ -115,7 +116,7 @@ public class InventoryManager : MonoBehaviour
             Instantiate(currentSlot, equipmentsParent, false);
            
         }
-    }
+    }*/
 
     public void UpdateUIConsummable(Consummable consummable)
     {
@@ -138,6 +139,16 @@ public class InventoryManager : MonoBehaviour
         currentSlot.icon.sprite = equipment.icon;
 
         Instantiate(currentSlot, equipmentsParent, false);
+    }
+
+    public void UpdateUIUnit(StoreUnit unit) {
+        ItemSlot currentSlot = prefabSlot;
+
+        currentSlot.item = unit;
+        currentSlot.itemName.SetText(unit.name);
+        currentSlot.icon.sprite = unit.icon;
+
+        Instantiate(currentSlot, unitsParent, false);
     }
 
     public void RemoveConsummable(Consummable consummable)

@@ -6,6 +6,7 @@ using Items;
 using TerrainGeneration;
 using Units;
 using UnityEngine;
+using Utility;
 
 namespace Game {
     [Serializable]
@@ -26,6 +27,9 @@ namespace Game {
 
         public List<EnemySpawn> enemySpawns;
         public List<Transform> livingEnemies;
+
+        private List<PlayerUnit> _playerUnits;
+        private bool _levelStarted;
         
         public void Init() {
             StartCoroutine(terrainBuilder.Init());
@@ -49,17 +53,31 @@ namespace Game {
         }
 
         private void Update() {
+            if (!_levelStarted) return;
+            if (enemySpawns.Count == 0 && livingEnemies.Count == 0) {
+                GameSingleton.Instance.EndGame(1);    // WIN
+            } else if (_playerUnits.Count == 0) {
+                GameSingleton.Instance.EndGame(0);
+            }
+            
             for (int i = 0; i < livingEnemies.Count; i++) {
                 if (livingEnemies[i] == null) {
                     livingEnemies.RemoveAt(i);
                     break;
                 }
             }
+
+            for (int i = 0; i < _playerUnits.Count; i++) {
+                if (_playerUnits[i] == null || !_playerUnits[i].gameObject.activeSelf) {
+                    _playerUnits.RemoveAt(i);
+                    break;
+                }
+            }
         }
         
         public IEnumerator StartLevel() {
+            _playerUnits = new List<PlayerUnit>(FindObjectsOfType<PlayerUnit>());
             while (enemySpawns.Count > 0) {
-                print("Spawn enemy");
                 EnemySpawn current = enemySpawns[0];
                 DOVirtual.DelayedCall(current.spawnTime, () => {
                     Transform newUnit = _systemUnit.SpawnUnit(current.entityType, _systemUnit.aiUnitPrefab, current.position);
@@ -68,6 +86,7 @@ namespace Game {
                 });
                 yield return 0;
             }
+            _levelStarted = true;
         }
 
         private void OnDrawGizmos() {

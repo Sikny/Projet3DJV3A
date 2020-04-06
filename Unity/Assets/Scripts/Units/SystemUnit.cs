@@ -19,10 +19,7 @@ namespace Units {
         public LayerMask groundMask;
         public float rotationSpeed = 300f;
         public float speed = 5f;
-
-        [SerializeField] private int numberAi = 1;
-        [SerializeField] private int numberRemote = 1;
-
+        
         private const int YPos = 1;
 
         public bool isRunning = false;
@@ -38,7 +35,7 @@ namespace Units {
                 new Vector3(3, YPos, 5),
                 new Vector3(7, YPos, 3)
             };
-            numberRemote = playerUnitsPositions.Length;
+            
             /*Vector3[] aiUnitsPositions = {
                 new Vector3(1, YPos, 1),
                 new Vector3(10, YPos, 8)
@@ -74,7 +71,8 @@ namespace Units {
             var newUnit = Instantiate(unit);
             newUnit.SetPosition(position);
             newUnit.Init(unitType, entityDict.GetEntityType(unitType), sizeUnit);
-            _units.Add(unit);
+            _units.Add(newUnit);
+            UnitLibData.units = _units;
             return newUnit.transform;
         }
 
@@ -85,25 +83,13 @@ namespace Units {
                 int unitCount = _units.Count;
                 for (int i = 0; i < unitCount; i++)
                 {
-                    if (_units[i] == null) continue;
-
                     _units[i].UpdateUnit();
                     if (_units[i].GetNumberAlive() <= 0)
                     {
-                        if (_units[i] is AiUnit) numberAi--;
-                        else if (_units[i] is PlayerUnit) numberRemote--;
                         _units[i].Kill();
-                        _units[i] = null;
+                        _units.RemoveAt(i);
+                        break;
                     }
-                }
-
-                if (numberRemote == 0)
-                {
-                    GameSingleton.Instance.EndGame(0);
-                }
-                else if (numberAi == 0)
-                {
-                    GameSingleton.Instance.EndGame(1);
                 }
 
                 if (Input.GetKeyDown(KeyCode.Mouse0))

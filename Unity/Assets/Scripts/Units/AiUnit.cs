@@ -75,9 +75,5 @@ namespace Units  {
             return best;
         }
         
-        public override bool Kill() {
-            return true;
-        }
-        
     }
 }
