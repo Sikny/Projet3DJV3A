@@ -6821,7 +6821,6 @@ GameObject:
   - component: {fileID: 1309471605}
   - component: {fileID: 1309471607}
   - component: {fileID: 1309471606}
-  - component: {fileID: 1309471608}
   m_Layer: 5
   m_Name: MainPannel
   m_TagString: Untagged
@@ -6890,21 +6889,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1309471604}
   m_CullTransparentMesh: 0
---- !u!114 &1309471608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309471604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e0a14766bd1afe47b6bd46ad43e2506, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemSlotsConsumable: []
-  shopConsummables: []
-  shopEquipments: []
 --- !u!1 &1314127710
 GameObject:
   m_ObjectHideFlags: 0
@@ -12576,22 +12560,22 @@ PrefabInstance:
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 8.4e-43
+      value: 9.98e-43
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -1.4009777e-33
+      value: -1.5196809e-36
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 4.5904e-41
+      value: 9.96e-43
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: -1.4008998e-33
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613575, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}

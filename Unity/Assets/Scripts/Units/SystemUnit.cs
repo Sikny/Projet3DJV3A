@@ -1,4 +1,5 @@
-﻿using System;
+using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Utility;
 
@@ -7,11 +8,11 @@ namespace Units {
         [SerializeField] private Entity entityModel;
         [SerializeField] private int sizeUnit = 9;
 
+        public EntityDict entityDict;
         public PlayerUnit playerUnitPrefab;
         public AiUnit aiUnitPrefab;
-        private AbstractUnit[] _units = new AbstractUnit[16];
+        private List<AbstractUnit> _units = new List<AbstractUnit>();
 
-        
 
         /** Données de l'ancien système nécessaire aux unités*/
         public Camera cam;
@@ -47,18 +48,17 @@ namespace Units {
             int i = 0;
             
             foreach (var unitPos in playerUnitsPositions) {
-                PlayerUnit unit = new GameObject("Allied Unit").AddComponent<PlayerUnit>();
+                PlayerUnit unit = Instantiate(playerUnitPrefab);
                 unit.SetPosition(unitPos);
-                unit.transform.position = unitPos;
-                unit.Init(1, entityModel, sizeUnit);
-                _units[i++] = unit;
+                unit.Init(EntityType.Soldier, entityDict.GetEntityType(EntityType.Soldier), sizeUnit);    // Archer
+                _units.Add(unit);
             }
 
             foreach (var unitPos in aiUnitsPositions) {
-                AiUnit unit = new GameObject("Enemy Unit").AddComponent<AiUnit>();
+                AiUnit unit = Instantiate(aiUnitPrefab);
                 unit.SetPosition(unitPos);
-                unit.Init(0, entityModel, sizeUnit);
-                _units[i++] = unit;
+                unit.Init(EntityType.Archer, entityDict.GetEntityType(EntityType.Archer), sizeUnit);    // Zombie ?
+                _units.Add(unit);
             }
 
             /* On se servira de ça pour appeler les updates des units */
@@ -70,11 +70,19 @@ namespace Units {
             UnitLibData.deltaTime = 0;
         }
 
+        public void SpawnUnit(EntityType unitType, AbstractUnit unit, Vector3 position) {
+            AbstractUnit newUnit = Instantiate(unit);
+            newUnit.SetPosition(position);
+            newUnit.Init(unitType, entityDict.GetEntityType(unitType), sizeUnit);
+            _units.Add(unit);
+        }
+
         public void Update() {
             if (isRunning)
             {
                 UnitLibData.deltaTime = Time.deltaTime;
-                for (int i = 0; i < _units.Length; i++)
+                int unitCount = _units.Count;
+                for (int i = 0; i < unitCount; i++)
                 {
                     if (_units[i] == null) continue;
 

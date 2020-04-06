@@ -10,6 +10,7 @@ namespace Units {
 
         public MeshRenderer meshRenderer;
         public RectTransform fillBar;
+        public MeshRenderer circleRenderer;
 
         private Color _firstColor;
 
@@ -19,7 +20,7 @@ namespace Units {
             _life = _maxLife;
             _firstColor = meshRenderer.material.color;
         }
-
+        
         public void InitColor(Color col) {
             meshRenderer.material.color = col;
             _firstColor = col;

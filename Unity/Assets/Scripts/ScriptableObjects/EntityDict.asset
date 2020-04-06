@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b00e9f891f4ba54198985730d61c580, type: 3}
+  m_Name: EntityDict
+  m_EditorClassIdentifier: 
+  entitiesList:
+  - idType: 0
+    entityPrefab: {fileID: 5044763055523909067, guid: 969af8c71f7f19844bc70cbe26a884c1,
+      type: 3}
+    description: Soldier
+  - idType: 1
+    entityPrefab: {fileID: 7468583631191037214, guid: 2869a4ddc78ec384aa381910b4b2a65d,
+      type: 3}
+    description: Archer
+  - idType: 2
+    entityPrefab: {fileID: 7468583631191037214, guid: 2869a4ddc78ec384aa381910b4b2a65d,
+      type: 3}
+    description: Mage

@@ -9,7 +9,7 @@ namespace Units  {
         private float _deltaTime;
         private const float TickAttack = 0.10f; //PARAM OF DIFFICULTY
 
-        public override bool Init(int idType, Entity entityModel, int entityCountP) {
+        public override bool Init(EntityType idType, Entity entityModel, int entityCountP) {
             bool initState = base.Init(idType, entityModel, entityCountP);
             _deltaTime = 0.0f;
             _unitTarget = null;

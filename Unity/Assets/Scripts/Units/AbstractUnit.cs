@@ -28,12 +28,12 @@ namespace Units {
         protected float speedEntity;
 
         protected Rigidbody rigidBody;
-
-        private Effect[] effect = new Effect[16]; // max
-        private int nbEffectApplied = 0;
+		public Material circleMaterial;
+		private Effect[] effect = new Effect[16]; // max
+   	    private int nbEffectApplied = 0;
         
-        public virtual bool Init(int idType,Entity entityModel, int entityCountP)
-        {
+		public virtual bool Init(EntityType idType,Entity entityModel, int entityCountP){
+	        
 
             this.brain = getControllerFromId(idType);
             
@@ -51,6 +51,7 @@ namespace Units {
                 for (int j = 0; j < sqrtEntityCount; j++) {
                     if (counterInstance <= entityCount) {
                         Entity entityGo = Instantiate(entityModel, transform);
+                        entityGo.circleRenderer.material = circleMaterial;
                         entityGo.transform.localPosition = new Vector3(i-entityScale.x*2,0,j-entityScale.z*2);
                         entities[counterInstance++] = entityGo;
                     }
@@ -72,18 +73,18 @@ namespace Units {
         }
 
         // Init of unit's controller
-        private Controller getControllerFromId(int id)
+        private Controller getControllerFromId(EntityType id)
         {
-            this.idBrain = id;
-            switch (id) 
+            this.idBrain = (int) id;
+            switch (idBrain) 
             {
                 // Lister ici les controlleurs possibles
                 case 0x0:   
-                    return new Zombie(this);
+                    return new Soldier(this);
                 case 0x1:   
                     return new Archer(this);
                 case 0x2:   
-                    return new Illusionnist(this);
+                    return new Wizard(this);
             }
 
             return null;
@@ -93,9 +94,9 @@ namespace Units {
         {
             float[,] matrixEfficient = new float[,]
             {
-                {1.0f, 1.5f, 0.5f},
-                {0.5f, 1.0f, 1.5f},
-                {1.5f, 0.5f, 1.0f}
+                {1.0f, 1.25f, 0.75f},
+                {0.75f, 1.0f, 1.25f},
+                {1.25f, 0.75f, 1.0f}
             };
 
             return matrixEfficient[from.idBrain, to.idBrain];
