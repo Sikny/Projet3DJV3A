@@ -11,4 +11,14 @@ public class UIManager : MonoBehaviour
         currency = 10;
         currencyText.SetText(currency + "g");
     }
+    
+    //utils
+    public static void clearUI(GameObject parent, int ignoreIndex)
+    {
+        for (int i = 1; i < parent.transform.childCount; i++)
+        {
+            if(ignoreIndex != i)
+                parent.transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
 }

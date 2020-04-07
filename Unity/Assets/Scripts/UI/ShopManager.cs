@@ -7,6 +7,7 @@ using Units;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility;
+using Object = System.Object;
 
 public class ShopManager : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class ShopManager : MonoBehaviour
     public Transform unitsParent;
 
     private Player _player;
-    
+
     //-----------------------------------------------------------------------------
 
     #region Singleton
@@ -86,7 +87,10 @@ public class ShopManager : MonoBehaviour
     
     public void ActivateSelf()
     {
-        gameObject.SetActive(!gameObject.activeSelf);
+        GameObject o = gameObject;
+        UIManager.clearUI(o.transform.parent.gameObject,1);
+        o.SetActive(!o.activeSelf);
+        systemUnit.setRunning(!o.activeSelf);
     }
 
 
