@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEditor.IMGUI.Controls;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,4 +1,5 @@
-Taille du menu qui est indépendante de l'écran
 Axe du zoom de la caméra incorrect
-Bugs de changement de couleur du terrain et des unités lors de leur sélection/déselection
-	-> Présent aussi quand on relance une partie
+Unités qui sortent des limites du terrain
+Unités qui marchent sur l'eau
+Certaines données ne sont pas bien sauvegardées
+Quelques objets ne sont pas mis en pause quand on ouvre le menu pause
