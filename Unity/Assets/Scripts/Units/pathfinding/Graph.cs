@@ -73,11 +73,11 @@ namespace AStar
                             {
                                 arcsList.Add(new Arc(tiles[row, col], tiles[row, col-1], tiles[row, col-1].Cost()));
                             }
-                            if (row - 1 < 0 && tiles[row + 1, col].IsValidPath())
+                            if (row + 1 < nbRows && tiles[row + 1, col].IsValidPath())
                             {
                                 arcsList.Add(new Arc(tiles[row, col], tiles[row+1, col], tiles[row+1, col].Cost()));
                             }
-                            if (col + 1 < 0 && tiles[row, col+1].IsValidPath())
+                            if (col + 1 < nbCols && tiles[row, col+1].IsValidPath())
                             {
                                 arcsList.Add(new Arc(tiles[row, col], tiles[row, col+1], tiles[row, col+1].Cost()));
                             }
@@ -103,11 +103,11 @@ namespace AStar
             {
                 list.Add(new Arc(currentNode, tiles[currentRow, currentCol-1], tiles[currentRow, currentCol-1].Cost()));
             }
-            if (currentRow - 1 < 0 && tiles[currentRow + 1, currentCol].IsValidPath())
+            if (currentRow + 1 < nbRows && tiles[currentRow + 1, currentCol].IsValidPath())
             {
                 list.Add(new Arc(currentNode, tiles[currentRow+1, currentCol], tiles[currentRow+1, currentCol].Cost()));
             }
-            if (currentCol + 1 < 0 && tiles[currentRow, currentCol+1].IsValidPath())
+            if (currentCol + 1 < nbCols && tiles[currentRow, currentCol+1].IsValidPath())
             {
                 list.Add(new Arc(currentNode, tiles[currentRow, currentCol+1], tiles[currentRow, currentCol+1].Cost()));
             }
@@ -137,6 +137,23 @@ namespace AStar
             }
 
             beginNode.DistanceTraveled = beginNode.Cost();
+        }
+
+        public void ReconstructPath()
+        {
+            Tile currentNode = exitNode;
+            Tile prevNode = (Tile) exitNode.Previous;
+            
+            
+            while (prevNode != null)
+            {
+                GameObject o = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                o.transform.position = new Vector3(currentNode.Row,1,currentNode.Col);
+                o.transform.localScale = new Vector3(0.2f,0.2f,0.2f);
+                currentNode = prevNode;
+                prevNode = (Tile) prevNode.Previous;
+            }
+            
         }
     }
 }

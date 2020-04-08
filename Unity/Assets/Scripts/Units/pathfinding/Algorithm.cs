@@ -17,7 +17,10 @@ namespace AStar
         public void Solve()
         {
             graph.Clear();
+            
+            
             Run();
+            Debug.Log(graph.ExitNode().DistanceTraveled);
         }
 
         private void Run()

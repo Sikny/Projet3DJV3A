@@ -6,7 +6,8 @@ namespace AStar
 
     public enum TileType
     {
-        Grass
+        Grass,
+        Wall
     };
     
     public class Tile : Node
