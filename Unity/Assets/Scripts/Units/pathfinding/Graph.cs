@@ -11,9 +11,6 @@ namespace AStar
         private int nbRows;
         private int nbCols;
 
-        private Tile beginNode;
-        private Tile exitNode;
-
         private List<Node> nodesList = null;
         private List<Arc> arcsList = null;
 
@@ -23,22 +20,16 @@ namespace AStar
             this.nbCols = nbCols;
             this.nbRows = nbRows;
 
-            beginNode = begin;
-            exitNode = end;
+            BeginningNode = begin;
+            ExitNode = end;
             NodesList();
             ArcsList();
             
         }
 
-        public Node BeginningNode()
-        {
-            return beginNode;
-        }
+        public Tile BeginningNode { get; set; }
 
-        public Node ExitNode()
-        {
-            return exitNode;
-        }
+        public Tile ExitNode { get; set; }
 
         public List<Node> NodesList()
         {
@@ -119,7 +110,9 @@ namespace AStar
         {
             foreach (var tile in tiles)
             {
-                tile.EstimatedDistance = Math.Abs(exitNode.Row - tile.Row) + Math.Abs(exitNode.Col - tile.Col);
+                //tile.EstimatedDistance = Math.Abs(exitNode.Row - tile.Row) + Math.Abs(exitNode.Col - tile.Col);
+                tile.EstimatedDistance = Vector2.Distance(new Vector2(ExitNode.Row, ExitNode.Col),
+                    new Vector2(tile.Row, tile.Col));
             }
         }
 
@@ -136,24 +129,27 @@ namespace AStar
                 }
             }
 
-            beginNode.DistanceTraveled = beginNode.Cost();
+            BeginningNode.DistanceTraveled = BeginningNode.Cost();
         }
 
-        public void ReconstructPath()
+        public Stack<Tile> ReconstructPath()
         {
-            Tile currentNode = exitNode;
-            Tile prevNode = (Tile) exitNode.Previous;
+            Stack<Tile> stacksItineraire = new Stack<Tile>();
+            
+            Tile currentNode = ExitNode;
+            Tile prevNode = (Tile) ExitNode.Previous;
             
             
             while (prevNode != null)
             {
-                GameObject o = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                o.transform.position = new Vector3(currentNode.Row,1,currentNode.Col);
-                o.transform.localScale = new Vector3(0.2f,0.2f,0.2f);
+                
+                stacksItineraire.Push(currentNode);
                 currentNode = prevNode;
                 prevNode = (Tile) prevNode.Previous;
             }
-            
+            stacksItineraire.Push(currentNode);
+            return stacksItineraire;
+
         }
     }
 }
