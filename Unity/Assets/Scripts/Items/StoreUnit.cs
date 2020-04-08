@@ -1,9 +1,9 @@
-﻿using Units;
-using UnityEditor;
+﻿using Game;
+using Units;
 using UnityEngine;
 
 namespace Items {
-    [CreateAssetMenu(fileName = "New Unit", menuName = "ScriptableObjects/Unit")]
+    [CreateAssetMenu(fileName = "New Unit", menuName = "ScriptableObject/Unit")]
     public class StoreUnit : Item {
         public EntityType entityType;
         
@@ -12,9 +12,9 @@ namespace Items {
 
             InventoryManager.instance.gameObject.SetActive(false);
             ShopManager.instance.gameObject.SetActive(false);
-            InventoryContent.instance.selectedStoreUnit = this;
+            Inventory.instance.selectedStoreUnit = this;
             
-            Popups.instance.popupText.text = "Placing " + name;
+            Popups.instance.popupText.text = "Placing " + itemName;
         }
     }
 }

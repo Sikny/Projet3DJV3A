@@ -35,6 +35,7 @@ namespace Editor {
         void OnGUI()
         {
             _value = GUILayout.TextField(_value);
+            
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Ok")) {
                 if (_type == 0) {

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6830cd48d9944c84cbef562e6d6142af, type: 3}
   m_Name: Mage
   m_EditorClassIdentifier: 
-  name: Mage
+  itemName: Mage
   icon: {fileID: 21300000, guid: e32b6932cb8fda0459069c12da630c7e, type: 3}
   price: 50
   entityType: 2

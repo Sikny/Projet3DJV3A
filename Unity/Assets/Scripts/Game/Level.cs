@@ -16,13 +16,13 @@ namespace Game {
         public Vector3 position;
     }
     public class Level : MonoBehaviour {
-        private ShopContent _shopContent;
+        private Shop _shop;
         private SystemUnit _systemUnit;
 
         public TerrainBuilder terrainBuilder;
 
         [Header("Shop content")]
-        public List<Consummable> consumablesList = new List<Consummable>();
+        public List<Consumable> consumablesList = new List<Consumable>();
         public List<Equipment> equipmentsList = new List<Equipment>();
         public List<StoreUnit> unitList = new List<StoreUnit>();
         
@@ -38,19 +38,19 @@ namespace Game {
 
             _systemUnit = FindObjectOfType<SystemUnit>();
             
-            _shopContent = ShopContent.Instance;
-            _shopContent.ClearShop();
+            _shop = Shop.Instance;
+            _shop.ClearShop();
             
-            foreach (Consummable cons in consumablesList) {
-                _shopContent.AddConsummable(cons);
+            foreach (Consumable cons in consumablesList) {
+                _shop.AddConsummable(cons);
             }
 
             foreach (Equipment equip in equipmentsList) {
-                _shopContent.AddEquipment(equip);
+                _shop.AddEquipment(equip);
             }
 
             foreach (StoreUnit storeUnit in unitList) {
-                _shopContent.AddStoreUnit(storeUnit);
+                _shop.AddStoreUnit(storeUnit);
             }
         }
 

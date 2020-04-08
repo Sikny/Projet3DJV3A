@@ -1,14 +1,16 @@
 ﻿
-public struct Effect
-{
-    public Effect(int idEffect, int level, float timeout)
+namespace Units.utils {
+    public struct Effect
     {
-        IdEffect = idEffect;
-        LevelEffect = level;
-        Timeout = timeout;
-    }
+        public Effect(int idEffect, int level, float timeout)
+        {
+            this.IdEffect = idEffect;
+            LevelEffect = level;
+            this.Timeout = timeout;
+        }
 
-    public int IdEffect { get; set; }
-    public int LevelEffect { get; set; }
-    public float Timeout { get; set; }
+        public int IdEffect { get; set; }
+        public int LevelEffect { get; set; }
+        public float Timeout { get; set; }
+    }
 }

@@ -117,13 +117,13 @@ public class InventoryManager : MonoBehaviour
         }
     }*/
 
-    public void UpdateUIConsummable(Consummable consummable)
+    public void UpdateUIConsummable(Consumable consumable)
     {
         ItemSlot currentSlot = prefabSlot;
 
-        currentSlot.item = consummable;
-        currentSlot.itemName.SetText(consummable.name);
-        currentSlot.icon.sprite = consummable.icon;
+        currentSlot.item = consumable;
+        currentSlot.itemName.SetText(consumable.itemName);
+        currentSlot.icon.sprite = consumable.icon;
 
         _consummableSlots.Add(Instantiate(currentSlot, itemsParent, false));
 
@@ -134,7 +134,7 @@ public class InventoryManager : MonoBehaviour
         ItemSlot currentSlot = prefabSlot;
 
         currentSlot.item = equipment;
-        currentSlot.itemName.SetText(equipment.name);
+        currentSlot.itemName.SetText(equipment.itemName);
         currentSlot.icon.sprite = equipment.icon;
 
         Instantiate(currentSlot, equipmentsParent, false);
@@ -144,18 +144,18 @@ public class InventoryManager : MonoBehaviour
         ItemSlot currentSlot = prefabSlot;
 
         currentSlot.item = unit;
-        currentSlot.itemName.SetText(unit.name);
+        currentSlot.itemName.SetText(unit.itemName);
         currentSlot.icon.sprite = unit.icon;
 
         _unitSlots.Add(Instantiate(currentSlot, unitsParent, false));
     }
 
-    public void RemoveConsummable(Consummable consummable)
+    public void RemoveConsummable(Consumable consumable)
     {
         int targetIndex = 0;
         for (int i = _consummableSlots.Count - 1; i > 0; i--)
         {
-            if (_consummableSlots[i].item == consummable)
+            if (_consummableSlots[i].item == consumable)
             {
                 targetIndex = i;
                 break;

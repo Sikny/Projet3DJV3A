@@ -1,4 +1,5 @@
 ﻿using System;
+using Units.utils;
 using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -31,12 +32,11 @@ namespace Units {
         protected Rigidbody rigidBody;
 		public Material circleMaterial;
 		private Effect[] effect = new Effect[16]; // max
-   	    private int nbEffectApplied = 0;
 
         protected bool initialized;
         
 		public virtual bool Init(EntityType idType,Entity entityModel, int entityCountP) {
-            brain = getControllerFromId(idType);
+            brain = GetControllerFromId(idType);
             
             entityCount = entityCountP;
             livingEntityCount = entityCountP;
@@ -76,7 +76,7 @@ namespace Units {
         }
 
         // Init of unit's controller
-        private Controller getControllerFromId(EntityType id)
+        private Controller GetControllerFromId(EntityType id)
         {
             this.idBrain = (int) id;
             switch (id) 
@@ -93,7 +93,7 @@ namespace Units {
             return null;
         }
 
-        protected static float getEfficientCoef(AbstractUnit from, AbstractUnit to)
+        protected static float GetEfficientCoef(AbstractUnit from, AbstractUnit to)
         {
             float[,] matrixEfficient = new float[,]
             {
@@ -153,12 +153,12 @@ namespace Units {
             return livingEntityCount;
         }
         
-        public void addEffect(int idEffect, int level, float timeout)
+        public void AddEffect(int idEffect, int level, float timeout)
         {
             effect[idEffect] = new Effect(idEffect, level, timeout);
         }
 
-        protected void updateTimeoutEffects()
+        protected void UpdateTimeoutEffects()
         {
             for (int i = 0; i < effect.Length; i++)
             {
@@ -173,7 +173,7 @@ namespace Units {
             }
         }
 
-        public Effect getEffect(int id)
+        public Effect GetEffect(int id)
         {
             return effect[id];
         }

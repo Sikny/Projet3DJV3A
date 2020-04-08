@@ -20,7 +20,7 @@ public class ShopManager : MonoBehaviour
 
     public ItemSlot prefabSlot; 
         
-    private ShopContent _shopContent;
+    private Shop _shop;
     public Transform itemsParent;
     public Transform equipmentsParent;
     public Transform unitsParent;
@@ -49,7 +49,7 @@ public class ShopManager : MonoBehaviour
     void Start()
     {
         
-        _shopContent = ShopContent.Instance;
+        _shop = Shop.Instance;
         _player = Player.instance;
         gold = 10;
         goldText.SetText(gold + "g");
@@ -92,7 +92,7 @@ public class ShopManager : MonoBehaviour
 
     private void UpdateUIItems()
     {
-        List<Consummable> shopConsummables = _shopContent.shopConsummables;
+        List<Consumable> shopConsummables = _shop.shopConsummables;
         //List<Item> shopConsummables = _shopContent.GetShopItems().Cast<Item>().ToList();
 
         //Debug.Log("shop items count: " + shopConsummables.Count);
@@ -102,7 +102,7 @@ public class ShopManager : MonoBehaviour
             ItemSlot currentSlot = prefabSlot;
 
             currentSlot.item = shopConsummables[i];
-            currentSlot.itemName.SetText(shopConsummables[i].name);
+            currentSlot.itemName.SetText(shopConsummables[i].itemName);
             currentSlot.icon.sprite = shopConsummables[i].icon;
             currentSlot.price.SetText(shopConsummables[i].price.ToString());
             //Debug.Log("put item :" + shopConsummables[i].name);
@@ -114,14 +114,14 @@ public class ShopManager : MonoBehaviour
     
     private void UpdateUIEquipments()
     {
-        List<Equipment> shopEquipments = _shopContent.shopEquipments;
+        List<Equipment> shopEquipments = _shop.shopEquipments;
         //Debug.Log("shop EQUIPMENTS count: " + shopEquipments.Count);
 
         for (int i = 0; i < shopEquipments.Count; i++)
         {
             ItemSlot currentSlot = prefabSlot;
             currentSlot.item = shopEquipments[i];
-            currentSlot.itemName.SetText(shopEquipments[i].name);
+            currentSlot.itemName.SetText(shopEquipments[i].itemName);
             currentSlot.icon.sprite = shopEquipments[i].icon;
 
             //Debug.Log("put equipment :" + shopEquipments[i].name);
@@ -134,12 +134,12 @@ public class ShopManager : MonoBehaviour
     }
 
     private void UpdateUIUnits() {
-        List<StoreUnit> shopUnits = _shopContent.shopUnits;
+        List<StoreUnit> shopUnits = _shop.shopUnits;
 
         for (int i = 0; i < shopUnits.Count; i++) {
             ItemSlot currentSlot = prefabSlot;
             currentSlot.item = shopUnits[i];
-            currentSlot.itemName.SetText(shopUnits[i].name);
+            currentSlot.itemName.SetText(shopUnits[i].itemName);
             currentSlot.icon.sprite = shopUnits[i].icon;
 
             Instantiate(currentSlot, unitsParent, false);
@@ -157,7 +157,7 @@ public class ShopManager : MonoBehaviour
     public void Fight() {
         int playerCount = FindObjectsOfType<PlayerUnit>().Length;
         if (playerCount == 0) return;
-        systemUnit.setRunning(true);
+        systemUnit.SetRunning(true);
         fightButton.SetActive(false);
         shopPanel.SetActive(false);
         GameSingleton.Instance.StartFight();

@@ -1,40 +1,40 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class StoreItems : MonoBehaviour
-{
-    public List<Consummable> allConssumables;
-    public List<Equipment> allEquipments;
+namespace Items {
+    public class StoreItems : MonoBehaviour
+    {
+        public List<Consumable> allConssumables;
+        public List<Equipment> allEquipments;
 
     
-    #region Singleton
+        #region Singleton
     
-    public static StoreItems instance;
+        public static StoreItems instance;
     
     
-    private void Awake()
-    {
-        if (instance != null)
+        private void Awake()
         {
-            Debug.Log("Several instances");
-            return;
+            if (instance != null)
+            {
+                Debug.Log("Several instances");
+                return;
+            }
+            instance = this;
         }
-        instance = this;
-    }
 
-    #endregion
-    public List<Consummable> GetAllItems()
-    {
-        return allConssumables;
-    }
+        #endregion
+        public List<Consumable> GetAllItems()
+        {
+            return allConssumables;
+        }
 
-    public List<Equipment> GetAllEquipments()
-    {
-        return allEquipments;
-    }
+        public List<Equipment> GetAllEquipments()
+        {
+            return allEquipments;
+        }
 
 
     
+    }
 }

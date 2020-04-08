@@ -17,30 +17,18 @@ namespace Units {
         public GameObject effectiveHitParticles;
         public GameObject notEffectiveHitParticles;
 
-        private Color _firstColor;
-
         private void Awake() {
             _strength = 5;
             _maxLife = 100;
             _life = _maxLife;
-            _firstColor = meshRenderer.material.color;
         }
         
-        public void InitColor(Color col) {
-            meshRenderer.material.color = col;
-            _firstColor = col;
-        }
-
-        public void ResetColor() {
-            meshRenderer.material.color = _firstColor;
-        }
-
         public void ResetLife()
         {
             _life = 100;
         }
 
-        public int getLife()
+        public int GetLife()
         {
             return _life;
         }
@@ -66,13 +54,11 @@ namespace Units {
         }
         
         private readonly WaitForSeconds _blinkTime = new WaitForSeconds(0.2f);
-        private float blinkAlpha = 0.5f;
+        
         private IEnumerator Blink() {
             hitParticles.layer = 0;
             yield return _blinkTime;
             hitParticles.layer = 31;
-            //meshCol.a = 1f;
-            //material.color = meshCol;
         }
 
         public int GetStrength() {

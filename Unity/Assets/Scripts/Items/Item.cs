@@ -1,23 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
+
+namespace Items {
+    public class Item : ScriptableObject {
+        public string itemName = "New item";
+        public Sprite icon;
+
+        public int price = 10;
+        //public String description = ""; 
 
 
-public class Item : ScriptableObject
-{
-    new public string name = "New item";
-    public Sprite icon = null;
-    public int price = 10;
-    //public String description = ""; 
-
-
-    // Called when the item is pressed in the inventory
-    public virtual void Use ()
-    {
-        Popups.instance.Popup("using " + name);
+        // Called when the item is pressed in the inventory
+        public virtual void Use() {
+            Popups.instance.Popup("using " + itemName);
+        }
     }
-
-
-    
 }

@@ -17,7 +17,7 @@ namespace TerrainGeneration {
         public TerrainUnit unitPrefab;
     }
 
-    [CreateAssetMenu(fileName = "UnitDict", menuName = "ScriptableObjects/UnitDict")]
+    [CreateAssetMenu(fileName = "UnitDict", menuName = "ScriptableObject/UnitDict")]
     public class UnitDict : ScriptableObject {
         public List<ZoneMaterial> unitZoneMaterials;
 
