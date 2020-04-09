@@ -81,7 +81,7 @@ public class InventoryManager : MonoBehaviour
         GameObject o = gameObject;
         UIManager.clearUI(o.transform.parent.gameObject,2);
         o.SetActive(!o.activeSelf);
-        systemUnit.setRunning(!o.activeSelf);
+        systemUnit.SetRunning(!o.activeSelf);
     }
 
     /*public void UpdateUIItems()

@@ -90,7 +90,7 @@ public class ShopManager : MonoBehaviour
         GameObject o = gameObject;
         UIManager.clearUI(o.transform.parent.gameObject,1);
         o.SetActive(!o.activeSelf);
-        systemUnit.setRunning(!o.activeSelf);
+        systemUnit.SetRunning(!o.activeSelf);
     }
 
 
