@@ -134,21 +134,27 @@ namespace AStar
 
         public Stack<Tile> ReconstructPath()
         {
-            Stack<Tile> stacksItineraire = new Stack<Tile>();
-            
-            Tile currentNode = ExitNode;
-            Tile prevNode = (Tile) ExitNode.Previous;
-            
-            
-            while (prevNode != null)
+            if (!double.IsInfinity(ExitNode.DistanceTraveled))
             {
-                
+                Stack<Tile> stacksItineraire = new Stack<Tile>();
+
+                Tile currentNode = ExitNode;
+                Tile prevNode = (Tile) ExitNode.Previous;
+
+
+                while (prevNode != null)
+                {
+
+                    stacksItineraire.Push(currentNode);
+                    currentNode = prevNode;
+                    prevNode = (Tile) prevNode.Previous;
+                }
+
                 stacksItineraire.Push(currentNode);
-                currentNode = prevNode;
-                prevNode = (Tile) prevNode.Previous;
+                return stacksItineraire;
             }
-            stacksItineraire.Push(currentNode);
-            return stacksItineraire;
+
+            return new Stack<Tile>();
 
         }
     }
