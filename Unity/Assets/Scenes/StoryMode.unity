@@ -1076,19 +1076,8 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 755814114}
-        m_MethodName: SetRunning
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &191335894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1834,7 +1823,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1902986997}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2719,7 +2708,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1985501627}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4028,7 +4017,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2038129253}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6142,6 +6131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1234919997}
+  - component: {fileID: 1234919996}
   m_Layer: 0
   m_Name: CameraParent
   m_TagString: Untagged
@@ -6149,6 +6139,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1234919996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234919995}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e928518078653944994a536dda1e798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  centerPoint: {fileID: 1241454768}
+  offset: {x: 0, y: -5, z: 0}
+  zoomSpeed: 40
+  minZoom: 0
+  maxZoom: 50
 --- !u!4 &1234919997
 Transform:
   m_ObjectHideFlags: 0
@@ -7020,7 +7027,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1457580466}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7505,7 +7512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0771588a31246044e977d7180c2beb47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 500
+  gold: 0
 --- !u!114 &1370698922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8115,7 +8122,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1708402707}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9475,7 +9482,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 250190867}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10436,6 +10443,7 @@ MonoBehaviour:
   itemsParent: {fileID: 532815574}
   equipmentsParent: {fileID: 1567536013}
   unitsParent: {fileID: 1637328422}
+  systemUnit: {fileID: 755814114}
 --- !u!114 &1781779826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10996,17 +11004,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1097806594}
         m_MethodName: ActivateSelf
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 755814114}
-        m_MethodName: SetRunning
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12537,17 +12534,17 @@ PrefabInstance:
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 0
+      value: 0.00000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 0
+      value: 2.3509887e-38
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1e-45
+      value: 4.5918e-41
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613575, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}

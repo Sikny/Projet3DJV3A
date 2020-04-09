@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Items;
 using TMPro;
+using Units;
 using UnityEngine;
 using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
@@ -28,6 +29,7 @@ public class InventoryManager : MonoBehaviour
     
     private List<ItemSlot> _unitSlots = new List<ItemSlot>();
 
+    public SystemUnit systemUnit;
     #region Singleton
     
     public static InventoryManager instance;
@@ -76,7 +78,10 @@ public class InventoryManager : MonoBehaviour
 
     public void ActivateSelf()
     {
-        gameObject.SetActive(!gameObject.activeSelf);
+        GameObject o = gameObject;
+        UIManager.clearUI(o.transform.parent.gameObject,2);
+        o.SetActive(!o.activeSelf);
+        systemUnit.setRunning(!o.activeSelf);
     }
 
     /*public void UpdateUIItems()
@@ -182,7 +187,7 @@ public class InventoryManager : MonoBehaviour
     
     public void UpdateGold()
     {
-        goldText.SetText(Player.instance.gold.ToString() + "g");   
+        goldText.SetText(Player.instance.gold.ToString() + " g");   
     }
 
     
