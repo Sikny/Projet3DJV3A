@@ -11,9 +11,6 @@ namespace AStar
         private int nbRows;
         private int nbCols;
 
-        private Tile beginNode;
-        private Tile exitNode;
-
         private List<Node> nodesList = null;
         private List<Arc> arcsList = null;
 
@@ -23,22 +20,16 @@ namespace AStar
             this.nbCols = nbCols;
             this.nbRows = nbRows;
 
-            beginNode = begin;
-            exitNode = end;
+            BeginningNode = begin;
+            ExitNode = end;
             NodesList();
             ArcsList();
             
         }
 
-        public Node BeginningNode()
-        {
-            return beginNode;
-        }
+        public Tile BeginningNode { get; set; }
 
-        public Node ExitNode()
-        {
-            return exitNode;
-        }
+        public Tile ExitNode { get; set; }
 
         public List<Node> NodesList()
         {
@@ -73,11 +64,11 @@ namespace AStar
                             {
                                 arcsList.Add(new Arc(tiles[row, col], tiles[row, col-1], tiles[row, col-1].Cost()));
                             }
-                            if (row - 1 < 0 && tiles[row + 1, col].IsValidPath())
+                            if (row + 1 < nbRows && tiles[row + 1, col].IsValidPath())
                             {
                                 arcsList.Add(new Arc(tiles[row, col], tiles[row+1, col], tiles[row+1, col].Cost()));
                             }
-                            if (col + 1 < 0 && tiles[row, col+1].IsValidPath())
+                            if (col + 1 < nbCols && tiles[row, col+1].IsValidPath())
                             {
                                 arcsList.Add(new Arc(tiles[row, col], tiles[row, col+1], tiles[row, col+1].Cost()));
                             }
@@ -103,11 +94,11 @@ namespace AStar
             {
                 list.Add(new Arc(currentNode, tiles[currentRow, currentCol-1], tiles[currentRow, currentCol-1].Cost()));
             }
-            if (currentRow - 1 < 0 && tiles[currentRow + 1, currentCol].IsValidPath())
+            if (currentRow + 1 < nbRows && tiles[currentRow + 1, currentCol].IsValidPath())
             {
                 list.Add(new Arc(currentNode, tiles[currentRow+1, currentCol], tiles[currentRow+1, currentCol].Cost()));
             }
-            if (currentCol + 1 < 0 && tiles[currentRow, currentCol+1].IsValidPath())
+            if (currentCol + 1 < nbCols && tiles[currentRow, currentCol+1].IsValidPath())
             {
                 list.Add(new Arc(currentNode, tiles[currentRow, currentCol+1], tiles[currentRow, currentCol+1].Cost()));
             }
@@ -119,7 +110,9 @@ namespace AStar
         {
             foreach (var tile in tiles)
             {
-                tile.EstimatedDistance = Math.Abs(exitNode.Row - tile.Row) + Math.Abs(exitNode.Col - tile.Col);
+                //tile.EstimatedDistance = Math.Abs(exitNode.Row - tile.Row) + Math.Abs(exitNode.Col - tile.Col);
+                tile.EstimatedDistance = Vector2.Distance(new Vector2(ExitNode.Row, ExitNode.Col),
+                    new Vector2(tile.Row, tile.Col));
             }
         }
 
@@ -136,7 +129,33 @@ namespace AStar
                 }
             }
 
-            beginNode.DistanceTraveled = beginNode.Cost();
+            BeginningNode.DistanceTraveled = BeginningNode.Cost();
+        }
+
+        public Stack<Tile> ReconstructPath()
+        {
+            if (!double.IsInfinity(ExitNode.DistanceTraveled))
+            {
+                Stack<Tile> stacksItineraire = new Stack<Tile>();
+
+                Tile currentNode = ExitNode;
+                Tile prevNode = (Tile) ExitNode.Previous;
+
+
+                while (prevNode != null)
+                {
+
+                    stacksItineraire.Push(currentNode);
+                    currentNode = prevNode;
+                    prevNode = (Tile) prevNode.Previous;
+                }
+
+                stacksItineraire.Push(currentNode);
+                return stacksItineraire;
+            }
+
+            return new Stack<Tile>();
+
         }
     }
 }

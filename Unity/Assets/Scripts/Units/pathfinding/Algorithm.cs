@@ -8,7 +8,7 @@ namespace AStar
     public class Algorithm
     {
         protected Graph graph;
-
+        
         public Algorithm(Graph graph)
         {
             this.graph = graph;
@@ -17,7 +17,10 @@ namespace AStar
         public void Solve()
         {
             graph.Clear();
+            
+            
             Run();
+            Debug.Log(graph.ExitNode.DistanceTraveled);
         }
 
         private void Run()
@@ -38,7 +41,7 @@ namespace AStar
                     
                 }
 
-                if (currentNode == graph.ExitNode())
+                if (currentNode == graph.ExitNode)
                 {
                     exitReached = true;
                 }
