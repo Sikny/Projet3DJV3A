@@ -20,7 +20,7 @@ namespace AStar
             
             
             Run();
-            Debug.Log(graph.ExitNode.DistanceTraveled);
+            //Debug.Log(graph.ExitNode.DistanceTraveled);
         }
 
         private void Run()

@@ -27,8 +27,8 @@ public class test_perso_controller : MonoBehaviour
                 if (gen.alg != null && gen.graph != null)
                 {
                     Vector3 exitPos = hit.transform.position;
-                    gen.graph.BeginningNode = gen.tiles[(int)transform.position.x, (int)transform.position.z] ;
-                    gen.graph.ExitNode = gen.tiles[(int)exitPos.x, (int)exitPos.z] ;
+                    gen.graph.BeginningNode = gen.tiles[(int)transform.position.x, (int)transform.position.z];
+                    gen.graph.ExitNode = gen.tiles[(int)exitPos.x, (int)exitPos.z];
                     gen.alg.Solve();
                     itineraire = gen.graph.ReconstructPath();
                 }

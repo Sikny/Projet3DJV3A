@@ -1,7 +1,7 @@
-﻿using Language;
+﻿using CustomEvents;
+using Language;
 using UI;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Utility {
     /**
@@ -11,18 +11,23 @@ namespace Utility {
         private static GameSingleton _instance;
         public static GameSingleton Instance => _instance;
 
-        public UnityEvent updateLoop;
-        public UnityEvent fixedUpdateLoop;
-        public UnityEvent lateUpdateLoop;
+        [Header("Events")]
+        public CustomEvent updateLoop;
+        public CustomEvent fixedUpdateLoop;
+        public CustomEvent lateUpdateLoop;
         
         [HideInInspector] public SceneManager sceneManager;
+        [Space]
         public GameVariables gameVariables;
         [HideInInspector] public LevelManager levelManager;
 
         public GameSettings gameSettings;
         public LanguageDictionary languageDictionary;
 
+        [Space]
         public EndGamePanel endGamePanel;
+
+        [HideInInspector] public bool gamePaused;
 
         private void Awake() {
             if (_instance != null && _instance != this) {
@@ -38,13 +43,13 @@ namespace Utility {
         
         // optimizations purposes
         private void Update() {
-            updateLoop.Invoke();
+            updateLoop.Raise();
         }
         private void FixedUpdate() {
-            fixedUpdateLoop.Invoke();
+            fixedUpdateLoop.Raise();
         }
         private void LateUpdate() {
-            lateUpdateLoop.Invoke();
+            lateUpdateLoop.Raise();
         }
 
         // Do not delete or make private (used by events)
@@ -55,8 +60,6 @@ namespace Utility {
         public void StartFight() {
             if (levelManager != null) {
                 StartCoroutine(levelManager.loadedLevel.StartLevel());
-            } else {
-                // Wave mode ?
             }
         }
 
@@ -67,6 +70,20 @@ namespace Utility {
             endGamePanel.TypeEndGame = status;
             endGamePanel.gameObject.SetActive(true);
             Player.instance.Save();
+        }
+
+        public void PauseGame() {
+            Time.timeScale = 0f;
+            gamePaused = true;
+        }
+
+        public void ResumeGame() {
+            Time.timeScale = gameVariables.timeScaleGameActive;
+            gamePaused = false;
+        }
+
+        public void QuitGame() {
+            Application.Quit();
         }
     }
 }
