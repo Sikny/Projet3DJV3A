@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 public class Map
@@ -29,28 +30,33 @@ public class Map
      public void UpdateMap(EditorMap.ToolsEnum currentTool, int radiusTool, int amplitude)
      {
          RaycastHit hit;
-         if(meshCollider.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit,1000)){
-             if (Input.GetKey(KeyCode.Mouse0))
+         if (!EventSystem.current.IsPointerOverGameObject())
+         {
+             if (meshCollider.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit, 1000))
              {
-                 switch (currentTool)
+                 if (Input.GetKey(KeyCode.Mouse0))
                  {
-                     case EditorMap.ToolsEnum.MAP_BRUSH:
-                         UpdateHeighmapRegion(hit, radiusTool, amplitude,0);
-                         break;
-                     case EditorMap.ToolsEnum.DIFFICULTY_PAINTING:
-                         UpdateLocalDifficulty(hit, radiusTool, amplitude,0);
-                         break;
+                     switch (currentTool)
+                     {
+                         case EditorMap.ToolsEnum.MAP_BRUSH:
+                             UpdateHeighmapRegion(hit, radiusTool, amplitude, 0);
+                             break;
+                         case EditorMap.ToolsEnum.DIFFICULTY_PAINTING:
+                             UpdateLocalDifficulty(hit, radiusTool, amplitude, 0);
+                             break;
+                     }
                  }
-             }else if (Input.GetKey(KeyCode.Mouse1))
-             {
-                 switch (currentTool)
+                 else if (Input.GetKey(KeyCode.Mouse1))
                  {
-                     case EditorMap.ToolsEnum.MAP_BRUSH:
-                         UpdateHeighmapRegion(hit, radiusTool, amplitude,1);
-                         break;
-                     case EditorMap.ToolsEnum.DIFFICULTY_PAINTING:
-                         UpdateLocalDifficulty(hit, radiusTool, amplitude,1);
-                         break;
+                     switch (currentTool)
+                     {
+                         case EditorMap.ToolsEnum.MAP_BRUSH:
+                             UpdateHeighmapRegion(hit, radiusTool, amplitude, 1);
+                             break;
+                         case EditorMap.ToolsEnum.DIFFICULTY_PAINTING:
+                             UpdateLocalDifficulty(hit, radiusTool, amplitude, 1);
+                             break;
+                     }
                  }
              }
          }
@@ -90,6 +96,7 @@ public class Map
          }
          meshFilter.mesh.vertices = mapVertices;
          meshCollider.sharedMesh.vertices = mapVertices;
+         meshFilter.mesh.RecalculateNormals();
      }
 
      public void UpdateLocalDifficulty(RaycastHit hit,int radiusTool, int amplitude, int mode)
@@ -122,6 +129,7 @@ public class Map
         mapVertices = getVertices(SIZE);
         generalMesh.vertices = mapVertices;
         generalMesh.triangles = getIndices(SIZE);
+        generalMesh.uv = getUv(SIZE);
         
         localDifficulty = getDifficulty(SIZE);
         generalMesh.colors = localDifficulty;
@@ -132,7 +140,22 @@ public class Map
         meshCollider.sharedMesh = generalMesh;
     }
 
-    public Vector3[] getVertices(int size)
+     private Vector2[] getUv(int size)
+     {
+         Vector2[] result = new Vector2[(size*2+1)*(size*2+1)];
+
+         for(int i = 0;i <= size*2; i++)
+         {
+             for(int j = 0;j <= size*2; j++)
+             {
+                 result[i*(size*2+1) + j] = new Vector2(i/10f,  j/10f);
+             }
+         }
+
+         return result;
+     }
+
+     public Vector3[] getVertices(int size)
     {
         Vector3[] result = new Vector3[(size*2+1)*(size*2+1)];
 
