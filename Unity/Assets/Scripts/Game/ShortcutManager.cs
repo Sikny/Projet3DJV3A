@@ -1,27 +1,32 @@
-﻿using UnityEngine;
+﻿using CustomEvents;
+using UnityEngine;
+using Utility;
 
 namespace Game {
-    public class ShortcutManager : MonoBehaviour
-    {
+    public class ShortcutManager : MonoBehaviour {
+        public CustomEvent pauseEvent;
+        public CustomEvent resumeEvent;
 
-        public GameObject shopPanel;
-        public GameObject inventoryPanel;
-    
+        public CustomEvent toggleInventoryEvent;
+        public CustomEvent toggleShopEvent;
+
         // Update is called once per frame
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                shopPanel.SetActive(!shopPanel.activeSelf);
-                inventoryPanel.SetActive(false);
+        void Update() {
+            if (Input.GetKeyDown(KeyCode.S)) {
+                toggleShopEvent.Raise();
             }
-        
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-        
-                inventoryPanel.SetActive(!inventoryPanel.activeSelf);
-                shopPanel.SetActive(false);
 
+            if (Input.GetKeyDown(KeyCode.I)) {
+                toggleInventoryEvent.Raise();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                if (GameSingleton.Instance.gamePaused) {
+                    resumeEvent.Raise();
+                }
+                else {
+                    pauseEvent.Raise();
+                }
             }
         }
     }

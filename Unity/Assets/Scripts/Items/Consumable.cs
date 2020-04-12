@@ -14,7 +14,7 @@ namespace Items {
     
         public void RemoveFromInventory ()
         {
-            Inventory.instance.RemoveConsummable(this);
+            Inventory.instance.RemoveConsumable(this);
         }
     }
 }

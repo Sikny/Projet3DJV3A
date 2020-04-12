@@ -88,6 +88,7 @@ namespace Game {
                 });
                 yield return 0;
             }
+            GameSingleton.Instance.ResumeGame();
             _levelStarted = true;
         }
 
