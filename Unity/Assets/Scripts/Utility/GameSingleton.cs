@@ -1,4 +1,5 @@
 ﻿using CustomEvents;
+using Game;
 using Language;
 using UI;
 using UnityEngine;
@@ -29,6 +30,10 @@ namespace Utility {
 
         [HideInInspector] public bool gamePaused;
 
+        private Player _player;
+
+        public UiManager uiManager;
+
         private void Awake() {
             if (_instance != null && _instance != this) {
                 Destroy(gameObject);
@@ -36,6 +41,8 @@ namespace Utility {
             }
             _instance = this;
             DontDestroyOnLoad(gameObject);
+            
+            _player = new Player();
             
             sceneManager = new SceneManager();
             sceneManager.LoadScene("Menu");
@@ -63,13 +70,17 @@ namespace Utility {
             }
         }
 
+        public Player GetPlayer() {
+            return _player;
+        }
+
         private bool _gameEnded;
         public void EndGame(int status) {
             if (_gameEnded) return;
             _gameEnded = true;
             endGamePanel.TypeEndGame = status;
             endGamePanel.gameObject.SetActive(true);
-            Player.instance.Save();
+            _player.Save();
         }
 
         public void PauseGame() {

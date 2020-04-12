@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Game;
 using Items;
 using UnityEngine;
+using Utility;
 
 namespace Units {
     public class SystemUnit : MonoBehaviour {
@@ -49,34 +49,33 @@ namespace Units {
             return newUnit.transform;
         }
 
-        public void Update() {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+        public void DoClick() {
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (GameSingleton.Instance.uiManager.inventory.selectedStoreUnit != null
+                && Physics.Raycast(ray, out hit, 100f, 1 << 8)) {
+                Vector3 position = new Vector3(Mathf.Floor(hit.transform.position.x)-0.5f, YPos,
+                    Mathf.Floor(hit.transform.position.z)-0.5f) ;
+                StoreUnit unit = GameSingleton.Instance.uiManager.inventory.selectedStoreUnit;
+                SpawnUnit(unit.entityType, playerUnitPrefab, position);
+                GameSingleton.Instance.uiManager.inventory.RemoveUnit(unit);
+                GameSingleton.Instance.uiManager.inventory.selectedStoreUnit = null;
+            }
+            if (!isRunning) return;
+            if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
             {
-                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Inventory.instance.selectedStoreUnit != null
-                    && Physics.Raycast(ray, out hit, 100f, 1 << 8)) {
-                    Vector3 position = new Vector3(Mathf.Floor(hit.transform.position.x)-0.5f, YPos,
-                        Mathf.Floor(hit.transform.position.z)-0.5f) ;
-                    StoreUnit unit = Inventory.instance.selectedStoreUnit;
-                    SpawnUnit(unit.entityType, playerUnitPrefab, position);
-                    Inventory.instance.RemoveUnit(unit);
-                    Inventory.instance.selectedStoreUnit = null;
-                }
-                if (!isRunning) return;
-                if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
+                UnitLibData._selectedUnit = hit.transform.GetComponent<PlayerUnit>();
+            }
+            else if (UnitLibData._selectedUnit != null)
+            {
+                if (Physics.Raycast(ray, out hit, 100f, 1 << 8))
                 {
-                    UnitLibData._selectedUnit = hit.transform.GetComponent<PlayerUnit>();
-                }
-                else if (UnitLibData._selectedUnit != null)
-                {
-                    if (Physics.Raycast(ray, out hit, 100f, 1 << 8))
-                    {
-                        UnitLibData._selectedUnit.SetTargetPosition();
-                    }
+                    UnitLibData._selectedUnit.SetTargetPosition();
                 }
             }
-            
+        }
+
+        public void Update() {
             if (isRunning)
             {
                 UnitLibData.deltaTime = Time.deltaTime;

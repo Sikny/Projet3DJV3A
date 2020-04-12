@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 678431467393923813}
   - component: {fileID: 678431467393923812}
+  - component: {fileID: 4384538936900775757}
   m_Layer: 0
   m_Name: UnitSystem
   m_TagString: Untagged
@@ -43,8 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6f158ea3ae7ffc4a8eb58e889c49706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityModel: {fileID: 7468583631191037214, guid: 2869a4ddc78ec384aa381910b4b2a65d,
-    type: 3}
   sizeUnit: 9
   entityDict: {fileID: 11400000, guid: 06127aa73b1792e4392b7c64f1b5cc88, type: 2}
   playerUnitPrefab: {fileID: 1916052447807135498, guid: 72f849211454d5e4199c6ad27f9a1408,
@@ -57,5 +56,31 @@ MonoBehaviour:
     m_Bits: 256
   rotationSpeed: 300
   speed: 5
-  numberAi: 1
-  numberRemote: 1
+  isRunning: 0
+--- !u!114 &4384538936900775757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678431467393923819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ff765aaf74eb34896b6b3ea87a2fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customEventSent: {fileID: 11400000, guid: a1db9c368c2bcc0478010da2fb2aaa47, type: 2}
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 678431467393923812}
+        m_MethodName: DoClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

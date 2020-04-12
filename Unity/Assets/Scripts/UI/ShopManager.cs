@@ -8,15 +8,12 @@ using Utility;
 namespace UI {
     public class ShopManager : ItemsPanel {
         public TextMeshProUGUI goldText;
-        private int gold = 5;
 
         public GameObject shopPanel;
 
         public ItemSlot prefabSlot;
 
         private Shop _shop;
-
-        private Player _player;
 
         #region Singleton
 
@@ -36,9 +33,6 @@ namespace UI {
 
         void Start() {
             _shop = Shop.Instance;
-            _player = Player.instance;
-            gold = 10;
-            goldText.SetText(gold + "g");
 
             UpdateUIItems();
             UpdateUIEquipments();
@@ -89,7 +83,7 @@ namespace UI {
         }
 
         public void UpdateGold() {
-            goldText.SetText(_player.GetGold() + "g");
+            goldText.SetText(GameSingleton.Instance.GetPlayer().GetGold() + "g");
         }
 
         public GameObject fightButton;

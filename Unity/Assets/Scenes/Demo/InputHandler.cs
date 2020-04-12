@@ -1,5 +1,5 @@
-﻿using CustomEvents;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace Scenes.Tests {
     public class InputHandler : MonoBehaviour

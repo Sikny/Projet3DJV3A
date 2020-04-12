@@ -4,45 +4,30 @@ using UI;
 using UnityEngine;
 
 namespace Game {
-    public class Inventory : MonoBehaviour {
-        public List<Consumable> inventoryConsummables = new List<Consumable>();
-        public List<Equipment> inventoryEquipments = new List<Equipment>();
-        public List<StoreUnit> inventoryUnits = new List<StoreUnit>();
+    [CreateAssetMenu(fileName = "Inventory", menuName = "ScriptableObject/Inventory")]
+    public class Inventory : ScriptableObject{
+        public List<Consumable> consumables = new List<Consumable>();
+        public List<Equipment> equipments = new List<Equipment>();
+        public List<StoreUnit> units = new List<StoreUnit>();
 
         public StoreUnit selectedStoreUnit;
 
         private InventoryManager _inventoryManager;
         private ShopManager _shopManager;
-
-        #region Singleton
-
-        public static Inventory instance;
-
-
-        private void Awake() {
-            if (instance != null) {
-                Debug.Log("Several instances");
-                return;
-            }
-            instance = this;
-        }
-
-        #endregion
-
-
-        private void Start() {
-            _inventoryManager = InventoryManager.instance;
+        
+        public void Load(InventoryManager inventoryUi) {
+            _inventoryManager = inventoryUi;
             _shopManager = ShopManager.instance;
 
-            foreach (var unit in inventoryUnits) {
+            foreach (var unit in units) {
                 _inventoryManager.UpdateUiUnit(unit);
             }
 
-            foreach (var cons in inventoryConsummables) {
+            foreach (var cons in consumables) {
                 _inventoryManager.UpdateUiConsumable(cons);
             }
 
-            foreach (var equips in inventoryEquipments) {
+            foreach (var equips in equipments) {
                 _inventoryManager.UpdateUiEquipment(equips);
             }
         }
@@ -64,29 +49,35 @@ namespace Game {
         }
 
         private void AddConsumable(Consumable item) {
-            inventoryConsummables.Add(item);
+            consumables.Add(item);
             _inventoryManager.UpdateUiConsumable(item);
         }
 
         private void AddEquipment(Equipment equipment) {
-            inventoryEquipments.Add(equipment);
+            equipments.Add(equipment);
             _inventoryManager.UpdateUiEquipment(equipment);
         }
 
         private void AddUnit(StoreUnit unit) {
-            inventoryUnits.Add(unit);
+            units.Add(unit);
             _inventoryManager.UpdateUiUnit(unit);
         }
 
 
         public void RemoveConsumable(Consumable item) {
-            inventoryConsummables.Remove(item);
+            consumables.Remove(item);
             _inventoryManager.RemoveConsumable(item);
         }
 
         public void RemoveUnit(StoreUnit unit) {
-            inventoryUnits.Remove(unit);
+            units.Remove(unit);
             _inventoryManager.RemoveUnit(unit);
+        }
+
+        public void Clear() {
+            units.Clear();
+            consumables.Clear();
+            equipments.Clear();
         }
     }
 }

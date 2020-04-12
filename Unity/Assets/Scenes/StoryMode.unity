@@ -121,6 +121,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &422432352 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3095815225031586316, guid: 3c3a0d18b81786f469d674dcd8ff9df2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3095815222999765580}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16fd358106e1f64992ebd7eb1bbfc41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &443868579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -242,6 +254,8 @@ GameObject:
   - component: {fileID: 972527759}
   - component: {fileID: 972527758}
   - component: {fileID: 972527761}
+  - component: {fileID: 972527762}
+  - component: {fileID: 972527763}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -434,6 +448,60 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
+--- !u!114 &972527762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972527756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ff765aaf74eb34896b6b3ea87a2fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customEventSent: {fileID: 11400000, guid: ea8cb18e30a55204a8d356fc7e077c4f, type: 2}
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972527758}
+        m_MethodName: SetRotating
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &972527763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972527756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ff765aaf74eb34896b6b3ea87a2fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customEventSent: {fileID: 11400000, guid: 198d50b2c1b235a41a762615c51fc901, type: 2}
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 972527758}
+        m_MethodName: UnsetRotating
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1234919995
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,9 +643,8 @@ GameObject:
   - component: {fileID: 1370698919}
   - component: {fileID: 1370698918}
   - component: {fileID: 1370698920}
-  - component: {fileID: 1370698921}
-  - component: {fileID: 1370698922}
   - component: {fileID: 1370698923}
+  - component: {fileID: 1370698921}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -625,11 +692,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bf3d06af9904bacfff0f63051e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseEvent: {fileID: 11400000, guid: 3db354e3d1ee8b244b9f7bdc2eb5dbb0, type: 2}
-  resumeEvent: {fileID: 11400000, guid: cee966b28bcc72341b248213f319af85, type: 2}
-  toggleInventoryEvent: {fileID: 11400000, guid: 36d979449f85cff4186800e3fe0882d2,
-    type: 2}
-  toggleShopEvent: {fileID: 11400000, guid: 7e9e76694cf1e6c4f94104a48156f31f, type: 2}
+  keyMap:
+    selectKey: 323
+    cameraRotateKey: 324
+    shopKey: 115
+    inventoryKey: 105
+    pauseKey: 27
+  gameEvents:
+    pauseEvent: {fileID: 11400000, guid: 3db354e3d1ee8b244b9f7bdc2eb5dbb0, type: 2}
+    resumeEvent: {fileID: 11400000, guid: cee966b28bcc72341b248213f319af85, type: 2}
+    toggleInventoryEvent: {fileID: 11400000, guid: 36d979449f85cff4186800e3fe0882d2,
+      type: 2}
+    toggleShopEvent: {fileID: 11400000, guid: 7e9e76694cf1e6c4f94104a48156f31f, type: 2}
+    selectionEvent: {fileID: 11400000, guid: a1db9c368c2bcc0478010da2fb2aaa47, type: 2}
+    cameraRotateOnEvent: {fileID: 11400000, guid: ea8cb18e30a55204a8d356fc7e077c4f,
+      type: 2}
+    cameraRotateOffEvent: {fileID: 11400000, guid: 198d50b2c1b235a41a762615c51fc901,
+      type: 2}
 --- !u!114 &1370698921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,28 +718,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1370698917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0771588a31246044e977d7180c2beb47, type: 3}
+  m_Script: {fileID: 11500000, guid: 93ff765aaf74eb34896b6b3ea87a2fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 0
---- !u!114 &1370698922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1370698917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0412a2ce15a437b8c2f4d51a849af77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryConsummables: []
-  inventoryEquipments: []
-  inventoryUnits:
-  - {fileID: 11400000, guid: f31b04ebfc4748141af4d82e75d1c293, type: 2}
-  - {fileID: 11400000, guid: f31b04ebfc4748141af4d82e75d1c293, type: 2}
-  selectedStoreUnit: {fileID: 0}
+  customEventSent: {fileID: 11400000, guid: 9b08185e5a74c2a46837a37727fe96cd, type: 2}
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1370698920}
+        m_MethodName: DoUpdate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1370698923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,6 +756,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 910083300732840378, guid: 243cd5ffb706fae4b8d0d3f23a1fdf8f,
+        type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 422432352}
     - target: {fileID: 1406515577152823728, guid: 243cd5ffb706fae4b8d0d3f23a1fdf8f,
         type: 3}
       propertyPath: m_Name
@@ -834,22 +914,22 @@ PrefabInstance:
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 0.078125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 58
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 0
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613575, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
