@@ -45,14 +45,11 @@ namespace UI {
             List<Consumable> shopConsummables = _shop.shopConsummables;
             
             for (int i = 0; i < shopConsummables.Count; i++) {
-                ItemSlot currentSlot = prefabSlot;
-
-                currentSlot.item = shopConsummables[i];
-                currentSlot.itemName.SetText(shopConsummables[i].itemName);
-                currentSlot.icon.sprite = shopConsummables[i].icon;
-                currentSlot.price.SetText(shopConsummables[i].price.ToString());
-
-                Instantiate(currentSlot, itemsParent, false);
+                ItemSlot addedItem = Instantiate(prefabSlot, itemsParent, false);
+                addedItem.item = shopConsummables[i];
+                addedItem.itemName.SetText(shopConsummables[i].itemName);
+                addedItem.icon.sprite = shopConsummables[i].icon;
+                addedItem.price.SetText(shopConsummables[i].price.ToString());
             }
         }
 
@@ -60,12 +57,11 @@ namespace UI {
             List<Equipment> shopEquipments = _shop.shopEquipments;
 
             for (int i = 0; i < shopEquipments.Count; i++) {
-                ItemSlot currentSlot = prefabSlot;
-                currentSlot.item = shopEquipments[i];
-                currentSlot.itemName.SetText(shopEquipments[i].itemName);
-                currentSlot.icon.sprite = shopEquipments[i].icon;
-
-                Instantiate(currentSlot, equipmentsParent, false);
+                ItemSlot addedItem = Instantiate(prefabSlot, equipmentsParent, false);
+                addedItem.item = shopEquipments[i];
+                addedItem.itemName.SetText(shopEquipments[i].itemName);
+                addedItem.icon.sprite = shopEquipments[i].icon;
+                addedItem.price.SetText(shopEquipments[i].price.ToString());
             }
         }
 
@@ -73,12 +69,11 @@ namespace UI {
             List<StoreUnit> shopUnits = _shop.shopUnits;
 
             for (int i = 0; i < shopUnits.Count; i++) {
-                ItemSlot currentSlot = prefabSlot;
-                currentSlot.item = shopUnits[i];
-                currentSlot.itemName.SetText(shopUnits[i].itemName);
-                currentSlot.icon.sprite = shopUnits[i].icon;
-
-                Instantiate(currentSlot, unitsParent, false);
+                ItemSlot addedItem = Instantiate(prefabSlot, unitsParent, false);
+                addedItem.item = shopUnits[i];
+                addedItem.itemName.SetText(shopUnits[i].itemName);
+                addedItem.icon.sprite = shopUnits[i].icon;
+                addedItem.price.SetText(shopUnits[i].price.ToString());
             }
         }
 

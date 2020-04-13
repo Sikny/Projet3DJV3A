@@ -16,52 +16,34 @@ namespace UI {
 
         private List<ItemSlot> _unitSlots = new List<ItemSlot>();
 
-        #region Singleton
-        public static InventoryManager instance;
-
-        private void Awake() {
-            if (instance != null) {
-                Debug.Log("Several instances");
-                return;
-            }
-
-            instance = this;
-        }
-        #endregion
-
         void Start() {
             inventoryPanel.SetActive(false);
             UpdateGold();
         }
 
         public void UpdateUiConsumable(Consumable consumable) {
-            ItemSlot currentSlot = prefabSlot;
+            var addedItem = Instantiate(prefabSlot, itemsParent, false);
+            addedItem.item = consumable;
+            addedItem.itemName.SetText(consumable.itemName);
+            addedItem.icon.sprite = consumable.icon;
 
-            currentSlot.item = consumable;
-            currentSlot.itemName.SetText(consumable.itemName);
-            currentSlot.icon.sprite = consumable.icon;
-
-            _consumableSlots.Add(Instantiate(currentSlot, itemsParent, false));
+            _consumableSlots.Add(addedItem);
         }
 
         public void UpdateUiEquipment(Equipment equipment) {
-            ItemSlot currentSlot = prefabSlot;
-
-            currentSlot.item = equipment;
-            currentSlot.itemName.SetText(equipment.itemName);
-            currentSlot.icon.sprite = equipment.icon;
-
-            Instantiate(currentSlot, equipmentsParent, false);
+            var addedItem = Instantiate(prefabSlot, equipmentsParent, false);
+            addedItem.item = equipment;
+            addedItem.itemName.SetText(equipment.itemName);
+            addedItem.icon.sprite = equipment.icon;
         }
 
         public void UpdateUiUnit(StoreUnit unit) {
-            ItemSlot currentSlot = prefabSlot;
-
-            currentSlot.item = unit;
-            currentSlot.itemName.SetText(unit.itemName);
-            currentSlot.icon.sprite = unit.icon;
-
-            _unitSlots.Add(Instantiate(currentSlot, unitsParent, false));
+            var addedItem = Instantiate(prefabSlot, unitsParent, false);
+            addedItem.item = unit;
+            addedItem.itemName.SetText(unit.itemName);
+            addedItem.icon.sprite = unit.icon;
+            
+            _unitSlots.Add(addedItem);
         }
 
         public void RemoveConsumable(Consumable consumable) {
