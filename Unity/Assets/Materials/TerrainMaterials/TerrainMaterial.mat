@@ -247,7 +247,7 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
-    - _YMinMax: {r: -0.07640785, g: 1.0089672, b: 0, a: 0}
+    - _YMinMax: {r: -0.5, g: 5, b: 0, a: 0}
 --- !u!114 &1881032273711440460
 MonoBehaviour:
   m_ObjectHideFlags: 11
