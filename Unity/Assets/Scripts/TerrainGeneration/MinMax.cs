@@ -9,8 +9,8 @@
         }
 
         public void HandleValue(float value) {
-            Max = value > Max ? value : Max;
-            Min = value < Min ? value : Min;
+            Max = value > Max ? value + 0.1f : Max;
+            Min = value < Min ? value - 0.1f : Min;
         }
     }
 }

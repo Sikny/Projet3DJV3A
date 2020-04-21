@@ -122,17 +122,18 @@ namespace TerrainGeneration {
         }
 
         private float CalculateHeight(Vector3 vertex) {
+            float result = 0;
             Vector2Int intVec = new Vector2Int((int)vertex.x, (int)vertex.z);
             if (terrainOptions.modifierHeightMap.ContainsKey(intVec)) {
-                return terrainOptions.modifierHeightMap[intVec];
+                result = terrainOptions.modifierHeightMap[intVec];
             }
 
             foreach (var waterValue in _waterData) {
                 if (waterValue.Contains(intVec.x, intVec.y)) {
-                    return -0.5f;
+                    result = -0.5f;
                 }
             }
-            return 0;
+            return result;
         }
 
         private List<UnitList> _waterData = new List<UnitList>();
