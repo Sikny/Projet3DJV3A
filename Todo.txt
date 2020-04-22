@@ -1,48 +1,11 @@
-{\rtf1}
-
-Gameplay plus poussé, avec créations de gameplay unique pour chaque type d'unité.
-Mise en place d'un magasin et système de monnaie
-Mise en place d'un menu pause
-Mise en place d'un système d'inventaire et équipement
-- implémentations des pièges
-- pathfinding avec A* 
-
-1.    Texture
-a.    A voir
-2.    Sons/musiques
-a.    Menu.mp3
-b.    Combat.mp3
-c.    Victoire.mp3
-d.    Defaite.mp3
-3.    Prefabs (modélisation)
-a.    Pièces de château (sera généré procéduralement)
-b.    Lot de pierres/roches
-c.    Lot d’arbre
-d.    Herbe
-e.    Les personnages 
-i.    Les soldats
-ii.    Des archers
-iii.    Des catapultiers
-iv.    Les magiciens/sorciers 
-v.    Les géants (3 m) 
-f.    Les pièges
-i.    Mines anti-personnelles 
-4.    Maps
-a.    Génération du château de façon procédurale
-b.    Génération du terrain de façon procédurale
-c.    Disposition des entités selon les règles ( f (mode de jeu, niveau, choix upgrade, …))
-d.    Disposition des upgrades (remparts, pièges…) selon les règles ( f (mode de jeu, niveau, choix upgrade, …))
-5.    Interface d’accueil
-a.    4 boutons principaux redirigeant vers les possibilités (Mode scénarisé, mode libre, éditeur niveau, options et quitter) + Bouton de connexion
-b.    Affiche le titre et la version du projet
-
-6.    Identification
-a.    Connexion : Saisie de l’email et du mot de passe -> vérification auprès d’un WS en php sur OVH -> token
-b.    Inscription : Saisie Pseudo, Prénom, nom, email, mot de passe, mot de passe 2 -> vérification validité des données + intégrité des données -> token
-Atomix01/14/2020
-8.    Mode libre
-a.    Un menu permet de choisir la composition de son armée sur un budget libre. 
-b.    La maps utilise la génération procédurale (4.) basée sur des règles aléatoires et donc sur un seed de génération. 
-c.    Quant au spawn des ennemis, elle sera définie selon le seed sur une échelle de temps mais sera augmentée selon le budget du joueur défini.
-d.    Fin de partie : La partie s’arrête quand toute l’armée du joueur est détruite.
-e.    Les données de partie du joueur authentifié sont enregistrées dans la base de données
+Amélioration des unités
+Pathfinding A* pour le mouvement des unités
+Plus de consommables (ex piège) et équipements
+Réglage de bugs mineur
+Ajout de différent type de terrain
+Ajout du château au centre de la map
+Ajout de cinématique d’introduction du mode histoire
+Animation de déplacement de d’attaque des unités
+Intégration de l’éditeur de niveau dans le jeu
+Ajout de musique et effet sonore
+Ajout du mode scoring

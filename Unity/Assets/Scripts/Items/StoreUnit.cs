@@ -1,19 +1,21 @@
-﻿using Units;
+﻿using UI;
+using Units;
 using UnityEngine;
+using Utility;
 
 namespace Items {
-    [CreateAssetMenu(fileName = "New Unit", menuName = "ScriptableObjects/Unit")]
+    [CreateAssetMenu(fileName = "New Unit", menuName = "ScriptableObject/Unit")]
     public class StoreUnit : Item {
         public EntityType entityType;
         
         public override void Use() {
             base.Use();
 
-            InventoryManager.instance.gameObject.SetActive(false);
+            GameSingleton.Instance.uiManager.HideUis();
             ShopManager.instance.gameObject.SetActive(false);
-            InventoryContent.instance.selectedStoreUnit = this;
+            GameSingleton.Instance.uiManager.inventory.selectedStoreUnit = this;
             
-            Popups.instance.popupText.text = "Placing " + name;
+            Popups.instance.popupText.text = "Placing " + itemName;
         }
     }
 }

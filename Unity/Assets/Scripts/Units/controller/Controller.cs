@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Units.utils;
 using UnityEngine;
 
 namespace Units
@@ -24,7 +25,7 @@ namespace Units
         {
             float baseVitess = UnitLibData.speed * Time.deltaTime * speedEntity;
 
-            Effect effect = body.getEffect(0);
+            Effect effect = body.GetEffect(0);
 
             int bonusLevel = effect.IdEffect == -1 ? 0 : effect.LevelEffect;
 
@@ -33,14 +34,14 @@ namespace Units
         }
         protected float getAttackUnit(AbstractUnit target)
         {
-            float baseVitess = basisAttack;
+            float baseAttack = basisAttack;
 
-            Effect effect = target.getEffect(1); //defense
+            Effect effect = target.GetEffect(1); //defense
 
             int bonusLevel = effect.IdEffect == -1 ? 1 : effect.LevelEffect + 1;
 
 
-            return baseVitess/bonusLevel;
+            return basisAttack/bonusLevel;
         }
     }
 }

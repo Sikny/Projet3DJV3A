@@ -3,9 +3,9 @@ using Game;
 using UnityEngine;
 
 namespace Utility {
-    [CreateAssetMenu(fileName = "LevelList", menuName = "ScriptableObjects/LevelList")]
+    [CreateAssetMenu(fileName = "LevelList", menuName = "ScriptableObject/LevelList")]
     public class LevelList : ScriptableObject {
-        [SerializeField] private List<Level> levels;
+        [SerializeField] private List<Level> levels = new List<Level>();
 
         public int LevelCount => levels.Count;
 

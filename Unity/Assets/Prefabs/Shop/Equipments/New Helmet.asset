@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823ca192b4472ab4083c820edc7fb3ab, type: 3}
   m_Name: New Helmet
   m_EditorClassIdentifier: 
-  name: New item
+  itemName: Helmet
   icon: {fileID: 0}
   price: 10
   stat: 0
-  defenseStat: 5
+  level: 0

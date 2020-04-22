@@ -9,13 +9,13 @@ namespace Utility {
 
         private void Awake() {
             GameSingleton.Instance.levelManager = this;
-            loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.gameVariables.currentLevel));
+            loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevel));
             loadedLevel.Init();
         }
 
         public void NextLevel() {
-            GameSingleton.Instance.gameVariables.currentLevel = 
-                (GameSingleton.Instance.gameVariables.currentLevel + 1) % levelList.LevelCount;
+            GameSingleton.Instance.GetPlayer().currentLevel = 
+                (GameSingleton.Instance.GetPlayer().currentLevel + 1) % levelList.LevelCount;
         }
     }
 }

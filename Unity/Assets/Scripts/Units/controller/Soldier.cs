@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Boo.Lang;
-using Units;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Units{
     public class Soldier : Controller

@@ -1,5 +1,7 @@
-﻿using Units;
+﻿using Game;
+using Units;
 using UnityEngine;
+using Utility;
 
 namespace Units  {
     /**
@@ -32,7 +34,7 @@ namespace Units  {
             
             brain.interract(false, _unitTarget, targetPosition);
 
-            updateTimeoutEffects();
+            UpdateTimeoutEffects();
             
             UpdateGameObject();
         }
@@ -46,7 +48,7 @@ namespace Units  {
 
                 if (entityAttack == null || entityDefense == null) return;
 
-                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength() * damage * getEfficientCoef(this, anotherUnit)));
+                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength() * damage * GetEfficientCoef(this, anotherUnit)));
                 if (life == 0) {
                     anotherUnit.PopEntity(indexEntityDefense);
                 }
@@ -74,6 +76,10 @@ namespace Units  {
             }
             return best;
         }
-        
+
+        public override void Kill() {
+            GameSingleton.Instance.GetPlayer().gold += 150;
+            base.Kill();
+        }
     }
 }

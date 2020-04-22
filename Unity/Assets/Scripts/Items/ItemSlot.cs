@@ -1,80 +1,49 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Game;
 using TMPro;
-using UnityEditor.IMGUI.Controls;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
-public class ItemSlot : MonoBehaviour
-{
-    
-    public Image icon;
+namespace Items {
+    public class ItemSlot : MonoBehaviour {
+        public Image icon;
 
-    public TextMeshProUGUI itemName;
+        public TextMeshProUGUI itemName;
 
-    public TextMeshProUGUI price;
+        public TextMeshProUGUI price;
 
-    public ItemSlot inventoryPrefab;
+        public ItemSlot inventoryPrefab;
 
-    private Popups _popup;
+        private Popups _popup;
 
-    //-------------------------
- 
-    public Item item;
+        public Item item;
 
-    private Player _player;
+        private Player _player;
+        private Inventory _inventory;
 
-    private InventoryContent _inventoryContent;
-    //private ShopManager _shopManager;
-
-    public void Start()
-    {
-        _player = Player.instance;
-        _inventoryContent = InventoryContent.instance;
-        _popup = Popups.instance;
-
-    }
-
-    public void BuyItem()
-    {
-        if (_player.gold > item.price)
-        {
-            _player.gold -= item.price;
-            ItemSlot boughtSlot = inventoryPrefab;
-            boughtSlot.item = item;
-            boughtSlot.icon.sprite = icon.sprite;
-            boughtSlot.itemName.SetText(itemName.text);
-            _inventoryContent.AddItem(boughtSlot.item);
-            //Instantiate(boughtSlot, equipmentsParent, false);
-
-            //Player.instance.inventory.add(item);
+        public void Start() {
+            _player = GameSingleton.Instance.GetPlayer();
+            _inventory = GameSingleton.Instance.uiManager.inventory;
+            _popup = Popups.instance;
         }
-        else
-        {
-            _popup.Popup("not enough gold!");
+
+        public void BuyItem() {
+            if (_player.gold >= item.price) {
+                _player.gold -= item.price;
+                ItemSlot boughtSlot = inventoryPrefab;
+                boughtSlot.item = item;
+                boughtSlot.icon.sprite = icon.sprite;
+                boughtSlot.itemName.SetText(itemName.text);
+                _inventory.AddItem(boughtSlot.item);
+            }
+            else {
+                _popup.Popup("Not enough gold !");
+            }
         }
-        
+
+        public void UseItem() {
+            item.Use();
+        }
     }
-
-
-    public void AddItem(Item newItem)
-    {
-        item = newItem;
-        icon.sprite = item.icon;
-        icon.enabled = true;
-    }
-    public void RemoveItem()
-    {
-        item = null;
-        icon.sprite = null;
-        icon.enabled = false;
-    }
-
-
-    public void UseItem()
-    {
-        item.Use();
-    }
-
 }

@@ -17,14 +17,14 @@ public class Rule
     char globalDifficulty;
     
     Dictionary<SeriaVector2, float> mapModifierHeightmap;
-    Dictionary<SeriaVector2, int> localSpawnDifficulty; //SPEC : to avoid the gen into the castle
+    Dictionary<SeriaVector2, byte> localSpawnDifficulty; //SPEC : to avoid the gen into the castle
     Dictionary<int, Castle> mapCastlePiecesPlacement;
 
     //TODO
     public Rule()
     {
         mapModifierHeightmap = new Dictionary<SeriaVector2, float>();
-        localSpawnDifficulty = new Dictionary<SeriaVector2, int>();
+        localSpawnDifficulty = new Dictionary<SeriaVector2, byte>();
         mapCastlePiecesPlacement = new Dictionary<int, Castle>();
     }
 
@@ -40,7 +40,7 @@ public class Rule
             }
             if (accurancyEpsilon <= difficulty[i].r)
             {
-                localSpawnDifficulty.Add(new SeriaVector2(heightmap[i].x,heightmap[i].z),(int)(difficulty[i].r*4) );
+                localSpawnDifficulty.Add(new SeriaVector2(heightmap[i].x,heightmap[i].z),(byte)(difficulty[i].r*4) );
             }
         }
     }
@@ -58,7 +58,7 @@ public class Rule
             }
             catch (Exception ex)
             {
-                
+                Debug.Log("problem");
             }
         }
 
@@ -74,11 +74,12 @@ public class Rule
             {
                 difficulty[(int) (entry.Key.X+size) * (size*2+1) + (int) entry.Key.Z+size] =
                     new Color(entry.Value/4f,0f,0f);
+                Debug.Log("ok");
                 
             }
             catch (Exception ex)
             {
-                
+                Debug.Log("problem");
             }
         }
 
@@ -148,9 +149,11 @@ public class Rule
             var ptrModifier = 27;
             var ptrLocalDifficulty = ptrModifier + sizeModifier;
             var ptrCastle = ptrLocalDifficulty + sizeLocalDifficulty;
+
+            sizeModifier += ptrModifier;
+            sizeLocalDifficulty += ptrLocalDifficulty;
             
-            
-            bw.Write(r.globalDifficulty);
+            bw.Write((byte)r.globalDifficulty);
             bw.Write((short)r.maxBudget);
             
             bw.Write((int)ptrModifier);
@@ -161,6 +164,9 @@ public class Rule
             
             bw.Write((int)ptrCastle);
             bw.Write((int)sizeCastle);
+            
+            Debug.Log($"write {r.mapModifierHeightmap.Count*12}");
+            Debug.Log($"write {r.localSpawnDifficulty.Count*5}");
             
             foreach (var vertex in r.mapModifierHeightmap)
             {
@@ -173,7 +179,7 @@ public class Rule
             {
                 bw.Write((short)difficulty.Key.X);
                 bw.Write((short)difficulty.Key.Z);
-                bw.Write((char)difficulty.Value);
+                bw.Write((byte)difficulty.Value);
             }
             
             bw.Close();
@@ -191,7 +197,7 @@ public class Rule
 
             var i = 0;
             
-            r.globalDifficulty = br.ReadChar();
+            r.globalDifficulty = (char) br.ReadByte();
             i += 1;
             r.maxBudget = br.ReadInt16();
             i += 2;
@@ -204,23 +210,29 @@ public class Rule
             var sizeCastle = br.ReadInt32();
             i += 24;
 
-            for (; i < sizeModifier; i += 12)
+            var nbWrite = 0;
+            var nbWrite2 = 0;
+
+            for (; i+12 <= sizeModifier; i += 12)
             {
                 var xCoord = br.ReadInt16();
                 var zCoord = br.ReadInt16();
                 var heightmap = br.ReadDouble();
-
+                nbWrite+= 12;
                 r.mapModifierHeightmap.Add(new SeriaVector2(xCoord, zCoord), (float) heightmap);
             }
 
-            for (; i < sizeLocalDifficulty; i += 5)
+            for (; i+5 <= sizeLocalDifficulty; i += 5)
             {
                 var xCoord = br.ReadInt16();
                 var zCoord = br.ReadInt16();
-                var difficulty = br.ReadChar();
-
+                var difficulty = br.ReadByte();
+                nbWrite2 += 5;
                 r.localSpawnDifficulty.Add(new SeriaVector2(xCoord, zCoord), difficulty);
             }
+            
+            Debug.Log($"read {nbWrite}");
+            Debug.Log($"read {nbWrite2}");
 
             br.Close();
             stream.Close();

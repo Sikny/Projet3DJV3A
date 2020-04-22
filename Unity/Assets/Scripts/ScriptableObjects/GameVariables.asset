@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7b08bdf4ae3c94a96c72b3ce0ea919, type: 3}
   m_Name: GameVariables
   m_EditorClassIdentifier: 
-  currentLevel: 0
+  currentLevel: 1
   currentWave: 0

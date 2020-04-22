@@ -4,37 +4,22 @@ using Random = UnityEngine.Random;
 
 namespace Units {
     public class PlayerUnit : AbstractUnit {
-        private int _isWalkable = 1;
-        private bool _isSelected;
-
-        private Color _color = Color.cyan;
-        
-        private float _deltaTime;
-
-        private const float TickAttack = 0.10f; //PARAM OF DIFFICULTY
-    
         public override bool Init(EntityType idType, Entity entityModel, int entityCountP) {
             bool value = base.Init(idType, entityModel, entityCountP);
             speedEntity = 1.0f;
-            _isSelected = true;
-            _deltaTime = 0.0f;
         
-            foreach (var entity in entities) {
-                entity.InitColor(_color);
-            }
             gameObject.layer = 9;    // allied units
             return value;
         }
 
         public override void UpdateUnit() {
             if (!initialized) return;
-            _deltaTime += UnitLibData.deltaTime;
 
             if (_unitTarget == null) _unitTarget = GuessTheBestUnitToTarget();
 
             brain.interract(true,_unitTarget, targetPosition);
             
-            updateTimeoutEffects();
+            UpdateTimeoutEffects();
             
             UpdateGameObject();
             
@@ -42,14 +27,14 @@ namespace Units {
 
         public override void Attack(AbstractUnit anotherUnit, float damage) {
             int indexEntityAttack = Random.Range(0, entityCount);
-            Entity entityAttack = this.GetEntity(indexEntityAttack);
+            Entity entityAttack = GetEntity(indexEntityAttack);
             if (anotherUnit.GetNumberAlive() > 1) {
                 int indexEntityDefense = Random.Range(1, entityCount);
                 Entity entityDefense = anotherUnit.GetEntity(indexEntityDefense);
 
                 if (entityAttack == null || entityDefense == null) return;
 
-                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength()*damage* getEfficientCoef(this, anotherUnit)));
+                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength()*damage* GetEfficientCoef(this, anotherUnit)));
                 if (life == 0) {
                     anotherUnit.PopEntity(indexEntityDefense);
                 }
@@ -84,10 +69,6 @@ namespace Units {
             if (Physics.Raycast(ray, out var hit, 100, 1 << 4) ||
                 !Physics.Raycast(ray, out hit, 100, UnitLibData.groundMask))
                 return;
-            if (hit.transform.gameObject.layer == 4) //water 
-                _isWalkable = 0;
-            else if (hit.transform.gameObject.layer == 8) //ground 
-                _isWalkable = 1;
 
             float xHit = Mathf.Floor(hit.transform.position.x);
             float zHit = Mathf.Floor(hit.transform.position.z);
@@ -103,21 +84,6 @@ namespace Units {
 
             isMoving = true;
             isTurning = true;
-        }
-
-        public void Select() {
-            foreach (var entity in entities) {
-                if (entity == null) continue;
-                entity.meshRenderer.material.color = Color.yellow;
-            }
-        }
-
-        public void Deselect() {
-            foreach (var entity in entities)
-            {
-                if (entity == null) continue;
-                entity.ResetColor();
-            }
         }
     }
 }

@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1406515577152823729}
   - component: {fileID: 910083300732840378}
+  - component: {fileID: 8917694000792785765}
+  - component: {fileID: 1748774663448512488}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,19 +47,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99efe0ece1472bd488060a1bdd766f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateLoop:
-    m_PersistentCalls:
-      m_Calls: []
-  fixedUpdateLoop:
-    m_PersistentCalls:
-      m_Calls: []
-  lateUpdateLoop:
-    m_PersistentCalls:
-      m_Calls: []
+  updateLoop: {fileID: 11400000, guid: 9b08185e5a74c2a46837a37727fe96cd, type: 2}
+  fixedUpdateLoop: {fileID: 11400000, guid: ab7b9e20125c76c4a88d37e46b009b7d, type: 2}
+  lateUpdateLoop: {fileID: 11400000, guid: 1fa043e1d42b8754ab36a8f659c3956d, type: 2}
   gameVariables: {fileID: 11400000, guid: 228004ee795077c4d8223abcede2c5f5, type: 2}
+  levelManager: {fileID: 0}
   gameSettings: {fileID: 11400000, guid: dfbe9b8a7b0398646aedb0eb9776d315, type: 2}
   languageDictionary: {fileID: 11400000, guid: 0d6cf9341b33a57479eaa5b00a4243f6, type: 2}
   endGamePanel: {fileID: 44291853314280001}
+  gamePaused: 0
+  inventory: {fileID: 11400000, guid: b7120ce116e92ee4d9d9f6c7f5d23817, type: 2}
+--- !u!114 &8917694000792785765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406515577152823728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ff765aaf74eb34896b6b3ea87a2fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customEventSent: {fileID: 11400000, guid: 3db354e3d1ee8b244b9f7bdc2eb5dbb0, type: 2}
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 910083300732840378}
+        m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1748774663448512488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406515577152823728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ff765aaf74eb34896b6b3ea87a2fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customEventSent: {fileID: 11400000, guid: cee966b28bcc72341b248213f319af85, type: 2}
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 910083300732840378}
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8943940678969898490
 GameObject:
   m_ObjectHideFlags: 0

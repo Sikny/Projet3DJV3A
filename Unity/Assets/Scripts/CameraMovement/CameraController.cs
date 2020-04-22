@@ -11,30 +11,31 @@ namespace CameraMovement {
         public float speed = 100f;
         public float pitch = 2f;
         
-        private float currentYaw = 0f;
+        private float _currentYaw;
 
         private bool _mousePressed;
-        // Update is called once per frame
-        void Update()
-        {
-            if (Input.GetMouseButtonDown(1)) //right click
-            {
-                _mousePressed = true;
-            }
-            if (Input.GetMouseButtonUp(1)) {
-                _mousePressed = false;
-            }
-            if(_mousePressed)
-                currentYaw += Input.GetAxis("Mouse X") * speed * Time.deltaTime;
+
+        public void SetRotating() {
+            _mousePressed = true;
         }
 
-        private Vector3 centerPointPos;
+        public void UnsetRotating() {
+            _mousePressed = false;
+        }
+
+        void Update()
+        {
+            if(_mousePressed)
+                _currentYaw += Input.GetAxis("Mouse X") * speed * Time.deltaTime;
+        }
+
+        private Vector3 _centerPointPos;
         private void LateUpdate()
         {
-            centerPointPos = centerPoint.position;
-            transform.LookAt(centerPointPos + Vector3.up * pitch);
-            transform.RotateAround(centerPointPos,Vector3.up, currentYaw);
-            currentYaw = 0;
+            _centerPointPos = centerPoint.position;
+            transform.LookAt(_centerPointPos + Vector3.up * pitch);
+            transform.RotateAround(_centerPointPos,Vector3.up, _currentYaw);
+            _currentYaw = 0;
         }
     }
 }

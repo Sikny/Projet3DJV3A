@@ -16,15 +16,17 @@ namespace Game {
         public Vector3 position;
     }
     public class Level : MonoBehaviour {
-        private ShopContent _shopContent;
+        private Shop _shop;
         private SystemUnit _systemUnit;
 
         public TerrainBuilder terrainBuilder;
 
-        public List<Consummable> consumablesList = new List<Consummable>();
+        [Header("Shop content")]
+        public List<Consumable> consumablesList = new List<Consumable>();
         public List<Equipment> equipmentsList = new List<Equipment>();
         public List<StoreUnit> unitList = new List<StoreUnit>();
-
+        
+        [Header("Enemies")]
         public List<EnemySpawn> enemySpawns;
         public List<Transform> livingEnemies;
 
@@ -36,19 +38,19 @@ namespace Game {
 
             _systemUnit = FindObjectOfType<SystemUnit>();
             
-            _shopContent = ShopContent.Instance;
-            _shopContent.ClearShop();
+            _shop = Shop.Instance;
+            _shop.ClearShop();
             
-            foreach (Consummable cons in consumablesList) {
-                _shopContent.AddConsummable(cons);
+            foreach (Consumable cons in consumablesList) {
+                _shop.AddConsummable(cons);
             }
 
             foreach (Equipment equip in equipmentsList) {
-                _shopContent.AddEquipment(equip);
+                _shop.AddEquipment(equip);
             }
 
             foreach (StoreUnit storeUnit in unitList) {
-                _shopContent.AddStoreUnit(storeUnit);
+                _shop.AddStoreUnit(storeUnit);
             }
         }
 
@@ -86,6 +88,7 @@ namespace Game {
                 });
                 yield return 0;
             }
+            GameSingleton.Instance.ResumeGame();
             _levelStarted = true;
         }
 

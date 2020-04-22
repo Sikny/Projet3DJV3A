@@ -1,162 +1,95 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Items;
 using TMPro;
+using Units;
 using UnityEngine;
-using UnityEngine.UI;
 using Utility;
 
-public class ShopManager : MonoBehaviour
-{
-    public TextMeshProUGUI goldText;
-    private int gold = 5;
+namespace UI {
+    public class ShopManager : ItemsPanel {
+        public TextMeshProUGUI goldText;
 
-    public GameObject unitPanel;
-    public GameObject itemsPanel;
-    public GameObject equipmentsPanel;
-    public GameObject shopPanel;
+        public GameObject shopPanel;
 
-    public ItemSlot prefabSlot; 
-        
-    private ShopContent _shopContent;
-    public Transform itemsParent;
-    public Transform equipmentsParent;
-    public Transform unitsParent;
+        public ItemSlot prefabSlot;
 
-    private Player _player;
-    
-    //-----------------------------------------------------------------------------
+        private Shop _shop;
 
-    #region Singleton
-    
-    public static ShopManager instance;
-    
-    
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Debug.Log("Several instances");
-            return;
+        #region Singleton
+
+        public static ShopManager instance;
+
+
+        private void Awake() {
+            if (instance != null) {
+                Debug.Log("Several instances");
+                return;
+            }
+
+            instance = this;
         }
-        instance = this;
-    }
 
-    #endregion
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        _shopContent = ShopContent.Instance;
-        _player = Player.instance;
-        gold = 10;
-        goldText.SetText(gold + "g");
-        
-        UpdateUIItems();
-        UpdateUIEquipments();
-        UpdateUIUnits();
-        UpdateGold();
-        shopPanel.SetActive(false);
-    }
+        #endregion
 
+        void Start() {
+            _shop = Shop.Instance;
 
+            UpdateUIItems();
+            UpdateUIEquipments();
+            UpdateUIUnits();
+            UpdateGold();
+            shopPanel.SetActive(false);
+        }
 
-    public void ShowUnitsPanel()
-    {
-        itemsPanel.SetActive(false);
-        equipmentsPanel.SetActive(false);
-        unitPanel.SetActive(true);
-    }
-    
-    public void ShowItemsPanel()
-    {
-        equipmentsPanel.SetActive(false);
-        unitPanel.SetActive(false);
-        itemsPanel.SetActive(true);
-    }
-
-    public void ShowEquipmentsPanel()
-    {
-        itemsPanel.SetActive(false);
-        unitPanel.SetActive(false);
-        equipmentsPanel.SetActive(true);
-    }
-    
-    public void ActivateSelf()
-    {
-        gameObject.SetActive(!gameObject.activeSelf);
-    }
-
-
-    private void UpdateUIItems()
-    {
-        List<Consummable> shopConsummables = _shopContent.shopConsummables;
-        //List<Item> shopConsummables = _shopContent.GetShopItems().Cast<Item>().ToList();
-
-        //Debug.Log("shop items count: " + shopConsummables.Count);
-        for (int i = 0; i < shopConsummables.Count; i++)
-        {
+        private void UpdateUIItems() {
+            List<Consumable> shopConsummables = _shop.shopConsummables;
             
-            ItemSlot currentSlot = prefabSlot;
+            for (int i = 0; i < shopConsummables.Count; i++) {
+                ItemSlot addedItem = Instantiate(prefabSlot, itemsParent, false);
+                addedItem.item = shopConsummables[i];
+                addedItem.itemName.SetText(shopConsummables[i].itemName);
+                addedItem.icon.sprite = shopConsummables[i].icon;
+                addedItem.price.SetText(shopConsummables[i].price.ToString());
+            }
+        }
 
-            currentSlot.item = shopConsummables[i];
-            currentSlot.itemName.SetText(shopConsummables[i].name);
-            currentSlot.icon.sprite = shopConsummables[i].icon;
-            currentSlot.price.SetText(shopConsummables[i].price.ToString());
-            //Debug.Log("put item :" + shopConsummables[i].name);
+        private void UpdateUIEquipments() {
+            List<Equipment> shopEquipments = _shop.shopEquipments;
 
-            Instantiate(currentSlot, itemsParent, false);
-            //Canvas.ForceUpdateCanvases();
+            for (int i = 0; i < shopEquipments.Count; i++) {
+                ItemSlot addedItem = Instantiate(prefabSlot, equipmentsParent, false);
+                addedItem.item = shopEquipments[i];
+                addedItem.itemName.SetText(shopEquipments[i].itemName);
+                addedItem.icon.sprite = shopEquipments[i].icon;
+                addedItem.price.SetText(shopEquipments[i].price.ToString());
+            }
+        }
+
+        private void UpdateUIUnits() {
+            List<StoreUnit> shopUnits = _shop.shopUnits;
+
+            for (int i = 0; i < shopUnits.Count; i++) {
+                ItemSlot addedItem = Instantiate(prefabSlot, unitsParent, false);
+                addedItem.item = shopUnits[i];
+                addedItem.itemName.SetText(shopUnits[i].itemName);
+                addedItem.icon.sprite = shopUnits[i].icon;
+                addedItem.price.SetText(shopUnits[i].price.ToString());
+            }
+        }
+
+        public void UpdateGold() {
+            goldText.SetText(GameSingleton.Instance.GetPlayer().GetGold() + "g");
+        }
+
+        public GameObject fightButton;
+
+        public void Fight() {
+            int playerCount = FindObjectsOfType<PlayerUnit>().Length;
+            if (playerCount == 0) return;
+            systemUnit.SetRunning(true);
+            fightButton.SetActive(false);
+            shopPanel.SetActive(false);
+            GameSingleton.Instance.StartFight();
         }
     }
-    
-    private void UpdateUIEquipments()
-    {
-        List<Equipment> shopEquipments = _shopContent.shopEquipments;
-        //Debug.Log("shop EQUIPMENTS count: " + shopEquipments.Count);
-
-        for (int i = 0; i < shopEquipments.Count; i++)
-        {
-            ItemSlot currentSlot = prefabSlot;
-            currentSlot.item = shopEquipments[i];
-            currentSlot.itemName.SetText(shopEquipments[i].name);
-            currentSlot.icon.sprite = shopEquipments[i].icon;
-
-            //Debug.Log("put equipment :" + shopEquipments[i].name);
-            
-            Instantiate(currentSlot, equipmentsParent, false);
-            //Canvas.ForceUpdateCanvases();
-           
-
-        }
-    }
-
-    private void UpdateUIUnits() {
-        List<StoreUnit> shopUnits = _shopContent.shopUnits;
-
-        for (int i = 0; i < shopUnits.Count; i++) {
-            ItemSlot currentSlot = prefabSlot;
-            currentSlot.item = shopUnits[i];
-            currentSlot.itemName.SetText(shopUnits[i].name);
-            currentSlot.icon.sprite = shopUnits[i].icon;
-
-            Instantiate(currentSlot, unitsParent, false);
-        }
-    }
-
-    public void UpdateGold()
-    {
-        goldText.SetText(_player.GetGold() + "g");   
-    }
-
-    public void Fight()
-    {
-        shopPanel.SetActive(false);
-        GameSingleton.Instance.StartFight();
-    }
-    
-
-    
-
 }

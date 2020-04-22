@@ -13,7 +13,7 @@ namespace Units {
         public string description;
     }
     
-    [CreateAssetMenu(fileName = "EntityDict", menuName = "ScriptableObjects/EntityDict")]
+    [CreateAssetMenu(fileName = "EntityDict", menuName = "ScriptableObject/EntityDict")]
     public class EntityDict : ScriptableObject {
         public List<EntityStruct> entitiesList;
 
