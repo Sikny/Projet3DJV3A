@@ -48,7 +48,6 @@ public class UpgradeManager : MonoBehaviour
 
     private void Start()
     {
-
         _inventory = GameSingleton.Instance.uiManager.inventory;
     }
 
@@ -60,32 +59,17 @@ public class UpgradeManager : MonoBehaviour
     public void SetUIUnits(StoreUnit storeUnit)
     {
         _unit = storeUnit;
-        Debug.Log("" + storeUnit.upgrades[0].entityType + storeUnit.upgrades[1].entityType);
-        unitName.SetText(storeUnit.entityType.ToString());
+        unitName.SetText(storeUnit.name);
         unitImage.sprite = storeUnit.icon;
 
-        unitUpgrade1Name.SetText(storeUnit.upgrades[0].entityType.ToString());
+        unitUpgrade1Name.SetText(storeUnit.upgrades[0].name);
         unitUpgrade1Image.sprite = storeUnit.upgrades[0].icon;
         
-        unitUpgrade2Name.SetText(storeUnit.upgrades[1].entityType.ToString());
+        unitUpgrade2Name.SetText(storeUnit.upgrades[1].name);
         unitUpgrade2Image.sprite = storeUnit.upgrades[1].icon;
         
         ToggleUpgradePannel();
-
-        //Entity unit;
-        //unit = entityDict.GetEntityType(unitID);
-        /*List<EntityType> upgrades = unit.upgrades;
-        for(int i = 0; i < upgrades.Count - 1; i++)
-        {
-            Debug.Log("Entity : "  + upgrades[i]);
-        }
-        //entry unit from inventory
-        /*
-         * get model image
-         * get name
-         * get upgrades and do the same for them
-         * 
-         */
+        
     }
 
     public void OnUpgrade(int number)

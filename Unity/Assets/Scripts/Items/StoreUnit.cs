@@ -10,6 +10,7 @@ namespace Items {
         public EntityType entityType;
         //public List<EntityType> upgrades;
         public List<StoreUnit> upgrades;
+        
         public override void Use() {
             base.Use();
 
@@ -23,8 +24,6 @@ namespace Items {
         public override void Upgrade()
         {
             base.Upgrade();
-            Debug.Log("upgrading");
-
             UpgradeManager.instance.SetUIUnits(this);
             //UpgradeManager.instance.SetUIUnits(entityType);
             //EntityDict.GetEntityType(entityType);

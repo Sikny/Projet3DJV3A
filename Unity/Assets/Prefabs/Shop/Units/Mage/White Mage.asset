@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6830cd48d9944c84cbef562e6d6142af, type: 3}
-  m_Name: Archer
+  m_Name: White Mage
   m_EditorClassIdentifier: 
-  itemName: Archer
+  itemName: White Mage
   icon: {fileID: 21300000, guid: a4e293942449ba940bbd8bc406cc7b3e, type: 3}
   price: 50
-  entityType: 1
-  upgrades: 
+  entityType: 9
+  upgrades:
+  - {fileID: 11400000, guid: 0f77ddf4e7861f9499b85b67b52ab66e, type: 2}
+  - {fileID: 11400000, guid: 48fe8b56ed7d0684284ca7a4799d2b64, type: 2}

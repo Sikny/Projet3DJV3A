@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6830cd48d9944c84cbef562e6d6142af, type: 3}
-  m_Name: Soldier
+  m_Name: Demonist
   m_EditorClassIdentifier: 
-  itemName: Soldier
+  itemName: Demonist
   icon: {fileID: 21300000, guid: a4e293942449ba940bbd8bc406cc7b3e, type: 3}
   price: 50
-  entityType: 0
-  upgrades:
-  - {fileID: 11400000, guid: d7cc81eb0e49fb5429ad4838ac2c96c5, type: 2}
-  - {fileID: 11400000, guid: 8c3a0c3cc26ac294b9031c84ad619af0, type: 2}
+  entityType: 10
+  upgrades: []
