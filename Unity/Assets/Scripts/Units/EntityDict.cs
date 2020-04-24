@@ -4,19 +4,21 @@ using UnityEngine;
 
 namespace Units {
     public enum EntityType {
-        Soldier, Archer, Mage
+        Soldier, Archer, Mage, Spearman
     }
     [Serializable]
     public class EntityStruct {
         public EntityType idType;
         public Entity entityPrefab;
         public string description;
+        public List<EntityType> upgrades;
+
     }
     
     [CreateAssetMenu(fileName = "EntityDict", menuName = "ScriptableObject/EntityDict")]
     public class EntityDict : ScriptableObject {
         public List<EntityStruct> entitiesList;
-
+        
         public Entity GetEntityType(EntityType idType) {
             int listLen = entitiesList.Count;
             for (int i = 0; i < listLen; i++) {

@@ -88,6 +88,8 @@ namespace Units {
                     return new Archer(this);
                 case EntityType.Mage:
                     return new Wizard(this);
+                case EntityType.Spearman:
+                    return new Spearman(this);
             }
 
             return null;

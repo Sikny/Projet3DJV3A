@@ -12,6 +12,8 @@ namespace UI {
 
         public ItemSlot prefabSlot;
 
+        public ItemSlot unitPrefabSlot;
+
         private List<ItemSlot> _consumableSlots = new List<ItemSlot>();
 
         private List<ItemSlot> _unitSlots = new List<ItemSlot>();
@@ -38,7 +40,7 @@ namespace UI {
         }
 
         public void UpdateUiUnit(StoreUnit unit) {
-            var addedItem = Instantiate(prefabSlot, unitsParent, false);
+            var addedItem = Instantiate(unitPrefabSlot, unitsParent, false);
             addedItem.item = unit;
             addedItem.itemName.SetText(unit.itemName);
             addedItem.icon.sprite = unit.icon;

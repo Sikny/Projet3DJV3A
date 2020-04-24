@@ -10,6 +10,8 @@ namespace UI {
         public InventoryManager inventoryUi;
         public Inventory inventory;
 
+        //public UpgradeManager upgradeUI; TODO
+        
         private void Start() {
             GameSingleton.Instance.uiManager = this;
             inventory.Load(inventoryUi);
