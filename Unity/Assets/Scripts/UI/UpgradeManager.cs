@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Game;
 using Items;
 using TMPro;
+using UI;
 using Units;
 using UnityEngine;
 using UnityEngine.UI;
@@ -75,6 +76,7 @@ public class UpgradeManager : MonoBehaviour
     public void OnUpgrade(int number)
     {        
         StoreUnit upgradedUnit = (number == 1) ? _unit.upgrades[0] : _unit.upgrades[1];
+        Popups.instance.Popup("Upgraded " + _unit.name + " to " + upgradedUnit.name);
         _inventory.RemoveUnit(_unit);
         _inventory.AddItem(upgradedUnit);
         ToggleUpgradePannel();

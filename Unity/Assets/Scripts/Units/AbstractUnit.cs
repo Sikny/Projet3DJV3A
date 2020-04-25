@@ -90,6 +90,36 @@ namespace Units {
                     return new Wizard(this);
                 case EntityType.Spearman:
                     return new Spearman(this);
+                case EntityType.Knight:
+                    return new Knight(this);
+                case EntityType.WhiteKnight:
+                    return new WhiteKnight(this);
+                case EntityType.Horseman:
+                    return new Horseman(this);
+                case EntityType.Executionist:
+                    return new Executionist(this);
+                case EntityType.WhiteMage:
+                    return new WhiteMage(this);
+                case EntityType.BlackMage:
+                    return new BlackMage(this);
+                case EntityType.Demonist:
+                    return new Demonist(this);
+                case EntityType.RedMage:
+                    return new RedMage(this);
+                case EntityType.Bard:
+                    return new Bard(this);
+                case EntityType.Arbalist:
+                    return new Arbalist(this);
+                case EntityType.Hunter:
+                    return new Hunter(this);
+                case EntityType.MachineArc:
+                    return new MachineArc(this);
+                case EntityType.Catapultist:
+                    return new Catapultist(this);
+                case EntityType.Sniper:
+                    return new Sniper(this);
+                
+
             }
 
             return null;
