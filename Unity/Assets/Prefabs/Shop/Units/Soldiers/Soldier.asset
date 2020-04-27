@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6830cd48d9944c84cbef562e6d6142af, type: 3}
-  m_Name: Mage
+  m_Name: Soldier
   m_EditorClassIdentifier: 
-  itemName: Mage
-  icon: {fileID: 21300000, guid: e32b6932cb8fda0459069c12da630c7e, type: 3}
+  itemName: Soldier
+  icon: {fileID: 21300000, guid: a4e293942449ba940bbd8bc406cc7b3e, type: 3}
   price: 50
-  entityType: 2
+  entityType: 0
+  upgrades:
+  - {fileID: 11400000, guid: d7cc81eb0e49fb5429ad4838ac2c96c5, type: 2}
+  - {fileID: 11400000, guid: 879145365eceffc408423e190298f6dc, type: 2}

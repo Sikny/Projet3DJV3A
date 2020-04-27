@@ -14,5 +14,10 @@ namespace Items {
         public virtual void Use() {
             Popups.instance.Popup("using " + itemName);
         }
+
+        public virtual void Upgrade()
+        {
+            
+        }
     }
 }

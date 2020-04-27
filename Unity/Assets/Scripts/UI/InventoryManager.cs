@@ -2,6 +2,7 @@
 using Items;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 using Utility;
 
 namespace UI {
@@ -11,6 +12,8 @@ namespace UI {
         public GameObject inventoryPanel;
 
         public ItemSlot prefabSlot;
+
+        public ItemSlot unitPrefabSlot;
 
         private List<ItemSlot> _consumableSlots = new List<ItemSlot>();
 
@@ -37,8 +40,13 @@ namespace UI {
             addedItem.icon.sprite = equipment.icon;
         }
 
-        public void UpdateUiUnit(StoreUnit unit) {
-            var addedItem = Instantiate(prefabSlot, unitsParent, false);
+        public void UpdateUiUnit(StoreUnit unit)
+        {
+
+            ItemSlot targetSlot = (unit.upgrades.Count > 0) ? unitPrefabSlot : prefabSlot;
+ 
+            var addedItem = Instantiate(targetSlot, unitsParent, false);
+
             addedItem.item = unit;
             addedItem.itemName.SetText(unit.itemName);
             addedItem.icon.sprite = unit.icon;
