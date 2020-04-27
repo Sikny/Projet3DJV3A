@@ -6,38 +6,51 @@ using Random = UnityEngine.Random;
 // ReSharper disable Unity.PreferAddressByIdToGraphicsParams
 
 namespace TerrainGeneration {
+    public enum TerrainSide {
+        Top = 0,
+        Bottom = 1,
+        Left = 2,
+        Front = 3,
+        Right = 4,
+        Back = 5
+    }
+
     public class TerrainMeshDeformation : MonoBehaviour {
         public Material material;
         [Range(2, 256)] public int resolution;
-        [SerializeField, HideInInspector] private MeshFilter meshFilter;
-        [SerializeField, HideInInspector] private MeshRenderer meshRenderer;
+        [SerializeField, HideInInspector] private List<GameObject> meshObjects;
+        private MeshFilter[] _meshFilters;
+        private MeshRenderer[] _meshRenderers;
 
-        private float _toleranceX;
-        private float _toleranceY;
-        
-        
         private MinMax _minMax;
         public Gradient heightGradient;
         public int textureResolution = 150;
-        
+
         public TerrainOptions terrainOptions;
         public Transform cursor;
-        
+
         private void Awake() {
             Init();
+        }
+        
+        private void Clear() {
+            int meshesCount = meshObjects.Count;
+            for (int i = 0; i < meshesCount; i++) {
+                DestroyImmediate(meshObjects[i]);
+            }
+
+            meshObjects.Clear();
         }
 
         [ContextMenu("Build")]
         private void Init() {
-            _toleranceX = (float) terrainOptions.height/resolution;
-            _toleranceY = (float) terrainOptions.width/resolution;
             TerrainGrid.Height = terrainOptions.height;
             TerrainGrid.Width = terrainOptions.width;
 
             TerrainGrid.Instance.cursor = cursor;
-            
+
             _waterData.Clear();
-            
+
             Random.InitState(terrainOptions.rules.seedWorld);
             // build water areas
             for (int i = 0; i < terrainOptions.waterCount; i++) {
@@ -45,7 +58,7 @@ namespace TerrainGeneration {
             }
 
             terrainOptions.modifierHeightMap.Clear();
-            
+
             // build mountains
             for (int i = 0; i < terrainOptions.mountainCount; i++) {
                 BuildOneMountain();
@@ -53,25 +66,43 @@ namespace TerrainGeneration {
 
             BuildTerrain();
         }
-        
+
         private void BuildTerrain() {
             terrainOptions.rules.seedWorld = Random.Range(0, 100000);
-            
-            if (meshFilter == null) {
-                GameObject meshObject = new GameObject("Mesh");
-                meshObject.transform.parent = transform;
-                meshRenderer = meshObject.AddComponent<MeshRenderer>();
-
-                meshFilter = meshObject.AddComponent<MeshFilter>();
-                meshFilter.sharedMesh = new Mesh();
+            if (meshObjects == null) {
+                meshObjects = new List<GameObject>();
+            }
+            else {
+                Clear();
             }
 
-            BuildMesh();
+            var sides = Enum.GetValues(typeof(TerrainSide));
+
+            _meshFilters = new MeshFilter[sides.Length];
+            _meshRenderers = new MeshRenderer[sides.Length];
+
+            _minMax = new MinMax();
+
+            foreach (TerrainSide terrainSide in sides) {
+                GameObject meshObj = new GameObject("TerrainMesh" + Enum.GetName(typeof(TerrainSide), terrainSide));
+                meshObj.transform.parent = transform;
+
+                MeshRenderer meshRenderer = meshObj.AddComponent<MeshRenderer>();
+                meshRenderer.sharedMaterial = material;
+                _meshRenderers[(int) terrainSide] = meshRenderer;
+
+                MeshFilter meshFilter = meshObj.AddComponent<MeshFilter>();
+                meshFilter.sharedMesh = new Mesh();
+                _meshFilters[(int) terrainSide] = meshFilter;
+
+                BuildTerrainMesh(terrainSide);
+                meshObjects.Add(meshObj);
+            }
 
             Texture2D texture = new Texture2D(textureResolution, 1);
             Color[] colours = new Color[textureResolution];
             for (int i = 0; i < textureResolution; i++) {
-                colours[i] = heightGradient.Evaluate(i / (textureResolution-1f));
+                colours[i] = heightGradient.Evaluate(i / (textureResolution - 1f));
             }
 
             texture.SetPixels(colours);
@@ -80,39 +111,179 @@ namespace TerrainGeneration {
             material.SetVector("_YMinMax", new Vector4(_minMax.Min, _minMax.Max));
             material.SetTexture("_terrainTexture", texture);
 
-            meshRenderer.sharedMaterial = material;
+            //meshRenderer.sharedMaterial = material;
         }
 
-        private void BuildMesh() {
-            _minMax = new MinMax();
-            Mesh mesh = meshFilter.sharedMesh;
-            Vector3[] vertices = new Vector3[resolution * resolution];
-            int[] triangles = new int[(resolution - 1) * (resolution - 1) * 6];
+        private void BuildTerrainMesh(TerrainSide side) {
+            int index = (int) side;
+            Mesh mesh = _meshFilters[index].sharedMesh;
+
+            Vector3[] vertices;
+            int[] triangles;
             int triIndex = 0;
 
-            for (int y = 0; y < resolution; y++) {
-                for (int x = 0; x < resolution; x++) {
-                    int i = x + y * resolution;
-                    Vector2 percent = new Vector2(x, y) / (resolution - 1);
-                    Vector3 point = new Vector3((percent.x - .5f) * TerrainGrid.Width, 
-                        0f,
-                        -(percent.y - .5f) * TerrainGrid.Height);
-                    point.y = CalculateHeight(point);
-                    _minMax.HandleValue(point.y);
-                    vertices[i] = point;
+            int i;
+            switch (side) {
+                case TerrainSide.Top:
+                    vertices = new Vector3[resolution * resolution];
+                    triangles = new int[(resolution - 1) * (resolution - 1) * 6];
 
-                    if (x != resolution - 1 && y != resolution - 1) {
-                        triangles[triIndex] = i;
-                        triangles[triIndex + 1] = i + resolution + 1;
-                        triangles[triIndex + 2] = i + resolution;
+                    for (int y = 0; y < resolution; y++) {
+                        for (int x = 0; x < resolution; x++) {
+                            i = x + y * resolution;
+                            Vector2 percent = new Vector2(x, y) / (resolution - 1);
+                            Vector3 point = new Vector3((percent.x - .5f) * TerrainGrid.Width,
+                                0f,
+                                -(percent.y - .5f) * TerrainGrid.Height);
+                            point.y = CalculateHeight(point);
+                            _minMax.HandleValue(point.y);
+                            vertices[i] = point;
 
-                        triangles[triIndex + 3] = i;
-                        triangles[triIndex + 4] = i + 1;
-                        triangles[triIndex + 5] = i + resolution + 1;
-                        triIndex += 6;
+                            if (x != resolution - 1 && y != resolution - 1) {
+                                triangles[triIndex] = i;
+                                triangles[triIndex + 1] = i + resolution + 1;
+                                triangles[triIndex + 2] = i + resolution;
+
+                                triangles[triIndex + 3] = i;
+                                triangles[triIndex + 4] = i + 1;
+                                triangles[triIndex + 5] = i + resolution + 1;
+                                triIndex += 6;
+                            }
+                        }
                     }
 
-                }
+                    break;
+                case TerrainSide.Bottom:
+                    vertices = new Vector3[resolution * resolution];
+                    triangles = new int[(resolution - 1) * (resolution - 1) * 6];
+
+                    for (int y = 0; y < resolution; y++) {
+                        for (int x = 0; x < resolution; x++) {
+                            i = x + y * resolution;
+                            Vector2 percent = new Vector2(x, y) / (resolution - 1);
+                            Vector3 point = new Vector3((percent.x - .5f) * TerrainGrid.Width,
+                                -1f,
+                                -(percent.y - .5f) * TerrainGrid.Height);
+                            _minMax.HandleValue(point.y);
+                            vertices[i] = point;
+
+                            if (x != resolution - 1 && y != resolution - 1) {
+                                triangles[triIndex] = i + resolution;
+                                triangles[triIndex + 1] = i + resolution + 1;
+                                triangles[triIndex + 2] = i;
+
+                                triangles[triIndex + 3] = i + resolution + 1;
+                                triangles[triIndex + 4] = i + 1;
+                                triangles[triIndex + 5] = i;
+                                triIndex += 6;
+                            }
+                        }
+                    }
+
+                    break;
+                default:
+                    vertices = new Vector3[resolution * 2];
+                    triangles = new int[(resolution - 1) * 6];
+                    float semiWidth = terrainOptions.width / 2f;
+                    float semiHeight = terrainOptions.height / 2f;
+                    i = 0;
+
+                    switch (side) {
+                        case TerrainSide.Back:
+                            for (int x = 0; x < resolution; x++) {
+                                for (int y = -1; y <= 0; y++) {
+                                    float scaledX = (x / (resolution - 1f) - 0.5f) * TerrainGrid.Width;
+                                    vertices[i] = new Vector3(scaledX, y, semiWidth);
+                                    if (vertices[i].y > -1f) {
+                                        vertices[i].y = CalculateHeight(vertices[i]);
+                                    }
+                                    if (x != resolution - 1 && y != 0) {
+                                        triangles[triIndex] = i;
+                                        triangles[triIndex + 1] = i + 2;
+                                        triangles[triIndex + 2] = i + 1;
+
+                                        triangles[triIndex + 3] = i + 1;
+                                        triangles[triIndex + 4] = i + 2;
+                                        triangles[triIndex + 5] = i + 3;
+                                        triIndex += 6;
+                                    }
+                                    i++;
+                                }
+                            }
+                            break;
+                        case TerrainSide.Front:
+                            for (int x = 0; x < resolution; x++) {
+                                for (int y = -1; y <= 0; y++) {
+                                    float scaledX = (x / (resolution - 1f) - 0.5f) * TerrainGrid.Width;
+                                    vertices[i] = new Vector3(scaledX, y, -semiWidth);
+                                    if (vertices[i].y > -1f) {
+                                        vertices[i].y = CalculateHeight(vertices[i]);
+                                    }
+                                    if (x != resolution - 1 && y != 0) {
+                                        triangles[triIndex] = i;
+                                        triangles[triIndex + 1] = i + 1;
+                                        triangles[triIndex + 2] = i + 2;
+
+                                        triangles[triIndex + 3] = i + 1;
+                                        triangles[triIndex + 4] = i + 3;
+                                        triangles[triIndex + 5] = i + 2;
+                                        triIndex += 6;
+                                    }
+                                    i++;
+                                }
+                            }
+                            break;
+                        case TerrainSide.Left:
+                            for (int z = 0; z < resolution; z++) {
+                                for (int y = -1; y <= 0; y++) {
+                                    float scaledZ = (z / (resolution - 1f) - 0.5f) * TerrainGrid.Height;
+                                    vertices[i] = new Vector3(-semiHeight, y, scaledZ);
+                                    if (vertices[i].y > -1f) {
+                                        vertices[i].y = CalculateHeight(vertices[i]);
+                                    }
+                                    if (y != 0 && z != resolution - 1) {
+                                        triangles[triIndex] = i;
+                                        triangles[triIndex + 1] = i + 2;
+                                        triangles[triIndex + 2] = i + 1;
+
+                                        triangles[triIndex + 3] = i + 1;
+                                        triangles[triIndex + 4] = i + 2;
+                                        triangles[triIndex + 5] = i + 3;
+                                        triIndex += 6;
+                                    }
+                                    i++;
+                                }
+                            }
+                            break;
+                        case TerrainSide.Right:
+                            for (int z = 0; z < resolution; z++) {
+                                for (int y = -1; y <= 0; y++) {
+                                    float scaledZ = (z / (resolution - 1f) - 0.5f) * TerrainGrid.Height;
+                                    vertices[i] = new Vector3(semiHeight, y, scaledZ);
+                                    if (vertices[i].y > -1f) {
+                                        vertices[i].y = CalculateHeight(vertices[i]);
+                                    }
+                                    if (y != 0 && z != resolution - 1) {
+                                        triangles[triIndex] = i;
+                                        triangles[triIndex + 1] = i + 1;
+                                        triangles[triIndex + 2] = i + 2;
+
+                                        triangles[triIndex + 3] = i + 1;
+                                        triangles[triIndex + 4] = i + 3;
+                                        triangles[triIndex + 5] = i + 2;
+                                        triIndex += 6;
+                                    }
+                                    i++;
+                                }
+                            }
+                            break;
+                    }
+
+                    int verticesCount = vertices.Length;
+                    for (i = 0; i < verticesCount; i++)
+                        if (vertices[i].y > 0.01f)
+                            vertices[i].y = CalculateHeight(vertices[i]);
+                    break;
             }
 
             mesh.Clear();
@@ -123,7 +294,7 @@ namespace TerrainGeneration {
 
         private float CalculateHeight(Vector3 vertex) {
             float result = 0;
-            Vector2Int intVec = new Vector2Int((int)vertex.x, (int)vertex.z);
+            Vector2Int intVec = new Vector2Int((int) vertex.x, (int) vertex.z);
             if (terrainOptions.modifierHeightMap.ContainsKey(intVec)) {
                 result = terrainOptions.modifierHeightMap[intVec];
             }
@@ -133,62 +304,60 @@ namespace TerrainGeneration {
                     result = -0.5f;
                 }
             }
+
             return result;
         }
 
-        private List<UnitList> _waterData = new List<UnitList>();
+        private readonly List<UnitList> _waterData = new List<UnitList>();
+
         private void BuildOneWaterArea() {
             Vector2Int tmp;
             int randomX, randomY;
             var waterList = new UnitList();
-            int crashHandler = 0;
-            while (waterList.Count() < terrainOptions.maxWaterSize 
-                   && crashHandler < terrainOptions.crashLoopLimit) {
-                crashHandler++;
+            while (waterList.Count() < terrainOptions.maxWaterSize) {
                 if (waterList.Count() == 0) {
-                    // Horizontal
-                    randomY = Random.Range(0, terrainOptions.width);
-                    // Vertical
-                    randomX = Random.Range(0, terrainOptions.height);
-                    if (randomX > 0 && randomX < terrainOptions.width - 1 
-                                    && randomY > 0 && randomY < terrainOptions.height - 1)
-                        continue;
-                } else {
+                    randomY = Random.Range(-terrainOptions.height / 2, terrainOptions.height / 2);
+                    randomX = Random.Range(-terrainOptions.width / 2, terrainOptions.width / 2);
+                }
+                else {
                     tmp = waterList.Last();
-                    randomY = Random.Range(tmp.y - 1, tmp.y + 2);
+                    randomY = Random.Range(tmp.y - 1, tmp.y + 2); // +2 because exclusive
                     randomX = Random.Range(tmp.x - 1, tmp.y + 2);
                 }
-                if (waterList.Contains(randomX, randomY) || randomX < 0 || randomY < 0
-                    || randomX >= terrainOptions.width || randomY >= terrainOptions.height
+
+                if (randomX < -terrainOptions.width / 2 || randomY < -terrainOptions.height / 2 ||
+                    randomX >= terrainOptions.width / 2 || randomY >= terrainOptions.height / 2
                     || !waterList.HasNeighbour(randomX, randomY))
                     continue;
                 waterList.Add(randomX, randomY);
             }
+
             _waterData.Add(waterList);
         }
-        
+
         private void BuildOneMountain() {
-            int posX = Random.Range(-terrainOptions.width/2, terrainOptions.width/2);
-            int posZ = Random.Range(-terrainOptions.height/2, terrainOptions.height/2);
+            int posX = Random.Range(-terrainOptions.width / 2, terrainOptions.width / 2);
+            int posZ = Random.Range(-terrainOptions.height / 2, terrainOptions.height / 2);
             Vector2 mountainSource = new Vector2(posX, posZ);
             int mountTipHeight = Random.Range(terrainOptions.minMountainHeight, terrainOptions.maxMountainHeight + 1);
-            if(!terrainOptions.modifierHeightMap.ContainsKey(mountainSource))
+            if (!terrainOptions.modifierHeightMap.ContainsKey(mountainSource))
                 terrainOptions.modifierHeightMap.Add(mountainSource, mountTipHeight);
             int radius = 1;
-            for (int i = mountTipHeight-1; i > 0; i--) {
+            for (int i = mountTipHeight - 1; i > 0; i--) {
                 SetMountainFloor(i, mountainSource, radius++);
             }
         }
-        
+
         private void SetMountainFloor(int yPos, Vector2 center, int radius) {
             int y = yPos;
             for (float x = center.x - radius; x <= center.x + radius; x++) {
                 for (float z = center.y - radius; z <= center.y + radius; z++) {
-                    if (Random.Range(0f, 1f) > 0.6f) y = yPos-1;
+                    if (Random.Range(0f, 1f) > 0.6f) y = yPos - 1;
                     Vector2 currentUnit = new Vector2(x, z);
                     if (!terrainOptions.modifierHeightMap.ContainsKey(currentUnit)) {
                         terrainOptions.modifierHeightMap.Add(currentUnit, y);
                     }
+
                     y = yPos;
                 }
             }

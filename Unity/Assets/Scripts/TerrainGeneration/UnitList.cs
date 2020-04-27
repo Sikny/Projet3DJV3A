@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TerrainGeneration {
+    [Serializable]
     public class UnitList {
-        private readonly List<Vector2Int> _list = new List<Vector2Int>();
+        public readonly List<Vector2Int> _list = new List<Vector2Int>();
 
         public void Add(int x, int y) {
             _list.Add(new Vector2Int(x, y));
