@@ -1,5 +1,4 @@
-﻿using Game;
-using UnityEngine;
+﻿using Utility;
 
 namespace Items {
     public class Consumable : Item
@@ -14,7 +13,7 @@ namespace Items {
     
         public void RemoveFromInventory ()
         {
-            Inventory.instance.RemoveConsumable(this);
+            GameSingleton.Instance.uiManager.inventory.RemoveConsumable(this);
         }
     }
 }

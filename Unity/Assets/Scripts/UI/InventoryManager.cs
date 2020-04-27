@@ -2,6 +2,7 @@
 using Items;
 using TMPro;
 using UnityEngine;
+using Utility;
 
 namespace UI {
     public class InventoryManager : ItemsPanel {
@@ -11,73 +12,52 @@ namespace UI {
 
         public ItemSlot prefabSlot;
 
-        private List<ItemSlot> _consummableSlots = new List<ItemSlot>();
+        private List<ItemSlot> _consumableSlots = new List<ItemSlot>();
 
         private List<ItemSlot> _unitSlots = new List<ItemSlot>();
 
-        #region Singleton
-
-        public static InventoryManager instance;
-
-        private void Awake() {
-            if (instance != null) {
-                Debug.Log("Several instances");
-                return;
-            }
-
-            instance = this;
-        }
-
-        #endregion
-
-        // Start is called before the first frame update
         void Start() {
             inventoryPanel.SetActive(false);
             UpdateGold();
         }
 
         public void UpdateUiConsumable(Consumable consumable) {
-            ItemSlot currentSlot = prefabSlot;
+            var addedItem = Instantiate(prefabSlot, itemsParent, false);
+            addedItem.item = consumable;
+            addedItem.itemName.SetText(consumable.itemName);
+            addedItem.icon.sprite = consumable.icon;
 
-            currentSlot.item = consumable;
-            currentSlot.itemName.SetText(consumable.itemName);
-            currentSlot.icon.sprite = consumable.icon;
-
-            _consummableSlots.Add(Instantiate(currentSlot, itemsParent, false));
+            _consumableSlots.Add(addedItem);
         }
 
         public void UpdateUiEquipment(Equipment equipment) {
-            ItemSlot currentSlot = prefabSlot;
-
-            currentSlot.item = equipment;
-            currentSlot.itemName.SetText(equipment.itemName);
-            currentSlot.icon.sprite = equipment.icon;
-
-            Instantiate(currentSlot, equipmentsParent, false);
+            var addedItem = Instantiate(prefabSlot, equipmentsParent, false);
+            addedItem.item = equipment;
+            addedItem.itemName.SetText(equipment.itemName);
+            addedItem.icon.sprite = equipment.icon;
         }
 
         public void UpdateUiUnit(StoreUnit unit) {
-            ItemSlot currentSlot = prefabSlot;
-
-            currentSlot.item = unit;
-            currentSlot.itemName.SetText(unit.itemName);
-            currentSlot.icon.sprite = unit.icon;
-
-            _unitSlots.Add(Instantiate(currentSlot, unitsParent, false));
+            var addedItem = Instantiate(prefabSlot, unitsParent, false);
+            addedItem.item = unit;
+            addedItem.itemName.SetText(unit.itemName);
+            addedItem.icon.sprite = unit.icon;
+            
+            _unitSlots.Add(addedItem);
         }
 
         public void RemoveConsumable(Consumable consumable) {
             int targetIndex = 0;
-            for (int i = _consummableSlots.Count - 1; i > 0; i--) {
-                if (_consummableSlots[i].item == consumable) {
+            for (int i = _consumableSlots.Count - 1; i > 0; i--) {
+                if (_consumableSlots[i].item == consumable) {
                     targetIndex = i;
                     break;
                 }
             }
 
-            GameObject slotGameobject = _consummableSlots[targetIndex].gameObject;
-            Destroy(slotGameobject);
-            _consummableSlots.Remove(_consummableSlots[targetIndex]);
+            GameObject slotGameObject = _consumableSlots[targetIndex].gameObject;
+            Destroy(slotGameObject);
+            _consumableSlots.Remove(_consumableSlots[targetIndex]);
         }
 
         public void RemoveUnit(StoreUnit unit) {
@@ -95,7 +75,7 @@ namespace UI {
         }
 
         public void UpdateGold() {
-            goldText.SetText(Player.instance.gold + " g");
+            goldText.SetText(GameSingleton.Instance.GetPlayer().gold + " g");
         }
     }
 }

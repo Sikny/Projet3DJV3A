@@ -1,32 +1,63 @@
-﻿using CustomEvents;
+﻿using System;
+using CustomEvents;
 using UnityEngine;
 using Utility;
 
 namespace Game {
     public class ShortcutManager : MonoBehaviour {
-        public CustomEvent pauseEvent;
-        public CustomEvent resumeEvent;
+        [Serializable]
+        public class KeyMap {
+            public KeyCode selectKey = KeyCode.Mouse0;
+            public KeyCode cameraRotateKey = KeyCode.Mouse1;
+            public KeyCode shopKey = KeyCode.S;
+            public KeyCode inventoryKey = KeyCode.I;
+            public KeyCode pauseKey = KeyCode.Escape;
+        }
 
-        public CustomEvent toggleInventoryEvent;
-        public CustomEvent toggleShopEvent;
+        public KeyMap keyMap;
 
-        // Update is called once per frame
-        void Update() {
-            if (Input.GetKeyDown(KeyCode.S)) {
-                toggleShopEvent.Raise();
+        [Serializable]
+        public class GameEvents {
+            public CustomEvent pauseEvent;
+            public CustomEvent resumeEvent;
+
+            public CustomEvent toggleInventoryEvent;
+            public CustomEvent toggleShopEvent;
+            public CustomEvent selectionEvent;
+            public CustomEvent cameraRotateOnEvent;
+            public CustomEvent cameraRotateOffEvent;            
+        }
+
+        public GameEvents gameEvents;
+        
+        void DoUpdate() {
+            if (Input.GetKeyDown(keyMap.shopKey)) {
+                gameEvents.toggleShopEvent.Raise();
             }
 
-            if (Input.GetKeyDown(KeyCode.I)) {
-                toggleInventoryEvent.Raise();
+            if (Input.GetKeyDown(keyMap.inventoryKey)) {
+                gameEvents.toggleInventoryEvent.Raise();
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (Input.GetKeyDown(keyMap.pauseKey)) {
                 if (GameSingleton.Instance.gamePaused) {
-                    resumeEvent.Raise();
+                    gameEvents.resumeEvent.Raise();
                 }
                 else {
-                    pauseEvent.Raise();
+                    gameEvents.pauseEvent.Raise();
                 }
+            }
+
+            if (Input.GetKeyDown(keyMap.selectKey)) {
+                gameEvents.selectionEvent.Raise();
+            }
+
+            if (Input.GetKeyDown(keyMap.cameraRotateKey)) {
+                gameEvents.cameraRotateOnEvent.Raise();
+            }
+
+            if (Input.GetKeyUp(keyMap.cameraRotateKey)) {
+                gameEvents.cameraRotateOffEvent.Raise();
             }
         }
     }

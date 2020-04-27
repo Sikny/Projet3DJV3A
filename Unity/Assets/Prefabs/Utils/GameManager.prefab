@@ -50,13 +50,13 @@ MonoBehaviour:
   updateLoop: {fileID: 11400000, guid: 9b08185e5a74c2a46837a37727fe96cd, type: 2}
   fixedUpdateLoop: {fileID: 11400000, guid: ab7b9e20125c76c4a88d37e46b009b7d, type: 2}
   lateUpdateLoop: {fileID: 11400000, guid: 1fa043e1d42b8754ab36a8f659c3956d, type: 2}
-  gameInitEvent: {fileID: 11400000, guid: 4bc707f2d33944441b723eae0b3a7e3c, type: 2}
   gameVariables: {fileID: 11400000, guid: 228004ee795077c4d8223abcede2c5f5, type: 2}
   levelManager: {fileID: 0}
   gameSettings: {fileID: 11400000, guid: dfbe9b8a7b0398646aedb0eb9776d315, type: 2}
   languageDictionary: {fileID: 11400000, guid: 0d6cf9341b33a57479eaa5b00a4243f6, type: 2}
   endGamePanel: {fileID: 44291853314280001}
   gamePaused: 0
+  inventory: {fileID: 11400000, guid: b7120ce116e92ee4d9d9f6c7f5d23817, type: 2}
 --- !u!114 &8917694000792785765
 MonoBehaviour:
   m_ObjectHideFlags: 0

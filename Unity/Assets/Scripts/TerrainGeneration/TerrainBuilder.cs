@@ -91,7 +91,6 @@ namespace TerrainGeneration {
             for (int i = 0; i < terrainOptions.mountainCount; i++) {
                 BuildOneMountain();
             }
-            DisplayGrid();
         }
 
         private void BuildOneWaterArea() {
@@ -125,16 +124,6 @@ namespace TerrainGeneration {
             _terrainData.Add(new KeyValuePair<ZoneType, UnitList>(ZoneType.Water, waterList));
             
             TerrainGrid.Instance.GridArray = grid;
-        }
-       
-        private void DisplayGrid() {
-            for (int i = 0; i < terrainOptions.height; i++) {
-                for (int j = 0; j < terrainOptions.width; j++) {
-                    printGrid += grid[terrainOptions.height-i-1, j];
-                }
-                printGrid += "\n";
-            }
-            //Debug.Log(printGrid);
         }
 
         private void BuildOneMountain() {

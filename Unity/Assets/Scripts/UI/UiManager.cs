@@ -1,17 +1,18 @@
-﻿using UnityEngine;
+﻿using Game;
+using UnityEngine;
+using Utility;
 
 namespace UI {
     public class UiManager : MonoBehaviour {
         public GameObject shopPanel;
         public GameObject inventoryPanel;
-        
-        public static void ClearUi(GameObject parent, int ignoreIndex)
-        {
-            for (int i = 1; i < parent.transform.childCount; i++)
-            {
-                if(ignoreIndex != i)
-                    parent.transform.GetChild(i).gameObject.SetActive(false);
-            }
+
+        public InventoryManager inventoryUi;
+        public Inventory inventory;
+
+        private void Start() {
+            GameSingleton.Instance.uiManager = this;
+            inventory.Load(inventoryUi);
         }
 
         public void ToggleInventory() {
@@ -22,6 +23,11 @@ namespace UI {
         public void ToggleShop() {
             shopPanel.SetActive(!shopPanel.activeSelf);
             inventoryPanel.SetActive(false);
+        }
+
+        public void HideUis() {
+            inventoryPanel.SetActive(false);
+            shopPanel.SetActive(false);
         }
     }
 }

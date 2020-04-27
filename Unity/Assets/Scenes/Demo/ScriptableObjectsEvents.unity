@@ -363,7 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac7295daa77b8149a12ef885755fe24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myEvent: {fileID: 11400000, guid: c1c90f67d7058f542b09d1c8e395a434, type: 2}
+  myCustomEvent: {fileID: 11400000, guid: 417c6e98c93ecd34e9b0938f5ce0fc0e, type: 2}
 --- !u!1 &852846589
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ff765aaf74eb34896b6b3ea87a2fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSent: {fileID: 11400000, guid: c1c90f67d7058f542b09d1c8e395a434, type: 2}
+  customEventSent: {fileID: 11400000, guid: 417c6e98c93ecd34e9b0938f5ce0fc0e, type: 2}
   action:
     m_PersistentCalls:
       m_Calls:
@@ -636,7 +636,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: OK SENT
+          m_StringArgument: test
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!4 &1747936158

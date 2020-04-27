@@ -1,5 +1,7 @@
-﻿using Units;
+﻿using Game;
+using Units;
 using UnityEngine;
+using Utility;
 
 namespace Units  {
     /**
@@ -76,7 +78,7 @@ namespace Units  {
         }
 
         public override void Kill() {
-            Player.instance.gold += 150;
+            GameSingleton.Instance.GetPlayer().gold += 150;
             base.Kill();
         }
     }
