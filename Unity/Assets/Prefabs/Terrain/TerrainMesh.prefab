@@ -87,6 +87,7 @@ MonoBehaviour:
   textureResolution: 50
   terrainOptions: {fileID: 2496842524491047986}
   cursor: {fileID: 2496842525972769654}
+  waterObject: {fileID: 5230928976668908788}
 --- !u!114 &2496842524491047986
 MonoBehaviour:
   m_ObjectHideFlags: 0

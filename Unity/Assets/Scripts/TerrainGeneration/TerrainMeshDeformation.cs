@@ -28,6 +28,7 @@ namespace TerrainGeneration {
 
         public TerrainOptions terrainOptions;
         public Transform cursor;
+        public Transform waterObject;
 
         private void Awake() {
             Init();
@@ -65,10 +66,11 @@ namespace TerrainGeneration {
             }
 
             BuildTerrain();
+            waterObject.transform.localScale = new Vector3(terrainOptions.width-0.0001f, 
+                    waterObject.localScale.y, terrainOptions.height-0.0001f);
         }
 
         private void BuildTerrain() {
-            terrainOptions.rules.seedWorld = Random.Range(0, 100000);
             if (meshObjects == null) {
                 meshObjects = new List<GameObject>();
             }
@@ -110,8 +112,6 @@ namespace TerrainGeneration {
 
             material.SetVector("_YMinMax", new Vector4(_minMax.Min, _minMax.Max));
             material.SetTexture("_terrainTexture", texture);
-
-            //meshRenderer.sharedMaterial = material;
         }
 
         private void BuildTerrainMesh(TerrainSide side) {

@@ -194,22 +194,22 @@ PrefabInstance:
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 0
+      value: 7.9e-43
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 47
+      value: 7.1e-44
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 0
+      value: 4.8902997e-17
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613575, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
@@ -552,6 +552,21 @@ PrefabInstance:
         type: 3}
       propertyPath: meshObjects.Array.data[5]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2496842524491047987, guid: 3b1f21d804692474d8b111d1df75bef5,
+        type: 3}
+      propertyPath: resolution
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230928976668908788, guid: 3b1f21d804692474d8b111d1df75bef5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 29.9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5230928976668908788, guid: 3b1f21d804692474d8b111d1df75bef5,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 29.9999
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b1f21d804692474d8b111d1df75bef5, type: 3}
