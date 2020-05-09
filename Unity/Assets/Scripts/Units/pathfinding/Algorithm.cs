@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace AStar
 {
     public class Algorithm
     {
+        
+        readonly Stopwatch sw = new Stopwatch();
         protected Graph graph;
         
         public Algorithm(Graph graph)
@@ -25,11 +28,15 @@ namespace AStar
 
         private void Run()
         {
+            sw.Reset();
+            
             graph.ComputeEstimatedDistance();
+            
             List<Node> nodeToVisit = graph.NodesList();
             bool exitReached = false;
             while (nodeToVisit.Count != 0 && !exitReached)
             {
+                sw.Start();
                 Node currentNode = nodeToVisit.FirstOrDefault();
                 foreach (var newNode in nodeToVisit)
                 {
@@ -40,6 +47,7 @@ namespace AStar
                     }
                     
                 }
+                
 
                 if (currentNode == graph.ExitNode)
                 {
@@ -47,9 +55,11 @@ namespace AStar
                 }
                 else
                 {
-                    List<Arc> arcsFromCurrentNode = graph.ArcsList(currentNode);
+                    //List<Arc> arcsFromCurrentNode = graph.ArcsList(currentNode);
+                    Arc[] arcsFromCurrentNode = graph.ArcsList(currentNode);
                     foreach (var arc in arcsFromCurrentNode)
                     {
+                        if(arc == null ) break;
                         if (arc.From.DistanceTraveled + arc.Cost < arc.To.DistanceTraveled)
                         {
                             arc.To.DistanceTraveled = arc.From.DistanceTraveled + arc.Cost;
@@ -58,8 +68,12 @@ namespace AStar
                     }
 
                     nodeToVisit.Remove(currentNode);
+                    
                 }
+                sw.Stop();
             }
+            
+            Debug.Log(sw.ElapsedMilliseconds);
         }
     }
 }

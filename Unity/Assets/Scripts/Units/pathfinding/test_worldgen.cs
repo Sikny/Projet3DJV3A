@@ -19,22 +19,22 @@ public class test_worldgen : MonoBehaviour
     
     void Start()
     {
-        Rule r = Rule.readLevel("test");
+        //Rule r = Rule.readLevel("test");
+
+        mapVertices = new Vector3[SIZE*SIZE];//r.loadHeightmap(getVertices(SIZE), SIZE);
+        tiles = new Tile[SIZE, SIZE];
         
-        mapVertices = r.loadHeightmap(getVertices(SIZE), SIZE);
-        tiles = new Tile[SIZE*2+1, SIZE*2+1];
-        
-        for (int i = 0; i <= SIZE*2; i++)
+        for (int i = 0; i < SIZE; i++)
         {
-            for (int j = 0; j <= SIZE*2; j++)
+            for (int j = 0; j < SIZE; j++)
             {
-                float y = mapVertices[i + j * SIZE].y;
+                float y = 0;//mapVertices[i + j * SIZE].y;
                 GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 cube.transform.position = new Vector3(i,y,j);
                 MeshRenderer meshRenderer = cube.GetComponent<MeshRenderer>();
                 
                 meshRenderer.material.SetColor("_BaseColor", (i + j) % 2 == 0 ? Color.black : Color.white);
-                if (y < 1.0f)
+                if (y > 1.0f)
                 {
                     tiles[i, j] = new Tile(TileType.Wall, i, j, cube.transform.position); //TODO : y should be the normal of neightborg blocks
                     meshRenderer.material.SetColor("_BaseColor", Color.blue);
