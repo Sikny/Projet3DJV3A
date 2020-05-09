@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -15,12 +16,13 @@ namespace TerrainGeneration {
         Back = 5
     }
 
-    public class TerrainMeshDeformation : MonoBehaviour {
+    public class TerrainMeshBuilder : MonoBehaviour {
         public Material material;
         [Range(2, 256)] public int resolution;
         [SerializeField, HideInInspector] private List<GameObject> meshObjects;
         private MeshFilter[] _meshFilters;
         private MeshRenderer[] _meshRenderers;
+        private MeshCollider _meshCollider;
 
         private MinMax _minMax;
         public Gradient heightGradient;
@@ -28,11 +30,10 @@ namespace TerrainGeneration {
 
         public TerrainOptions terrainOptions;
         public Transform cursor;
+        public Transform waterObject;
 
-        private void Awake() {
-            Init();
-        }
-        
+        private Camera _cam;
+
         private void Clear() {
             int meshesCount = meshObjects.Count;
             for (int i = 0; i < meshesCount; i++) {
@@ -42,13 +43,19 @@ namespace TerrainGeneration {
             meshObjects.Clear();
         }
 
-        [ContextMenu("Build")]
-        private void Init() {
+        [ContextMenu("Init")]
+        private void InitMeshes() {
+            StartCoroutine(Init());
+        }
+
+        public IEnumerator Init() {
             TerrainGrid.Height = terrainOptions.height;
             TerrainGrid.Width = terrainOptions.width;
 
             TerrainGrid.Instance.cursor = cursor;
 
+            _cam = Camera.main;
+            
             _waterData.Clear();
 
             Random.InitState(terrainOptions.rules.seedWorld);
@@ -65,16 +72,15 @@ namespace TerrainGeneration {
             }
 
             BuildTerrain();
+            waterObject.transform.localScale = new Vector3(terrainOptions.width - 0.0001f,
+                waterObject.localScale.y, terrainOptions.height - 0.0001f);
+
+            yield return null;
         }
 
         private void BuildTerrain() {
-            terrainOptions.rules.seedWorld = Random.Range(0, 100000);
-            if (meshObjects == null) {
-                meshObjects = new List<GameObject>();
-            }
-            else {
-                Clear();
-            }
+            Clear();
+            meshObjects = new List<GameObject>();
 
             var sides = Enum.GetValues(typeof(TerrainSide));
 
@@ -85,7 +91,10 @@ namespace TerrainGeneration {
 
             foreach (TerrainSide terrainSide in sides) {
                 GameObject meshObj = new GameObject("TerrainMesh" + Enum.GetName(typeof(TerrainSide), terrainSide));
+                meshObj.layer = 8;    // Ground
                 meshObj.transform.parent = transform;
+                if (terrainSide == TerrainSide.Top)
+                    meshObj.AddComponent<TerrainRaycaster>();
 
                 MeshRenderer meshRenderer = meshObj.AddComponent<MeshRenderer>();
                 meshRenderer.sharedMaterial = material;
@@ -99,6 +108,9 @@ namespace TerrainGeneration {
                 meshObjects.Add(meshObj);
             }
 
+            _meshCollider = _meshFilters[(int) TerrainSide.Top].gameObject.AddComponent<MeshCollider>();
+            _meshCollider.sharedMesh = _meshFilters[(int) TerrainSide.Top].sharedMesh;
+
             Texture2D texture = new Texture2D(textureResolution, 1);
             Color[] colours = new Color[textureResolution];
             for (int i = 0; i < textureResolution; i++) {
@@ -110,10 +122,9 @@ namespace TerrainGeneration {
 
             material.SetVector("_YMinMax", new Vector4(_minMax.Min, _minMax.Max));
             material.SetTexture("_terrainTexture", texture);
-
-            //meshRenderer.sharedMaterial = material;
         }
-
+        
+        // TODO SIMPLIFY CODE
         private void BuildTerrainMesh(TerrainSide side) {
             int index = (int) side;
             Mesh mesh = _meshFilters[index].sharedMesh;
@@ -197,6 +208,7 @@ namespace TerrainGeneration {
                                     if (vertices[i].y > -1f) {
                                         vertices[i].y = CalculateHeight(vertices[i]);
                                     }
+
                                     if (x != resolution - 1 && y != 0) {
                                         triangles[triIndex] = i;
                                         triangles[triIndex + 1] = i + 2;
@@ -207,9 +219,11 @@ namespace TerrainGeneration {
                                         triangles[triIndex + 5] = i + 3;
                                         triIndex += 6;
                                     }
+
                                     i++;
                                 }
                             }
+
                             break;
                         case TerrainSide.Front:
                             for (int x = 0; x < resolution; x++) {
@@ -219,6 +233,7 @@ namespace TerrainGeneration {
                                     if (vertices[i].y > -1f) {
                                         vertices[i].y = CalculateHeight(vertices[i]);
                                     }
+
                                     if (x != resolution - 1 && y != 0) {
                                         triangles[triIndex] = i;
                                         triangles[triIndex + 1] = i + 1;
@@ -229,9 +244,11 @@ namespace TerrainGeneration {
                                         triangles[triIndex + 5] = i + 2;
                                         triIndex += 6;
                                     }
+
                                     i++;
                                 }
                             }
+
                             break;
                         case TerrainSide.Left:
                             for (int z = 0; z < resolution; z++) {
@@ -241,6 +258,7 @@ namespace TerrainGeneration {
                                     if (vertices[i].y > -1f) {
                                         vertices[i].y = CalculateHeight(vertices[i]);
                                     }
+
                                     if (y != 0 && z != resolution - 1) {
                                         triangles[triIndex] = i;
                                         triangles[triIndex + 1] = i + 2;
@@ -251,9 +269,11 @@ namespace TerrainGeneration {
                                         triangles[triIndex + 5] = i + 3;
                                         triIndex += 6;
                                     }
+
                                     i++;
                                 }
                             }
+
                             break;
                         case TerrainSide.Right:
                             for (int z = 0; z < resolution; z++) {
@@ -263,6 +283,7 @@ namespace TerrainGeneration {
                                     if (vertices[i].y > -1f) {
                                         vertices[i].y = CalculateHeight(vertices[i]);
                                     }
+
                                     if (y != 0 && z != resolution - 1) {
                                         triangles[triIndex] = i;
                                         triangles[triIndex + 1] = i + 1;
@@ -273,9 +294,11 @@ namespace TerrainGeneration {
                                         triangles[triIndex + 5] = i + 2;
                                         triIndex += 6;
                                     }
+
                                     i++;
                                 }
                             }
+
                             break;
                     }
 
@@ -335,6 +358,7 @@ namespace TerrainGeneration {
             _waterData.Add(waterList);
         }
 
+        // TODO : ROUND MOUNTAINS ??
         private void BuildOneMountain() {
             int posX = Random.Range(-terrainOptions.width / 2, terrainOptions.width / 2);
             int posZ = Random.Range(-terrainOptions.height / 2, terrainOptions.height / 2);
