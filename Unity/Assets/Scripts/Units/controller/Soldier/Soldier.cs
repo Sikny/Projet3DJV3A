@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Units{
     public class Soldier : Controller
     {
         private const float TICK_ATTACK= 0.10f; // 10 per second
-        
+
         public Soldier(AbstractUnit body) : base(body)
         {
             speedEntity = 0.8f;
             basisAttack = 1.0f;
+            //upgrades.Add(EntityType.Spearman);
+            //upgrades.Add(EntityType.Knight);
+
         }
         
         public override void interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget)

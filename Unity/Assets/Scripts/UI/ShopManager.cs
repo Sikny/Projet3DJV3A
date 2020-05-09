@@ -15,6 +15,7 @@ namespace UI {
 
         private Shop _shop;
 
+        
         #region Singleton
 
         public static ShopManager instance;
@@ -33,12 +34,13 @@ namespace UI {
 
         void Start() {
             _shop = Shop.Instance;
-
+            
             UpdateUIItems();
             UpdateUIEquipments();
             UpdateUIUnits();
             UpdateGold();
             shopPanel.SetActive(false);
+            
         }
 
         private void UpdateUIItems() {

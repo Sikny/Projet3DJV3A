@@ -14,10 +14,12 @@ public class Wizard : Controller
 
     private bool canShoot = false;
 
+    
     public Wizard(AbstractUnit body) : base(body)
     {
         speedEntity = 0.5f;
         basisAttack = 10f;
+        //upgrades.Add(EntityType.something);
     }
 
     public override void interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget)

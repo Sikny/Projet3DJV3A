@@ -136,6 +136,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mage
       objectReference: {fileID: 0}
+    - target: {fileID: 3615504290006116332, guid: 2869a4ddc78ec384aa381910b4b2a65d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615504290006116332, guid: 2869a4ddc78ec384aa381910b4b2a65d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615504290006116335, guid: 2869a4ddc78ec384aa381910b4b2a65d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028375930194285825, guid: 2869a4ddc78ec384aa381910b4b2a65d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028375930194285826, guid: 2869a4ddc78ec384aa381910b4b2a65d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028375930194285826, guid: 2869a4ddc78ec384aa381910b4b2a65d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246859762993817985, guid: 2869a4ddc78ec384aa381910b4b2a65d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7385633686172652229, guid: 2869a4ddc78ec384aa381910b4b2a65d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2869a4ddc78ec384aa381910b4b2a65d, type: 3}
 --- !u!4 &7443190564065166007 stripped

@@ -45,5 +45,11 @@ namespace Items {
         public void UseItem() {
             item.Use();
         }
+
+        public void UpgradeUnit()
+        {
+            item.Upgrade();
+
+        }
     }
 }
