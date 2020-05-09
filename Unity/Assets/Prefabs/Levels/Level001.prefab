@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e8925b4cc66eb438052274686b5d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainBuilder: {fileID: 2739367744365421580}
+  terrainBuilder: {fileID: 3903957490331760120}
   consumablesList:
   - {fileID: 11400000, guid: 45b2d4959514bca41b1bc99a1493fc57, type: 2}
   - {fileID: 11400000, guid: 32e5c4bdeb00e0d4b83bc8fedea14800, type: 2}
@@ -58,7 +58,7 @@ MonoBehaviour:
   enemySpawns:
   - spawnTime: 0
     entityType: 0
-    position: {x: -10, y: 1, z: 10}
+    position: {x: -10, y: 10}
   livingEnemies: []
 --- !u!1001 &1296933168781156492
 PrefabInstance:
@@ -67,10 +67,40 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1296933168775581950}
     m_Modifications:
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: meshObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: meshObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: meshObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: meshObjects.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: meshObjects.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: meshObjects.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4831506940399020680, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
       propertyPath: m_Name
-      value: TerrainBuilder
+      value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: 4831506940399020684, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
@@ -170,15 +200,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1296933168781156492}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2739367744365421580 stripped
+--- !u!114 &3903957490331760120 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4033978056318059648, guid: 023c5a39670951d49be3c39d866d3307,
+  m_CorrespondingSourceObject: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
     type: 3}
   m_PrefabInstance: {fileID: 1296933168781156492}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8292aa0c3bff8af4ab01dc16e07b78bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 04c4f47c54a8925479dc24797ab9acf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

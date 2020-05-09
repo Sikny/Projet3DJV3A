@@ -13,13 +13,13 @@ namespace Game {
     public class EnemySpawn {
         public float spawnTime;
         public EntityType entityType;
-        public Vector3 position;
+        public Vector2 position;
     }
     public class Level : MonoBehaviour {
         private Shop _shop;
         private SystemUnit _systemUnit;
 
-        public TerrainBuilder terrainBuilder;
+        public TerrainMeshBuilder terrainBuilder;
 
         [Header("Shop content")]
         public List<Consumable> consumablesList = new List<Consumable>();
@@ -81,8 +81,9 @@ namespace Game {
             _playerUnits = new List<PlayerUnit>(FindObjectsOfType<PlayerUnit>());
             while (enemySpawns.Count > 0) {
                 EnemySpawn current = enemySpawns[0];
+                Vector3 position = new Vector3(current.position.x, SystemUnit.YPos, current.position.y);
                 DOVirtual.DelayedCall(current.spawnTime, () => {
-                    Transform newUnit = _systemUnit.SpawnUnit(current.entityType, _systemUnit.aiUnitPrefab, current.position);
+                    Transform newUnit = _systemUnit.SpawnUnit(current.entityType, _systemUnit.aiUnitPrefab, position);
                     livingEnemies.Add(newUnit);
                     enemySpawns.Remove(current);
                 });
@@ -94,15 +95,12 @@ namespace Game {
 
         private void OnDrawGizmos() {
             if (Application.isPlaying) return;
-            Gizmos.color = Color.green;
-            Vector3 dims = new Vector3(terrainBuilder.unitScale*terrainBuilder.terrainOptions.width, 
-                terrainBuilder.unitScale, terrainBuilder.unitScale*terrainBuilder.terrainOptions.height);
-            Gizmos.DrawCube(transform.position, dims);
             
             Gizmos.color = Color.red;
             int enemyLen = enemySpawns.Count;
             for (int i = 0; i < enemyLen; i++) {
-                Gizmos.DrawSphere(enemySpawns[i].position, 0.5f);
+                Vector3 position = new Vector3(enemySpawns[i].position.x, SystemUnit.YPos, enemySpawns[i].position.y);
+                Gizmos.DrawSphere(position, 0.5f);
             }
         }
     }

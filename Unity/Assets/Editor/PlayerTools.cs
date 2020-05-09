@@ -9,20 +9,12 @@ namespace Editor {
         private static StoreUnit[] _availableUnits;
         private static Consumable[] _availableConsumables;
         private static Equipment[] _availableEquipments;
-        
-        
-
-        [MenuItem("Tools/Clear Player Data")]
-        public static void ClearPlayerData() {
-            InitData();
-            PlayerPrefs.DeleteAll();
-            _inventory.Clear();
-        }
 
         [MenuItem("Tools/Set Player Data As Default")]
         public static void ResetDefaultPlayerData() {
             InitData();
-            ClearPlayerData();
+            PlayerPrefs.DeleteAll();
+            _inventory.Clear();
             var soldierItem = FindUnitByName(_availableUnits, "Soldier");
             // Begin with 2 soldiers
             if (soldierItem == null) return;

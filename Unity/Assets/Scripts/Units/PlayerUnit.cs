@@ -63,20 +63,20 @@ namespace Units {
             return best;
         }
     
-        public void SetTargetPosition() {
+        public void SetTargetPosition(float yPos) {
             Ray ray = UnitLibData.cam.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out var hit, 100, 1 << 4) ||
                 !Physics.Raycast(ray, out hit, 100, UnitLibData.groundMask))
                 return;
 
-            float xHit = Mathf.Floor(hit.transform.position.x);
-            float zHit = Mathf.Floor(hit.transform.position.z);
+            float xHit = Mathf.Floor(hit.point.x);
+            float zHit = Mathf.Floor(hit.point.z);
             TerrainGrid.Instance.TileX = (int) xHit + (TerrainGrid.Width / 2);
             TerrainGrid.Instance.TileZ = (int) zHit + (TerrainGrid.Height / 2);
 
-            targetPosition = new Vector3(Mathf.Floor(hit.transform.position.x)-0.5f, 1,
-                Mathf.Floor(hit.transform.position.z)-0.5f) ;
+            targetPosition = new Vector3(Mathf.Floor(hit.point.x)-0.5f, yPos,
+                Mathf.Floor(hit.point.z)-0.5f) ;
             
             //Vector of unit to point 
             Vector3 unitToTarget = (targetPosition - position);
