@@ -24,6 +24,11 @@ public class UpgradeManager : MonoBehaviour
     [Space]
     public Image unitUpgrade2Image;
     public TextMeshProUGUI unitUpgrade2Name;
+
+    public TextMeshProUGUI playerGold;
+    public TextMeshProUGUI cost;
+
+    private int _currentCost;
     
     private StoreUnit _unit;
     
@@ -56,9 +61,19 @@ public class UpgradeManager : MonoBehaviour
     {
         upgradePanel.SetActive(!upgradePanel.activeSelf);
     }
+    private void UpdateGold() {
+        playerGold.SetText(GameSingleton.Instance.GetPlayer().GetGold() + "g");
+    }
+    private void UpdateCost(int price) {
+        cost.SetText("Costs: " + price+"g");
+    }
 
     public void SetUIUnits(StoreUnit storeUnit)
     {
+        
+        UpdateGold();
+        _currentCost = storeUnit.upgradeCost;
+        UpdateCost(_currentCost);
         _unit = storeUnit;
         unitName.SetText(storeUnit.name);
         unitImage.sprite = storeUnit.icon;
@@ -74,12 +89,22 @@ public class UpgradeManager : MonoBehaviour
     }
 
     public void OnUpgrade(int number)
-    {        
-        StoreUnit upgradedUnit = (number == 1) ? _unit.upgrades[0] : _unit.upgrades[1];
-        Popups.instance.Popup("Upgraded " + _unit.name + " to " + upgradedUnit.name);
-        _inventory.RemoveUnit(_unit);
-        _inventory.AddItem(upgradedUnit);
-        ToggleUpgradePannel();
+    {
+        if (GameSingleton.Instance.GetPlayer().GetGold() >= _currentCost)
+        {
+            GameSingleton.Instance.GetPlayer().gold -= _currentCost;
+            StoreUnit upgradedUnit = (number == 1) ? _unit.upgrades[0] : _unit.upgrades[1];
+            Popups.instance.Popup("Upgraded " + _unit.name + " to " + upgradedUnit.name);
+            _inventory.RemoveUnit(_unit);
+            _inventory.AddItem(upgradedUnit);
+            ToggleUpgradePannel();
+        }
+        else
+        {
+            Popups.instance.Popup("Not enough gold!");
+            ToggleUpgradePannel();
+        }
+
         
     }
     
