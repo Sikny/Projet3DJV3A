@@ -135,11 +135,14 @@ namespace TerrainGeneration {
                 {
                     Vector2Int intVec = new Vector2Int((int) (i-terrainOptions.width/2), (int) (j-terrainOptions.height/2));
                     if (terrainOptions.modifierHeightMap.ContainsKey(intVec)) {
-                        tiles[i, j] = new Tile(TileType.Grass, i, j, new Vector3(intVec.x,terrainOptions.modifierHeightMap[intVec],intVec.y));
+                        if(terrainOptions.modifierHeightMap[intVec] > 0.5f || terrainOptions.modifierHeightMap[intVec] < -0.1f)
+                            tiles[i, j] = new Tile(TileType.Wall, i, j, new Vector3(intVec.x,terrainOptions.modifierHeightMap[intVec]+1,intVec.y));
+                        else
+                            tiles[i, j] = new Tile(TileType.Grass, i, j, new Vector3(intVec.x,terrainOptions.modifierHeightMap[intVec]+1,intVec.y));
                     }
                     else
                     {
-                        tiles[i, j] = new Tile(TileType.Grass, i, j, new Vector3(intVec.x,0,intVec.y));
+                        tiles[i, j] = new Tile(TileType.Grass, i, j, new Vector3(intVec.x,1,intVec.y));
                     }
                    
                 }
