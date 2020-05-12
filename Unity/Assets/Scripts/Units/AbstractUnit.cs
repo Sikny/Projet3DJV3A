@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using AStar;
 using Units.utils;
 using UnityEditor;
 using UnityEditor.Rendering;
@@ -16,6 +18,7 @@ namespace Units {
         // The interaction controller (zombie, bowman, giant...)
         protected Controller brain;
         private int idBrain;
+        private EntityNative native;
         
         protected Vector3 velocity;
         
@@ -82,41 +85,59 @@ namespace Units {
             switch (id) 
             {
                 // Lister ici les controlleurs possibles
-                case EntityType.Soldier:   
+                case EntityType.Soldier:
+                    native = EntityNative.Soldier;
                     return new Soldier(this);
                 case EntityType.Archer:
+                    native = EntityNative.Archer;
                     return new Archer(this);
                 case EntityType.Mage:
+                    native = EntityNative.Mage;
                     return new Wizard(this);
                 case EntityType.Spearman:
+                    native = EntityNative.Soldier;
                     return new Spearman(this);
                 case EntityType.Knight:
+                    native = EntityNative.Soldier;
                     return new Knight(this);
                 case EntityType.WhiteKnight:
+                    native = EntityNative.Soldier;
                     return new WhiteKnight(this);
                 case EntityType.Horseman:
+                    native = EntityNative.Archer;
                     return new Horseman(this);
                 case EntityType.Executionist:
+                    native = EntityNative.Mage;
                     return new Executionist(this);
                 case EntityType.WhiteMage:
+                    native = EntityNative.Mage;
                     return new WhiteMage(this);
                 case EntityType.BlackMage:
+                    native = EntityNative.Mage;
                     return new BlackMage(this);
                 case EntityType.Demonist:
+                    native = EntityNative.Mage;
                     return new Demonist(this);
                 case EntityType.RedMage:
+                    native = EntityNative.Mage;
                     return new RedMage(this);
                 case EntityType.Bard:
+                    native = EntityNative.Archer;
                     return new Bard(this);
                 case EntityType.Arbalist:
+                    native = EntityNative.Archer;
                     return new Arbalist(this);
                 case EntityType.Hunter:
+                    native = EntityNative.Archer;
                     return new Hunter(this);
                 case EntityType.MachineArc:
+                    native = EntityNative.Archer;
                     return new MachineArc(this);
                 case EntityType.Catapultist:
+                    native = EntityNative.Archer;
                     return new Catapultist(this);
                 case EntityType.Sniper:
+                    native = EntityNative.Archer;
                     return new Sniper(this);
                 
 
@@ -134,7 +155,7 @@ namespace Units {
                 {1.25f, 0.75f, 1.0f}
             };
 
-            return matrixEfficient[from.idBrain, to.idBrain];
+            return matrixEfficient[(int)from.native, (int)to.native];
         }
 
         public void OnCollisionEnter(Collision c)

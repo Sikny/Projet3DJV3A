@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using AStar;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class test_perso_controller : MonoBehaviour
 {
     public GameObject worldProvider;
     private Stack<Tile> itineraire;
-
     private test_worldgen gen;
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class test_perso_controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
@@ -33,6 +35,7 @@ public class test_perso_controller : MonoBehaviour
                     itineraire = gen.graph.ReconstructPath();
                 }
             }
+            
         }
         
         Vector3 last = transform.position;

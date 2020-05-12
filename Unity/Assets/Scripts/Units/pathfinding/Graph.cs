@@ -13,7 +13,11 @@ namespace AStar
 
         private List<Node> nodesList = null;
         private List<Arc> arcsList = null;
-
+        
+        //Opti buffer
+        private Arc[] bufferArc = new Arc[4];
+        private int bufferArcIndex = 0;
+        
         public Graph(Tile[,] tiles, int nbRows, int nbCols, Tile begin, Tile end)
         {
             this.tiles = tiles;
@@ -80,30 +84,43 @@ namespace AStar
             return arcsList;
         }
 
-        public List<Arc> ArcsList(Node currentNode)
+        public Arc[] ArcsList(Node currentNode)
         {
-            List<Arc> list = new List<Arc>();
             int currentRow = ((Tile) currentNode).Row;
             int currentCol = ((Tile) currentNode).Col;
 
+            bufferArc[0] = null;
+            bufferArc[1] = null;
+            bufferArc[2] = null;
+            bufferArc[3] = null;
+            bufferArcIndex = 0;
+            
             if (currentRow - 1 >= 0 && tiles[currentRow - 1, currentCol].IsValidPath())
             {
-                list.Add(new Arc(currentNode, tiles[currentRow-1, currentCol], tiles[currentRow-1, currentCol].Cost()));
+                //list.Add(new Arc(currentNode, tiles[currentRow-1, currentCol], tiles[currentRow-1, currentCol].Cost()));
+                bufferArc[bufferArcIndex++] = new Arc(currentNode, tiles[currentRow - 1, currentCol],
+                    tiles[currentRow - 1, currentCol].Cost());
             }
             if (currentCol - 1 >= 0 && tiles[currentRow, currentCol-1].IsValidPath())
             {
-                list.Add(new Arc(currentNode, tiles[currentRow, currentCol-1], tiles[currentRow, currentCol-1].Cost()));
+                //list.Add(new Arc(currentNode, tiles[currentRow, currentCol-1], tiles[currentRow, currentCol-1].Cost()));
+                bufferArc[bufferArcIndex++] = new Arc(currentNode, tiles[currentRow, currentCol - 1],
+                    tiles[currentRow, currentCol - 1].Cost());
             }
             if (currentRow + 1 < nbRows && tiles[currentRow + 1, currentCol].IsValidPath())
             {
-                list.Add(new Arc(currentNode, tiles[currentRow+1, currentCol], tiles[currentRow+1, currentCol].Cost()));
+                //list.Add(new Arc(currentNode, tiles[currentRow+1, currentCol], tiles[currentRow+1, currentCol].Cost()));
+                bufferArc[bufferArcIndex++] = new Arc(currentNode, tiles[currentRow + 1, currentCol],
+                    tiles[currentRow + 1, currentCol].Cost());
             }
             if (currentCol + 1 < nbCols && tiles[currentRow, currentCol+1].IsValidPath())
             {
-                list.Add(new Arc(currentNode, tiles[currentRow, currentCol+1], tiles[currentRow, currentCol+1].Cost()));
+                //list.Add(new Arc(currentNode, tiles[currentRow, currentCol+1], tiles[currentRow, currentCol+1].Cost()));
+                bufferArc[bufferArcIndex++] = new Arc(currentNode, tiles[currentRow, currentCol + 1],
+                    tiles[currentRow, currentCol + 1].Cost());
             }
             
-            return list;
+            return bufferArc;
         }
 
         public void ComputeEstimatedDistance()

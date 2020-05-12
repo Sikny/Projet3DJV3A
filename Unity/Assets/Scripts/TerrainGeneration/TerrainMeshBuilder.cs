@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AStar;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -32,6 +33,12 @@ namespace TerrainGeneration {
         public Transform cursor;
         public Transform waterObject;
 
+        // Path-finding fields
+        public static Graph graph;
+        public static Algorithm alg;
+        public static Tile[,] tiles;
+        public static int[] dimensions;
+        
         private Camera _cam;
 
         private void Clear() {
@@ -54,6 +61,8 @@ namespace TerrainGeneration {
 
             TerrainGrid.Instance.cursor = cursor;
 
+            tiles = new Tile[terrainOptions.width,terrainOptions.height];
+            dimensions = new[] {terrainOptions.width, terrainOptions.height};
             _cam = Camera.main;
             
             _waterData.Clear();
@@ -75,6 +84,9 @@ namespace TerrainGeneration {
             waterObject.transform.localScale = new Vector3(terrainOptions.width - 0.0001f,
                 waterObject.localScale.y, terrainOptions.height - 0.0001f);
 
+            graph = new Graph(tiles, terrainOptions.width,terrainOptions.height,tiles[0,0], tiles[terrainOptions.width-1,terrainOptions.height-1]);
+            alg = new Algorithm(graph);
+            
             yield return null;
         }
 
@@ -116,6 +128,26 @@ namespace TerrainGeneration {
             for (int i = 0; i < textureResolution; i++) {
                 colours[i] = heightGradient.Evaluate(i / (textureResolution - 1f));
             }
+
+            for (int i = 0; i < terrainOptions.width; i++)
+            {
+                for (int j = 0; j < terrainOptions.height; j++)
+                {
+                    Vector2Int intVec = new Vector2Int((int) (i-terrainOptions.width/2), (int) (j-terrainOptions.height/2));
+                    if (terrainOptions.modifierHeightMap.ContainsKey(intVec)) {
+                        if(terrainOptions.modifierHeightMap[intVec] > 0.5f || terrainOptions.modifierHeightMap[intVec] < -0.1f)
+                            tiles[i, j] = new Tile(TileType.Wall, i, j, new Vector3(intVec.x,terrainOptions.modifierHeightMap[intVec]+1,intVec.y));
+                        else
+                            tiles[i, j] = new Tile(TileType.Grass, i, j, new Vector3(intVec.x,terrainOptions.modifierHeightMap[intVec]+1,intVec.y));
+                    }
+                    else
+                    {
+                        tiles[i, j] = new Tile(TileType.Grass, i, j, new Vector3(intVec.x,1,intVec.y));
+                    }
+                   
+                }
+            }
+            
 
             texture.SetPixels(colours);
             texture.Apply();
