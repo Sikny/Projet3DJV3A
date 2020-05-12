@@ -38,9 +38,7 @@ namespace Units{
             {
                 return; 
             }
-            Vector3 last = body.GetPosition();
-            Vector3 posTarget = isRemoted ? positionTarget : target.GetPosition();
-            body.SetPosition(Vector3.MoveTowards(last, posTarget, getVitessUnit()));
+            updatePathMove();
             
             //velocity = position - last;
         }
