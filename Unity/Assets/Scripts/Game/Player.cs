@@ -10,7 +10,7 @@ namespace Game {
         }
 
         public void Load() {
-            gold = PlayerPrefs.GetInt("PlayerGold", 0);
+            gold = PlayerPrefs.GetInt("PlayerGold", 50);
             currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
         }
 

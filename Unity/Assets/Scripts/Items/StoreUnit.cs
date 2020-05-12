@@ -10,6 +10,7 @@ namespace Items {
         public EntityType entityType;
         //public List<EntityType> upgrades;
         public List<StoreUnit> upgrades;
+        public int upgradeCost;
         
         public override void Use() {
             base.Use();
@@ -25,6 +26,7 @@ namespace Items {
         {
             base.Upgrade();
             UpgradeManager.instance.SetUIUnits(this);
+            
             //UpgradeManager.instance.SetUIUnits(entityType);
             //EntityDict.GetEntityType(entityType);
             //UpgradeManager.instance.SetUIUnits(item);
