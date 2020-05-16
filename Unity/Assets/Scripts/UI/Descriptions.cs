@@ -16,6 +16,10 @@ public class Descriptions : MonoBehaviour
 
     private GameObject _descriptionBox;
 
+    public bool isUpgrade;
+    public bool isFirstUpgrade;
+
+    public UpgradeManager upgradeManager;
 
     private void Start()
     {
@@ -27,7 +31,9 @@ public class Descriptions : MonoBehaviour
     public void EnterItem()
     {
         _descriptionBox.SetActive(true);
-        Item item = GetComponent<ItemSlot>().item;
+
+        Item item = (isUpgrade) ? upgradeManager.GetUnit(isFirstUpgrade) : GetComponent<ItemSlot>().item;;
+
         _description.SetText(item.description);
         isTouchingItem = true;
     }

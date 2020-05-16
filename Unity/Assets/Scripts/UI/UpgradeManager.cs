@@ -107,5 +107,10 @@ public class UpgradeManager : MonoBehaviour
 
         
     }
+
+    public Item GetUnit(bool isFirstUpgrade)
+    {
+        return (isFirstUpgrade) ?  _unit.upgrades[0] : _unit.upgrades[1];
+    }
     
 }
