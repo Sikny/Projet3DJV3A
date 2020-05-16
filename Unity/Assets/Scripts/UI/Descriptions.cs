@@ -12,7 +12,7 @@ public class Descriptions : MonoBehaviour
 {
     private TextMeshProUGUI _description;
 
-    private bool isTouchingItem = false;
+    private bool _isTouchingItem;
 
     private GameObject _descriptionBox;
 
@@ -35,20 +35,20 @@ public class Descriptions : MonoBehaviour
         Item item = (isUpgrade) ? upgradeManager.GetUnit(isFirstUpgrade) : GetComponent<ItemSlot>().item;;
 
         _description.SetText(item.description);
-        isTouchingItem = true;
+        _isTouchingItem = true;
     }
 
     public void ExitItem()
     {
         _descriptionBox.SetActive(false);
-        isTouchingItem = false;
+        _isTouchingItem = false;
     }
 
 
 
     private void Update()
     {
-        if (isTouchingItem)
+        if (_isTouchingItem)
         {
             _descriptionBox.transform.position = new Vector3(Input.mousePosition.x-70, Input.mousePosition.y+20, _descriptionBox.transform.position.z);
         }
