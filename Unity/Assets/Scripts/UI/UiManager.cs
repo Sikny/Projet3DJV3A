@@ -1,4 +1,5 @@
 ﻿using Game;
+using TMPro;
 using UnityEngine;
 using Utility;
 
@@ -6,6 +7,8 @@ namespace UI {
     public class UiManager : MonoBehaviour {
         public GameObject shopPanel;
         public GameObject inventoryPanel;
+        public GameObject descriptionBox;
+        public TextMeshProUGUI description;
 
         public InventoryManager inventoryUi;
         public Inventory inventory;

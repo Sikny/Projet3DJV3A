@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdeb2f9861404dc0822470751b0307ae, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  name: Sword
+  itemName: New item
   icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   price: 500
+  description: +3 damage
   stat: 2

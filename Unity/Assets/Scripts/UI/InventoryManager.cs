@@ -46,7 +46,7 @@ namespace UI {
             ItemSlot targetSlot = (unit.upgrades.Count > 0) ? unitPrefabSlot : prefabSlot;
  
             var addedItem = Instantiate(targetSlot, unitsParent, false);
-
+            
             addedItem.item = unit;
             addedItem.itemName.SetText(unit.itemName);
             addedItem.icon.sprite = unit.icon;
