@@ -59,7 +59,8 @@ public class UpgradeManager : MonoBehaviour
 
     public void ToggleUpgradePannel()
     {
-        upgradePanel.SetActive(!upgradePanel.activeSelf);
+        GameSingleton.Instance.uiManager.ToggleUpgradePanel();
+        
     }
     private void UpdateGold() {
         playerGold.SetText(GameSingleton.Instance.GetPlayer().GetGold() + "g");
@@ -101,11 +102,16 @@ public class UpgradeManager : MonoBehaviour
         }
         else
         {
-            Popups.instance.Popup("Not enough gold!");
+            Popups.instance.Popup("Not enough gold!", Color.red);
             ToggleUpgradePannel();
         }
 
         
+    }
+
+    public Item GetUnit(bool isFirstUpgrade)
+    {
+        return (isFirstUpgrade) ?  _unit.upgrades[0] : _unit.upgrades[1];
     }
     
 }

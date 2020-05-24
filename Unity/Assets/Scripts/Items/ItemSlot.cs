@@ -36,14 +36,17 @@ namespace Items {
                 boughtSlot.icon.sprite = icon.sprite;
                 boughtSlot.itemName.SetText(itemName.text);
                 _inventory.AddItem(boughtSlot.item);
+                _popup.Popup("Bought " + item.name + "!");
             }
-            else {
-                _popup.Popup("Not enough gold !");
+            else
+            {
+                _popup.Popup("Not enough gold !", Color.red);
             }
         }
 
         public void UseItem() {
             item.Use();
+            _popup.Popup("Used " + item.name + "!");
         }
 
         public void UpgradeUnit()

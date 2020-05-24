@@ -7,8 +7,8 @@ using Utility;
 namespace Items {
     [CreateAssetMenu(fileName = "New Unit", menuName = "ScriptableObject/Unit")]
     public class StoreUnit : Item {
+        //public string upgradeDescription;
         public EntityType entityType;
-        //public List<EntityType> upgrades;
         public List<StoreUnit> upgrades;
         public int upgradeCost;
         
@@ -27,12 +27,6 @@ namespace Items {
             base.Upgrade();
             UpgradeManager.instance.SetUIUnits(this);
             
-            //UpgradeManager.instance.SetUIUnits(entityType);
-            //EntityDict.GetEntityType(entityType);
-            //UpgradeManager.instance.SetUIUnits(item);
-            //activate other UI and deactivate others
-            //set unit selected
-            //get units upgradable ones 
         }
 
     }

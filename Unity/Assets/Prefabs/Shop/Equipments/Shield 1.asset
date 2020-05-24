@@ -15,5 +15,6 @@ MonoBehaviour:
   itemName: Shield of doom
   icon: {fileID: 21300000, guid: b38100a3ec2912641b4f021d0bcd9efa, type: 3}
   price: 10
+  description: +10 defense
   stat: 0
   level: 3

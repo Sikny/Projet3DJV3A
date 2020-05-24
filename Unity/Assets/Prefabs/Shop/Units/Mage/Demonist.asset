@@ -15,5 +15,7 @@ MonoBehaviour:
   itemName: Demonist
   icon: {fileID: 21300000, guid: a4e293942449ba940bbd8bc406cc7b3e, type: 3}
   price: 50
+  description: Demonists are very slow but deal a huge amount of damage.
   entityType: 10
   upgrades: []
+  upgradeCost: 0

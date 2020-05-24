@@ -17,15 +17,89 @@ MonoBehaviour:
     entityPrefab: {fileID: 5044763055523909067, guid: 969af8c71f7f19844bc70cbe26a884c1,
       type: 3}
     description: Soldier
+    upgrades: 
   - idType: 1
     entityPrefab: {fileID: 3760056377490896563, guid: 097fddff0e450fc4d9c4cb35fb601d3b,
       type: 3}
     description: Archer
+    upgrades: 
   - idType: 2
     entityPrefab: {fileID: 2622449584784750246, guid: 86d64b6af9149cb459b7a8337f34e338,
       type: 3}
     description: Mage
+    upgrades: 
   - idType: 3
     entityPrefab: {fileID: 5044763055523909067, guid: 216e9e8da37624f4586b54dc68b63449,
       type: 3}
     description: Spearman
+    upgrades: 
+  - idType: 4
+    entityPrefab: {fileID: 5044763055523909067, guid: 1a91b5091c3ef614b9465ed21276035f,
+      type: 3}
+    description: Knight
+    upgrades: 
+  - idType: 5
+    entityPrefab: {fileID: 5044763055523909067, guid: 1fb87569977e41a49a95ca1c8c5766c3,
+      type: 3}
+    description: White Knight
+    upgrades: 
+  - idType: 6
+    entityPrefab: {fileID: 5044763055523909067, guid: c73641c83387677439574a0d061509dd,
+      type: 3}
+    description: Horseman
+    upgrades: 
+  - idType: 7
+    entityPrefab: {fileID: 5044763055523909067, guid: a6f2befb4fb4a5a4594df0b56056e55f,
+      type: 3}
+    description: Executionist
+    upgrades: 
+  - idType: 8
+    entityPrefab: {fileID: 2622449584784750246, guid: d764a9a3fa8400c44b876a4c0c106f77,
+      type: 3}
+    description: Black Mage
+    upgrades: 
+  - idType: 9
+    entityPrefab: {fileID: 2622449584784750246, guid: 92d20b187d35ec24295758d79b34b753,
+      type: 3}
+    description: White Mage
+    upgrades: 
+  - idType: 10
+    entityPrefab: {fileID: 2622449584784750246, guid: 2631f32435956ef4cb4778e1c2c8a2f5,
+      type: 3}
+    description: Demonist
+    upgrades: 
+  - idType: 11
+    entityPrefab: {fileID: 2622449584784750246, guid: 98cbb23a099f7004995ca93d5f0b9edc,
+      type: 3}
+    description: Red Mage
+    upgrades: 
+  - idType: 12
+    entityPrefab: {fileID: 2622449584784750246, guid: 580716b6b8328e74489ec33711467c7c,
+      type: 3}
+    description: Bard
+    upgrades: 
+  - idType: 13
+    entityPrefab: {fileID: 3760056377490896563, guid: bf44b82b69ef9584fa6e566be7a8de6b,
+      type: 3}
+    description: Arbalist
+    upgrades: 
+  - idType: 14
+    entityPrefab: {fileID: 3760056377490896563, guid: 9e063076f3056e345a4489568278ddcc,
+      type: 3}
+    description: Hunter
+    upgrades: 
+  - idType: 15
+    entityPrefab: {fileID: 3760056377490896563, guid: 283bb17890296364880fbd95dc91e452,
+      type: 3}
+    description: Machine Arc
+    upgrades: 
+  - idType: 16
+    entityPrefab: {fileID: 3760056377490896563, guid: b339f4711aab71c489422027a7f23191,
+      type: 3}
+    description: Catapultist
+    upgrades: 
+  - idType: 17
+    entityPrefab: {fileID: 3760056377490896563, guid: 389bfcf2d981171429d607756ef9c532,
+      type: 3}
+    description: Sniper
+    upgrades: 
