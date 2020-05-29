@@ -270,7 +270,7 @@ PrefabInstance:
     - target: {fileID: 633210206118253867, guid: 2faac54c24c20714184c6ce8eaf41218,
         type: 3}
       propertyPath: m_Text
-      value: returnLabel
+      value: Retour
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2faac54c24c20714184c6ce8eaf41218, type: 3}
@@ -300,7 +300,7 @@ PrefabInstance:
     - target: {fileID: 3497006108653505374, guid: e2a986c673e8c044085e89fe9f4dc881,
         type: 3}
       propertyPath: m_Text
-      value: musicLabel
+      value: Musique
       objectReference: {fileID: 0}
     - target: {fileID: 3497006109807019982, guid: e2a986c673e8c044085e89fe9f4dc881,
         type: 3}
@@ -587,7 +587,7 @@ PrefabInstance:
     - target: {fileID: 3497006108653505374, guid: e2a986c673e8c044085e89fe9f4dc881,
         type: 3}
       propertyPath: m_Text
-      value: soundsLabel
+      value: Sons
       objectReference: {fileID: 0}
     - target: {fileID: 3497006109807019982, guid: e2a986c673e8c044085e89fe9f4dc881,
         type: 3}
@@ -739,7 +739,7 @@ PrefabInstance:
     - target: {fileID: 3497006108653505374, guid: 8910300a818d8f04ab558585f6c0eafd,
         type: 3}
       propertyPath: m_Text
-      value: langLabel
+      value: Langue
       objectReference: {fileID: 0}
     - target: {fileID: 3497006109911429355, guid: 8910300a818d8f04ab558585f6c0eafd,
         type: 3}
@@ -855,6 +855,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Options.m_Options.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716149681018130809, guid: 8910300a818d8f04ab558585f6c0eafd,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716149681018130809, guid: 8910300a818d8f04ab558585f6c0eafd,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716149681018130809, guid: 8910300a818d8f04ab558585f6c0eafd,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8640121497808359044, guid: 8910300a818d8f04ab558585f6c0eafd,
         type: 3}

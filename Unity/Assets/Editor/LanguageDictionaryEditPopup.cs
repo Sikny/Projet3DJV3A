@@ -43,7 +43,7 @@ namespace Editor {
                     _languageDictionary.AddEntry(_value);
                 } else if (_type == 1) {
                     // modifying entry
-                    _languageDictionary.ModifyKey(_oldValue, _value);
+                    //_languageDictionary.ModifyKey(_oldValue, _value);
                 }
                 Close();
             }

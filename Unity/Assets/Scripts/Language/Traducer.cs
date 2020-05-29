@@ -18,7 +18,7 @@ namespace Language {
             int tMPsCount = tMPs.Length;
             for (int i = 0; i < tMPsCount; i++) {
                 if (!notTranslatedTmp.Contains(tMPs[i])) {
-                    tMPs[i].text = GameSingleton.Instance.languageDictionary.GetString(tMPs[i].text,
+                    tMPs[i].text = GameSingleton.Instance.languageDictionary.SearchAndTraduce(tMPs[i].text,
                         GameSingleton.Instance.gameSettings.language);
                 }
             }
@@ -27,10 +27,14 @@ namespace Language {
             int textsCount = texts.Length;
             for (int i = 0; i < textsCount; i++) {
                 if (!notTranslated.Contains(texts[i])) {
-                    texts[i].text = GameSingleton.Instance.languageDictionary.GetString(texts[i].text,
+                    texts[i].text = GameSingleton.Instance.languageDictionary.SearchAndTraduce(texts[i].text,
                         GameSingleton.Instance.gameSettings.language);
                 }
             }
+        }
+
+        public void ChangeLanguage(int value) {
+            print(value);
         }
     }
 }

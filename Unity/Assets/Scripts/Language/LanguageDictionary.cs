@@ -20,8 +20,7 @@ namespace Language {
     }
 
     [Serializable]
-    public class StringLanguagesPair {
-        public string key;
+    public class LanguageDictionaryEntry {
         public List<LanguageStringPair> values;
 
         public string GetTranslation(Language lang) {
@@ -29,34 +28,47 @@ namespace Language {
             for (int i = 0; i < listLen; i++)
                 if (values[i].key == lang)
                     return values[i].value;
-            return key;
+            return "";
+        }
+
+        public bool Contains(string value) {
+            int listLen = values.Count;
+            for(int i = 0; i < listLen; i++)
+                if (values[i].value == value)
+                    return true;
+            return false;
         }
     }
     
     public class LanguageDictionary : ScriptableObject {
-        public List<StringLanguagesPair> dictionary = new List<StringLanguagesPair>();
+        public List<LanguageDictionaryEntry> dictionary = new List<LanguageDictionaryEntry>();
 
-        public string GetString(string key, Language lang) {
+        public string SearchAndTraduce(string value, Language lang) {
+            Debug.Log("Translation source: " + value);
             int listLen = dictionary.Count;
             for (int i = 0; i < listLen; i++) {
-                if (dictionary[i].key == key)
-                    return dictionary[i].GetTranslation(lang);
+                string curLang = dictionary[i].GetTranslation(lang);
+                if (curLang == value) {
+                    Debug.Log("Translation out: " + curLang);
+                    return curLang;
+                }
             }
-            return key;
+            Debug.Log("Translation out: " + value);
+            return value;
         }
 
-        private bool Contains(string key) {
+        private bool Contains(string value) {
             int listLen = dictionary.Count;
             for (int i = 0; i < listLen; i++)
-                if (dictionary[i].key == key)
+                if(dictionary[i].Contains(value))
                     return true;
             return false;
         }
 
-        public void AddEntry(string key = "") {
-            if (Contains(key)) return;
-            StringLanguagesPair entry = new StringLanguagesPair {
-                key = key, values = new List<LanguageStringPair>()
+        public void AddEntry(string value = "") {
+            if (Contains(value)) return;
+            LanguageDictionaryEntry entry = new LanguageDictionaryEntry() {
+                values = new List<LanguageStringPair>()
             };
             Array langArray = Enum.GetValues(typeof(Language));
             int langLen = langArray.Length;
@@ -65,21 +77,10 @@ namespace Language {
             dictionary.Add(entry);
         }
 
-        public void DeleteEntry(string key) {
-            int listLen = dictionary.Count;
-            for (int i = 0; i < listLen; i++)
-                if (dictionary[i].key == key) {
-                    dictionary.RemoveAt(i);
-                    return;
-                }
-        }
-
-        public void ModifyKey(string key, string newKey) {
-            if (Contains(newKey)) return;
-            int listLen = dictionary.Count;
-            for (int i = 0; i < listLen; i++)
-                if (dictionary[i].key == key)
-                    dictionary[i].key = newKey;
+        public void DeleteEntry(int index) {
+            if (index < dictionary.Count - 1)
+                return;
+            dictionary.RemoveAt(index);
         }
     }
 }
