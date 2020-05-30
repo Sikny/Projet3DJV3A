@@ -38,16 +38,16 @@ namespace AStar
             {
                 sw.Start();
                 Node currentNode = nodeToVisit.FirstOrDefault();
-                foreach (var newNode in nodeToVisit)
+                for (var index = 0; index < nodeToVisit.Count; index++)
                 {
+                    var newNode = nodeToVisit[index];
                     if ((newNode.DistanceTraveled + newNode.EstimatedDistance) <
                         (currentNode.DistanceTraveled + currentNode.EstimatedDistance))
                     {
                         currentNode = newNode;
                     }
-                    
                 }
-                
+
 
                 if (currentNode == graph.ExitNode)
                 {
@@ -57,8 +57,9 @@ namespace AStar
                 {
                     //List<Arc> arcsFromCurrentNode = graph.ArcsList(currentNode);
                     Arc[] arcsFromCurrentNode = graph.ArcsList(currentNode);
-                    foreach (var arc in arcsFromCurrentNode)
+                    for(var i = 0; i < arcsFromCurrentNode.Length; i++)
                     {
+                        var arc = arcsFromCurrentNode[i];
                         if(arc == null ) break;
                         if (arc.From.DistanceTraveled + arc.Cost < arc.To.DistanceTraveled)
                         {

@@ -2,9 +2,9 @@
 {
     public class Arc
     {
-        internal Node From { get; set; }
-        internal Node To { get; set; }
-        internal double Cost { get; set; }
+        public Node From;
+        public Node To;
+        public double Cost;
 
         public Arc(Node from, Node to, double cost)
         {
