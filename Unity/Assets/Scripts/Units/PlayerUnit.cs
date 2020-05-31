@@ -15,7 +15,17 @@ namespace Units {
         public override void UpdateUnit() {
             if (!initialized) return;
 
-            if (_unitTarget == null) _unitTarget = GuessTheBestUnitToTarget();
+            if(_unitTarget != null)
+            {
+                brain.calculatePath(targetPosition);
+                
+            }
+            else
+            {
+                _unitTarget = GuessTheBestUnitToTarget();
+                if(_unitTarget != null)
+                    brain.calculatePath(_unitTarget.GetPosition());
+            }
 
             brain.interract(true,_unitTarget, targetPosition);
             

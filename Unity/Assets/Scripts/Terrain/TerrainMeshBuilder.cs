@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 // ReSharper disable Unity.PreferAddressByIdToGraphicsParams
 
-namespace Terrain {
+namespace TerrainGeneration {
     public enum TerrainSide {
         Top = 0,
         Bottom = 1,
@@ -30,7 +30,7 @@ namespace Terrain {
         public int textureResolution = 150;
 
         public TerrainOptions terrainOptions;
-        public Cursor cursor;
+        public Transform cursor;
         public Transform waterObject;
 
         // Path-finding fields
@@ -38,6 +38,8 @@ namespace Terrain {
         public static Algorithm alg;
         public static Tile[,] tiles;
         public static int[] dimensions;
+        
+        private Camera _cam;
 
         private void Clear() {
             int meshesCount = meshObjects.Count;
@@ -61,7 +63,8 @@ namespace Terrain {
 
             tiles = new Tile[terrainOptions.width,terrainOptions.height];
             dimensions = new[] {terrainOptions.width, terrainOptions.height};
-
+            _cam = Camera.main;
+            
             _waterData.Clear();
 
             Random.InitState(terrainOptions.rules.seedWorld);
@@ -100,11 +103,10 @@ namespace Terrain {
 
             foreach (TerrainSide terrainSide in sides) {
                 GameObject meshObj = new GameObject("TerrainMesh" + Enum.GetName(typeof(TerrainSide), terrainSide));
+                meshObj.layer = 8;    // Ground
                 meshObj.transform.parent = transform;
-                if (terrainSide == TerrainSide.Top) {
+                if (terrainSide == TerrainSide.Top)
                     meshObj.AddComponent<TerrainRaycaster>();
-                    meshObj.layer = 8;    // Ground
-                }
 
                 MeshRenderer meshRenderer = meshObj.AddComponent<MeshRenderer>();
                 meshRenderer.sharedMaterial = material;
@@ -131,17 +133,13 @@ namespace Terrain {
             {
                 for (int j = 0; j < terrainOptions.height; j++)
                 {
-                    Vector2Int intVec = new Vector2Int(i-terrainOptions.width/2, j-terrainOptions.height/2);
-                    if (terrainOptions.modifierHeightMap.ContainsKey(intVec)) {
-                        if(terrainOptions.modifierHeightMap[intVec] > 0.5f || terrainOptions.modifierHeightMap[intVec] < -0.1f)
-                            tiles[i, j] = new Tile(TileType.Wall, i, j, new Vector3(intVec.x,terrainOptions.modifierHeightMap[intVec]+1,intVec.y));
-                        else
-                            tiles[i, j] = new Tile(TileType.Grass, i, j, new Vector3(intVec.x,terrainOptions.modifierHeightMap[intVec]+1,intVec.y));
-                    }
+                    Vector3 vec = new Vector3((int) (i-terrainOptions.width/2),0, (int) (j-terrainOptions.height/2));
+                    float h = CalculateHeight(vec);
+                    if(h > 0.5f || h < -0.1f)
+                        tiles[i, j] = new Tile(TileType.Wall, i, j, new Vector3(vec.x,h+0.5f,vec.y));
                     else
-                    {
-                        tiles[i, j] = new Tile(TileType.Grass, i, j, new Vector3(intVec.x,1,intVec.y));
-                    }
+                        tiles[i, j] = new Tile(TileType.Grass, i, j, new Vector3(vec.x,h+0.5f,vec.y));
+                    
                    
                 }
             }

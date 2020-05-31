@@ -11,7 +11,7 @@ namespace Units {
         public int entityCount;
         protected Entity[] entities;
         protected Vector3 position;
-        protected Vector3 targetPosition;
+        public Vector3 targetPosition;
 
         protected AbstractUnit _unitTarget;
 
