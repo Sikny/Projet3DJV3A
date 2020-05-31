@@ -30,7 +30,7 @@ namespace Terrain {
         public int textureResolution = 150;
 
         public TerrainOptions terrainOptions;
-        public Transform cursor;
+        public Cursor cursor;
         public Transform waterObject;
 
         // Path-finding fields
@@ -100,10 +100,11 @@ namespace Terrain {
 
             foreach (TerrainSide terrainSide in sides) {
                 GameObject meshObj = new GameObject("TerrainMesh" + Enum.GetName(typeof(TerrainSide), terrainSide));
-                meshObj.layer = 8;    // Ground
                 meshObj.transform.parent = transform;
-                if (terrainSide == TerrainSide.Top)
+                if (terrainSide == TerrainSide.Top) {
                     meshObj.AddComponent<TerrainRaycaster>();
+                    meshObj.layer = 8;    // Ground
+                }
 
                 MeshRenderer meshRenderer = meshObj.AddComponent<MeshRenderer>();
                 meshRenderer.sharedMaterial = material;

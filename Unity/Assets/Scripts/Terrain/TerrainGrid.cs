@@ -16,10 +16,10 @@ namespace Terrain {
 
         public static int Height { get; set; }
 
-        public Transform cursor;
+        public Cursor cursor;
 
         public void SelectZone(int posZ, int posX) {
-            cursor.position = new Vector3(posX-Width/2, cursor.position.y, posZ-Height/2);
+            cursor.SetPosition(posX-Width/2+0.5f, posZ-Height/2+0.5f);
         }
     }
 }
