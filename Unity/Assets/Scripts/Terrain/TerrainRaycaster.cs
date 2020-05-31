@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TerrainGeneration {
+namespace Terrain {
     public class TerrainRaycaster : MonoBehaviour {
         private Camera _cam;
 

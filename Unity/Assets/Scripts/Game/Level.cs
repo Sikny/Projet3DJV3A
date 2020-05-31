@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Items;
-using TerrainGeneration;
+using Terrain;
 using Units;
 using UnityEngine;
 using Utility;

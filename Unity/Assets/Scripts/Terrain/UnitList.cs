@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TerrainGeneration {
+namespace Terrain {
     [Serializable]
     public class UnitList {
         public readonly List<Vector2Int> _list = new List<Vector2Int>();

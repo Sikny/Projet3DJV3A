@@ -1,5 +1,4 @@
 ﻿using System;
-using TerrainGeneration;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -74,8 +73,6 @@ namespace Units {
 
             float xHit = Mathf.Floor(hit.point.x);
             float zHit = Mathf.Floor(hit.point.z);
-            TerrainGrid.Instance.TileX = (int) xHit + (TerrainGrid.Width / 2);
-            TerrainGrid.Instance.TileZ = (int) zHit + (TerrainGrid.Height / 2);
 
             targetPosition = new Vector3(Mathf.Floor(hit.point.x)-0.5f, yPos,
                 Mathf.Floor(hit.point.z)-0.5f) ;
