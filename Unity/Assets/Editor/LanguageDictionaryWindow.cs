@@ -93,10 +93,6 @@ namespace Editor {
                 GUILayout.Label(""+index);
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
-                if (GUILayout.Button("Edit", GUILayout.Width(50f))) {
-                    //LanguageDictionaryEditPopup.Init(entry.key, 1);
-                    break;
-                }
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
                 GUILayout.EndVertical();
@@ -127,7 +123,7 @@ namespace Editor {
                 index++;
             }
             if (GUILayout.Button("Add")) {
-                LanguageDictionaryEditPopup.Init("", 0);
+                _languageDictionary.AddEntry();
             }
             GUILayout.EndVertical();
             GUILayout.EndScrollView();

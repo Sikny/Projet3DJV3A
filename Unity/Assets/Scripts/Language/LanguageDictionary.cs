@@ -44,29 +44,15 @@ namespace Language {
         public List<LanguageDictionaryEntry> dictionary = new List<LanguageDictionaryEntry>();
 
         public string SearchAndTraduce(string value, Language lang) {
-            Debug.Log("Translation source: " + value);
             int listLen = dictionary.Count;
             for (int i = 0; i < listLen; i++) {
-                string curLang = dictionary[i].GetTranslation(lang);
-                if (curLang == value) {
-                    Debug.Log("Translation out: " + curLang);
-                    return curLang;
-                }
+                if (!dictionary[i].Contains(value)) continue;
+                return dictionary[i].GetTranslation(lang);
             }
-            Debug.Log("Translation out: " + value);
             return value;
         }
 
-        private bool Contains(string value) {
-            int listLen = dictionary.Count;
-            for (int i = 0; i < listLen; i++)
-                if(dictionary[i].Contains(value))
-                    return true;
-            return false;
-        }
-
-        public void AddEntry(string value = "") {
-            if (Contains(value)) return;
+        public void AddEntry() {
             LanguageDictionaryEntry entry = new LanguageDictionaryEntry() {
                 values = new List<LanguageStringPair>()
             };
