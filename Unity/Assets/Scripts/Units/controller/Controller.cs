@@ -58,7 +58,7 @@ namespace Units
                 Vector3 exitPos = target;
                 int xOffset = TerrainMeshBuilder.dimensions[0] / 2;
                 int yOffset = TerrainMeshBuilder.dimensions[1] / 2;
-                TerrainMeshBuilder.graph.BeginningNode = TerrainMeshBuilder.tiles[(int)body.transform.position.x+xOffset, (int)body.transform.position.z+yOffset];
+                TerrainMeshBuilder.graph.BeginningNode = TerrainMeshBuilder.tiles[(int)body.GetPosition().x+xOffset, (int)body.GetPosition().z+yOffset];
                 Debug.Log("nodebeginpos="+TerrainMeshBuilder.graph.BeginningNode.Pos);
                 TerrainMeshBuilder.graph.ExitNode = TerrainMeshBuilder.tiles[(int)(exitPos.x+xOffset), (int)(exitPos.z+yOffset)];
                 Debug.Log("nodeendpos="+TerrainMeshBuilder.graph.ExitNode.Pos);
@@ -72,17 +72,17 @@ namespace Units
             
             int xOffset = TerrainMeshBuilder.dimensions[0] / 2;
             int yOffset = TerrainMeshBuilder.dimensions[1] / 2;
-            Vector3 last = body.transform.position;
+            Vector3 last = body.GetPosition();
             if (itineraire != null && itineraire.Count > 0)
             {
                 Vector3 posTarget = itineraire.Peek().Pos; //- new Vector3(xOffset,0,yOffset);
-                Debug.Log(posTarget+"<->"+last);
+                //Debug.Log(posTarget+"<->"+last);
                 if (Vector3.Distance(last, posTarget) < 2f)
                 {
                     
                     Debug.Log(itineraire.Pop().Pos);
                 } 
-                body.transform.position = Vector3.MoveTowards(last, posTarget, 5f * Time.deltaTime);
+                body.SetPosition(Vector3.MoveTowards(last, posTarget, 5f * Time.deltaTime));
             }
         }
     }
