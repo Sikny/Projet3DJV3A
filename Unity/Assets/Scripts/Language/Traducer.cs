@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,7 +35,11 @@ namespace Language {
         }
 
         public void ChangeLanguage(int value) {
-            print(value);
+            Language oldLanguage = GameSingleton.Instance.gameSettings.language;
+            Language newLanguage = (Language) value;
+            if (newLanguage == oldLanguage) return;
+            GameSingleton.Instance.gameSettings.language = newLanguage;
+            TranslateView();
         }
     }
 }
