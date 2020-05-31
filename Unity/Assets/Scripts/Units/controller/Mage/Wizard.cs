@@ -19,6 +19,8 @@ public class Wizard : Controller
     {
         speedEntity = 0.5f;
         basisAttack = 10f;
+        
+        itineraireNumberRemain = 3;
         //upgrades.Add(EntityType.something);
     }
 

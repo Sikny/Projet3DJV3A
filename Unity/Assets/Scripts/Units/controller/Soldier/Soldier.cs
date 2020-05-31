@@ -12,7 +12,8 @@ namespace Units{
             basisAttack = 1.0f;
             //upgrades.Add(EntityType.Spearman);
             //upgrades.Add(EntityType.Knight);
-
+            
+            itineraireNumberRemain = 0;
         }
         
         public override void interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget)
