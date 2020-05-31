@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 // ReSharper disable Unity.PreferAddressByIdToGraphicsParams
 
-namespace TerrainGeneration {
+namespace Terrain {
     public enum TerrainSide {
         Top = 0,
         Bottom = 1,
@@ -30,7 +30,7 @@ namespace TerrainGeneration {
         public int textureResolution = 150;
 
         public TerrainOptions terrainOptions;
-        public Transform cursor;
+        public Cursor cursor;
         public Transform waterObject;
 
         // Path-finding fields
@@ -38,8 +38,6 @@ namespace TerrainGeneration {
         public static Algorithm alg;
         public static Tile[,] tiles;
         public static int[] dimensions;
-        
-        private Camera _cam;
 
         private void Clear() {
             int meshesCount = meshObjects.Count;
@@ -63,8 +61,7 @@ namespace TerrainGeneration {
 
             tiles = new Tile[terrainOptions.width,terrainOptions.height];
             dimensions = new[] {terrainOptions.width, terrainOptions.height};
-            _cam = Camera.main;
-            
+
             _waterData.Clear();
 
             Random.InitState(terrainOptions.rules.seedWorld);
@@ -133,7 +130,7 @@ namespace TerrainGeneration {
             {
                 for (int j = 0; j < terrainOptions.height; j++)
                 {
-                    Vector3 vec = new Vector3((int) (i-terrainOptions.width/2),0, (int) (j-terrainOptions.height/2));
+                    Vector3 vec = new Vector3(i-terrainOptions.width/2,0, j-terrainOptions.height/2);
                     float h = CalculateHeight(vec);
                     if(h > 0.5f || h < -0.1f)
                         tiles[i, j] = new Tile(TileType.Wall, i, j, new Vector3(vec.x,h+0.5f,vec.y));
