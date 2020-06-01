@@ -2,7 +2,6 @@
 using Items;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering.HighDefinition;
 using Utility;
 
 namespace UI {

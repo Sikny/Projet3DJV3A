@@ -16,12 +16,12 @@ namespace Items.Consumables {
         //par défaut a un nom, prix, sprite, tu peux ajouter d'autre type en faisant des variables public comme healAmount ici 
         public override void Use()
         {
-            if (UnitLibData._selectedUnit != null)
+            if (UnitLibData.selectedUnit != null)
             {
-                for (int i = 0; i < UnitLibData._selectedUnit.entityCount; i++)
+                for (int i = 0; i < UnitLibData.selectedUnit.entityCount; i++)
                 {
-                    if (UnitLibData._selectedUnit.GetEntity(i) != null && UnitLibData._selectedUnit.GetEntity(i).GetLife() > 0) // REGEN IF LIFE > 0
-                        UnitLibData._selectedUnit.GetEntity(i).ResetLife();
+                    if (UnitLibData.selectedUnit.GetEntity(i) != null && UnitLibData.selectedUnit.GetEntity(i).GetLife() > 0) // REGEN IF LIFE > 0
+                        UnitLibData.selectedUnit.GetEntity(i).ResetLife();
                 }
                 base.Use();
             }

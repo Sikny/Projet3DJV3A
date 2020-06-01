@@ -102,8 +102,11 @@ namespace Terrain {
                 GameObject meshObj = new GameObject("TerrainMesh" + Enum.GetName(typeof(TerrainSide), terrainSide));
                 meshObj.layer = 8;    // Ground
                 meshObj.transform.parent = transform;
-                if (terrainSide == TerrainSide.Top)
-                    meshObj.AddComponent<TerrainRaycaster>();
+                if (terrainSide == TerrainSide.Top) {
+                    var terrainRaycaster = meshObj.AddComponent<TerrainRaycaster>();
+                    terrainRaycaster.width = terrainOptions.width;
+                    terrainRaycaster.height = terrainOptions.height;
+                }
 
                 MeshRenderer meshRenderer = meshObj.AddComponent<MeshRenderer>();
                 meshRenderer.sharedMaterial = material;

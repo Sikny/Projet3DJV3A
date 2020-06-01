@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Terrain {
+﻿namespace Terrain {
     public class TerrainGrid {
         private static TerrainGrid _instance;
         
