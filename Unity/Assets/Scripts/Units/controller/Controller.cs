@@ -25,7 +25,8 @@ namespace Units
 
         
         protected Stack<Tile> itineraire;
-        
+        protected int itineraireNumberRemain = 0;
+            
         public abstract void interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget);
 
         protected float getVitessUnit()
@@ -73,7 +74,7 @@ namespace Units
             int xOffset = TerrainMeshBuilder.dimensions[0] / 2;
             int yOffset = TerrainMeshBuilder.dimensions[1] / 2;
             Vector3 last = body.GetPosition();
-            if (itineraire != null && itineraire.Count > 0)
+            if (itineraire != null && itineraire.Count > itineraireNumberRemain)
             {
                 Vector3 posTarget = itineraire.Peek().Pos; //- new Vector3(xOffset,0,yOffset);
                 //Debug.Log(posTarget+"<->"+last);
