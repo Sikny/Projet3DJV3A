@@ -8,10 +8,10 @@ namespace Items.Equipments {
       public int level;
       public override void Use()
       {
-         if (UnitLibData._selectedUnit != null)
+         if (UnitLibData.selectedUnit != null)
          {
          
-            UnitLibData._selectedUnit.AddEffect(1,level,float.PositiveInfinity);
+            UnitLibData.selectedUnit.AddEffect(1,level,float.PositiveInfinity);
          
             base.Use(); 
          }

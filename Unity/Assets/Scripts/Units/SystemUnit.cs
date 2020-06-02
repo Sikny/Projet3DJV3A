@@ -19,7 +19,7 @@ namespace Units {
         public float rotationSpeed = 300f;
         public float speed = 5f;
         
-        private const int YPos = 1;
+        public const float YPos = 0.5f;
 
         public bool isRunning;
 
@@ -29,7 +29,7 @@ namespace Units {
         }
         
         public void Start() {
-            UnitLibData._selectedUnit = null;
+            UnitLibData.selectedUnit = null;
 
             /* On se servira de ça pour appeler les updates des units */
             UnitLibData.cam = cam;
@@ -54,8 +54,8 @@ namespace Units {
             RaycastHit hit;
             if (GameSingleton.Instance.uiManager.inventory.selectedStoreUnit != null
                 && Physics.Raycast(ray, out hit, 100f, 1 << 8)) {
-                Vector3 position = new Vector3(Mathf.Floor(hit.transform.position.x)-0.5f, YPos,
-                    Mathf.Floor(hit.transform.position.z)-0.5f) ;
+                Vector3 position = new Vector3(Mathf.Floor(hit.point.x)+0.5f, YPos,
+                    Mathf.Floor(hit.point.z)+0.5f) ;
                 StoreUnit unit = GameSingleton.Instance.uiManager.inventory.selectedStoreUnit;
                 SpawnUnit(unit.entityType, playerUnitPrefab, position);
                 GameSingleton.Instance.uiManager.inventory.RemoveUnit(unit);
@@ -64,13 +64,13 @@ namespace Units {
             if (!isRunning) return;
             if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
             {
-                UnitLibData._selectedUnit = hit.transform.GetComponent<PlayerUnit>();
+                UnitLibData.selectedUnit = hit.transform.GetComponent<PlayerUnit>();
             }
-            else if (UnitLibData._selectedUnit != null)
+            else if (UnitLibData.selectedUnit != null)
             {
                 if (Physics.Raycast(ray, out hit, 100f, 1 << 8))
                 {
-                    UnitLibData._selectedUnit.SetTargetPosition();
+                    UnitLibData.selectedUnit.SetTargetPosition(YPos);
                 }
             }
         }

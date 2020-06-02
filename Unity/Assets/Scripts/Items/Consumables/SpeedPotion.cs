@@ -16,9 +16,9 @@ namespace Items.Consumables {
         //par défaut a un nom, prix, sprite, tu peux ajouter d'autre type en faisant des variables public comme healAmount ici 
         public override void Use()
         {
-            if (UnitLibData._selectedUnit != null)
+            if (UnitLibData.selectedUnit != null)
             {
-                UnitLibData._selectedUnit.AddEffect(0, 3, 20f);
+                UnitLibData.selectedUnit.AddEffect(0, 3, 20f);
 
                 base.Use();
             }
