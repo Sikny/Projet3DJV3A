@@ -11,7 +11,6 @@ namespace Items {
         public EntityType entityType;
         public List<StoreUnit> upgrades;
         public int upgradeCost;
-        
         public override void Use() {
             base.Use();
 
