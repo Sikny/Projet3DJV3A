@@ -52,6 +52,7 @@ namespace Units {
         public void DoClick() {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+           
             if (GameSingleton.Instance.uiManager.inventory.selectedStoreUnit != null
                 && Physics.Raycast(ray, out hit, 100f, 1 << 8)) {
                 Vector3 position = new Vector3(Mathf.Floor(hit.point.x)+0.5f, YPos,
@@ -70,6 +71,7 @@ namespace Units {
             {
                 if (Physics.Raycast(ray, out hit, 100f, 1 << 8))
                 {
+
                     UnitLibData.selectedUnit.SetTargetPosition(YPos);
                 }
             }

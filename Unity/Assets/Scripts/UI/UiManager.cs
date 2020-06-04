@@ -27,7 +27,9 @@ namespace UI {
             descriptionBox.SetActive(false);
         }
 
-        public void ToggleShop() {
+        public void ToggleShop()
+        {
+            Debug.Log("hey");
             shopPanel.SetActive(!shopPanel.activeSelf);
             inventoryPanel.SetActive(false);
             descriptionBox.SetActive(false);
@@ -40,6 +42,7 @@ namespace UI {
         }
 
         public void HideUis() {
+            descriptionBox.SetActive(false);
             inventoryPanel.SetActive(false);
             shopPanel.SetActive(false);
         }
