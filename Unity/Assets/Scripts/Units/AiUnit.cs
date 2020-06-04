@@ -45,28 +45,51 @@ namespace Units  {
         public override void Attack(AbstractUnit anotherUnit, float damage) {
             int indexEntityAttack = Random.Range(0, entityCount);
             Entity entityAttack = this.GetEntity(indexEntityAttack);
+            float coef = GetEfficientCoef(this, anotherUnit);
+            int efficientCoef = GetEfficiencyType(coef);
+
             if (anotherUnit.GetNumberAlive() > 1) {
                 int indexEntityDefense = Random.Range(1, entityCount);
                 Entity entityDefense = anotherUnit.GetEntity(indexEntityDefense);
 
                 if (entityAttack == null || entityDefense == null) return;
 
-                float efficientCoef = GetEfficientCoef(this, anotherUnit);
                 
-                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength() * damage * efficientCoef));
+                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength() * damage * coef), efficientCoef);
                 if (life == 0) {
                     anotherUnit.PopEntity(indexEntityDefense);
                 }
             }
             else if(anotherUnit.GetNumberAlive() == 1) {
                 if (entityAttack != null) {
-                    anotherUnit.GetEntity(0).ChangeLife(-100);
+                    anotherUnit.GetEntity(0).ChangeLife(-100, efficientCoef);
                     anotherUnit.PopEntity(0); // Le leader est attrapé
                     _unitTarget = null; //important pour indiquer à l'IA de commencer de nouvelles recherches
                 }
             }
         }
-        
+        private int GetEfficiencyType(float efficientCoef)
+        {
+            int res = 0; 
+            //display particule on anotherUnit (targeted unit) 
+            if (efficientCoef == 1f)
+            {
+                return res;
+                //attack is neutral gray
+            }
+            else if (efficientCoef < 1f)
+            {
+                res = -1;
+                //attack is unefficient red 
+            }
+            else
+            {
+                res = 1;
+                //attack is efficient green 
+            }
+
+            return res; 
+        }
         private PlayerUnit GuessTheBestUnitToTarget() {
             PlayerUnit best = null;
             float bestDistance = float.PositiveInfinity;

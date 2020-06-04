@@ -9,7 +9,7 @@ namespace Sounds
 {
     public class SoundManager : MonoBehaviour
     {
-
+        //take game setting volume with gamesingleton.instance.gamesettings.volume 
         public Sound[] sounds;
 
         private void Awake()
