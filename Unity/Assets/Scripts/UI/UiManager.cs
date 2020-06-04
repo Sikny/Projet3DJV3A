@@ -29,7 +29,6 @@ namespace UI {
 
         public void ToggleShop()
         {
-            Debug.Log("hey");
             shopPanel.SetActive(!shopPanel.activeSelf);
             inventoryPanel.SetActive(false);
             descriptionBox.SetActive(false);

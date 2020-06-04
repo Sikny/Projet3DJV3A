@@ -44,7 +44,22 @@ namespace Units {
 
                 if (entityAttack == null || entityDefense == null) return;
 
-                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength()*damage* GetEfficientCoef(this, anotherUnit)));
+
+                float efficientCoef = GetEfficientCoef(this, anotherUnit);
+                //display particule on anotherUnit (targeted unit) 
+                if (efficientCoef == 1f)
+                {
+                    //attack is neutral gray
+                }
+                else if (efficientCoef < 1f)
+                {
+                    //attack is unefficient red 
+                }
+                else
+                {
+                    //attack is efficient green 
+                }
+                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength()*damage* efficientCoef));
                 if (life == 0) {
                     anotherUnit.PopEntity(indexEntityDefense);
                 }
@@ -76,7 +91,6 @@ namespace Units {
     
         public void SetTargetPosition(float yPos) {
             Ray ray = UnitLibData.cam.ScreenPointToRay(Input.mousePosition);
-
             if (Physics.Raycast(ray, out var hit, 100, 1 << 4) ||
                 !Physics.Raycast(ray, out hit, 100, UnitLibData.groundMask))
                 return;

@@ -1,6 +1,8 @@
-﻿using CustomEvents;
+﻿using System;
+using CustomEvents;
 using Game;
 using Language;
+using Sounds;
 using UI;
 using UnityEngine;
 
@@ -34,6 +36,8 @@ namespace Utility {
 
         public UiManager uiManager;
 
+        public SoundManager soundManager;
+
         private void Awake() {
             if (_instance != null && _instance != this) {
                 Destroy(gameObject);
@@ -47,7 +51,9 @@ namespace Utility {
             sceneManager = new SceneManager();
             sceneManager.LoadScene("Menu");
         }
-        
+
+
+
         // optimizations purposes
         private void Update() {
             updateLoop.Raise();
@@ -56,6 +62,7 @@ namespace Utility {
             fixedUpdateLoop.Raise();
         }
         private void LateUpdate() {
+            
             lateUpdateLoop.Raise();
         }
 
@@ -66,6 +73,7 @@ namespace Utility {
 
         public void StartFight() {
             if (levelManager != null) {
+                //start fight sound play here
                 StartCoroutine(levelManager.loadedLevel.StartLevel());
             }
         }
