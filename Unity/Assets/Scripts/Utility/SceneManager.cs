@@ -9,7 +9,8 @@ namespace Utility {
 
         public SceneManager() {
             _storedScenesIds = new Dictionary<string, int> {
-                {"Menu", 1}, {"StoryMode", 2}
+                {"Menu", 1}, {"StoryMode", 2}, {"creator", 3},
+                {"loadLvl", 4}, {"personnalizedMap", 5}
             };
         }
 
