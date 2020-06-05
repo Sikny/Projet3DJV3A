@@ -20,7 +20,7 @@ public class Archer : Controller
     {
         speedEntity = 0.5f;
         basisAttack = 2.5f;
-        
+        itineraireNumberRemain = 3;
     }
 
     public override void interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget) {
