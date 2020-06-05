@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using Sounds;
+using UnityEngine;
 using UnityEngine.Networking;
+using Utility;
 using WebClient;
 
 namespace UI {
@@ -7,7 +10,9 @@ namespace UI {
         public GameObject optionsPanel;
         public ConnectForm connectionPanel;
         public RegisterForm registerPanel;
-        
+
+
+
         public void OnConnectConfirmPressed() {
             if(connectionPanel.ValidForm()) {
                 StartCoroutine(ConnectModule.Instance.ConnectUser(connectionPanel.mail.text, 

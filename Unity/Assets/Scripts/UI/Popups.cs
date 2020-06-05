@@ -3,6 +3,7 @@ using System.Collections;
 using Game;
 using TMPro;
 using UnityEngine;
+using Utility;
 
 namespace UI {
     public class Popups : MonoBehaviour
@@ -27,6 +28,11 @@ namespace UI {
         }
 
         #endregion
+
+        private void Start()
+        {
+            GameSingleton.Instance.soundManager.Play("Level theme");
+        }
 
         public void Popup(String content, Color color)
         {

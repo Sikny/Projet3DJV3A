@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEditor;
+using UnityEngine;
+using Utility;
 
 namespace CameraMovement {
     /**
@@ -6,7 +9,6 @@ namespace CameraMovement {
      */
     public class CameraController : MonoBehaviour
     {
-        public Transform centerPoint;
         
         public float speed = 15;
         public float pitch = 2f;
@@ -21,6 +23,18 @@ namespace CameraMovement {
         private bool _isMovingLeft;
         private bool _isMovingDown;
         private bool _isMovingUp;
+
+        private bool _invertCameraX;
+        private bool _invertCameraY;
+        
+
+        private void Start()
+        {
+            _invertCameraX = GameSingleton.Instance.gameSettings.invertCameraX;
+            _invertCameraY = GameSingleton.Instance.gameSettings.invertCameraY;
+            Debug.Log("invert camera X : "  +_invertCameraX);
+            Debug.Log("invert camera Y : "  +_invertCameraY);
+        }
 
         public void SetRotating() {
             _mousePressed = true;
@@ -70,15 +84,40 @@ namespace CameraMovement {
  
             _currentYaw -= Input.mouseScrollDelta.y * (zoomSpeed * speed * Time.deltaTime);// Input.GetAxis("Mouse ScrollWheel") * speed * Time.deltaTime;
             _currentYaw = Mathf.Clamp(_currentYaw, _minZoom, _maxZoom);
+            //StoreUnit upgradedUnit = (number == 1) ? _unit.upgrades[0] : _unit.upgrades[1];
 
-            if(_isMovingRight)
-                transform.Translate(new Vector3(-speed * Time.deltaTime, 0,0), Space.World);
-            if(_isMovingLeft)
-                transform.Translate(new Vector3(speed * Time.deltaTime, 0,0), Space.World);
-            if(_isMovingDown)
-                transform.Translate(new Vector3(0, 0,speed * Time.deltaTime), Space.World);
-            if(_isMovingUp)
-                transform.Translate(new Vector3(0, 0,-speed * Time.deltaTime), Space.World);
+
+            if (_isMovingRight)
+            {
+                transform.Translate(
+                    _invertCameraX
+                        ? new Vector3(speed * Time.deltaTime, 0, 0)
+                        : new Vector3(-speed * Time.deltaTime, 0, 0), Space.World);
+            }
+
+            if (_isMovingLeft)
+            {
+                transform.Translate(
+                    _invertCameraX
+                        ? new Vector3(-speed * Time.deltaTime, 0, 0)
+                        : new Vector3(speed * Time.deltaTime, 0,0), Space.World);
+            }
+
+            if (_isMovingDown)
+            {
+                transform.Translate(
+                    _invertCameraY
+                        ? new Vector3(0, 0,-speed * Time.deltaTime)
+                        : new Vector3(0, 0,speed * Time.deltaTime), Space.World);
+            }
+
+            if (_isMovingUp)
+            {
+                transform.Translate(
+                    _invertCameraY
+                        ? new Vector3(0, 0,speed * Time.deltaTime)
+                        : new Vector3(0, 0,-speed * Time.deltaTime), Space.World);
+            }
         
             camera.fieldOfView = _currentYaw;
         }

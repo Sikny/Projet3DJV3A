@@ -11,6 +11,8 @@ namespace UI {
         
         public Dropdown languageDropdown;
 
+        public bool invertCameraX;
+        public bool invertCameraY;
         private void Awake() {
             soundsSlider.value = GameSingleton.Instance.gameSettings.soundVolume;
             musicSlider.value = GameSingleton.Instance.gameSettings.musicVolume;
@@ -23,6 +25,31 @@ namespace UI {
                 }
                 value++;
             }
+
+
+        }
+
+
+
+
+        public void SetInvertCameraX()
+        {
+            invertCameraX = !invertCameraX;
+        }        
+        
+        public void SetInvertCameraY()
+        {
+            invertCameraY = !invertCameraY;
+        }
+        public void OnSubmit()
+        {
+            GameSingleton.Instance.gameSettings.soundVolume = soundsSlider.value;
+            GameSingleton.Instance.gameSettings.musicVolume = musicSlider.value;
+            GameSingleton.Instance.gameSettings.invertCameraX = invertCameraX;
+            GameSingleton.Instance.gameSettings.invertCameraY = invertCameraY;
+
         }
     }
+    
+
 }

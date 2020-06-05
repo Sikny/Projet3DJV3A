@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine;
+using Utility;
 
 
 namespace Sounds
@@ -11,7 +12,7 @@ namespace Sounds
     {
         //take game setting volume with gamesingleton.instance.gamesettings.volume 
         public Sound[] sounds;
-
+        public GameSettings settings;
         private void Awake()
         {
             
@@ -26,18 +27,20 @@ namespace Sounds
             }
         }
 
-
         public void Play(string name)
         {
             Debug.Log("PLAYING SOUND: " + name);
             Sound s = Array.Find(sounds, sound => sound.name == name);
             if (s == null)
             {
-                
                 Debug.Log("sound " + name + "does not exist");
                 return;
-
             }
+            settings = GameSingleton.Instance.gameSettings;
+            if (s.loop) //is a music
+                s.source.volume *= settings.musicVolume;
+            else
+                s.source.volume *= settings.soundVolume;
             s.source.Play();
         }
     }
