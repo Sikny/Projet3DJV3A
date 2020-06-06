@@ -15,8 +15,8 @@ namespace CameraMovement {
         public float zoomSpeed = 6f;
         public Camera camera;
         private float _currentYaw;
-        private int _minZoom = 10;
-        private int _maxZoom = 40;
+        public int minZoom = 10;
+        public int maxZoom = 40;
         private bool _mousePressed;
         
         private bool _isMovingRight;
@@ -83,7 +83,7 @@ namespace CameraMovement {
         {
  
             _currentYaw -= Input.mouseScrollDelta.y * (zoomSpeed * speed * Time.deltaTime);// Input.GetAxis("Mouse ScrollWheel") * speed * Time.deltaTime;
-            _currentYaw = Mathf.Clamp(_currentYaw, _minZoom, _maxZoom);
+            _currentYaw = Mathf.Clamp(_currentYaw, minZoom, maxZoom);
             //StoreUnit upgradedUnit = (number == 1) ? _unit.upgrades[0] : _unit.upgrades[1];
 
 

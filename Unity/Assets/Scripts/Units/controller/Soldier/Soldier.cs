@@ -31,7 +31,7 @@ namespace Units{
                 {
                     if (!_playingSound)
                     {
-                        //GameSingleton.Instance.soundManager.Play("Slash");
+                        GameSingleton.Instance.soundManager.Play("Slash");
                     }
                     body.Attack(target, getAttackUnit(target));
                 }

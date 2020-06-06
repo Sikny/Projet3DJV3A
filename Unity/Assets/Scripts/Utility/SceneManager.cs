@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace Utility {
@@ -17,6 +18,8 @@ namespace Utility {
         public void LoadScene(string sceneName) {
             if(sceneName == "StoryMode")
                 GameSingleton.Instance.soundManager.Play("Level theme");
+            //if(sceneName == "Menu")
+            //    GameSingleton.Instance.soundManager.Play("Menu");
             UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
         }
     }
