@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using Utility;
 using WebClient;
 
 namespace UI {
@@ -7,6 +8,7 @@ namespace UI {
         public GameObject optionsPanel;
         public ConnectForm connectionPanel;
         public RegisterForm registerPanel;
+        public GameObject background;
         
         public void OnConnectConfirmPressed() {
             if(connectionPanel.ValidForm()) {
@@ -20,7 +22,7 @@ namespace UI {
             if (registerPanel.ValidForm()) {
                 StartCoroutine(ConnectModule.Instance.RegisterUser(registerPanel.firstName.text,
                     registerPanel.lastName.text, registerPanel.mail.text, registerPanel.password.text,
-                    ProcessConnectionResult));
+                    ProcessRegisterResult));
                 //  TODO CONNECT, LOADING, CONFIRM WINDOW
             }
         }
@@ -37,7 +39,29 @@ namespace UI {
                 Debug.Log("Connect success");
                 string result = www.downloadHandler.text;
                 Debug.Log("Received: " + result);
+                if (result.Contains("NOK"))
+                {
+                    //message d'erreur
+                }
+                else
+                {
+                    GameSingleton.Instance.tokenConnection = result;
+                    connectionPanel.gameObject.SetActive(false);
+                    background.SetActive(false);
+                }
             }
+        }
+        
+        private void ProcessRegisterResult(UnityWebRequest www) {
+            if (www.isNetworkError || www.isHttpError) {
+                Debug.Log(www.error);
+            }
+            else {
+                Debug.Log("Connect success");
+                string result = www.downloadHandler.text;
+                Debug.Log("Received: " + result);
+            }
+            
         }
     }
 }

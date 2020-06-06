@@ -2092,6 +2092,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7250147542952311472, guid: 713fc0ea1c597f54fb335e8f3c35acd4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7250147542952311474, guid: 713fc0ea1c597f54fb335e8f3c35acd4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2162,6 +2167,11 @@ PrefabInstance:
       propertyPath: registerPanel
       value: 
       objectReference: {fileID: 5165323173077928231}
+    - target: {fileID: 7250147542952311475, guid: 713fc0ea1c597f54fb335e8f3c35acd4,
+        type: 3}
+      propertyPath: background
+      value: 
+      objectReference: {fileID: 1077926752}
     - target: {fileID: 7250147542952311477, guid: 713fc0ea1c597f54fb335e8f3c35acd4,
         type: 3}
       propertyPath: notTranslated.Array.data[0]
