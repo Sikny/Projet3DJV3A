@@ -20,7 +20,8 @@ namespace Game {
         private SystemUnit _systemUnit;
 
         public TerrainMeshBuilder terrainBuilder;
-
+        public TerrainOptions terrainOptions;
+        
         [Header("Shop content")]
         public List<Consumable> consumablesList = new List<Consumable>();
         public List<Equipment> equipmentsList = new List<Equipment>();
