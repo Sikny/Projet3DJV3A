@@ -16,7 +16,7 @@ namespace UI {
         private Shop _shop;
 
         
-        #region Singleton
+        #region Singletonto
 
         public static ShopManager instance;
 

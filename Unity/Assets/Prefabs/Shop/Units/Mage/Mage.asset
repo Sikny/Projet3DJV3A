@@ -15,7 +15,9 @@ MonoBehaviour:
   itemName: Mage
   icon: {fileID: 21300000, guid: a4e293942449ba940bbd8bc406cc7b3e, type: 3}
   price: 50
+  description: Base Mage unit. Effective against Soldier units
   entityType: 2
   upgrades:
   - {fileID: 11400000, guid: 2f782b1c9852faf4e8a3e1b9cb0d0c77, type: 2}
   - {fileID: 11400000, guid: 7ab6edaeb0be13a4a9d5fbd85a9efe29, type: 2}
+  upgradeCost: 100

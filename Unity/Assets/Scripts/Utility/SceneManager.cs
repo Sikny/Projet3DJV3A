@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game;
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace Utility {
@@ -14,7 +13,7 @@ namespace Utility {
                 {"loadLvl", 4}, {"personnalizedMap", 5}
             };
         }
-
+        
         public void LoadScene(string sceneName) {
 
             if (_storedScenesIds[sceneName] == 2)
@@ -25,6 +24,7 @@ namespace Utility {
                 GameSingleton.Instance.GetPlayer().gamemode = Player.Gamemode.ARCADE;
             }
             
+                GameSingleton.Instance.soundManager.Play("Level theme");
             UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
         }
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Units;
 using UnityEngine;
+using Utility;
 using Random = UnityEngine.Random;
 
 public class Archer : Controller
@@ -35,8 +36,14 @@ public class Archer : Controller
             {
                 float distance = Vector3.Distance(positionTarget, body.GetPosition());
                 float ceilAccuracy = ACCURACY * Mathf.Exp(Mathf.Pow(-ZONE_ACCURACY_DISPERSEMENT*(distance-OPTIMAL_DISTANCE),2)); // calcul de la précision
-                if (ceilAccuracy >= Random.Range(0f, 1.0f)) 
+                if (ceilAccuracy >= Random.Range(0f, 1.0f))
+                {
+                    GameSingleton.Instance.soundManager.Play("ArcherAttack");
                     body.Attack(target, getAttackUnit(target));
+                    
+                }
+                
+                //get efficiency type 
             }
 
             deltaTime -= TICK_ATTACK;

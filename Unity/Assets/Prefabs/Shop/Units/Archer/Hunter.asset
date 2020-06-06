@@ -15,7 +15,9 @@ MonoBehaviour:
   itemName: Hunter
   icon: {fileID: 21300000, guid: a4e293942449ba940bbd8bc406cc7b3e, type: 3}
   price: 50
+  description: Hunters can shoot from a further distance and deal more damage.
   entityType: 14
   upgrades:
   - {fileID: 11400000, guid: e5cef5a3c1892f34c8df71349e72e8bc, type: 2}
   - {fileID: 11400000, guid: b4a3fb0fdd337f541a7ad45494938c90, type: 2}
+  upgradeCost: 150

@@ -374,7 +374,7 @@ PrefabInstance:
     - target: {fileID: 1538591994930796200, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}
       propertyPath: m_Text
-      value: passwordLabel
+      value: Mot de passe
       objectReference: {fileID: 0}
     - target: {fileID: 3150058846161109342, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}
@@ -526,7 +526,7 @@ PrefabInstance:
     - target: {fileID: 1538591994930796200, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}
       propertyPath: m_Text
-      value: lNameLabel
+      value: Nom
       objectReference: {fileID: 0}
     - target: {fileID: 3150058846161109342, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}
@@ -818,12 +818,12 @@ PrefabInstance:
     - target: {fileID: 7559805419424179713, guid: 98d365858f3ea2c408da6c9be4df8504,
         type: 3}
       propertyPath: m_enableAutoSizing
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7559805419424179713, guid: 98d365858f3ea2c408da6c9be4df8504,
         type: 3}
       propertyPath: m_fontSize
-      value: 36
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 7559805419424179713, guid: 98d365858f3ea2c408da6c9be4df8504,
         type: 3}
@@ -833,12 +833,27 @@ PrefabInstance:
     - target: {fileID: 7559805419424179713, guid: 98d365858f3ea2c408da6c9be4df8504,
         type: 3}
       propertyPath: m_text
-      value: Register
+      value: "Cr\xE9er un compte"
       objectReference: {fileID: 0}
     - target: {fileID: 7559805419424179713, guid: 98d365858f3ea2c408da6c9be4df8504,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 8
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7559805419424179713, guid: 98d365858f3ea2c408da6c9be4df8504,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7559805419424179713, guid: 98d365858f3ea2c408da6c9be4df8504,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7559805419424179713, guid: 98d365858f3ea2c408da6c9be4df8504,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 24
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98d365858f3ea2c408da6c9be4df8504, type: 3}
@@ -1125,7 +1140,7 @@ PrefabInstance:
     - target: {fileID: 633210206118253867, guid: 2faac54c24c20714184c6ce8eaf41218,
         type: 3}
       propertyPath: m_Text
-      value: confirmLabel
+      value: Confirmer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2faac54c24c20714184c6ce8eaf41218, type: 3}
@@ -1312,7 +1327,7 @@ PrefabInstance:
     - target: {fileID: 1538591994930796200, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}
       propertyPath: m_Text
-      value: fNameLabel
+      value: "Pr\xE9nom"
       objectReference: {fileID: 0}
     - target: {fileID: 3150058846161109342, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}
@@ -1604,7 +1619,7 @@ PrefabInstance:
     - target: {fileID: 1538591994930796200, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}
       propertyPath: m_Text
-      value: passwordRepeatLabel
+      value: Confirmer mot de passe
       objectReference: {fileID: 0}
     - target: {fileID: 3150058846161109342, guid: 4d80506befeda5f448ca8c989585fc42,
         type: 3}

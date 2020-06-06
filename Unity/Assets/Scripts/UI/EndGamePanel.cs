@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
+using Units;
 using UnityEngine;
 using Utility;
 using SceneManager = UnityEngine.SceneManagement.SceneManager;
@@ -9,7 +11,8 @@ namespace UI {
         public TextMeshProUGUI loseMessage;
         public GameObject retryBtn;
         public GameObject nextBtn;
-
+        public SystemUnit systemUnit;
+        
         public int TypeEndGame {
             set {
                 _typeEndGame = value;
@@ -25,8 +28,13 @@ namespace UI {
                         loseMessage.gameObject.SetActive(false);
                         retryBtn.SetActive(false);
                         nextBtn.SetActive(true);
+
                         if (GameSingleton.Instance.levelManager != null)
+                        {
+                            GetAliveAllyUnits(systemUnit.GetUnits());
                             GameSingleton.Instance.levelManager.NextLevel();
+
+                        }
                         break;
                 }
             }
@@ -44,5 +52,17 @@ namespace UI {
             }
             gameObject.SetActive(false);
         }
+        private static void GetAliveAllyUnits(List<AbstractUnit> units)
+        {
+            //get alive ally units in scene
+            //get their equipments
+            //retrieve to inventory 
+            Debug.Log("unit count : " + units.Count);
+            foreach (var unit in units)
+            {
+                Debug.Log(unit.GetType());
+            }
+        }
     }
+    
 }

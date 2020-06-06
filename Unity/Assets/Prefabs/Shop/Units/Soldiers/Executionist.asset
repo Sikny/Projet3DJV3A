@@ -15,5 +15,7 @@ MonoBehaviour:
   itemName: Executionist
   icon: {fileID: 21300000, guid: a4e293942449ba940bbd8bc406cc7b3e, type: 3}
   price: 100
+  description: Very slow unit but deals a lot of damage and has a lot of health.
   entityType: 7
   upgrades: []
+  upgradeCost: 0

@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections;
+using Game;
 using TMPro;
 using UnityEngine;
+using Utility;
 
 namespace UI {
     public class Popups : MonoBehaviour
     {
         public TextMeshProUGUI popupText;
 
+        public Color defaultColor = Color.yellow;
 
         #region Singleton
     
@@ -26,13 +29,19 @@ namespace UI {
 
         #endregion
 
+
+
         public void Popup(String content, Color color)
         {
-        
+            popupText.color = color;
+            popupText.SetText(content);
+            popupText.gameObject.SetActive(true);
+            StartCoroutine(DelayCorouting(3));
         }
     
         public void Popup(String content)
         {
+            popupText.color = defaultColor;
             popupText.SetText(content);
             popupText.gameObject.SetActive(true);
             StartCoroutine(DelayCorouting(3));

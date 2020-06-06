@@ -10,7 +10,7 @@ namespace Utility {
         public float musicVolume;
         public Language.Language language;
         public bool invertCameraX;
-        
-        
+        public bool invertCameraY;
+
     }
 }

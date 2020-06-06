@@ -15,7 +15,9 @@ MonoBehaviour:
   itemName: Knight
   icon: {fileID: 21300000, guid: a4e293942449ba940bbd8bc406cc7b3e, type: 3}
   price: 100
+  description: Knights have a lot of defense and health.
   entityType: 4
   upgrades:
   - {fileID: 11400000, guid: 02a784f79fdce984683841664b87ea1c, type: 2}
   - {fileID: 11400000, guid: 66eefecb5d8311541bb7046983c6b048, type: 2}
+  upgradeCost: 150

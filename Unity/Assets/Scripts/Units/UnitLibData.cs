@@ -13,7 +13,7 @@ namespace Units
 
         public static List<AbstractUnit> units = new List<AbstractUnit>();
 
-        public static PlayerUnit _selectedUnit;
+        public static PlayerUnit selectedUnit;
         
         public static float deltaTime;
     }

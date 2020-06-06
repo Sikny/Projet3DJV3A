@@ -84,18 +84,15 @@ namespace Editor {
             // array
             _scrollPosition = GUILayout.BeginScrollView(_scrollPosition);
             GUILayout.BeginVertical(_linesStyle);
+            int index = 0;
             foreach (var entry in _languageDictionary.dictionary) {
                 // one line (one dictionary entry)
                 GUILayout.BeginVertical(_singleLStyle);
                 GUILayout.BeginHorizontal();
                 GUILayout.BeginVertical(GUILayout.Width(position.width*_columnsWidth[0]));
-                GUILayout.Label(entry.key);
+                GUILayout.Label(""+index);
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
-                if (GUILayout.Button("Edit", GUILayout.Width(50f))) {
-                    LanguageDictionaryEditPopup.Init(entry.key, 1);
-                    break;
-                }
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
                 GUILayout.EndVertical();
@@ -117,15 +114,16 @@ namespace Editor {
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
                 if (GUILayout.Button("-", GUILayout.Width(50f))) {
-                    _languageDictionary.DeleteEntry(entry.key);
+                    _languageDictionary.DeleteEntry(index);
                     break;
                 }
                 GUILayout.EndHorizontal();
                 GUI.backgroundColor = defaultBg;
                 GUILayout.EndVertical();    // line end
+                index++;
             }
             if (GUILayout.Button("Add")) {
-                LanguageDictionaryEditPopup.Init("", 0);
+                _languageDictionary.AddEntry();
             }
             GUILayout.EndVertical();
             GUILayout.EndScrollView();

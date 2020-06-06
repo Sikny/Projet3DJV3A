@@ -6,8 +6,9 @@ namespace Items {
         public string itemName = "New item";
         public Sprite icon;
 
+        
         public int price = 10;
-        //public String description = ""; 
+        public string description = ""; 
 
 
         // Called when the item is pressed in the inventory

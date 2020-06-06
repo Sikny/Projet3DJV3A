@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using AStar;
-using TerrainGeneration;
+using Terrain;
 using Units.utils;
 using UnityEngine;
 

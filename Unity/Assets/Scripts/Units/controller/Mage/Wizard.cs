@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Units;
 using UnityEngine;
+using Utility;
 
 public class Wizard : Controller
 {
@@ -33,6 +34,8 @@ public class Wizard : Controller
             
         if (canShoot && deltaTime >= TICK_ATTACK)
         {
+            GameSingleton.Instance.soundManager.Play("MageAttack");
+
             body.Attack(target, getAttackUnit(target));
 
             deltaTime -= TICK_ATTACK;

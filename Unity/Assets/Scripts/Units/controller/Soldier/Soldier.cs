@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Utility;
 
 namespace Units{
     public class Soldier : Controller
     {
         private const float TICK_ATTACK= 0.10f; // 10 per second
-
+        private bool _playingSound;
         public Soldier(AbstractUnit body) : base(body)
         {
             speedEntity = 0.8f;
             basisAttack = 1.0f;
-            //upgrades.Add(EntityType.Spearman);
-            //upgrades.Add(EntityType.Knight);
             
             itineraireNumberRemain = 0;
         }
@@ -25,7 +25,12 @@ namespace Units{
             
             if (deltaTime >= TICK_ATTACK) {
                 if (target == null) return;
-                if (Vector3.Distance(body.GetPosition(), target.GetPosition()) <= 3) {
+                if (Vector3.Distance(body.GetPosition(), target.GetPosition()) <= 3)
+                {
+                    if (!_playingSound)
+                    {
+                        GameSingleton.Instance.soundManager.Play("Slash");
+                    }
                     body.Attack(target, getAttackUnit(target));
                 }
                 deltaTime -= TICK_ATTACK;
@@ -42,6 +47,13 @@ namespace Units{
             updatePathMove();
             
             //velocity = position - last;
+        }
+
+        IEnumerator WaitForSound()
+        {
+            _playingSound = true; 
+            yield return new WaitForSeconds(1);
+            _playingSound = false;
         }
     }
 }

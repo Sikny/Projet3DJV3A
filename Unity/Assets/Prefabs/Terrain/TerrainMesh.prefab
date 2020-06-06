@@ -86,7 +86,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   textureResolution: 50
   terrainOptions: {fileID: 2496842524491047986}
-  cursor: {fileID: 2496842525972769654}
+  cursor: {fileID: 8038414469622382947}
   waterObject: {fileID: 5230928976668908788}
 --- !u!114 &2496842524491047986
 MonoBehaviour:
@@ -109,7 +109,6 @@ MonoBehaviour:
   maxMountainHeight: 5
   width: 30
   height: 30
-  crashLoopLimit: 1000
 --- !u!1 &4008368010695874758
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,3 +263,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2128266024648417254}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8038414469622382947 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8216590962919497349, guid: 1bf6d001ba888d348992089433ad17dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 2128266024648417254}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 187d79cd7a3f46d488ec8fd1bcd78e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
