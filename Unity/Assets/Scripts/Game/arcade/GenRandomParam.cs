@@ -20,6 +20,8 @@ public class GenRandomParam : MonoBehaviour
 
     public Level generateNextLevel(int seed, int i)
     {
+        seed = seed + (seed+1) * i;
+        
         Random rand = new Random(seed);
 
         Level levelNew = Instantiate(levelBase);
