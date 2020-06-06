@@ -12,8 +12,6 @@ namespace Units{
         {
             speedEntity = 0.8f;
             basisAttack = 1.0f;
-            //upgrades.Add(EntityType.Spearman);
-            //upgrades.Add(EntityType.Knight);
             
             itineraireNumberRemain = 0;
         }
