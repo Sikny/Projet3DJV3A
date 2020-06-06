@@ -13,7 +13,7 @@ namespace Utility {
         {
             if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE)
             {
-                loadedLevel = grp.generateNextLevel(1024, 0);
+                loadedLevel = grp.generateNextLevel(1024, 5);
                 GameSingleton.Instance.levelManager = this;
                 loadedLevel.Init();
             }

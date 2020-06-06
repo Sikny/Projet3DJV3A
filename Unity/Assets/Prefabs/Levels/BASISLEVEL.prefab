@@ -56,10 +56,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f31b04ebfc4748141af4d82e75d1c293, type: 2}
   - {fileID: 11400000, guid: af1ecda70da49b34ca58f58124002d9d, type: 2}
   - {fileID: 11400000, guid: 8c3a0c3cc26ac294b9031c84ad619af0, type: 2}
-  enemySpawns:
-  - spawnTime: 0
-    entityType: 0
-    position: {x: -10, y: 10}
+  enemySpawns: []
   livingEnemies: []
 --- !u!1001 &8502122356403892488
 PrefabInstance:
