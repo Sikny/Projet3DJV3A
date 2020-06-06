@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Game;
-using TerrainGeneration;
+using Terrain;
 using Units;
 using UnityEngine;
 using Utility;

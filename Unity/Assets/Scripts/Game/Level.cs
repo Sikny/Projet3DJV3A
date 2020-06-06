@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Items;
-using TerrainGeneration;
+using Terrain;
 using UI;
 using Units;
 using UnityEngine;
@@ -46,7 +46,6 @@ namespace Game {
 
             ShopManager _shopManager = ShopManager.instance;
 
-            _shopManager.UpdateUI();
             
             foreach (Consumable cons in consumablesList) {
                 _shop.AddConsummable(cons);
@@ -59,6 +58,8 @@ namespace Game {
             foreach (StoreUnit storeUnit in unitList) {
                 _shop.AddStoreUnit(storeUnit);
             }
+            _shopManager.UpdateUI();
+
         }
 
         private void Update() {
