@@ -58,6 +58,8 @@ MonoBehaviour:
   gameSettings: {fileID: 11400000, guid: dfbe9b8a7b0398646aedb0eb9776d315, type: 2}
   languageDictionary: {fileID: 11400000, guid: 0d6cf9341b33a57479eaa5b00a4243f6, type: 2}
   endGamePanel: {fileID: 1415078842026712273}
+  inventory: {fileID: 11400000, guid: b7120ce116e92ee4d9d9f6c7f5d23817, type: 2}
+  storeUnitList: {fileID: 11400000, guid: 8591522ae67de054f9990aff0c226b93, type: 2}
   gamePaused: 0
   tokenConnection: 
   uiManager: {fileID: 0}

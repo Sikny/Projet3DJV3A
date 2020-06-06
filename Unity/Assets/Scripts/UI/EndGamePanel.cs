@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using Game;
+using Items;
 using TMPro;
 using Units;
 using UnityEngine;
+using UnityEngine.UI;
 using Utility;
 using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
@@ -11,7 +14,6 @@ namespace UI {
         public TextMeshProUGUI loseMessage;
         public GameObject retryBtn;
         public GameObject nextBtn;
-        public SystemUnit systemUnit;
         
         public int TypeEndGame {
             set {
@@ -31,7 +33,7 @@ namespace UI {
 
                         if (GameSingleton.Instance.levelManager != null)
                         {
-                            GetAliveAllyUnits(systemUnit.GetUnits());
+                            GetAliveAllyUnits();
                             GameSingleton.Instance.levelManager.NextLevel();
 
                         }
@@ -52,15 +54,19 @@ namespace UI {
             }
             gameObject.SetActive(false);
         }
-        private static void GetAliveAllyUnits(List<AbstractUnit> units)
+        private void GetAliveAllyUnits()
         {
-            //get alive ally units in scene
-            //get their equipments
-            //retrieve to inventory 
-            Debug.Log("unit count : " + units.Count);
+            SystemUnit systemUnit = FindObjectOfType<SystemUnit>();
+
+            List<AbstractUnit> units = systemUnit.GetUnits();
+
+            Inventory inventory = GameSingleton.Instance.inventory;
+
             foreach (var unit in units)
             {
-                Debug.Log(unit.GetType());
+                EntityType entityType = unit.GetEntityType();
+                StoreUnit storeUnit = GameSingleton.Instance.storeUnitList.GetStoreUnitByEntityType(entityType);
+                inventory.AddItem(storeUnit);
             }
         }
     }
