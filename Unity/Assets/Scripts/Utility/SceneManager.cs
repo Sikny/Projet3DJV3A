@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game;
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace Utility {
@@ -15,6 +16,15 @@ namespace Utility {
         }
 
         public void LoadScene(string sceneName) {
+
+            if (_storedScenesIds[sceneName] == 2)
+            {
+                GameSingleton.Instance.GetPlayer().gamemode = Player.Gamemode.LEVEL;
+            }else if (_storedScenesIds[sceneName] == 5)
+            {
+                GameSingleton.Instance.GetPlayer().gamemode = Player.Gamemode.ARCADE;
+            }
+            
             UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
         }
     }

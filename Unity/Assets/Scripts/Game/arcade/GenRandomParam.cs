@@ -17,11 +17,11 @@ public class GenRandomParam : MonoBehaviour
         
     }
 
-    public void generateNextLevel(int seed, int i)
+    public Level generateNextLevel(int seed, int i)
     {
         Random rand = new Random(seed);
 
-        Level levelNew = Level.Instantiate(levelBase);
+        Level levelNew = Instantiate(levelBase);
 
         TerrainOptions options = levelNew.terrainOptions;
 
@@ -31,5 +31,6 @@ public class GenRandomParam : MonoBehaviour
         options.maxWaterSize = rand.Next(10, 30);
 
         levelList.addLevel(levelNew);
+        return levelNew;
     } 
 }
