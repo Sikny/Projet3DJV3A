@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 678431467393923813}
   - component: {fileID: 678431467393923812}
-  - component: {fileID: 4384538936900775757}
+  - component: {fileID: 9164305878923577751}
   m_Layer: 0
   m_Name: UnitSystem
   m_TagString: Untagged
@@ -57,7 +57,7 @@ MonoBehaviour:
   rotationSpeed: 300
   speed: 5
   isRunning: 0
---- !u!114 &4384538936900775757
+--- !u!114 &9164305878923577751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

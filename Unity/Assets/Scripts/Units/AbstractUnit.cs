@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using AStar;
 using Units.utils;
-using UnityEditor;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace Units {
@@ -188,8 +184,8 @@ namespace Units {
 
         protected void UpdateGameObject()
         {
-            if (livingEntityCount > 0)
-                rigidBody.MovePosition(position);
+            //if (livingEntityCount > 0)
+            //    rigidBody.MovePosition(position);
         }
 
         public Entity GetEntity(int index)

@@ -101,17 +101,9 @@ namespace Units {
         }
         
     
-        public void SetTargetPosition(float yPos) {
-            Ray ray = UnitLibData.cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hit, 100, 1 << 4) ||
-                !Physics.Raycast(ray, out hit, 100, UnitLibData.groundMask))
-                return;
+        public void SetTargetPosition(Vector3 cursorPos) {
 
-            float xHit = Mathf.Floor(hit.point.x);
-            float zHit = Mathf.Floor(hit.point.z);
-
-            targetPosition = new Vector3(Mathf.Floor(hit.point.x)-0.5f, yPos,
-                Mathf.Floor(hit.point.z)-0.5f) ;
+            targetPosition = new Vector3(cursorPos.x, SystemUnit.YPos, cursorPos.z) ;
             
             //Vector of unit to point 
             Vector3 unitToTarget = (targetPosition - position);
