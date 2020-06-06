@@ -37,6 +37,14 @@ namespace WebClient {
             yield return www.SendWebRequest();
             callback(www);
         }
+        
+        public IEnumerator BestScores( Action<UnityWebRequest> callback) {
+            List<IMultipartFormSection> formData = new List<IMultipartFormSection> {
+            };
+            UnityWebRequest www = UnityWebRequest.Post("http://piwelengine.eu/sauron/WS/BEST_SCORES.php", formData);
+            yield return www.SendWebRequest();
+            callback(www);
+        }
 
         /**
          * Registers new user with given data

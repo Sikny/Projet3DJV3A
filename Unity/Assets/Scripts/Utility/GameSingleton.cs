@@ -34,6 +34,8 @@ namespace Utility {
 
         private Player _player;
 
+        public string tokenConnection;
+
         public UiManager uiManager;
 
         public SoundManager soundManager;
