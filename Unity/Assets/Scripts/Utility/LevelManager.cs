@@ -7,11 +7,11 @@ namespace Utility {
 
         public Level loadedLevel;
 
-        public GenRandomParam GRP;
+        public GenRandomParam grp;
         
         private void Awake()
         {
-            GRP.generateNextLevel(1024,0);
+            grp.generateNextLevel(1024,0);
             
             GameSingleton.Instance.levelManager = this;
             loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevel));

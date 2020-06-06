@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelList: {fileID: 11400000, guid: 757716f91318dec439002e3f46856d9b, type: 2}
   loadedLevel: {fileID: 0}
-  GRP: {fileID: 4978998015009354484}
+  grp: {fileID: 4978998015009354484}
 --- !u!114 &4978998015009354484
 MonoBehaviour:
   m_ObjectHideFlags: 0

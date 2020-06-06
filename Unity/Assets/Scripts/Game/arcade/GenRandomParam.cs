@@ -21,7 +21,7 @@ public class GenRandomParam : MonoBehaviour
     {
         Random rand = new Random(seed);
 
-        Level levelNew = new Level();
+        Level levelNew = Level.Instantiate(levelBase);
 
         TerrainOptions options = levelNew.terrainOptions;
 
