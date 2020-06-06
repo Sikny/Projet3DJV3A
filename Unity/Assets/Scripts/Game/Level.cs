@@ -36,6 +36,7 @@ namespace Game {
         public void Init() {
             StartCoroutine(terrainBuilder.Init());
 
+            // todo remove find
             _systemUnit = FindObjectOfType<SystemUnit>();
             
             _shop = Shop.Instance;
