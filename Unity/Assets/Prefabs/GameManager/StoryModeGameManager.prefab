@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5140803044235488903}
   - component: {fileID: 5140803044235488907}
+  - component: {fileID: 2208175530476096057}
+  - component: {fileID: -7202068828548526874}
   m_Layer: 0
-  m_Name: GameManager 1
+  m_Name: StoryModeGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,3 +47,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupText: {fileID: 0}
   defaultColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!114 &2208175530476096057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5140803044235488901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f158ea3ae7ffc4a8eb58e889c49706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sizeUnit: 9
+  entityDict: {fileID: 11400000, guid: 06127aa73b1792e4392b7c64f1b5cc88, type: 2}
+  playerUnitPrefab: {fileID: 1916052447807135498, guid: 72f849211454d5e4199c6ad27f9a1408,
+    type: 3}
+  aiUnitPrefab: {fileID: 2094734722187342622, guid: 728ddf25c15f7df48a69d3c8055d4cb6,
+    type: 3}
+  cam: {fileID: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  rotationSpeed: 300
+  speed: 5
+  isRunning: 0
+--- !u!114 &-7202068828548526874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5140803044235488901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ff765aaf74eb34896b6b3ea87a2fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customEventSent: {fileID: 11400000, guid: a1db9c368c2bcc0478010da2fb2aaa47, type: 2}
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: DoClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

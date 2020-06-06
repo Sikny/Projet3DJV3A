@@ -3,6 +3,7 @@ using Items;
 using Terrain;
 using UI;
 using UnityEngine;
+using UnityEngine.UI;
 using Utility;
 using Cursor = Terrain.Cursor;
 
@@ -52,9 +53,10 @@ namespace Units {
             return newUnit.transform;
         }
 
-        public bool CheckPlaceable()
+        private bool CheckPlaceable()
         {
             Cursor cursor = TerrainGrid.Instance.cursor;
+            
             foreach (var cell in cursor.cursorCells)
             {
                 if (cell.posY > 1 || cell.posY <= -0.4)
@@ -62,6 +64,11 @@ namespace Units {
             }
 
             return true;
+        }
+
+        public List<AbstractUnit> GetUnits()
+        {
+            return _units;
         }
         public void DoClick() {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);

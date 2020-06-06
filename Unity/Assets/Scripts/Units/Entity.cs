@@ -78,7 +78,6 @@ namespace Units {
         
         private IEnumerator BlinkInefficient() {
             notEffectiveHitParticles.layer = 0;
-            Debug.Log("blinking inneficient");
             yield return _blinkTime;
             notEffectiveHitParticles.layer = 31;
         }
