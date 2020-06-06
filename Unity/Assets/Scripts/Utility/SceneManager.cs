@@ -13,8 +13,10 @@ namespace Utility {
                 {"loadLvl", 4}, {"personnalizedMap", 5}
             };
         }
-
+        
         public void LoadScene(string sceneName) {
+            if(sceneName == "StoryMode")
+                GameSingleton.Instance.soundManager.Play("Level theme");
             UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
         }
     }

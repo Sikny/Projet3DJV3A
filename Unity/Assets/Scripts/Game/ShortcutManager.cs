@@ -49,7 +49,7 @@ namespace Game {
 
         public GameEvents gameEvents;
         
-        void DoUpdate() {
+        public void DoUpdate() {
             if (Input.GetKeyDown(keyMap.shopKey)) {
                 gameEvents.toggleShopEvent.Raise();
             }

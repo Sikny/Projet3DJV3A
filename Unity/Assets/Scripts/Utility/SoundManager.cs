@@ -12,7 +12,7 @@ namespace Sounds
     {
         //take game setting volume with gamesingleton.instance.gamesettings.volume 
         public Sound[] sounds;
-        public GameSettings settings;
+        private GameSettings _settings;
         private void Awake()
         {
             
@@ -36,11 +36,11 @@ namespace Sounds
                 Debug.Log("sound " + name + "does not exist");
                 return;
             }
-            settings = GameSingleton.Instance.gameSettings;
+            _settings = GameSingleton.Instance.gameSettings;
             if (s.loop) //is a music
-                s.source.volume *= settings.musicVolume;
+                s.source.volume *= _settings.musicVolume;
             else
-                s.source.volume *= settings.soundVolume;
+                s.source.volume *= _settings.soundVolume;
             s.source.Play();
         }
     }
