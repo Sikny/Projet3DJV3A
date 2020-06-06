@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Items;
 using Terrain;
+using UI;
 using Units;
 using UnityEngine;
 using Utility;
@@ -18,9 +19,11 @@ namespace Game {
     public class Level : MonoBehaviour {
         private Shop _shop;
         private SystemUnit _systemUnit;
-
+        
+        
         public TerrainMeshBuilder terrainBuilder;
-
+        public TerrainOptions terrainOptions;
+        
         [Header("Shop content")]
         public List<Consumable> consumablesList = new List<Consumable>();
         public List<Equipment> equipmentsList = new List<Equipment>();
@@ -35,11 +38,14 @@ namespace Game {
         
         public void Init() {
             StartCoroutine(terrainBuilder.Init());
-
+            
             _systemUnit = FindObjectOfType<SystemUnit>();
             
             _shop = Shop.Instance;
             _shop.ClearShop();
+
+            ShopManager _shopManager = ShopManager.instance;
+
             
             foreach (Consumable cons in consumablesList) {
                 _shop.AddConsummable(cons);
@@ -52,6 +58,8 @@ namespace Game {
             foreach (StoreUnit storeUnit in unitList) {
                 _shop.AddStoreUnit(storeUnit);
             }
+            _shopManager.UpdateUI();
+
         }
 
         private void Update() {

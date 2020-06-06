@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Game;
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace Utility {
@@ -11,15 +11,22 @@ namespace Utility {
         public SceneManager() {
             _storedScenesIds = new Dictionary<string, int> {
                 {"Menu", 1}, {"StoryMode", 2}, {"creator", 3},
-                {"loadLvl", 4}, {"personnalizedMap", 5}
+                {"loadLvl", 4}, {"freeMode", 5}
             };
         }
         
         public void LoadScene(string sceneName) {
-            if(sceneName == "StoryMode")
+
+            if (_storedScenesIds[sceneName] == 2)
+            {
+                GameSingleton.Instance.GetPlayer().gamemode = Player.Gamemode.LEVEL;
                 GameSingleton.Instance.soundManager.Play("Level theme");
-            //if(sceneName == "Menu")
-            //    GameSingleton.Instance.soundManager.Play("Menu");
+
+            }else if (_storedScenesIds[sceneName] == 5)
+            {
+                GameSingleton.Instance.GetPlayer().gamemode = Player.Gamemode.ARCADE;
+            }
+            
             UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
         }
     }

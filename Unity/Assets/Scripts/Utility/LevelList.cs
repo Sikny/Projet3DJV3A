@@ -12,5 +12,11 @@ namespace Utility {
         public Level GetLevel(int index) {
             return levels[index];
         }
+
+        public int addLevel(Level l)
+        {
+            levels.Add(l);
+            return LevelCount - 1;
+        }
     }
 }

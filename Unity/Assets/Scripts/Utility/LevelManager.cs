@@ -7,10 +7,22 @@ namespace Utility {
 
         public Level loadedLevel;
 
-        private void Awake() {
-            GameSingleton.Instance.levelManager = this;
-            loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevel));
-            loadedLevel.Init();
+        public GenRandomParam grp;
+        
+        private void Start()
+        {
+            if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE)
+            {
+                loadedLevel = grp.generateNextLevel(1024, 5);
+                GameSingleton.Instance.levelManager = this;
+                loadedLevel.Init();
+            }
+            else
+            {
+                GameSingleton.Instance.levelManager = this;
+                loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevel));
+                loadedLevel.Init();
+            }
         }
 
         public void NextLevel() {

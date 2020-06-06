@@ -43,6 +43,14 @@ namespace UI {
             
         }
 
+        public void UpdateUI()
+        {
+            UpdateUIItems();
+            UpdateUIEquipments();
+            UpdateUIUnits();
+            UpdateGold();
+        }
+
         private void UpdateUIItems() {
             List<Consumable> shopConsummables = _shop.shopConsummables;
             
