@@ -49,15 +49,14 @@ namespace Units {
                 if (entityAttack == null || entityDefense == null) return;
 
                 
-
-                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength()*damage* coef), efficientCoef);
+                int life = entityAttack.Attack(entityDefense, (int)(-1 * entityAttack.GetStrength()*damage* coef), efficientCoef);
                 if (life == 0) {
                     anotherUnit.PopEntity(indexEntityDefense);
                 }
             }
             else if(anotherUnit.GetNumberAlive() == 1) {
                 if (entityAttack != null) {
-                    anotherUnit.GetEntity(0).ChangeLife(-100, efficientCoef);
+                    entityAttack.Attack(anotherUnit.GetEntity(0), -100, efficientCoef);
                     anotherUnit.PopEntity(0); // Le leader est attrapé
                     _unitTarget = null; //important pour indiquer à l'IA de commencer de nouvelles recherches
                 }

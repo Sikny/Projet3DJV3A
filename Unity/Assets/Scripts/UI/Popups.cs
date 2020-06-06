@@ -31,7 +31,7 @@ namespace UI {
 
         private void Start()
         {
-            GameSingleton.Instance.soundManager.Play("Level theme");
+            //GameSingleton.Instance.soundManager.Play("Level theme");
         }
 
         public void Popup(String content, Color color)

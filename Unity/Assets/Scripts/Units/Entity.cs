@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -17,6 +19,8 @@ namespace Units {
         public GameObject effectiveHitParticles;
         public GameObject notEffectiveHitParticles;
 
+        [SerializeField] private WeaponAnimator weaponAnimator;
+        
         private void Awake() {
             _strength = 5;
             _maxLife = 100;
@@ -37,15 +41,24 @@ namespace Units {
             Destroy(gameObject);
         }
 
+        public int Attack(Entity target, int deltaValue, int efficiencyType) {
+            transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, 
+                target.transform.position.z));
+            transform.Rotate(0, -90f, 0);
+            if(weaponAnimator != null)
+                weaponAnimator.Animate();
+            return target.ChangeLife(deltaValue, efficiencyType);
+        }
+
         public int ChangeLife(int deltaValue, int efficiencyType) {
-            
-            
             _life += deltaValue;
             if (_life > _maxLife) _life = _maxLife;
             else if (_life < 0) _life = 0;
             if (deltaValue < 0)
             {
+                #if UNITY_EDITOR
                 Debug.Log("efficient type is : " + efficiencyType);
+                #endif
                 if (efficiencyType == -1)
                     StartCoroutine(BlinkInefficient());
                 else if (efficiencyType == +1)
