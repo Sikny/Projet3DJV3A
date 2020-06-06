@@ -16,6 +16,7 @@ namespace Utility {
             if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE)
             {
                 loadedLevel = grp.generateNextLevel(Random.Range(Int32.MinValue, Int32.MaxValue), 5);
+                grp.setDefaultGold(loadedLevel);
                 GameSingleton.Instance.levelManager = this;
                 loadedLevel.Init();
             }

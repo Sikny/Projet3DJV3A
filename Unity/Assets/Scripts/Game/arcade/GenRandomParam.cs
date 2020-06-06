@@ -20,6 +20,7 @@ public class GenRandomParam : MonoBehaviour
 
     public Level generateNextLevel(int seed, int i)
     {
+        //int difficulty;
         seed = seed + (seed+1) * i;
         
         Random rand = new Random(seed);
@@ -34,7 +35,7 @@ public class GenRandomParam : MonoBehaviour
         options.maxWaterSize = rand.Next(10, 30);
 
         int nbEnnemy =  rand.Next(1, i) + rand.Next( (int)(i/4f), (int)(i/2f));
-
+        Debug.Log("NBENNEMY="+nbEnnemy);
         nbEnnemy = nbEnnemy > 8 ? 8 : nbEnnemy;
 
         for (int j = 0; j < nbEnnemy; j++)
@@ -52,5 +53,11 @@ public class GenRandomParam : MonoBehaviour
         
         levelList.addLevel(levelNew);
         return levelNew;
-    } 
+    }
+
+    public void setDefaultGold(Level l)
+    {
+        
+        GameSingleton.Instance.GetPlayer().gold = l.enemySpawns.Count * 75;
+    }
 }

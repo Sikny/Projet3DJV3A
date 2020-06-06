@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game;
+using UnityEngine;
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace Utility {
@@ -24,7 +25,16 @@ namespace Utility {
 
             }else if (_storedScenesIds[sceneName] == 5)
             {
-                GameSingleton.Instance.GetPlayer().gamemode = Player.Gamemode.ARCADE;
+                string token = PlayerPrefs.GetString("connection.token");
+                if (token == null || token.Length < 8)
+                {
+                    Debug.Log("Non-connecté");
+                }
+                else
+                {
+                    GameSingleton.Instance.tokenManager.CheckToken(token ,"scene.load.freeMode");
+                }
+                return; // load somewhere else (need token validation)
             }
             
             UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);

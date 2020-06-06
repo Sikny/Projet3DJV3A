@@ -5,6 +5,7 @@ namespace Game {
         public int gold;
         public int currentLevel;
         public Gamemode gamemode = Gamemode.LEVEL;
+        public int currentScore = 0;
         
         public Player() {
             Load();
