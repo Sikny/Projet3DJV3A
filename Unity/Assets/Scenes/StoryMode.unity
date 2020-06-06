@@ -1431,7 +1431,7 @@ PrefabInstance:
     - target: {fileID: 5140803044235488901, guid: f89d047642a967b4ca8fc06e20935129,
         type: 3}
       propertyPath: m_Name
-      value: GameManager 1
+      value: StoryModeGameManager
       objectReference: {fileID: 0}
     - target: {fileID: 5140803044235488903, guid: f89d047642a967b4ca8fc06e20935129,
         type: 3}

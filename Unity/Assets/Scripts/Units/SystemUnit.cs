@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Items;
+using Terrain;
 using UnityEngine;
 using Utility;
 
@@ -48,11 +49,12 @@ namespace Units {
             UnitLibData.units = _units;
             return newUnit.transform;
         }
-
+        
         public void DoClick() {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
            
+            // Placement d'une unité de l'inventaire
             if (GameSingleton.Instance.uiManager.inventory.selectedStoreUnit != null
                 && Physics.Raycast(ray, out hit, 100f, 1 << 8)) {
                 Vector3 position = new Vector3(Mathf.Floor(hit.point.x)+0.5f, YPos,
@@ -62,17 +64,20 @@ namespace Units {
                 GameSingleton.Instance.uiManager.inventory.RemoveUnit(unit);
                 GameSingleton.Instance.uiManager.inventory.selectedStoreUnit = null;
             }
+            
+            // Fight start
             if (!isRunning) return;
+            // Allied Unit selection
             if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
             {
                 UnitLibData.selectedUnit = hit.transform.GetComponent<PlayerUnit>();
             }
             else if (UnitLibData.selectedUnit != null)
             {
+                // Click on ground
                 if (Physics.Raycast(ray, out hit, 100f, 1 << 8))
                 {
-
-                    UnitLibData.selectedUnit.SetTargetPosition(YPos);
+                    UnitLibData.selectedUnit.SetTargetPosition(TerrainGrid.Instance.cursor.transform.position);
                 }
             }
         }

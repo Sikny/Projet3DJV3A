@@ -59,6 +59,7 @@ MonoBehaviour:
   languageDictionary: {fileID: 11400000, guid: 0d6cf9341b33a57479eaa5b00a4243f6, type: 2}
   endGamePanel: {fileID: 1415078842026712273}
   gamePaused: 0
+  tokenConnection: 
   uiManager: {fileID: 0}
   soundManager: {fileID: -4084212933205450926}
 --- !u!114 &7564929115761100277
@@ -130,7 +131,7 @@ MonoBehaviour:
   keyMap:
     selectKey: 323
     cameraRotateKey: 324
-    shopKey: 115
+    shopKey: 117
     inventoryKey: 105
     pauseKey: 27
     arrowCameraRight: 275
@@ -238,7 +239,6 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  settings: {fileID: 0}
 --- !u!1 &8007759850593002346
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,15 +49,14 @@ namespace Units {
                 if (entityAttack == null || entityDefense == null) return;
 
                 
-
-                int life = entityDefense.ChangeLife((int)(-1 * entityAttack.GetStrength()*damage* coef), efficientCoef);
+                int life = entityAttack.Attack(entityDefense, (int)(-1 * entityAttack.GetStrength()*damage* coef), efficientCoef);
                 if (life == 0) {
                     anotherUnit.PopEntity(indexEntityDefense);
                 }
             }
             else if(anotherUnit.GetNumberAlive() == 1) {
                 if (entityAttack != null) {
-                    anotherUnit.GetEntity(0).ChangeLife(-100, efficientCoef);
+                    entityAttack.Attack(anotherUnit.GetEntity(0), -100, efficientCoef);
                     anotherUnit.PopEntity(0); // Le leader est attrapé
                     _unitTarget = null; //important pour indiquer à l'IA de commencer de nouvelles recherches
                 }
@@ -102,17 +101,9 @@ namespace Units {
         }
         
     
-        public void SetTargetPosition(float yPos) {
-            Ray ray = UnitLibData.cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hit, 100, 1 << 4) ||
-                !Physics.Raycast(ray, out hit, 100, UnitLibData.groundMask))
-                return;
+        public void SetTargetPosition(Vector3 cursorPos) {
 
-            float xHit = Mathf.Floor(hit.point.x);
-            float zHit = Mathf.Floor(hit.point.z);
-
-            targetPosition = new Vector3(Mathf.Floor(hit.point.x)-0.5f, yPos,
-                Mathf.Floor(hit.point.z)-0.5f) ;
+            targetPosition = new Vector3(cursorPos.x, SystemUnit.YPos, cursorPos.z) ;
             
             //Vector of unit to point 
             Vector3 unitToTarget = (targetPosition - position);

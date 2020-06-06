@@ -25,17 +25,17 @@ MonoBehaviour:
       value: Quitter
   - values:
     - key: 0
-      value: Story mode
+      value: Story Mode
     - key: 1
-      value: Mode histoire
+      value: Mode Histoire
   - values:
     - key: 0
-      value: Free mode
+      value: Free Mode
     - key: 1
-      value: Mode libre
+      value: Mode Libre
   - values:
     - key: 0
-      value: Level editor
+      value: Level Editor
     - key: 1
       value: Editeur de niveaux
   - values:
