@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using Items;
 using Terrain;
+using UI;
 using UnityEngine;
 using Utility;
+using Cursor = Terrain.Cursor;
 
 namespace Units {
     public class SystemUnit : MonoBehaviour {
@@ -49,7 +51,18 @@ namespace Units {
             UnitLibData.units = _units;
             return newUnit.transform;
         }
-        
+
+        public bool CheckPlaceable()
+        {
+            Cursor cursor = TerrainGrid.Instance.cursor;
+            foreach (var cell in cursor.cursorCells)
+            {
+                if (cell.posY > 1 || cell.posY <= -0.4)
+                    return false;
+            }
+
+            return true;
+        }
         public void DoClick() {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -59,10 +72,20 @@ namespace Units {
                 && Physics.Raycast(ray, out hit, 100f, 1 << 8)) {
                 Vector3 position = new Vector3(Mathf.Floor(hit.point.x)+0.5f, YPos,
                     Mathf.Floor(hit.point.z)+0.5f) ;
-                StoreUnit unit = GameSingleton.Instance.uiManager.inventory.selectedStoreUnit;
-                SpawnUnit(unit.entityType, playerUnitPrefab, position);
-                GameSingleton.Instance.uiManager.inventory.RemoveUnit(unit);
-                GameSingleton.Instance.uiManager.inventory.selectedStoreUnit = null;
+
+                bool isPlaceable = CheckPlaceable();
+                if (isPlaceable)
+                {
+                    StoreUnit unit = GameSingleton.Instance.uiManager.inventory.selectedStoreUnit;
+                    SpawnUnit(unit.entityType, playerUnitPrefab, position);
+                    GameSingleton.Instance.uiManager.inventory.RemoveUnit(unit);
+                    GameSingleton.Instance.uiManager.inventory.selectedStoreUnit = null;
+                }
+                else
+                {
+                    Popups.instance.Popup("Unit is not placeable here, please try somewhere else", Color.red);
+                }
+
             }
             
             // Fight start
