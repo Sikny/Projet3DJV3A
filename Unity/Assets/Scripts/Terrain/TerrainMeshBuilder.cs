@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using AStar;
+using Units.PathFinding;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,7 +23,7 @@ namespace Terrain {
         [SerializeField, HideInInspector] private List<GameObject> meshObjects;
         private MeshFilter[] _meshFilters;
         private MeshRenderer[] _meshRenderers;
-        private MeshCollider _meshCollider;
+        public static MeshCollider meshCollider;
 
         private MinMax _minMax;
         public Gradient heightGradient;
@@ -34,10 +34,8 @@ namespace Terrain {
         public Transform waterObject;
 
         // Path-finding fields
-        public static Graph graph;
-        public static Algorithm alg;
-        public static Tile[,] tiles;
-        public static int[] dimensions;
+        public int[][] grid;
+        public AStarScript aStarScript;
 
         private void Clear() {
             int meshesCount = meshObjects.Count;
@@ -59,8 +57,7 @@ namespace Terrain {
 
             TerrainGrid.Instance.cursor = cursor;
 
-            tiles = new Tile[terrainOptions.width,terrainOptions.height];
-            dimensions = new[] {terrainOptions.width, terrainOptions.height};
+            grid = new int[terrainOptions.width][];
 
             _waterData.Clear();
 
@@ -81,9 +78,7 @@ namespace Terrain {
             waterObject.transform.localScale = new Vector3(terrainOptions.width - 0.0001f,
                 waterObject.localScale.y, terrainOptions.height - 0.0001f);
 
-            graph = new Graph(tiles, terrainOptions.width,terrainOptions.height,tiles[0,0], tiles[terrainOptions.width-1,terrainOptions.height-1]);
-            alg = new Algorithm(graph);
-            
+            aStarScript.Init();
             yield return null;
         }
 
@@ -120,8 +115,8 @@ namespace Terrain {
                 meshObjects.Add(meshObj);
             }
 
-            _meshCollider = _meshFilters[(int) TerrainSide.Top].gameObject.AddComponent<MeshCollider>();
-            _meshCollider.sharedMesh = _meshFilters[(int) TerrainSide.Top].sharedMesh;
+            meshCollider = _meshFilters[(int) TerrainSide.Top].gameObject.AddComponent<MeshCollider>();
+            meshCollider.sharedMesh = _meshFilters[(int) TerrainSide.Top].sharedMesh;
 
             Texture2D texture = new Texture2D(textureResolution, 1);
             Color[] colours = new Color[textureResolution];
@@ -129,16 +124,17 @@ namespace Terrain {
                 colours[i] = heightGradient.Evaluate(i / (textureResolution - 1f));
             }
 
-            for (int i = 0; i < terrainOptions.width; i++)
-            {
+            for (int i = 0; i < terrainOptions.width; i++) {
+                grid[i] = new int[terrainOptions.height];
                 for (int j = 0; j < terrainOptions.height; j++)
                 {
                     Vector3 vec = new Vector3(i-terrainOptions.width/2,0, j-terrainOptions.height/2);
+                    //Vector2 percent = new Vector2() / ;
                     float h = CalculateHeight(vec);
-                    if(h > 0.5f || h < -0.1f)
-                        tiles[i, j] = new Tile(TileType.Wall, i, j, new Vector3(vec.x,h+0.5f,vec.z));
+                    if (h > 0.5f || h < -0.1f)
+                        grid[i][j] = 1;
                     else
-                        tiles[i, j] = new Tile(TileType.Grass, i, j, new Vector3(vec.x,h+0.5f,vec.z));
+                        grid[i][j] = 0;
                 }
             }
 
