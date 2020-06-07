@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game;
 using TMPro;
 using Units;
 using UnityEngine;
@@ -12,16 +13,28 @@ namespace UI {
         public GameObject retryBtn;
         public GameObject nextBtn;
         public SystemUnit systemUnit;
+        public EndGame endGame; // arcade
         
         public int TypeEndGame {
             set {
                 _typeEndGame = value;
                 switch (_typeEndGame) {
                     case 0:    // Lose
-                        winMessage.gameObject.SetActive(false);
-                        loseMessage.gameObject.SetActive(true);
-                        retryBtn.SetActive(true);
-                        nextBtn.SetActive(false);
+                        if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL)
+                        {
+                            winMessage.gameObject.SetActive(false);
+                            loseMessage.gameObject.SetActive(true);
+                            retryBtn.SetActive(true);
+                            nextBtn.SetActive(false);
+                        }
+                        else
+                        {
+                            winMessage.gameObject.SetActive(false);
+                            loseMessage.gameObject.SetActive(false);
+                            retryBtn.SetActive(false);
+                            nextBtn.SetActive(false);
+                            endGame.gameObject.SetActive(true);
+                        }
                         break;
                     case 1:    // Win
                         winMessage.gameObject.SetActive(true);
