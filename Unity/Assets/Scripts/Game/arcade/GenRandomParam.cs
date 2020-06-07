@@ -7,22 +7,32 @@ using Units;
 using UnityEngine;
 using Utility;
 using Random = System.Random;
+using rand = UnityEngine.Random;
+
 
 public class GenRandomParam : MonoBehaviour
 {
     public LevelList levelList;
     public Level levelBase;
 
-    public void Start()
+    private void Start()
     {
-        
+        Level loadedLevel = generateNextLevel(rand.Range(Int32.MinValue, Int32.MaxValue), 5);
+        GameSingleton.Instance.levelManager.SetLoadedLevel(loadedLevel);
+        GameSingleton.Instance.levelManager.grp.setDefaultGold(loadedLevel);
+        Debug.Log(GameSingleton.Instance.GetPlayer().currentLevel);
+        loadedLevel = Instantiate(GameSingleton.Instance.levelManager.levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevel));
+        loadedLevel.Init();
     }
 
     public Level generateNextLevel(int seed, int i)
     {
+        //int difficulty;
+        seed = seed + (seed+1) * i;
+        
         Random rand = new Random(seed);
 
-        Level levelNew = Instantiate(levelBase);
+        Level levelNew = levelBase;//Instantiate(levelBase);
 
         TerrainOptions options = levelNew.terrainOptions;
 
@@ -32,7 +42,7 @@ public class GenRandomParam : MonoBehaviour
         options.maxWaterSize = rand.Next(10, 30);
 
         int nbEnnemy =  rand.Next(1, i) + rand.Next( (int)(i/4f), (int)(i/2f));
-
+        Debug.Log("NBENNEMY="+nbEnnemy);
         nbEnnemy = nbEnnemy > 8 ? 8 : nbEnnemy;
 
         for (int j = 0; j < nbEnnemy; j++)
@@ -47,8 +57,13 @@ public class GenRandomParam : MonoBehaviour
             es.entityType = (EntityType)values.GetValue(rand.Next(values.Length));
             levelNew.enemySpawns.Add(es);
         }
-        
         levelList.addLevel(levelNew);
         return levelNew;
-    } 
+    }
+
+    public void setDefaultGold(Level l)
+    {
+        
+        GameSingleton.Instance.GetPlayer().gold = l.enemySpawns.Count * 75;
+    }
 }

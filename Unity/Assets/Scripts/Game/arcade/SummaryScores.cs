@@ -14,24 +14,18 @@ public class SummaryScores : MonoBehaviour
 
     public List<GameObject> scoresList;
 
+    public bool called = true;
+    public int offset = 0;
+    
     // Start is called before the first frame update
-    void Start()
+    void Update()
     {
-        StartCoroutine(ConnectModule.Instance.BestScores(ProcessConnectionResult));
-        
-        
-        /*
-        if (!true)
+        if (!called)
         {
-            
+            StartCoroutine(ConnectModule.Instance.BestScores(ProcessConnectionResult));
+            called = true;
         }
-        else
-        {
-            foreach (FileInfo f in info)
-            {
-                
-            }
-        }*/
+        
     }
 
     public class ScoreJson
@@ -67,9 +61,13 @@ public class SummaryScores : MonoBehaviour
                 GameObject pointsScoreGO = scoreNew.transform.Find("pointScore").gameObject;
                 Text compPointsFile = pointsScoreGO.GetComponent<Text>();
                 compPointsFile.text = "Score : " + scoreJson.nbpoints;
+                
+                GameObject classScoreGO = scoreNew.transform.Find("classScore").gameObject;
+                Text compClassFile = classScoreGO.GetComponent<Text>();
+                compClassFile.text = "#" + (offset+nb+1);
 
                 RectTransform rectTransform = scoreNew.GetComponent<RectTransform>();
-                rectTransform.localPosition = new Vector3(450,-25 - nb++ * 60,0);
+                rectTransform.localPosition = new Vector3(400,-25 - nb++ * 60,0);
                 scoreNew.name = scoreJson.firstname + " " + scoreJson.lastname;
                 scoreNew.SetActive(true);
                 

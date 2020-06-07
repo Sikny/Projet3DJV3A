@@ -62,9 +62,9 @@ namespace Units
                 int xOffset = TerrainMeshBuilder.dimensions[0] / 2;
                 int yOffset = TerrainMeshBuilder.dimensions[1] / 2;
                 TerrainMeshBuilder.graph.BeginningNode = TerrainMeshBuilder.tiles[(int)body.GetPosition().x+xOffset, (int)body.GetPosition().z+yOffset];
-              //  Debug.Log("nodebeginpos="+TerrainMeshBuilder.graph.BeginningNode.Pos);
+                //Debug.Log("nodebeginpos="+TerrainMeshBuilder.graph.BeginningNode.Pos);
                 TerrainMeshBuilder.graph.ExitNode = TerrainMeshBuilder.tiles[(int)(exitPos.x+xOffset), (int)(exitPos.z+yOffset)];
-//                Debug.Log("nodeendpos="+TerrainMeshBuilder.graph.ExitNode.Pos);
+                //Debug.Log("nodeendpos="+TerrainMeshBuilder.graph.ExitNode.Pos);
                 TerrainMeshBuilder.alg.Solve();
                 itineraire = TerrainMeshBuilder.graph.ReconstructPath();
             }
@@ -83,7 +83,7 @@ namespace Units
                 if (Vector3.Distance(last, posTarget) < 2f)
                 {
                     
-                    Debug.Log(itineraire.Pop().Pos);
+                    //Debug.Log(itineraire.Pop().Pos);
                 } 
                 body.SetPosition(Vector3.MoveTowards(last, posTarget, 5f * Time.deltaTime));
             }

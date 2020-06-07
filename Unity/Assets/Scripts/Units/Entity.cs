@@ -57,7 +57,7 @@ namespace Units {
             if (deltaValue < 0)
             {
                 #if UNITY_EDITOR
-                Debug.Log("efficient type is : " + efficiencyType);
+               // Debug.Log("efficient type is : " + efficiencyType);
                 #endif
 
                 if (efficiencyType == -1)

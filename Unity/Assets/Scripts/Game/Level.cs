@@ -38,7 +38,8 @@ namespace Game {
         
         public void Init() {
             StartCoroutine(terrainBuilder.Init());
-            
+
+            // todo remove find
             _systemUnit = FindObjectOfType<SystemUnit>();
             
             _shop = Shop.Instance;
@@ -65,6 +66,7 @@ namespace Game {
         private void Update() {
             if (!_levelStarted) return;
             if (enemySpawns.Count == 0 && livingEnemies.Count == 0) {
+                Debug.Log("LEVEL IS OVER ALRIGHT OK ");
                 GameSingleton.Instance.EndGame(1);    // WIN
             } else if (_playerUnits.Count == 0) {
                 GameSingleton.Instance.EndGame(0);
