@@ -18,7 +18,6 @@ namespace Units {
             if(_unitTarget != null)
             {
                 brain.calculatePath(targetPosition);
-                
             }
             else
             {

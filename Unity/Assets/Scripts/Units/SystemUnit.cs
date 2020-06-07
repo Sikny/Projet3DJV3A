@@ -33,6 +33,7 @@ namespace Units {
         }
         
         public void Start() {
+            cam = FindObjectOfType<Camera>();
             UnitLibData.selectedUnit = null;
 
             /* On se servira de ça pour appeler les updates des units */

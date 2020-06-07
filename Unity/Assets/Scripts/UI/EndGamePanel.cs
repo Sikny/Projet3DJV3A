@@ -14,7 +14,7 @@ namespace UI {
         public TextMeshProUGUI loseMessage;
         public GameObject retryBtn;
         public GameObject nextBtn;
-        
+        public SystemUnit systemUnit;
         public int TypeEndGame {
             set {
                 _typeEndGame = value;
@@ -33,7 +33,7 @@ namespace UI {
 
                         if (GameSingleton.Instance.levelManager != null)
                         {
-                            GetAliveAllyUnits();
+                            UnitRecovery();
                             GameSingleton.Instance.levelManager.NextLevel();
 
                         }
@@ -54,9 +54,11 @@ namespace UI {
             }
             gameObject.SetActive(false);
         }
-        private void GetAliveAllyUnits()
+        
+        private void UnitRecovery()
         {
-            SystemUnit systemUnit = FindObjectOfType<SystemUnit>();
+//            SystemUnit 
+            systemUnit = FindObjectOfType<SystemUnit>();
 
             List<AbstractUnit> units = systemUnit.GetUnits();
 
