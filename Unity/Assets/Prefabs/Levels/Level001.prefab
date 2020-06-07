@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainBuilder: {fileID: 3903957490331760120}
+  terrainOptions: {fileID: 0}
   consumablesList:
   - {fileID: 11400000, guid: 45b2d4959514bca41b1bc99a1493fc57, type: 2}
   - {fileID: 11400000, guid: 32e5c4bdeb00e0d4b83bc8fedea14800, type: 2}
@@ -58,7 +59,7 @@ MonoBehaviour:
   enemySpawns:
   - spawnTime: 0
     entityType: 0
-    position: {x: -10, y: 10}
+    position: {x: -3, y: 3}
   livingEnemies: []
 --- !u!1001 &1296933168781156492
 PrefabInstance:
@@ -96,6 +97,36 @@ PrefabInstance:
         type: 3}
       propertyPath: meshObjects.Array.data[5]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: width
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: height
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: mountainCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: waterCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: rules.seedWorld
+      value: 22720
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: maxWaterSize
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4831506940399020680, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
@@ -156,6 +187,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612446399517519283, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 9.9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612446399517519283, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 9.9999
       objectReference: {fileID: 0}
     - target: {fileID: 5637388254737945374, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}

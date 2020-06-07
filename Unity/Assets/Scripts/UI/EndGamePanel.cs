@@ -15,28 +15,15 @@ namespace UI {
         public GameObject retryBtn;
         public GameObject nextBtn;
         public SystemUnit systemUnit;
-        public EndGame endGame; // arcade
-        
         public int TypeEndGame {
             set {
                 _typeEndGame = value;
                 switch (_typeEndGame) {
                     case 0:    // Lose
-                        if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL)
-                        {
-                            winMessage.gameObject.SetActive(false);
-                            loseMessage.gameObject.SetActive(true);
-                            retryBtn.SetActive(true);
-                            nextBtn.SetActive(false);
-                        }
-                        else
-                        {
-                            winMessage.gameObject.SetActive(false);
-                            loseMessage.gameObject.SetActive(false);
-                            retryBtn.SetActive(false);
-                            nextBtn.SetActive(false);
-                            endGame.gameObject.SetActive(true);
-                        }
+                        winMessage.gameObject.SetActive(false);
+                        loseMessage.gameObject.SetActive(true);
+                        retryBtn.SetActive(true);
+                        nextBtn.SetActive(false);
                         break;
                     case 1:    // Win
                         winMessage.gameObject.SetActive(true);
@@ -46,7 +33,7 @@ namespace UI {
 
                         if (GameSingleton.Instance.levelManager != null)
                         {
-                            GetAliveAllyUnits();
+                            UnitRecovery();
                             GameSingleton.Instance.levelManager.NextLevel();
 
                         }
@@ -67,9 +54,11 @@ namespace UI {
             }
             gameObject.SetActive(false);
         }
-        private void GetAliveAllyUnits()
+        
+        private void UnitRecovery()
         {
-            SystemUnit systemUnit = FindObjectOfType<SystemUnit>();
+//            SystemUnit 
+            systemUnit = FindObjectOfType<SystemUnit>();
 
             List<AbstractUnit> units = systemUnit.GetUnits();
 
