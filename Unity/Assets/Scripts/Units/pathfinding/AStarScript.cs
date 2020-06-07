@@ -30,8 +30,11 @@ namespace Units.PathFinding {
             StartCoroutine(terrainMeshBuilder.Init());
         }
         
-        public void Init() {
-            terrainMeshBuilder.transform.position = targetTransform.position;
+        public void Init()
+        {
+            /*terrainMeshBuilder.transform.position += Vector3.right * (terrainMeshBuilder.terrainOptions.width / 2f) +
+                                                     Vector3.forward * (terrainMeshBuilder.terrainOptions.height / 2f);*/
+            gridSize = terrainMeshBuilder.terrainOptions.width;
             _wayPoints = new List<Vector3>();
 
             //grid = terrainMeshBuilder.grid;
@@ -39,15 +42,7 @@ namespace Units.PathFinding {
 
             _wayPoints = new List<Vector3>();
 
-            grid = new int[gridSize][];
-            for (var i = 0; i < gridSize; i++)
-            {
-                grid[i] = new int[gridSize];
-                for (var j = 0; j < gridSize; j++)
-                {
-                    grid[i][j] = 0;
-                }
-            }
+            grid = terrainMeshBuilder.grid;
 
             string strDebug = "";
             for (int i = 0; i < gridSize; i++) {
@@ -56,14 +51,10 @@ namespace Units.PathFinding {
                 strDebug += "\n";
             }
             print(strDebug);
-
-            /*foreach (var obstacle in obstacles)
+            foreach (var pair in terrainMeshBuilder.terrainOptions.modifierHeightMap)
             {
-                var position = obstacle.position;
-                var i = Mathf.RoundToInt(position.z);
-                var j = Mathf.RoundToInt(position.x);
-                grid[i][j] = 1;
-            }*/
+                print(pair.Key + " : " + pair.Value);
+            }
             
             var linesCount = grid.Length;
             var colsCount = grid[0].Length;
@@ -95,53 +86,56 @@ namespace Units.PathFinding {
 
         private void Update() {
             if (Input.GetMouseButtonUp(0) &&
-                groundCollider.Raycast(targetCamera.ScreenPointToRay(Input.mousePosition), out var hit, 1000f)) {
+                groundCollider.Raycast(targetCamera.ScreenPointToRay(Input.mousePosition), out _, 1000f)) {
                 var linesCount = grid.Length;
                 var colsCount = grid[0].Length;
                 var costMatrixWidth = linesCount * colsCount;
+
+                Vector3 cursorPos = terrainMeshBuilder.cursor.transform.position;
 
                 //Update Heuristic Matrix to target node
                 for (var i = 0; i < linesCount; i++) {
                     for (var j = 0; j < colsCount; j++) {
                         var sourceIdx = i * colsCount + j;
 
-                        _heuristicMatrix[sourceIdx] = Mathf.Abs(i - Mathf.RoundToInt(hit.point.z)) +
-                                                     Mathf.Abs(j - Mathf.RoundToInt(hit.point.x));
+                        _heuristicMatrix[sourceIdx] = Mathf.Abs(i - Mathf.RoundToInt(cursorPos.z)) +
+                                                     Mathf.Abs(j - Mathf.RoundToInt(cursorPos.x));
                     }
                 }
-
                 var position = targetTransform.position;
+                Debug.DrawLine(position, position+Vector3.up, Color.red, 5f);
+                Debug.DrawLine(cursorPos, cursorPos+Vector3.up, Color.blue, 5f);
                 var job = new PathFindingJob {
                     costMatrix = _costMatrix,
                     nodesCount = costMatrixWidth,
                     heuristicMatrix = _heuristicMatrix,
                     startNodeId = PosToId(position),
-                    endNodeId = PosToId(hit.point),
+                    endNodeId = PosToId(cursorPos),
                     bestCost = new NativeArray<float>(1, Allocator.TempJob),
                     exploredNodesCount = new NativeArray<int>(1, Allocator.TempJob),
                     bestPath = new NativeList<int>(Allocator.TempJob)
                 };
 
-                var sw = new Stopwatch();
-                sw.Start();
+                //var sw = new Stopwatch();
+                //sw.Start();
                 var handler = job.Schedule();
 
                 handler.Complete();
-                sw.Stop();
+                /*sw.Stop();
                 Debug.Log($"Job Execution in {sw.ElapsedMilliseconds}ms");
                 Debug.Log($"Explored Nodes Count : {job.exploredNodesCount[0]}");
-                Debug.Log($"Best Path Cost : {job.bestCost[0]}");
+                Debug.Log($"Best Path Cost : {job.bestCost[0]}");*/
 
-                var sb = new StringBuilder();
+                //var sb = new StringBuilder();
                 _wayPoints.Clear();
                 for (var n = 1; n < job.bestPath.Length; n++) {
                     var node = job.bestPath[n];
                     var nodePos = new Vector3(node % gridSize, 1f, Mathf.FloorToInt(node / (float) gridSize));
-                    sb.Append($"{node}, ");
+                    //sb.Append($"{node}, ");
                     _wayPoints.Add(nodePos);
                 }
 
-                Debug.Log($"Best Path : {string.Join(", ", job.bestPath.ToArray())}");
+                //Debug.Log($"Best Path : {string.Join(", ", job.bestPath.ToArray())}");
 
                 job.exploredNodesCount.Dispose();
                 job.bestCost.Dispose();
@@ -169,7 +163,7 @@ namespace Units.PathFinding {
                     _wayPoints.RemoveAt(0);
                 }
                 else {
-                    targetTransform.position += Time.deltaTime * targetSpeed * (vectorToTarget) / distanceToTarget;
+                    targetTransform.position += Time.deltaTime * targetSpeed * vectorToTarget / distanceToTarget;
 
                     _targetRotation = Quaternion.LookRotation(vectorToTarget, Vector3.up);
                 }
