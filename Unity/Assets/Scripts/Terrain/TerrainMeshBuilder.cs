@@ -136,14 +136,11 @@ namespace Terrain {
                     Vector3 vec = new Vector3(i-terrainOptions.width/2,0, j-terrainOptions.height/2);
                     float h = CalculateHeight(vec);
                     if(h > 0.5f || h < -0.1f)
-                        tiles[i, j] = new Tile(TileType.Wall, i, j, new Vector3(vec.x,h+0.5f,vec.y));
+                        tiles[i, j] = new Tile(TileType.Wall, i, j, new Vector3(vec.x,h+0.5f,vec.z));
                     else
-                        tiles[i, j] = new Tile(TileType.Grass, i, j, new Vector3(vec.x,h+0.5f,vec.y));
-                    
-                   
+                        tiles[i, j] = new Tile(TileType.Grass, i, j, new Vector3(vec.x,h+0.5f,vec.z));
                 }
             }
-            
 
             texture.SetPixels(colours);
             texture.Apply();
