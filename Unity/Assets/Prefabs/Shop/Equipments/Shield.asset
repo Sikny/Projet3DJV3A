@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Shield
   icon: {fileID: 21300000, guid: b38100a3ec2912641b4f021d0bcd9efa, type: 3}
-  price: 4100
+  price: 400
   description: +3 defense
   stat: 100
   level: 1

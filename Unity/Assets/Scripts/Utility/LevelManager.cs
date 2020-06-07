@@ -1,5 +1,7 @@
-﻿using Game;
+﻿using System;
+using Game;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Utility {
     public class LevelManager : MonoBehaviour {
@@ -7,10 +9,23 @@ namespace Utility {
 
         public Level loadedLevel;
 
-        private void Awake() {
-            GameSingleton.Instance.levelManager = this;
-            loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevel));
-            loadedLevel.Init();
+        public GenRandomParam grp;
+        
+        private void Start()
+        {
+            if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE)
+            {
+                loadedLevel = grp.generateNextLevel(Random.Range(Int32.MinValue, Int32.MaxValue), 5);
+                grp.setDefaultGold(loadedLevel);
+                GameSingleton.Instance.levelManager = this;
+                loadedLevel.Init();
+            }
+            else
+            {
+                GameSingleton.Instance.levelManager = this;
+                loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevel));
+                loadedLevel.Init();
+            }
         }
 
         public void NextLevel() {

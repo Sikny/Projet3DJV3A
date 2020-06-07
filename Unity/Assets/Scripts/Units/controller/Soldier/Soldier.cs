@@ -12,8 +12,6 @@ namespace Units{
         {
             speedEntity = 0.8f;
             basisAttack = 1.0f;
-            //upgrades.Add(EntityType.Spearman);
-            //upgrades.Add(EntityType.Knight);
             
             itineraireNumberRemain = 0;
         }
@@ -31,7 +29,7 @@ namespace Units{
                 {
                     if (!_playingSound)
                     {
-                        //GameSingleton.Instance.soundManager.Play("Slash");
+                        GameSingleton.Instance.soundManager.Play("Slash");
                     }
                     body.Attack(target, getAttackUnit(target));
                 }

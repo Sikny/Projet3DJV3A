@@ -1,5 +1,10 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using Game;
+using Items;
+using TMPro;
+using Units;
 using UnityEngine;
+using UnityEngine.UI;
 using Utility;
 using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
@@ -9,7 +14,7 @@ namespace UI {
         public TextMeshProUGUI loseMessage;
         public GameObject retryBtn;
         public GameObject nextBtn;
-
+        public SystemUnit systemUnit;
         public int TypeEndGame {
             set {
                 _typeEndGame = value;
@@ -25,8 +30,13 @@ namespace UI {
                         loseMessage.gameObject.SetActive(false);
                         retryBtn.SetActive(false);
                         nextBtn.SetActive(true);
+
                         if (GameSingleton.Instance.levelManager != null)
+                        {
+                            UnitRecovery();
                             GameSingleton.Instance.levelManager.NextLevel();
+
+                        }
                         break;
                 }
             }
@@ -44,5 +54,23 @@ namespace UI {
             }
             gameObject.SetActive(false);
         }
+        
+        private void UnitRecovery()
+        {
+//            SystemUnit 
+            systemUnit = FindObjectOfType<SystemUnit>();
+
+            List<AbstractUnit> units = systemUnit.GetUnits();
+
+            Inventory inventory = GameSingleton.Instance.inventory;
+
+            foreach (var unit in units)
+            {
+                EntityType entityType = unit.GetEntityType();
+                StoreUnit storeUnit = GameSingleton.Instance.storeUnitList.GetStoreUnitByEntityType(entityType);
+                inventory.AddItem(storeUnit);
+            }
+        }
     }
+    
 }

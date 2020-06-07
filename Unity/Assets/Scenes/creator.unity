@@ -912,6 +912,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraParent
       objectReference: {fileID: 0}
+    - target: {fileID: 1174942465475595641, guid: a51fdcbb9919d4a4b8b7105b632d295f,
+        type: 3}
+      propertyPath: minZoom
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174942465475595641, guid: a51fdcbb9919d4a4b8b7105b632d295f,
+        type: 3}
+      propertyPath: maxZoom
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174942465475595641, guid: a51fdcbb9919d4a4b8b7105b632d295f,
+        type: 3}
+      propertyPath: speed
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8431919729071328577, guid: a51fdcbb9919d4a4b8b7105b632d295f,
         type: 3}
       propertyPath: m_Enabled
@@ -2585,7 +2600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1270996226
 MonoBehaviour:
   m_ObjectHideFlags: 0

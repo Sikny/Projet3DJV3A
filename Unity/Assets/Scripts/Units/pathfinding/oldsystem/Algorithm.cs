@@ -74,7 +74,7 @@ namespace AStar
                 sw.Stop();
             }
             
-            Debug.Log(sw.ElapsedMilliseconds);
+            //Debug.Log(sw.ElapsedMilliseconds);
         }
     }
 }

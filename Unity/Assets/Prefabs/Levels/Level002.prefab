@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainBuilder: {fileID: 3903957490331760120}
+  terrainOptions: {fileID: 0}
   consumablesList:
   - {fileID: 11400000, guid: 45b2d4959514bca41b1bc99a1493fc57, type: 2}
   - {fileID: 11400000, guid: 32e5c4bdeb00e0d4b83bc8fedea14800, type: 2}
@@ -58,10 +59,10 @@ MonoBehaviour:
   enemySpawns:
   - spawnTime: 0
     entityType: 1
-    position: {x: -10, y: 5}
+    position: {x: -8, y: 2}
   - spawnTime: 0
     entityType: 2
-    position: {x: 10, y: 1}
+    position: {x: -3, y: -2}
   livingEnemies: []
 --- !u!1001 &1296933168781156492
 PrefabInstance:
@@ -70,6 +71,61 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1296933168775581950}
     m_Modifications:
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: meshObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: meshObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: meshObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: meshObjects.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: meshObjects.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: meshObjects.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: rules.seedWorld
+      value: 22811
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: width
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: height
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: mountainCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: waterCount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4831506940399020680, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
       propertyPath: m_Name
@@ -129,6 +185,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612446399517519283, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 19.9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612446399517519283, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 19.9999
       objectReference: {fileID: 0}
     - target: {fileID: 5637388254737945374, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}

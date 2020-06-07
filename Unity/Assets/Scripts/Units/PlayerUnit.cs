@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Utility;
 using Random = UnityEngine.Random;
 
 namespace Units {
@@ -18,7 +19,6 @@ namespace Units {
             if(_unitTarget != null)
             {
                 brain.calculatePath(targetPosition);
-                
             }
             else
             {
@@ -50,7 +50,11 @@ namespace Units {
 
                 
                 int life = entityAttack.Attack(entityDefense, (int)(-1 * entityAttack.GetStrength()*damage* coef), efficientCoef);
-                if (life == 0) {
+                if (life == 0)
+                {
+                    GameSingleton.Instance.GetPlayer().currentScore += (int)
+                        (GetEfficientCoef(this, anotherUnit) * 200f); // ajouter les types complexes
+                    Debug.Log(GameSingleton.Instance.GetPlayer().currentScore);
                     anotherUnit.PopEntity(indexEntityDefense);
                 }
             }

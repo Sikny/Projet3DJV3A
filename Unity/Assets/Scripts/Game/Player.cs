@@ -4,6 +4,8 @@ namespace Game {
     public class Player {
         public int gold;
         public int currentLevel;
+        public Gamemode gamemode = Gamemode.LEVEL;
+        public int currentScore = 0;
         
         public Player() {
             Load();
@@ -23,5 +25,12 @@ namespace Game {
             PlayerPrefs.SetInt("CurrentLevel", currentLevel);
             PlayerPrefs.Save();
         }
+        
+        public enum Gamemode
+        {
+            LEVEL,
+            ARCADE
+        }
     }
+    
 }

@@ -59,6 +59,7 @@ namespace Units {
                 #if UNITY_EDITOR
                 Debug.Log("efficient type is : " + efficiencyType);
                 #endif
+
                 if (efficiencyType == -1)
                     StartCoroutine(BlinkInefficient());
                 else if (efficiencyType == +1)
@@ -76,9 +77,9 @@ namespace Units {
         private readonly WaitForSeconds _blinkTime = new WaitForSeconds(0.2f);
         
         private IEnumerator BlinkInefficient() {
-            hitParticles.layer = 0;
+            notEffectiveHitParticles.layer = 0;
             yield return _blinkTime;
-            hitParticles.layer = 31;
+            notEffectiveHitParticles.layer = 31;
         }
         private IEnumerator BlinkEfficient() {
             effectiveHitParticles.layer = 0;
@@ -86,9 +87,9 @@ namespace Units {
             effectiveHitParticles.layer = 31;
         }
         private IEnumerator Blink() {
-            notEffectiveHitParticles.layer = 0;
+            hitParticles.layer = 0;
             yield return _blinkTime;
-            notEffectiveHitParticles.layer = 31;
+            hitParticles.layer = 31;
         }
 
         public int GetStrength() {

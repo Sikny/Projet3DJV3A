@@ -29,7 +29,12 @@ namespace Utility {
 
         [Space]
         public EndGamePanel endGamePanel;
+        
+        [Space]
+        public Inventory inventory;
 
+        public StoreUnitList storeUnitList;
+        [Space]
         [HideInInspector] public bool gamePaused;
 
         private Player _player;
@@ -40,6 +45,8 @@ namespace Utility {
 
         public SoundManager soundManager;
 
+        public TokenManager tokenManager;
+        
         private void Awake() {
             if (_instance != null && _instance != this) {
                 Destroy(gameObject);

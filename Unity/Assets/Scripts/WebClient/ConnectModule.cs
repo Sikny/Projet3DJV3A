@@ -62,5 +62,18 @@ namespace WebClient {
             callback(www);
             //{firstname:"xxx",lastname:"xxx",mail:"aaa@bbb.fr","psw":1234,psw2:"1234"
         }
+        
+        public IEnumerator RegisterScore(string token, int timegame, int nbpoints, int seed, Action<UnityWebRequest> callback) {
+            // TODO VALUES CHECK
+            List<IMultipartFormSection> formData = new List<IMultipartFormSection> {
+                new MultipartFormDataSection("token", token),
+                new MultipartFormDataSection("timegame", timegame.ToString()),
+                new MultipartFormDataSection("nbpoints", nbpoints.ToString()),
+                new MultipartFormDataSection("seed", seed.ToString())
+            };
+            UnityWebRequest www = UnityWebRequest.Post("http://piwelengine.eu/sauron/WS/INSERT_SCORE.php", formData);
+            yield return www.SendWebRequest();
+            callback(www);
+        }
     }
 }

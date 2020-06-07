@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Items;
 using Terrain;
+using UI;
 using Units;
 using UnityEngine;
 using Utility;
@@ -18,9 +19,11 @@ namespace Game {
     public class Level : MonoBehaviour {
         private Shop _shop;
         private SystemUnit _systemUnit;
-
+        
+        
         public TerrainMeshBuilder terrainBuilder;
-
+        public TerrainOptions terrainOptions;
+        
         [Header("Shop content")]
         public List<Consumable> consumablesList = new List<Consumable>();
         public List<Equipment> equipmentsList = new List<Equipment>();
@@ -40,6 +43,9 @@ namespace Game {
             
             _shop = Shop.Instance;
             _shop.ClearShop();
+
+            ShopManager _shopManager = ShopManager.instance;
+
             
             foreach (Consumable cons in consumablesList) {
                 _shop.AddConsummable(cons);
@@ -52,6 +58,8 @@ namespace Game {
             foreach (StoreUnit storeUnit in unitList) {
                 _shop.AddStoreUnit(storeUnit);
             }
+            _shopManager.UpdateUI();
+
         }
 
         private void Update() {
@@ -79,7 +87,8 @@ namespace Game {
         
         public IEnumerator StartLevel() {
             _playerUnits = new List<PlayerUnit>(FindObjectsOfType<PlayerUnit>());
-            while (enemySpawns.Count > 0) {
+            for (int i = enemySpawns.Count - 1; i >= 0; i--)
+            {
                 EnemySpawn current = enemySpawns[0];
                 Vector3 position = new Vector3(current.position.x, SystemUnit.YPos, current.position.y) + _systemUnit.TerrainOffset();
                 DOVirtual.DelayedCall(current.spawnTime, () => {
@@ -88,7 +97,7 @@ namespace Game {
                     livingEnemies.Add(newUnit);
                     enemySpawns.Remove(current);
                 });
-                yield return 0;
+                yield return null;
             }
             GameSingleton.Instance.ResumeGame();
             _levelStarted = true;
