@@ -15,7 +15,7 @@ namespace Units {
         protected Controller brain;
         private int idBrain;
         private EntityNative native;
-        
+        private EntityType _entityType;
         protected Vector3 velocity;
         
         public bool isMoving;
@@ -83,57 +83,75 @@ namespace Units {
                 // Lister ici les controlleurs possibles
                 case EntityType.Soldier:
                     native = EntityNative.Soldier;
+                    _entityType = EntityType.Soldier;
                     return new Soldier(this);
                 case EntityType.Archer:
                     native = EntityNative.Archer;
+                    _entityType = EntityType.Archer;
                     return new Archer(this);
                 case EntityType.Mage:
                     native = EntityNative.Mage;
+                    _entityType = EntityType.Mage;
                     return new Wizard(this);
                 case EntityType.Spearman:
                     native = EntityNative.Soldier;
+                    _entityType = EntityType.Spearman;
                     return new Spearman(this);
                 case EntityType.Knight:
                     native = EntityNative.Soldier;
+                    _entityType = EntityType.Knight;
                     return new Knight(this);
                 case EntityType.WhiteKnight:
                     native = EntityNative.Soldier;
+                    _entityType = EntityType.WhiteKnight;
                     return new WhiteKnight(this);
                 case EntityType.Horseman:
                     native = EntityNative.Archer;
+                    _entityType = EntityType.Horseman;
                     return new Horseman(this);
                 case EntityType.Executionist:
                     native = EntityNative.Mage;
+                    _entityType = EntityType.Executionist;
                     return new Executionist(this);
                 case EntityType.WhiteMage:
                     native = EntityNative.Mage;
+                    _entityType = EntityType.WhiteMage;
                     return new WhiteMage(this);
                 case EntityType.BlackMage:
                     native = EntityNative.Mage;
+                    _entityType = EntityType.BlackMage;
                     return new BlackMage(this);
                 case EntityType.Demonist:
                     native = EntityNative.Mage;
+                    _entityType = EntityType.Demonist;
                     return new Demonist(this);
                 case EntityType.RedMage:
                     native = EntityNative.Mage;
+                    _entityType = EntityType.RedMage;
                     return new RedMage(this);
                 case EntityType.Bard:
-                    native = EntityNative.Archer;
+                    native = EntityNative.Mage;
+                    _entityType = EntityType.Bard;
                     return new Bard(this);
                 case EntityType.Arbalist:
                     native = EntityNative.Archer;
+                    _entityType = EntityType.Arbalist;
                     return new Arbalist(this);
                 case EntityType.Hunter:
                     native = EntityNative.Archer;
+                    _entityType = EntityType.Hunter;
                     return new Hunter(this);
                 case EntityType.MachineArc:
                     native = EntityNative.Archer;
+                    _entityType = EntityType.MachineArc;
                     return new MachineArc(this);
                 case EntityType.Catapultist:
                     native = EntityNative.Archer;
+                    _entityType = EntityType.Catapultist;
                     return new Catapultist(this);
                 case EntityType.Sniper:
                     native = EntityNative.Archer;
+                    _entityType = EntityType.Sniper;
                     return new Sniper(this);
                 
 
@@ -205,6 +223,12 @@ namespace Units {
         public void AddEffect(int idEffect, int level, float timeout)
         {
             effect[idEffect] = new Effect(idEffect, level, timeout);
+        }
+
+
+        public EntityType GetEntityType()
+        {
+            return _entityType;
         }
 
         protected void UpdateTimeoutEffects()
