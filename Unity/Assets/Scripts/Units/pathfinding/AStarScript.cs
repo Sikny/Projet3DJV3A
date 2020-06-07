@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 using Terrain;
 using Unity.Collections;
 using Unity.Jobs;
@@ -8,7 +6,7 @@ using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 namespace Units.PathFinding {
-    public class AStarScript : MonoBehaviour {
+    public class AStarScriptun : MonoBehaviour {
         public Camera targetCamera;
         public Transform targetTransform;
         public float targetSpeed;
@@ -27,64 +25,15 @@ namespace Units.PathFinding {
         [SerializeField] private TerrainMeshBuilder terrainMeshBuilder;
 
         private void Awake() {
-            StartCoroutine(terrainMeshBuilder.Init());
+            StartCoroutine(terrainMeshBuilder.Init(null));
         }
         
         public void Init()
         {
-            /*terrainMeshBuilder.transform.position += Vector3.right * (terrainMeshBuilder.terrainOptions.width / 2f) +
-                                                     Vector3.forward * (terrainMeshBuilder.terrainOptions.height / 2f);*/
-            gridSize = terrainMeshBuilder.terrainOptions.width;
-            _wayPoints = new List<Vector3>();
-
-            //grid = terrainMeshBuilder.grid;
-            groundCollider = TerrainMeshBuilder.meshCollider;
-
-            _wayPoints = new List<Vector3>();
-
-            grid = terrainMeshBuilder.grid;
-
-            string strDebug = "";
-            for (int i = 0; i < gridSize; i++) {
-                for (int j = 0; j < gridSize; j++)
-                    strDebug += grid[i][j];
-                strDebug += "\n";
-            }
-            print(strDebug);
-            foreach (var pair in terrainMeshBuilder.terrainOptions.modifierHeightMap)
-            {
-                print(pair.Key + " : " + pair.Value);
-            }
             
-            var linesCount = grid.Length;
-            var colsCount = grid[0].Length;
-            var costMatrixWidth = linesCount * colsCount;
-
-            _costMatrix = new NativeArray<float>(costMatrixWidth * costMatrixWidth, Allocator.Persistent);
-            _heuristicMatrix = new NativeArray<float>(costMatrixWidth, Allocator.Persistent);
-
-            for (var i = 0; i < linesCount; i++) {
-                for (var j = 0; j < colsCount; j++) {
-                    var sourceIdx = i * colsCount + j;
-
-                    for (var i1 = 0; i1 < linesCount; i1++) {
-                        for (var j1 = 0; j1 < colsCount; j1++) {
-                            var targetIdx = i1 * colsCount + j1;
-
-                            if (grid[i][j] != 1 && grid[i1][j1] != 1 && (i == i1 && Mathf.Abs(j - j1) == 1 ||
-                                                                         j == j1 && Mathf.Abs(i - i1) == 1)) {
-                                _costMatrix[sourceIdx * costMatrixWidth + targetIdx] = 1;
-                            }
-                            else {
-                                _costMatrix[sourceIdx * costMatrixWidth + targetIdx] = float.MaxValue;
-                            }
-                        }
-                    }
-                }
-            }
         }
 
-        private void Update() {
+        private void UpdateTransform(Transform t) {
             if (Input.GetMouseButtonUp(0) &&
                 groundCollider.Raycast(targetCamera.ScreenPointToRay(Input.mousePosition), out _, 1000f)) {
                 var linesCount = grid.Length;

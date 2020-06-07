@@ -34,10 +34,9 @@ namespace Game {
         private bool _levelStarted;
         
         public void Init() {
-            StartCoroutine(terrainBuilder.Init());
-
             // todo remove find
             _systemUnit = FindObjectOfType<SystemUnit>();
+            StartCoroutine(terrainBuilder.Init(_systemUnit.InitPathFinding));
             
             _shop = Shop.Instance;
             _shop.ClearShop();
@@ -82,8 +81,9 @@ namespace Game {
             _playerUnits = new List<PlayerUnit>(FindObjectsOfType<PlayerUnit>());
             while (enemySpawns.Count > 0) {
                 EnemySpawn current = enemySpawns[0];
-                Vector3 position = new Vector3(current.position.x, SystemUnit.YPos, current.position.y);
+                Vector3 position = new Vector3(current.position.x, SystemUnit.YPos, current.position.y) + _systemUnit.TerrainOffset();
                 DOVirtual.DelayedCall(current.spawnTime, () => {
+                    
                     Transform newUnit = _systemUnit.SpawnUnit(current.entityType, _systemUnit.aiUnitPrefab, position);
                     livingEnemies.Add(newUnit);
                     enemySpawns.Remove(current);

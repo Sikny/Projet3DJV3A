@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 678431467393923813}
   - component: {fileID: 678431467393923812}
   - component: {fileID: 9164305878923577751}
+  - component: {fileID: 5354823938570569534}
   m_Layer: 0
   m_Name: UnitSystem
   m_TagString: Untagged
@@ -75,6 +76,33 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 678431467393923812}
         m_MethodName: DoClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5354823938570569534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678431467393923819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ff765aaf74eb34896b6b3ea87a2fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customEventSent: {fileID: 11400000, guid: 8ba5dc18c0e15f14787501afdc95400e, type: 2}
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 678431467393923812}
+        m_MethodName: InitPathFinding
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

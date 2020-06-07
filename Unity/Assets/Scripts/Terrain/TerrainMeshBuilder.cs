@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Units.PathFinding;
+using CustomEvents;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -34,8 +34,7 @@ namespace Terrain {
         public Transform waterObject;
 
         // Path-finding fields
-        public int[][] grid;
-        public AStarScript aStarScript;
+        [HideInInspector] public int[][] grid;
 
         private void Clear() {
             int meshesCount = meshObjects.Count;
@@ -48,10 +47,10 @@ namespace Terrain {
 
         [ContextMenu("Init")]
         private void InitMeshes() {
-            StartCoroutine(Init());
+            StartCoroutine(Init(null));
         }
 
-        public IEnumerator Init() {
+        public IEnumerator Init(Action action) {
             TerrainGrid.Height = terrainOptions.height;
             TerrainGrid.Width = terrainOptions.width;
 
@@ -77,9 +76,8 @@ namespace Terrain {
             BuildTerrain();
             waterObject.transform.localScale = new Vector3(terrainOptions.width - 0.0001f,
                 waterObject.localScale.y, terrainOptions.height - 0.0001f);
-
-            aStarScript.Init();
             yield return null;
+            action();
         }
 
         private void BuildTerrain() {

@@ -44,10 +44,13 @@ namespace Units{
             if (target == null) return;
             if (!isRemoted && Vector3.Distance(body.GetPosition(), target.GetPosition()) <= 3)
             {
-                return; 
+                return;
             }
-            updatePathMove();
-            
+
+            SystemUnit.UpdateTransform(body, positionTarget, speedEntity);
+
+            //updatePathMove();
+
             //velocity = position - last;
         }
 
