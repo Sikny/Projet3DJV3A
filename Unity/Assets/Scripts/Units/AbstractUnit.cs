@@ -12,7 +12,7 @@ namespace Units {
         protected AbstractUnit _unitTarget;
 
         // The interaction controller (zombie, bowman, giant...)
-        protected Controller brain;
+        public Controller brain;
         private int idBrain;
         private EntityNative native;
         private EntityType _entityType;

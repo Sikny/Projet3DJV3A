@@ -10,8 +10,9 @@ namespace Units{
         private bool _playingSound;
         public Soldier(AbstractUnit body) : base(body)
         {
-            speedEntity = 0.8f;
+            basisSpeed = 0.8f;
             basisAttack = 1.0f;
+            basisDefense = 1.0f;
             
             itineraireNumberRemain = 0;
         }

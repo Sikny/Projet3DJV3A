@@ -7,7 +7,7 @@ using Utility;
 public class Wizard : Controller
 {
     
-    private const float TICK_ATTACK= 10f; // 10 per second
+    private const float TICK_ATTACK= 4f; // 10 per second
 
     private const float ACCURACY = 0.5f; // Max probability to touch target
     private const float ZONE_ACCURACY_DISPERSEMENT = 0.2f;
@@ -18,8 +18,9 @@ public class Wizard : Controller
     
     public Wizard(AbstractUnit body) : base(body)
     {
-        speedEntity = 0.5f;
-        basisAttack = 10f;
+        basisSpeed = 0.5f;
+        basisAttack = 4f;
+        basisDefense = 1;
         
         itineraireNumberRemain = 3;
         //upgrades.Add(EntityType.something);
@@ -36,7 +37,10 @@ public class Wizard : Controller
         {
             GameSingleton.Instance.soundManager.Play("MageAttack");
 
-            body.Attack(target, getAttackUnit(target));
+            for (int i = 0; i < 9; i++)
+            {
+                body.Attack(target, getAttackUnit(target));
+            }
 
             deltaTime -= TICK_ATTACK;
         }

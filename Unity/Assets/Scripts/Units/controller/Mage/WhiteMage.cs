@@ -9,8 +9,7 @@ public class WhiteMage : Wizard
     
     public WhiteMage(AbstractUnit body) : base(body)
     {
-        speedEntity = 0.5f;
-        basisAttack = 10f;
+        basisDefense *= 2;
     }
     
 }
