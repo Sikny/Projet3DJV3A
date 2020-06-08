@@ -48,6 +48,7 @@ namespace Utility {
         public TokenManager tokenManager;
         
         private void Awake() {
+            PlayerPrefs.DeleteAll();
             if (_instance != null && _instance != this) {
                 Destroy(gameObject);
                 return;
@@ -56,7 +57,6 @@ namespace Utility {
             DontDestroyOnLoad(gameObject);
             
             _player = new Player();
-            
             sceneManager = new SceneManager();
             sceneManager.LoadScene("Menu");
         }

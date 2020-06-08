@@ -68,8 +68,8 @@ public class UpgradeManager : MonoBehaviour
 
     public void SetUIUnits(StoreUnit storeUnit)
     {
-        
-        UpdateGold();
+
+        GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
         _currentCost = storeUnit.upgradeCost;
         UpdateCost(_currentCost);
         _unit = storeUnit;
