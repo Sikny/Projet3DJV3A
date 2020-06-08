@@ -33,7 +33,6 @@ public class GenRandomParam : MonoBehaviour
         options.maxWaterSize = rand.Next(10, 30);
 
         int nbEnnemy =  rand.Next(1, i) + rand.Next( (int)(i/4f), (int)(i/2f));
-        Debug.Log("NBENNEMY="+nbEnnemy);
         nbEnnemy = nbEnnemy > 8 ? 8 : nbEnnemy;
 
         for (int j = 0; j < nbEnnemy; j++)

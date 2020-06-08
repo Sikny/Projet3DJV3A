@@ -14,7 +14,7 @@ namespace Game {
         }
 
         public void Load() {
-            gold = PlayerPrefs.GetInt("PlayerGold", 50);
+            gold = PlayerPrefs.GetInt("PlayerGold", 100);
             currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
             currentLevelArcade = PlayerPrefs.GetInt("CurrentLevelArcade", 0);
             goldStartLevel = gold;
