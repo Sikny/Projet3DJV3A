@@ -7,7 +7,7 @@ using Utility;
 namespace Units {
     public abstract class AbstractUnit : MonoBehaviour {
         public int entityCount;
-        protected Entity[] entities;
+        public Entity[] entities;
         protected Vector3 position;
         public Vector3 targetPosition;
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using CustomEvents;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,7 +22,7 @@ namespace Terrain {
         [SerializeField, HideInInspector] private List<GameObject> meshObjects;
         private MeshFilter[] _meshFilters;
         private MeshRenderer[] _meshRenderers;
-        public static MeshCollider meshCollider;
+        private static MeshCollider _meshCollider;
 
         private MinMax _minMax;
         public Gradient heightGradient;
@@ -113,8 +112,8 @@ namespace Terrain {
                 meshObjects.Add(meshObj);
             }
 
-            meshCollider = _meshFilters[(int) TerrainSide.Top].gameObject.AddComponent<MeshCollider>();
-            meshCollider.sharedMesh = _meshFilters[(int) TerrainSide.Top].sharedMesh;
+            _meshCollider = _meshFilters[(int) TerrainSide.Top].gameObject.AddComponent<MeshCollider>();
+            _meshCollider.sharedMesh = _meshFilters[(int) TerrainSide.Top].sharedMesh;
 
             Texture2D texture = new Texture2D(textureResolution, 1);
             Color[] colours = new Color[textureResolution];
@@ -129,7 +128,7 @@ namespace Terrain {
                     Vector3 vec = new Vector3(i-terrainOptions.width/2,0, j-terrainOptions.height/2);
                     //Vector2 percent = new Vector2() / ;
                     float h = CalculateHeight(vec);
-                    if (h > 0.5f || h < -0.1f)
+                    if (h > 0.01f || h < -0.01f)
                         grid[i][j] = 1;
                     else
                         grid[i][j] = 0;
@@ -336,7 +335,7 @@ namespace Terrain {
 
         private float CalculateHeight(Vector3 vertex) {
             float result = 0;
-            Vector2Int intVec = new Vector2Int((int) vertex.x, (int) vertex.z);
+            Vector2Int intVec = new Vector2Int((int) (vertex.x+0.5f), (int) (vertex.z+0.5f));
             if (terrainOptions.modifierHeightMap.ContainsKey(intVec)) {
                 result = terrainOptions.modifierHeightMap[intVec];
             }

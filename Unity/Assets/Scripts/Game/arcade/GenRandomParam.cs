@@ -27,7 +27,7 @@ public class GenRandomParam : MonoBehaviour
 
         Level levelNew = Instantiate(levelBase);
 
-        TerrainOptions options = levelNew.terrainOptions;
+        TerrainOptions options = levelNew.terrainBuilder.terrainOptions;
 
         options.rules.seedWorld = seed;
         options.mountainCount = rand.Next(2, 8);

@@ -45,7 +45,13 @@ namespace Units{
                 return;
             }
 
-            SystemUnit.UpdateTransform(body, positionTarget, speedEntity);
+            for (int i = body.entityCount - 1; i >= 0; i--)
+            { 
+                GameSingleton.Instance.levelManager.loadedLevel.aStarHandler.UpdateTransform(body.entities[i].transform, positionTarget, speedEntity);
+            }
+            //GameSingleton.Instance.levelManager.loadedLevel.aStarHandler.UpdateTransform(body, positionTarget,
+            //    speedEntity);
+            //SystemUnit.UpdateTransform(body, positionTarget, speedEntity);
 
             //updatePathMove();
 

@@ -6,7 +6,9 @@ using Items;
 using Terrain;
 using UI;
 using Units;
+using Units.PathFinding;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utility;
 
 namespace Game {
@@ -19,10 +21,10 @@ namespace Game {
     public class Level : MonoBehaviour {
         private Shop _shop;
         private SystemUnit _systemUnit;
+        [HideInInspector] public AStarHandler aStarHandler;
         
         
         public TerrainMeshBuilder terrainBuilder;
-        public TerrainOptions terrainOptions;
         
         [Header("Shop content")]
         public List<Consumable> consumablesList = new List<Consumable>();
@@ -37,14 +39,13 @@ namespace Game {
         private bool _levelStarted;
         
         public void Init() {
-            // todo remove find
             _systemUnit = FindObjectOfType<SystemUnit>();
-            StartCoroutine(terrainBuilder.Init(_systemUnit.InitPathFinding));
+            StartCoroutine(terrainBuilder.Init(InitAStar));
             
             _shop = Shop.Instance;
             _shop.ClearShop();
 
-            ShopManager _shopManager = ShopManager.instance;
+            ShopManager shopManager = ShopManager.instance;
 
             
             foreach (Consumable cons in consumablesList) {
@@ -58,11 +59,29 @@ namespace Game {
             foreach (StoreUnit storeUnit in unitList) {
                 _shop.AddStoreUnit(storeUnit);
             }
-            _shopManager.UpdateUI();
+            shopManager.UpdateUI();
 
         }
+        
+        private void InitAStar()
+        {
+            var offset = Vector3.right * (TerrainGrid.Width / 2f) +
+                         Vector3.forward * (TerrainGrid.Height / 2f);
+            terrainBuilder.transform.position += offset;
+            _systemUnit.cam.transform.position += offset;
+            aStarHandler = new AStarHandler(terrainBuilder.terrainOptions, terrainBuilder);
+            for (int i = 0; i < aStarHandler.grid.Length; i++)
+            {
+                for (int j = 0; j < aStarHandler.grid[i].Length; j++)
+                {
+                    if (aStarHandler.grid[i][j] == 0) continue;
+                    Vector3 pos = new Vector3(i, 0, j);
+                    GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = pos;
+                }
+            }
+        }
 
-        private void Update() {
+        private void FixedUpdate() {
             if (!_levelStarted) return;
             if (enemySpawns.Count == 0 && livingEnemies.Count == 0) {
                 GameSingleton.Instance.EndGame(1);    // WIN
@@ -86,11 +105,19 @@ namespace Game {
         }
         
         public IEnumerator StartLevel() {
-            _playerUnits = new List<PlayerUnit>(FindObjectsOfType<PlayerUnit>());
+            _playerUnits = new List<PlayerUnit>();
+            foreach (var unit in _systemUnit.units)
+            {
+                if (unit.GetType() == typeof(PlayerUnit)) {
+                    _playerUnits.Add((PlayerUnit) unit);
+                }
+            }
             for (int i = enemySpawns.Count - 1; i >= 0; i--)
             {
                 EnemySpawn current = enemySpawns[0];
-                Vector3 position = new Vector3(current.position.x, SystemUnit.YPos, current.position.y) + _systemUnit.TerrainOffset();
+                var offset = Vector3.right * (TerrainGrid.Width / 2f) +
+                             Vector3.forward * (TerrainGrid.Height / 2f);
+                Vector3 position = new Vector3(current.position.x, SystemUnit.YPos, current.position.y) + offset;
                 DOVirtual.DelayedCall(current.spawnTime, () => {
                     
                     Transform newUnit = _systemUnit.SpawnUnit(current.entityType, _systemUnit.aiUnitPrefab, position);
@@ -106,6 +133,7 @@ namespace Game {
         private void OnDrawGizmos() {
             if (Application.isPlaying) return;
             
+            // Enemy spawns
             Gizmos.color = Color.red;
             int enemyLen = enemySpawns.Count;
             for (int i = 0; i < enemyLen; i++) {
