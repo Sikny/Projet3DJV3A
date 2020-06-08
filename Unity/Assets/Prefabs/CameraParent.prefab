@@ -139,11 +139,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eade5bcc97047bb47b262beacfed4c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centerPoint: {fileID: 0}
   speed: 15
   pitch: 2
-  zoomSpeed: 6
+  zoomSpeed: 20
   camera: {fileID: 1174942465475595623}
+  minZoom: 10
+  maxZoom: 40
 --- !u!114 &1174942465475595622
 MonoBehaviour:
   m_ObjectHideFlags: 0
