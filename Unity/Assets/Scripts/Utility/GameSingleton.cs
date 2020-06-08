@@ -80,6 +80,7 @@ namespace Utility {
             sceneManager.LoadScene(sceneName);
         }
 
+
         public void StartFight() {
             if (levelManager != null) {
                 //start fight sound play here
@@ -92,14 +93,19 @@ namespace Utility {
         }
 
         private bool _gameEnded;
-        public void EndGame(int status) {
-            if (_gameEnded) return;
+        public void EndGame(int status) { 
+            //if (_gameEnded) return;
             _gameEnded = true;
             endGamePanel.TypeEndGame = status;
             endGamePanel.gameObject.SetActive(true);
             _player.Save();
         }
 
+        public void SetGameEnded(bool gameEnded)
+        {
+            _gameEnded = gameEnded;
+        }
+    
         public void PauseGame() {
             Time.timeScale = 0f;
             gamePaused = true;

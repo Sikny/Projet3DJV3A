@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Utility;
 using WebClient;
+using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 public class EndGame : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class EndGame : MonoBehaviour
     public SummaryScores summaryScores;
 
     private const int SCORE_MIDDLE = 10;
+
+    public GameObject endGamePanel;
     
     // Start is called before the first frame update
     void Start()
@@ -62,5 +65,13 @@ public class EndGame : MonoBehaviour
             }
         }
             
+    }
+
+    public void Back()
+    {
+        endGamePanel.SetActive(false);
+        SceneManager.LoadScene("Menu");
+        endGamePanel.SetActive(false);
+
     }
 }

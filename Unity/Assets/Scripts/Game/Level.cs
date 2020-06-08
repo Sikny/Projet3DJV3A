@@ -8,7 +8,6 @@ using UI;
 using Units;
 using Units.PathFinding;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Utility;
 
 namespace Game {
@@ -20,6 +19,7 @@ namespace Game {
     }
     public class Level : MonoBehaviour {
         private Shop _shop;
+        private ShopManager _shopManager;
         private SystemUnit _systemUnit;
         [HideInInspector] public AStarHandler aStarHandler;
         
@@ -44,8 +44,7 @@ namespace Game {
             
             _shop = Shop.Instance;
             _shop.ClearShop();
-
-            ShopManager shopManager = ShopManager.instance;
+            _shopManager = ShopManager.instance;
 
             
             foreach (Consumable cons in consumablesList) {
@@ -59,7 +58,7 @@ namespace Game {
             foreach (StoreUnit storeUnit in unitList) {
                 _shop.AddStoreUnit(storeUnit);
             }
-            shopManager.UpdateUI();
+            _shopManager.UpdateUI();
 
         }
         
@@ -81,9 +80,12 @@ namespace Game {
             }*/
         }
 
+        private bool _gameEnded;
         private void FixedUpdate() {
             if (!_levelStarted) return;
-            if (enemySpawns.Count == 0 && livingEnemies.Count == 0) {
+            if (enemySpawns.Count == 0 && livingEnemies.Count == 0 && !_gameEnded)
+            {
+                _gameEnded = true;
                 GameSingleton.Instance.EndGame(1);    // WIN
             } else if (_playerUnits.Count == 0) {
                 GameSingleton.Instance.EndGame(0);

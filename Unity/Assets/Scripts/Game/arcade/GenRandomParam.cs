@@ -7,17 +7,15 @@ using Units;
 using UnityEngine;
 using Utility;
 using Random = System.Random;
+using rand = UnityEngine.Random;
+
 
 public class GenRandomParam : MonoBehaviour
 {
     public LevelList levelList;
     public Level levelBase;
 
-    public void Start()
-    {
-        
-    }
-
+    
     public Level generateNextLevel(int seed, int i)
     {
         //int difficulty;
@@ -25,7 +23,7 @@ public class GenRandomParam : MonoBehaviour
         
         Random rand = new Random(seed);
 
-        Level levelNew = Instantiate(levelBase);
+        Level levelNew = levelBase;//Instantiate(levelBase);
 
         TerrainOptions options = levelNew.terrainBuilder.terrainOptions;
 
@@ -50,7 +48,6 @@ public class GenRandomParam : MonoBehaviour
             es.entityType = (EntityType)values.GetValue(rand.Next(values.Length));
             levelNew.enemySpawns.Add(es);
         }
-        
         levelList.addLevel(levelNew);
         return levelNew;
     }

@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheValid: 0
-  nextAction: 
+  nextAction: freeMode
 --- !u!1 &384324984 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7250147542952311472, guid: 713fc0ea1c597f54fb335e8f3c35acd4,

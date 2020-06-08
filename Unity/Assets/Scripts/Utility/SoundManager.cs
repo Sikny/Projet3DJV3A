@@ -29,7 +29,7 @@ namespace Sounds
 
         public void Play(string name)
         {
-            Debug.Log("PLAYING SOUND: " + name);
+            //Debug.Log("PLAYING SOUND: " + name);
             Sound s = Array.Find(sounds, sound => sound.name == name);
             if (s == null)
             {
