@@ -9,29 +9,14 @@ namespace CameraMovement {
      */
     public class CameraController : MonoBehaviour
     {
-        #region Singleton
-    
-        public static CameraController instance;
-    
-    
-        private void Awake()
-        {
-            if (instance != null)
-            {
-                Debug.Log("Several instances");
-                return;
-            }
-            instance = this;
-        }
-
-        #endregion
+        
         public float speed = 15;
         public float pitch = 2f;
-        public float zoomSpeed = 6f;
+        public float zoomSpeed = 20f;
         public Camera camera;
-        private float _currentYaw;
         public int minZoom = 10;
         public int maxZoom = 40;
+        private float _currentYaw;
         private bool _mousePressed;
         
         private bool _isMovingRight;
@@ -47,8 +32,10 @@ namespace CameraMovement {
         {
             _invertCameraX = GameSingleton.Instance.gameSettings.invertCameraX;
             _invertCameraY = GameSingleton.Instance.gameSettings.invertCameraY;
-            //Debug.Log("invert camera X : "  +_invertCameraX);
-            //Debug.Log("invert camera Y : "  +_invertCameraY);
+            Debug.Log("invert camera X : "  +_invertCameraX);
+            Debug.Log("invert camera Y : "  +_invertCameraY);
+
+            _currentYaw = maxZoom / 2f;
         }
 
         public void SetRotating() {
@@ -99,9 +86,11 @@ namespace CameraMovement {
  
             _currentYaw -= Input.mouseScrollDelta.y * (zoomSpeed * speed * Time.deltaTime);// Input.GetAxis("Mouse ScrollWheel") * speed * Time.deltaTime;
             _currentYaw = Mathf.Clamp(_currentYaw, minZoom, maxZoom);
+            //StoreUnit upgradedUnit = (number == 1) ? _unit.upgrades[0] : _unit.upgrades[1];
+
 
             if (_isMovingRight)
-            {            
+            {
                 transform.Translate(
                     _invertCameraX
                         ? new Vector3(speed * Time.deltaTime, 0, 0)

@@ -7,14 +7,14 @@ using Utility;
 namespace Units {
     public abstract class AbstractUnit : MonoBehaviour {
         public int entityCount;
-        protected Entity[] entities;
+        public Entity[] entities;
         protected Vector3 position;
         public Vector3 targetPosition;
 
         protected AbstractUnit _unitTarget;
 
         // The interaction controller (zombie, bowman, giant...)
-        protected Controller brain;
+        public Controller brain;
         private int idBrain;
         private EntityNative native;
         private EntityType _entityType;

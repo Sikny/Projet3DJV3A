@@ -9,8 +9,9 @@ public class Sniper : Archer
     
     public Sniper(AbstractUnit body) : base(body)
     {
-        speedEntity = 0.5f;
-        basisAttack = 10f;
+        TICK_ATTACK /= 2;
+        basisAttack *= 4;
+        accuracy = int.MaxValue; 
     }
     
 }

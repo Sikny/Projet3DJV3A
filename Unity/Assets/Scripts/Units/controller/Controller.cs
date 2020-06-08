@@ -12,10 +12,12 @@ namespace Units
     {
 
         protected AbstractUnit body;
-        protected float speedEntity;
         protected float basisAttack;
         protected List<EntityType> upgrades;
         protected bool isLastUpgarde;
+        protected float basisDefense;
+        protected float basisSpeed;
+        
 
         protected float deltaTime;
         protected Controller(AbstractUnit body)
@@ -32,7 +34,7 @@ namespace Units
 
         protected float getVitessUnit()
         {
-            float baseVitess = UnitLibData.speed * Time.deltaTime * speedEntity;
+            float baseVitess = UnitLibData.speed * Time.deltaTime * basisSpeed;
 
             Effect effect = body.GetEffect(0);
             //EquipmentEffect equipmentEffect = body.GetEquipmentEffect(0);
@@ -51,30 +53,30 @@ namespace Units
             //int bonusEquipmentLevel = equipmentEffect.IdEffect == -1 ? 1 : equipmentEffect.LevelEffect;
 
 
-            return basisAttack / bonusLevel; // + bonusEquipmentLevel;
+            return basisAttack / (bonusLevel * target.brain.basisDefense); // + bonusEquipmentLevel;
         }
 
         public void calculatePath(Vector3 target)
         {
-            if (TerrainMeshBuilder.alg != null && TerrainMeshBuilder.graph != null)
+            /*if (TerrainMeshBuilder.alg != null && TerrainMeshBuilder.graph != null)
             {
                 Vector3 exitPos = target;
                 int xOffset = TerrainMeshBuilder.dimensions[0] / 2;
                 int yOffset = TerrainMeshBuilder.dimensions[1] / 2;
                 TerrainMeshBuilder.graph.BeginningNode = TerrainMeshBuilder.tiles[(int)body.GetPosition().x+xOffset, (int)body.GetPosition().z+yOffset];
-                //Debug.Log("nodebeginpos="+TerrainMeshBuilder.graph.BeginningNode.Pos);
+              //  Debug.Log("nodebeginpos="+TerrainMeshBuilder.graph.BeginningNode.Pos);
                 TerrainMeshBuilder.graph.ExitNode = TerrainMeshBuilder.tiles[(int)(exitPos.x+xOffset), (int)(exitPos.z+yOffset)];
-                //Debug.Log("nodeendpos="+TerrainMeshBuilder.graph.ExitNode.Pos);
+//                Debug.Log("nodeendpos="+TerrainMeshBuilder.graph.ExitNode.Pos);
                 TerrainMeshBuilder.alg.Solve();
                 itineraire = TerrainMeshBuilder.graph.ReconstructPath();
-            }
+            }*/
         }
 
         public void updatePathMove()
         {
             
-            int xOffset = TerrainMeshBuilder.dimensions[0] / 2;
-            int yOffset = TerrainMeshBuilder.dimensions[1] / 2;
+            //int xOffset = TerrainMeshBuilder.dimensions[0] / 2;
+            //int yOffset = TerrainMeshBuilder.dimensions[1] / 2;
             Vector3 last = body.GetPosition();
             if (itineraire != null && itineraire.Count > itineraireNumberRemain)
             {
@@ -83,7 +85,7 @@ namespace Units
                 if (Vector3.Distance(last, posTarget) < 2f)
                 {
                     
-                    //Debug.Log(itineraire.Pop().Pos);
+                    Debug.Log(itineraire.Pop().Pos);
                 } 
                 body.SetPosition(Vector3.MoveTowards(last, posTarget, 5f * Time.deltaTime));
             }
