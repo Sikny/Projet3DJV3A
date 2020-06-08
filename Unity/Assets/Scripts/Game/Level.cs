@@ -18,6 +18,7 @@ namespace Game {
     }
     public class Level : MonoBehaviour {
         private Shop _shop;
+        private ShopManager _shopManager;
         private SystemUnit _systemUnit;
         
         
@@ -45,7 +46,7 @@ namespace Game {
             _shop = Shop.Instance;
             _shop.ClearShop();
 
-            ShopManager _shopManager = ShopManager.instance;
+            _shopManager = ShopManager.instance;
 
             
             foreach (Consumable cons in consumablesList) {
@@ -63,9 +64,12 @@ namespace Game {
 
         }
 
+        private bool _gameEnded;
         private void Update() {
             if (!_levelStarted) return;
-            if (enemySpawns.Count == 0 && livingEnemies.Count == 0) {
+            if (enemySpawns.Count == 0 && livingEnemies.Count == 0 && !_gameEnded)
+            {
+                _gameEnded = true;
                 GameSingleton.Instance.EndGame(1);    // WIN
             } else if (_playerUnits.Count == 0) {
                 GameSingleton.Instance.EndGame(0);

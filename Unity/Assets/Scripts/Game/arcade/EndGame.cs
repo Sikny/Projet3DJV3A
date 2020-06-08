@@ -69,7 +69,9 @@ public class EndGame : MonoBehaviour
 
     public void Back()
     {
+        endGamePanel.SetActive(false);
         SceneManager.LoadScene("Menu");
         endGamePanel.SetActive(false);
+
     }
 }
