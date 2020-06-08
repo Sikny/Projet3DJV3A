@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEditor;
+using UnityEngine;
 using Utility;
 
 namespace CameraMovement {
@@ -30,10 +32,12 @@ namespace CameraMovement {
         {
             _invertCameraX = GameSingleton.Instance.gameSettings.invertCameraX;
             _invertCameraY = GameSingleton.Instance.gameSettings.invertCameraY;
+
+            _currentYaw = maxZoom / 2f;
+
             //Debug.Log("invert camera X : "  +_invertCameraX);
             //Debug.Log("invert camera Y : "  +_invertCameraY);
 
-            _currentYaw = maxZoom / 2f;
         }
 
         public void SetRotating() {
