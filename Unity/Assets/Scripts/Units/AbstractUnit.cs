@@ -1,6 +1,8 @@
 ﻿using System;
+using Items;
 using Units.utils;
 using UnityEngine;
+using Utility;
 
 namespace Units {
     public abstract class AbstractUnit : MonoBehaviour {
@@ -32,6 +34,9 @@ namespace Units {
 		public Material circleMaterial;
 		private Effect[] effect = new Effect[16]; // max
 
+
+        //private EquipmentEffect[] _equipmentEffects = new EquipmentEffect[16];
+        private Equipment _currentEquipment;
         protected bool initialized;
         
 		public virtual bool Init(EntityType idType,Entity entityModel, int entityCountP) {
@@ -224,6 +229,17 @@ namespace Units {
         {
             effect[idEffect] = new Effect(idEffect, level, timeout);
         }
+        
+        public void AddEquipment(int idEffect, int level, Equipment equipment)
+        {
+            //effect[idEffect] = new Effect(idEffect, level);
+            //add equipment to unit
+            Debug.Log("current equip of unit: " + _currentEquipment);
+            if(_currentEquipment.itemName != null)
+                GameSingleton.Instance.inventory.AddItem(equipment); 
+            _currentEquipment = equipment;
+            //_equipmentEffects[idEffect] = new EquipmentEffect(idEffect, level);
+        }
 
 
         public EntityType GetEntityType()
@@ -250,6 +266,10 @@ namespace Units {
         {
             return effect[id];
         }
+        /*public EquipmentEffect GetEquipmentEffect(int id)
+        {
+            return _equipmentEffects[id];
+        }*/
     }
     
 }

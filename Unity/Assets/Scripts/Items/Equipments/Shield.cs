@@ -1,4 +1,5 @@
-﻿using Units;
+﻿using UI;
+using Units;
 using UnityEngine;
 
 namespace Items.Equipments {
@@ -10,14 +11,15 @@ namespace Items.Equipments {
       {
          if (UnitLibData.selectedUnit != null)
          {
-         
-            UnitLibData.selectedUnit.AddEffect(1,level,float.PositiveInfinity);
+            UnitLibData.selectedUnit.AddEffect(1,level, 1000);
+            //UnitLibData.selectedUnit.AddEquipment(1,level, this);
          
             base.Use(); 
          }
          else
          {
-         
+            Debug.Log("no selected unit");
+            Popups.instance.Popup("No Unit Selected!", Color.red);
          }//TODO gérer un message d'erreur
       }
    }

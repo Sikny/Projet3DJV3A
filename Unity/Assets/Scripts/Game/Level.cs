@@ -88,7 +88,8 @@ namespace Game {
         
         public IEnumerator StartLevel() {
             _playerUnits = new List<PlayerUnit>(FindObjectsOfType<PlayerUnit>());
-            while (enemySpawns.Count > 0) {
+            for (int i = enemySpawns.Count - 1; i >= 0; i--)
+            {
                 EnemySpawn current = enemySpawns[0];
                 Vector3 position = new Vector3(current.position.x, SystemUnit.YPos, current.position.y);
                 DOVirtual.DelayedCall(current.spawnTime, () => {
@@ -96,7 +97,7 @@ namespace Game {
                     livingEnemies.Add(newUnit);
                     enemySpawns.Remove(current);
                 });
-                yield return 0;
+                yield return null;
             }
             GameSingleton.Instance.ResumeGame();
             _levelStarted = true;
