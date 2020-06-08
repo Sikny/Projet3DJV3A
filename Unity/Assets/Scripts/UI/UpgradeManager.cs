@@ -63,7 +63,7 @@ public class UpgradeManager : MonoBehaviour
         
     }
     private void UpdateGold() {
-        playerGold.SetText(GameSingleton.Instance.GetPlayer().GetGold() + "g");
+        playerGold.SetText(GameSingleton.Instance.GetPlayer().GetGold() + " g");
     }
     private void UpdateCost(int price) {
         cost.SetText("Costs: " + price+"g");

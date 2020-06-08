@@ -58,7 +58,7 @@ namespace Utility {
         public void GenerateLevel()
         {
             _levelCountArcade++;
-            loadedLevel = grp.generateNextLevel(Random.Range(Int32.MinValue, Int32.MaxValue),  _levelCountArcade+50);
+            loadedLevel = grp.generateNextLevel(Random.Range(Int32.MinValue, Int32.MaxValue),  _levelCountArcade);
             grp.setDefaultGold(loadedLevel);
             GameSingleton.Instance.levelManager = this;
             loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade));

@@ -43,8 +43,9 @@ namespace UI {
             
         }
 
-        public void UpdateUI()
+        public void UpdateUI(Shop shop)
         {
+            _shop = shop;
             UpdateUIItems();
             UpdateUIEquipments();
             UpdateUIUnits();
