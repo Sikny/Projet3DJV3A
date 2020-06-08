@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.WSA;
 
 namespace Game {
     public class Player {

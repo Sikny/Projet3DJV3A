@@ -209,7 +209,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitSystem
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5354823938570569534, guid: df1ad11a2ccf53a45a280522fc3640de, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: df1ad11a2ccf53a45a280522fc3640de, type: 3}
 --- !u!114 &148225783 stripped
 MonoBehaviour:
@@ -669,7 +670,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1445413856}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -935,7 +936,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1253318383}
   - component: {fileID: 1253318381}
-  - component: {fileID: 1253318380}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -943,33 +943,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1253318380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1253318379}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93ff765aaf74eb34896b6b3ea87a2fc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  customEventSent: {fileID: 11400000, guid: 9b08185e5a74c2a46837a37727fe96cd, type: 2}
-  action:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: DoUpdate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1253318381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1212,7 +1185,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerGold
       value: 
-      objectReference: {fileID: 1046308513}
+      objectReference: {fileID: 0}
     - target: {fileID: 2363768732352373506, guid: 53520039c3db2e14680402fffa7e10d0,
         type: 3}
       propertyPath: cost

@@ -1,8 +1,6 @@
 ﻿using System;
 using Game;
-using UI;
 using UnityEngine;
-using UnityEngine.WSA;
 using Random = UnityEngine.Random;
 
 namespace Utility {
