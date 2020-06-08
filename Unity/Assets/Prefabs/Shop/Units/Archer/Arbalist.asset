@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Arbalist
   m_EditorClassIdentifier: 
   itemName: Arbalist
-  icon: {fileID: 21300000, guid: a4e293942449ba940bbd8bc406cc7b3e, type: 3}
+  icon: {fileID: 21300000, guid: 73da2ccabdd49c44d993fcd49ec4b119, type: 3}
   price: 100
   description: Arbalists shoot very quickly
   entityType: 13
