@@ -15,8 +15,22 @@ namespace Utility {
 
         public int addLevel(Level l)
         {
+            
+/*            for (int i = 0; i < levels.Count; i++)
+            {
+                if (levels[i] == null)
+                {
+                    levels[i] = l;
+                    break;
+                }
+            }*/
             levels.Add(l);
             return LevelCount - 1;
+        }
+
+        public void ClearLevels()
+        {
+            levels.Clear();
         }
     }
 }

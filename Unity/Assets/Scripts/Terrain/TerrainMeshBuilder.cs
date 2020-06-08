@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using AStar;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,7 +22,7 @@ namespace Terrain {
         [SerializeField, HideInInspector] private List<GameObject> meshObjects;
         private MeshFilter[] _meshFilters;
         private MeshRenderer[] _meshRenderers;
-        private MeshCollider _meshCollider;
+        private static MeshCollider _meshCollider;
 
         private MinMax _minMax;
         public Gradient heightGradient;
@@ -34,10 +33,7 @@ namespace Terrain {
         public Transform waterObject;
 
         // Path-finding fields
-        public static Graph graph;
-        public static Algorithm alg;
-        public static Tile[,] tiles;
-        public static int[] dimensions;
+        [HideInInspector] public int[][] grid;
 
         private void Clear() {
             int meshesCount = meshObjects.Count;
@@ -50,17 +46,16 @@ namespace Terrain {
 
         [ContextMenu("Init")]
         private void InitMeshes() {
-            StartCoroutine(Init());
+            StartCoroutine(Init(null));
         }
 
-        public IEnumerator Init() {
+        public IEnumerator Init(Action action) {
             TerrainGrid.Height = terrainOptions.height;
             TerrainGrid.Width = terrainOptions.width;
 
             TerrainGrid.Instance.cursor = cursor;
 
-            tiles = new Tile[terrainOptions.width,terrainOptions.height];
-            dimensions = new[] {terrainOptions.width, terrainOptions.height};
+            grid = new int[terrainOptions.width][];
 
             _waterData.Clear();
 
@@ -80,11 +75,8 @@ namespace Terrain {
             BuildTerrain();
             waterObject.transform.localScale = new Vector3(terrainOptions.width - 0.0001f,
                 waterObject.localScale.y, terrainOptions.height - 0.0001f);
-
-            graph = new Graph(tiles, terrainOptions.width,terrainOptions.height,tiles[0,0], tiles[terrainOptions.width-1,terrainOptions.height-1]);
-            alg = new Algorithm(graph);
-            
             yield return null;
+            action();
         }
 
         private void BuildTerrain() {
@@ -129,16 +121,17 @@ namespace Terrain {
                 colours[i] = heightGradient.Evaluate(i / (textureResolution - 1f));
             }
 
-            for (int i = 0; i < terrainOptions.width; i++)
-            {
+            for (int i = 0; i < terrainOptions.width; i++) {
+                grid[i] = new int[terrainOptions.height];
                 for (int j = 0; j < terrainOptions.height; j++)
                 {
                     Vector3 vec = new Vector3(i-terrainOptions.width/2,0, j-terrainOptions.height/2);
+                    //Vector2 percent = new Vector2() / ;
                     float h = CalculateHeight(vec);
-                    if(h > 0.5f || h < -0.1f)
-                        tiles[i, j] = new Tile(TileType.Wall, i, j, new Vector3(vec.x,h+0.5f,vec.z));
+                    if (h > 0.01f || h < -0.01f)
+                        grid[i][j] = 1;
                     else
-                        tiles[i, j] = new Tile(TileType.Grass, i, j, new Vector3(vec.x,h+0.5f,vec.z));
+                        grid[i][j] = 0;
                 }
             }
 
@@ -342,7 +335,7 @@ namespace Terrain {
 
         private float CalculateHeight(Vector3 vertex) {
             float result = 0;
-            Vector2Int intVec = new Vector2Int((int) vertex.x, (int) vertex.z);
+            Vector2Int intVec = new Vector2Int((int) (vertex.x+0.5f), (int) (vertex.z+0.5f));
             if (terrainOptions.modifierHeightMap.ContainsKey(intVec)) {
                 result = terrainOptions.modifierHeightMap[intVec];
             }

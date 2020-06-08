@@ -43,8 +43,9 @@ namespace UI {
             
         }
 
-        public void UpdateUI()
+        public void UpdateUI(Shop shop)
         {
+            _shop = shop;
             UpdateUIItems();
             UpdateUIEquipments();
             UpdateUIUnits();
@@ -88,14 +89,18 @@ namespace UI {
         }
 
         public void UpdateGold() {
-            goldText.SetText(GameSingleton.Instance.GetPlayer().GetGold() + "g");
+            goldText.SetText(GameSingleton.Instance.GetPlayer().GetGold() + " g");
         }
 
         public GameObject fightButton;
 
         public void Fight() {
             int playerCount = FindObjectsOfType<PlayerUnit>().Length;
-            if (playerCount == 0) return;
+            if (playerCount == 0)
+            {
+                Popups.instance.Popup("At least one unit must be placed first", Color.red);
+                return;
+            }
             systemUnit.SetRunning(true);
             fightButton.SetActive(false);
             shopPanel.SetActive(false);

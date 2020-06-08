@@ -1,11 +1,8 @@
-Amélioration des unités
-Pathfinding A* pour le mouvement des unités
-Plus de consommables (ex piège) et équipements
-Réglage de bugs mineur
-Ajout de différent type de terrain
-Ajout du château au centre de la map
-Ajout de cinématique d’introduction du mode histoire
-Animation de déplacement de d’attaque des unités
-Intégration de l’éditeur de niveau dans le jeu
-Ajout de musique et effet sonore
-Ajout du mode scoring
+Editeur de niveau
+  Déformer de façon plus “cubique”
+  Ajouter de nombreuses fonctions (nom de la carte, argent de départ, inventaire...)
+Charger les maps enregistrés et pouvoir jouer dessus
+Changement graphique
+Ajout des pièges
+Equilibrage
+Corrections de multiples anomalies

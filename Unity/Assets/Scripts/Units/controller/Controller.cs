@@ -12,12 +12,12 @@ namespace Units
     {
 
         protected AbstractUnit body;
-        protected float basisSpeed;
         protected float basisAttack;
-        protected float basisDefense;
-        
         protected List<EntityType> upgrades;
         protected bool isLastUpgarde;
+        protected float basisDefense;
+        protected float basisSpeed;
+        
 
         protected float deltaTime;
         protected Controller(AbstractUnit body)
@@ -60,7 +60,7 @@ namespace Units
 
         public void calculatePath(Vector3 target)
         {
-            if (TerrainMeshBuilder.alg != null && TerrainMeshBuilder.graph != null)
+            /*if (TerrainMeshBuilder.alg != null && TerrainMeshBuilder.graph != null)
             {
                 Vector3 exitPos = target;
                 int xOffset = TerrainMeshBuilder.dimensions[0] / 2;
@@ -71,14 +71,14 @@ namespace Units
 //                Debug.Log("nodeendpos="+TerrainMeshBuilder.graph.ExitNode.Pos);
                 TerrainMeshBuilder.alg.Solve();
                 itineraire = TerrainMeshBuilder.graph.ReconstructPath();
-            }
+            }*/
         }
 
         public void updatePathMove()
         {
             
-            int xOffset = TerrainMeshBuilder.dimensions[0] / 2;
-            int yOffset = TerrainMeshBuilder.dimensions[1] / 2;
+            //int xOffset = TerrainMeshBuilder.dimensions[0] / 2;
+            //int yOffset = TerrainMeshBuilder.dimensions[1] / 2;
             Vector3 last = body.GetPosition();
             if (itineraire != null && itineraire.Count > itineraireNumberRemain)
             {

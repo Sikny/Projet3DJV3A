@@ -4,8 +4,10 @@ namespace Game {
     public class Player {
         public int gold;
         public int currentLevel;
+        public int currentLevelArcade;
         public Gamemode gamemode = Gamemode.LEVEL;
         public int currentScore = 0;
+        public int goldStartLevel; 
         
         public Player() {
             Load();
@@ -14,6 +16,8 @@ namespace Game {
         public void Load() {
             gold = PlayerPrefs.GetInt("PlayerGold", 50);
             currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
+            currentLevelArcade = PlayerPrefs.GetInt("CurrentLevelArcade", 0);
+            goldStartLevel = gold;
         }
 
         public int GetGold() {
@@ -23,6 +27,7 @@ namespace Game {
         public void Save() {
             PlayerPrefs.SetInt("PlayerGold", gold);
             PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+            PlayerPrefs.SetInt("CurrentLevelArcade", currentLevelArcade);
             PlayerPrefs.Save();
         }
         

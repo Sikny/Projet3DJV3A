@@ -108,8 +108,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2633175725685055759}
-  - component: {fileID: 2633175725685055794}
-  - component: {fileID: 2633175725685055795}
   - component: {fileID: 7468583631191037214}
   m_Layer: 0
   m_Name: Entity
@@ -137,33 +135,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2633175725685055794
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2633175725685055793}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &2633175725685055795
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2633175725685055793}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7468583631191037214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f64285f006b0c47b0131d55197b255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 0}
   fillBar: {fileID: 3351929016779209979}
   circleRenderer: {fileID: 5705931590385838688}
   hitParticles: {fileID: 5246859762993817986}

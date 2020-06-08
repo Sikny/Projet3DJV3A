@@ -3,7 +3,7 @@ using Items;
 using Terrain;
 using UI;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Serialization;
 using Utility;
 using Cursor = Terrain.Cursor;
 
@@ -14,7 +14,7 @@ namespace Units {
         public EntityDict entityDict;
         public PlayerUnit playerUnitPrefab;
         public AiUnit aiUnitPrefab;
-        private List<AbstractUnit> _units = new List<AbstractUnit>();
+        [HideInInspector] public List<AbstractUnit> units = new List<AbstractUnit>();
 
 
         /** Données de l'ancien système nécessaire aux unités*/
@@ -41,7 +41,7 @@ namespace Units {
             UnitLibData.speed = speed;
             UnitLibData.rotationSpeed = rotationSpeed;
             UnitLibData.groundMask = groundMask;
-            UnitLibData.units = _units; // Penser à update si 
+            UnitLibData.units = units; // Penser à update si 
             UnitLibData.deltaTime = 0;
         }
 
@@ -49,8 +49,8 @@ namespace Units {
             var newUnit = Instantiate(unit);
             newUnit.SetPosition(position);
             newUnit.Init(unitType, entityDict.GetEntityType(unitType), sizeUnit);
-            _units.Add(newUnit);
-            UnitLibData.units = _units;
+            units.Add(newUnit);
+            UnitLibData.units = units;
             return newUnit.transform;
         }
 
@@ -69,7 +69,7 @@ namespace Units {
 
         public List<AbstractUnit> GetUnits()
         {
-            return _units;
+            return units;
         }
         public void DoClick() {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -117,14 +117,14 @@ namespace Units {
             if (isRunning)
             {
                 UnitLibData.deltaTime = Time.deltaTime;
-                int unitCount = _units.Count;
+                int unitCount = units.Count;
                 for (int i = 0; i < unitCount; i++)
                 {
-                    _units[i].UpdateUnit();
-                    if (_units[i].GetNumberAlive() <= 0)
+                    units[i].UpdateUnit();
+                    if (units[i].GetNumberAlive() <= 0)
                     {
-                        _units[i].Kill();
-                        _units.RemoveAt(i);
+                        units[i].Kill();
+                        units.RemoveAt(i);
                         break;
                     }
                 }

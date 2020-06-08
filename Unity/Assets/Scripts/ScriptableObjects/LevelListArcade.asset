@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e042439712b55c441835987ef97130af, type: 3}
   m_Name: LevelListArcade
   m_EditorClassIdentifier: 
-  levels: []
+  levels:
+  - {fileID: 7807795990556175184, guid: 41dc76ac1da477b4da03861305086706, type: 3}

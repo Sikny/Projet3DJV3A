@@ -54,7 +54,7 @@ namespace Units {
                 {
                     GameSingleton.Instance.GetPlayer().currentScore += (int)
                         (GetEfficientCoef(this, anotherUnit) * 200f); // ajouter les types complexes
-                    Debug.Log(GameSingleton.Instance.GetPlayer().currentScore);
+                   // Debug.Log(GameSingleton.Instance.GetPlayer().currentScore);
                     anotherUnit.PopEntity(indexEntityDefense);
                 }
             }
