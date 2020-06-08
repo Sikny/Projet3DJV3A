@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Items {
+﻿namespace Items {
     public class Equipment : Item
     {
         public int stat;
