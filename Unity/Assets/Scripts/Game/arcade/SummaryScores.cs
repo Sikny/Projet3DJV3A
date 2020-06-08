@@ -49,7 +49,6 @@ public class SummaryScores : MonoBehaviour
             
             int nb = 0;
             var json = JsonConvert.DeserializeObject<List<ScoreJson>>(result);
-            json.Reverse(); // pas joli et risqué
             foreach (var scoreJson in json)
             {
                 GameObject scoreNew = Instantiate(score, gameObject.transform);

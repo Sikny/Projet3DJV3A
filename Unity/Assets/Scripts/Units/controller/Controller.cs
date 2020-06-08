@@ -53,7 +53,9 @@ namespace Units
             //int bonusEquipmentLevel = equipmentEffect.IdEffect == -1 ? 1 : equipmentEffect.LevelEffect;
 
 
-            return basisAttack / (bonusLevel * target.brain.basisDefense); // + bonusEquipmentLevel;
+            return basisAttack/(bonusLevel*target.brain.basisDefense);// + bonusEquipmentLevel;
+
+
         }
 
         public void calculatePath(Vector3 target)
