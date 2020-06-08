@@ -10,18 +10,17 @@ namespace Utility {
         public Level loadedLevel;
 
         public GenRandomParam grp;
-        
+
+        private int _levelCount = 0; 
         private void Start()
         {
-            if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE)
+            if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE && GameSingleton.Instance.GetPlayer().currentScore == 0)
             {
-                Debug.Log("CALLED");
-                GameSingleton.Instance.levelManager = this;
-               /* loadedLevel = grp.generateNextLevel(Random.Range(Int32.MinValue, Int32.MaxValue), 5);
-                grp.setDefaultGold(loadedLevel);
-                GameSingleton.Instance.levelManager = this;
-                loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevel));
-                loadedLevel.Init();*/
+                
+                levelList.ClearLevels();
+                GameSingleton.Instance.GetPlayer().currentLevel = 0;
+                GenerateLevel();
+  
             }
             else
             {
@@ -39,6 +38,20 @@ namespace Utility {
         public void SetLoadedLevel(Level level)
         {
             loadedLevel = level;
+        }
+
+        public void GenerateLevel()
+        {
+            _levelCount++;
+            loadedLevel = grp.generateNextLevel(Random.Range(Int32.MinValue, Int32.MaxValue), _levelCount);
+            grp.setDefaultGold(loadedLevel);
+            GameSingleton.Instance.levelManager = this;
+            Debug.Log("player current level:" + GameSingleton.Instance.GetPlayer().currentLevel);
+            loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevel));
+            loadedLevel.Init();
+            //generate
+            //call when pressing free mode button in menu
+            //call at end of level in arcade mode 
         }
     }
 }

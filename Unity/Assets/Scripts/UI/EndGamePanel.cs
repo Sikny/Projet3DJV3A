@@ -46,18 +46,16 @@ namespace UI {
                         retryBtn.SetActive(false);
                         nextBtn.SetActive(true);
 
-                        if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL)
+                        if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE)
                         {
-                            Level loadedLevel = GameSingleton.Instance.levelManager.grp.generateNextLevel(Random.Range(Int32.MinValue, Int32.MaxValue), 5);
-                            GameSingleton.Instance.levelManager.grp.setDefaultGold(loadedLevel);
-                            loadedLevel = Instantiate(GameSingleton.Instance.levelManager.levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevel));
-                            loadedLevel.Init();
+                            Shop.Instance.ClearShop();
+                            GameSingleton.Instance.levelManager.GenerateLevel();
                         }
                         if (GameSingleton.Instance.levelManager != null)
                         {
                             UnitRecovery();
                             GameSingleton.Instance.levelManager.NextLevel();
-
+                            //GameSingleton.Instance.SetGameEnded(false);
                         }
                         break;
                 }

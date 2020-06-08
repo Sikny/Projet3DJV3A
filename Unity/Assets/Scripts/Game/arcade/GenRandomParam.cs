@@ -15,16 +15,7 @@ public class GenRandomParam : MonoBehaviour
     public LevelList levelList;
     public Level levelBase;
 
-    private void Start()
-    {
-        Level loadedLevel = generateNextLevel(rand.Range(Int32.MinValue, Int32.MaxValue), 5);
-        GameSingleton.Instance.levelManager.SetLoadedLevel(loadedLevel);
-        GameSingleton.Instance.levelManager.grp.setDefaultGold(loadedLevel);
-        Debug.Log(GameSingleton.Instance.GetPlayer().currentLevel);
-        loadedLevel = Instantiate(GameSingleton.Instance.levelManager.levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevel));
-        loadedLevel.Init();
-    }
-
+    
     public Level generateNextLevel(int seed, int i)
     {
         //int difficulty;
