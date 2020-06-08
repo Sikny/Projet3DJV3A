@@ -1,6 +1,8 @@
 ﻿using System;
 using Game;
+using UI;
 using UnityEngine;
+using UnityEngine.WSA;
 using Random = UnityEngine.Random;
 
 namespace Utility {
@@ -19,6 +21,7 @@ namespace Utility {
                 
                 levelList.ClearLevels();
                 GameSingleton.Instance.GetPlayer().currentLevelArcade = 0;
+                
                 _levelCountArcade = 0;
                 GenerateLevel();
   
@@ -31,6 +34,8 @@ namespace Utility {
             }
             else
             {
+                GameSingleton.Instance.GetPlayer().goldStartLevel = GameSingleton.Instance.GetPlayer().gold;
+                GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
                 GameSingleton.Instance.levelManager = this;
                 loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevel));
                 loadedLevel.Init();
@@ -57,6 +62,9 @@ namespace Utility {
 
         public void GenerateLevel()
         {
+            GameSingleton.Instance.GetPlayer().goldStartLevel = GameSingleton.Instance.GetPlayer().gold;
+            GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
+            //update gold inventoryUI
             _levelCountArcade++;
             loadedLevel = grp.generateNextLevel(Random.Range(Int32.MinValue, Int32.MaxValue),  _levelCountArcade);
             grp.setDefaultGold(loadedLevel);

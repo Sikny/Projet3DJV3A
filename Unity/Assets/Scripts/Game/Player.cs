@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.WSA;
 
 namespace Game {
     public class Player {
@@ -7,6 +8,7 @@ namespace Game {
         public int currentLevelArcade;
         public Gamemode gamemode = Gamemode.LEVEL;
         public int currentScore = 0;
+        public int goldStartLevel; 
         
         public Player() {
             Load();
@@ -16,6 +18,7 @@ namespace Game {
             gold = PlayerPrefs.GetInt("PlayerGold", 50);
             currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
             currentLevelArcade = PlayerPrefs.GetInt("CurrentLevelArcade", 0);
+            goldStartLevel = gold;
         }
 
         public int GetGold() {
