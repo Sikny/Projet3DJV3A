@@ -32,8 +32,8 @@ namespace CameraMovement {
         {
             _invertCameraX = GameSingleton.Instance.gameSettings.invertCameraX;
             _invertCameraY = GameSingleton.Instance.gameSettings.invertCameraY;
-            Debug.Log("invert camera X : "  +_invertCameraX);
-            Debug.Log("invert camera Y : "  +_invertCameraY);
+            //Debug.Log("invert camera X : "  +_invertCameraX);
+            //Debug.Log("invert camera Y : "  +_invertCameraY);
 
             _currentYaw = maxZoom / 2f;
         }

@@ -1,8 +1,8 @@
 ﻿using System;
 using Game;
+using Items;
 using UI;
 using UnityEngine;
-using UnityEngine.WSA;
 using Random = UnityEngine.Random;
 
 namespace Utility {
@@ -50,6 +50,11 @@ namespace Utility {
             }
             else
             {
+                if (GameSingleton.Instance.GetPlayer().gold < 50)
+                    GameSingleton.Instance.GetPlayer().gold = 50;
+                Shop.Instance.ClearShop();
+                GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
+                ShopManager.instance.UpdateGold();
                 GameSingleton.Instance.GetPlayer().currentLevel = 
                     (GameSingleton.Instance.GetPlayer().currentLevel + 1) % levelList.LevelCount;
             }

@@ -30,7 +30,7 @@ namespace Units.PathFinding {
                     strDebug += grid[i][j];
                 strDebug += "\n";
             }
-            Debug.Log(strDebug);
+            //Debug.Log(strDebug);
             
             var linesCount = grid.Length;
             var colsCount = grid[0].Length;
