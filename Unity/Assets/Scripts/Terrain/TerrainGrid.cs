@@ -17,7 +17,7 @@
         public Cursor cursor;
 
         public void SelectZone(int posZ, int posX) {
-            cursor.SetPosition(posX-Width/2+0.5f, posZ-Height/2+0.5f);
+            cursor.SetPosition(posX-Width/2+0.5f,posZ-Height/2+0.5f);
         }
     }
 }

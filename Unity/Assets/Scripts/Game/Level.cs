@@ -70,7 +70,7 @@ namespace Game {
             terrainBuilder.transform.position += offset;
             _systemUnit.cam.transform.position += offset;
             aStarHandler = new AStarHandler(terrainBuilder.terrainOptions, terrainBuilder);
-            for (int i = 0; i < aStarHandler.grid.Length; i++)
+            /*for (int i = 0; i < aStarHandler.grid.Length; i++)
             {
                 for (int j = 0; j < aStarHandler.grid[i].Length; j++)
                 {
@@ -78,7 +78,7 @@ namespace Game {
                     Vector3 pos = new Vector3(i, 0, j);
                     GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = pos;
                 }
-            }
+            }*/
         }
 
         private void FixedUpdate() {

@@ -88,7 +88,6 @@ MonoBehaviour:
   terrainOptions: {fileID: 2496842524491047986}
   cursor: {fileID: 8038414469622382947}
   waterObject: {fileID: 5230928976668908788}
-  terrainGenerated: {fileID: 11400000, guid: 8ba5dc18c0e15f14787501afdc95400e, type: 2}
 --- !u!114 &2496842524491047986
 MonoBehaviour:
   m_ObjectHideFlags: 0

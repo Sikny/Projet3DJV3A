@@ -9,7 +9,8 @@ namespace Terrain {
         public void SetAutoHeight(float defaultY) {
             RaycastHit hit;
             Vector3 position = transform.position;
-            if (Physics.Raycast(position+Vector3.up*10, Vector3.down, out hit, 20f, 1 << 8)) {
+            if (Physics.BoxCast(position+Vector3.up*10f, transform.localScale, Vector3.down, out hit,
+                Quaternion.identity, 20f, 1 << 8)) {
                 position.y = hit.point.y+0.1f;
                 posY = position.y;
             } else {
