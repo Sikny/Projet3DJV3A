@@ -24,14 +24,6 @@ namespace Units.PathFinding {
 
             grid = terrainMesh.grid;
 
-            string strDebug = "";
-            for (int i = 0; i < _gridSize; i++) {
-                for (int j = 0; j < _gridSize; j++)
-                    strDebug += grid[i][j];
-                strDebug += "\n";
-            }
-            //Debug.Log(strDebug);
-            
             var linesCount = grid.Length;
             var colsCount = grid[0].Length;
             var costMatrixWidth = linesCount * colsCount;

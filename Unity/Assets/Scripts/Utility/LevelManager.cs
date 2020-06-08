@@ -1,7 +1,5 @@
 ﻿using System;
 using Game;
-using Items;
-using UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
