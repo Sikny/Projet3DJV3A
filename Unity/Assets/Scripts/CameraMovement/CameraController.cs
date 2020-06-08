@@ -12,11 +12,11 @@ namespace CameraMovement {
         
         public float speed = 15;
         public float pitch = 2f;
-        public float zoomSpeed = 6f;
+        public float zoomSpeed = 20f;
         public Camera camera;
-        private float _currentYaw;
         public int minZoom = 10;
         public int maxZoom = 40;
+        private float _currentYaw;
         private bool _mousePressed;
         
         private bool _isMovingRight;
@@ -34,6 +34,8 @@ namespace CameraMovement {
             _invertCameraY = GameSingleton.Instance.gameSettings.invertCameraY;
             Debug.Log("invert camera X : "  +_invertCameraX);
             Debug.Log("invert camera Y : "  +_invertCameraY);
+
+            _currentYaw = maxZoom / 2f;
         }
 
         public void SetRotating() {
