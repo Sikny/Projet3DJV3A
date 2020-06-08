@@ -58,7 +58,7 @@ namespace Game {
             foreach (StoreUnit storeUnit in unitList) {
                 _shop.AddStoreUnit(storeUnit);
             }
-            _shopManager.UpdateUI();
+            _shopManager.UpdateUI(_shop);
 
         }
         

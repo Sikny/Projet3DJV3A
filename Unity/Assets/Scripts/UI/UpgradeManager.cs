@@ -63,7 +63,7 @@ public class UpgradeManager : MonoBehaviour
         
     }
     private void UpdateGold() {
-        playerGold.SetText(GameSingleton.Instance.GetPlayer().GetGold() + "g");
+        playerGold.SetText(GameSingleton.Instance.GetPlayer().GetGold() + " g");
     }
     private void UpdateCost(int price) {
         cost.SetText("Costs: " + price+"g");
@@ -109,6 +109,10 @@ public class UpgradeManager : MonoBehaviour
         
     }
 
+    public void OnBack()
+    {
+        ToggleUpgradePannel();
+    }
     public Item GetUnit(bool isFirstUpgrade)
     {
         return (isFirstUpgrade) ?  _unit.upgrades[0] : _unit.upgrades[1];

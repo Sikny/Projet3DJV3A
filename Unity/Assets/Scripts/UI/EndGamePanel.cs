@@ -69,6 +69,8 @@ namespace UI {
                     GameSingleton.Instance.sceneManager.LoadScene("Menu");
                     break;
                 case 1:
+                    GameSingleton.Instance.GetPlayer().gold = GameSingleton.Instance.GetPlayer().goldStartLevel;
+                    GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                     break;
             }
