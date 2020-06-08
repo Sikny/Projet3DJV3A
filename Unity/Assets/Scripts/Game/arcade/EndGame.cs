@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Items;
 using TMPro;
+using UI;
 using UnityEngine;
 using UnityEngine.Networking;
 using Utility;

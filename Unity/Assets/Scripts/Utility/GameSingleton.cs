@@ -62,7 +62,6 @@ namespace Utility {
         }
 
 
-
         // optimizations purposes
         private void Update() {
             updateLoop.Raise();
