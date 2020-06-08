@@ -111,7 +111,7 @@ namespace Units {
                     _entityType = EntityType.WhiteKnight;
                     return new WhiteKnight(this);
                 case EntityType.Horseman:
-                    native = EntityNative.Archer;
+                    native = EntityNative.Soldier;
                     _entityType = EntityType.Horseman;
                     return new Horseman(this);
                 case EntityType.Executionist:
