@@ -56,7 +56,7 @@ namespace Units.PathFinding {
             return Mathf.RoundToInt(pos.z) * _gridSize + Mathf.RoundToInt(pos.x);
         }
 
-        public void UpdateTransform(AbstractUnit unitToMove, Vector3 destination, float unitSpeed)
+        public void UpdateTransform(Transform unitToMove, Vector3 destination, float unitSpeed)
         {
             Transform targetTransform = unitToMove.transform;
             var linesCount = grid.Length;
@@ -121,7 +121,7 @@ namespace Units.PathFinding {
                 }
                 else {
                     targetTransform.position += Time.deltaTime * unitSpeed * UnitLibData.speed * vectorToTarget / distanceToTarget;
-                    unitToMove.SetPosition(unitToMove.transform.position);
+                    //unitToMove.SetPosition(unitToMove.transform.position);
 
                     //_targetRotation = Quaternion.LookRotation(vectorToTarget, Vector3.up);
                 }
