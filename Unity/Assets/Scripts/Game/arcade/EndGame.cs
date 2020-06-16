@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Items;
-using TMPro;
-using UI;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using Utility;
@@ -22,12 +18,6 @@ public class EndGame : MonoBehaviour
     private const int SCORE_MIDDLE = 10;
 
     public GameObject endGamePanel;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        //gameObject.SetActive(false);
-    }
 
     // Update is called once per frame
     void Update()

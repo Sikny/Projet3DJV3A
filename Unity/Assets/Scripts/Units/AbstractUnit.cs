@@ -111,7 +111,7 @@ namespace Units {
                     _entityType = EntityType.WhiteKnight;
                     return new WhiteKnight(this);
                 case EntityType.Horseman:
-                    native = EntityNative.Archer;
+                    native = EntityNative.Soldier;
                     _entityType = EntityType.Horseman;
                     return new Horseman(this);
                 case EntityType.Executionist:
@@ -234,7 +234,7 @@ namespace Units {
         {
             //effect[idEffect] = new Effect(idEffect, level);
             //add equipment to unit
-            Debug.Log("current equip of unit: " + _currentEquipment);
+            //Debug.Log("current equip of unit: " + _currentEquipment);
             if(_currentEquipment.itemName != null)
                 GameSingleton.Instance.inventory.AddItem(equipment); 
             _currentEquipment = equipment;
