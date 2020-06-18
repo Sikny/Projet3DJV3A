@@ -81,8 +81,16 @@ namespace Game {
         }
 
         private bool _gameEnded;
-        private void FixedUpdate() {
+        private void FixedUpdate()
+        {
             if (!_levelStarted) return;
+            _playerUnits.Clear();
+            foreach (var unit in _systemUnit.units)
+            {
+                if (unit.GetType() == typeof(PlayerUnit)) {
+                    _playerUnits.Add((PlayerUnit) unit);
+                }
+            }
             if (enemySpawns.Count == 0 && livingEnemies.Count == 0 && !_gameEnded)
             {
                 _gameEnded = true;
@@ -108,12 +116,6 @@ namespace Game {
         
         public IEnumerator StartLevel() {
             _playerUnits = new List<PlayerUnit>();
-            foreach (var unit in _systemUnit.units)
-            {
-                if (unit.GetType() == typeof(PlayerUnit)) {
-                    _playerUnits.Add((PlayerUnit) unit);
-                }
-            }
             for (int i = enemySpawns.Count - 1; i >= 0; i--)
             {
                 EnemySpawn current = enemySpawns[0];
