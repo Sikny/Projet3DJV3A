@@ -1,0 +1,12 @@
+Editeur de niveau
+  	Déformer de façon plus “cubique”
+  	Ajouter de nombreuses fonctions (nom de la carte, argent de départ, inventaire...)
+Charger les maps enregistrées et pouvoir jouer dessus
+Changement graphique
+Ajout des pièges
+Equilibrage du gameplay
+Corrections de multiples anomalies
+	Impossible de se connecter après identifiant incorrect
+	Scroll du classement non fonctionnel
+	Crash si spawn d’unité sur la bordure
+
