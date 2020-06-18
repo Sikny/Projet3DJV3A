@@ -7,6 +7,7 @@ namespace Game {
         public int currentLevelArcade;
         public Gamemode gamemode = Gamemode.LEVEL;
         public int currentScore = 0;
+        public string token;
         public int goldStartLevel; 
         
         public Player() {
@@ -18,6 +19,7 @@ namespace Game {
             currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
             currentLevelArcade = PlayerPrefs.GetInt("CurrentLevelArcade", 0);
             goldStartLevel = gold;
+            token = PlayerPrefs.GetString("connection.token", "");
         }
 
         public int GetGold() {
@@ -28,6 +30,7 @@ namespace Game {
             PlayerPrefs.SetInt("PlayerGold", gold);
             PlayerPrefs.SetInt("CurrentLevel", currentLevel);
             PlayerPrefs.SetInt("CurrentLevelArcade", currentLevelArcade);
+            PlayerPrefs.SetString("connection.token", token);
             PlayerPrefs.Save();
         }
         
