@@ -9,6 +9,7 @@ public class MachineArc : Archer
     
     public MachineArc(AbstractUnit body) : base(body)
     {
+        MultiplierScore = 4f;
         TICK_ATTACK *= 4;
         basisDefense *= 2;
     }

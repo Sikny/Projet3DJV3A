@@ -9,6 +9,7 @@ public class Catapultist : Archer
     
     public Catapultist(AbstractUnit body) : base(body)
     {
+        MultiplierScore = 4f;
         basisAttack *= 8;
         TICK_ATTACK /= 2;
     }
