@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game {
     public class Player {
@@ -8,7 +9,9 @@ namespace Game {
         public Gamemode gamemode = Gamemode.LEVEL;
         public int currentScore = 0;
         public string token;
-        public int goldStartLevel; 
+        public int goldStartLevel;
+        public int currentSeed;
+        public DateTime beginGame;
         
         public Player() {
             Load();
