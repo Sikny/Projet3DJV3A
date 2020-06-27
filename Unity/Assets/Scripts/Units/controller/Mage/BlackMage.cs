@@ -9,8 +9,8 @@ public class BlackMage : Wizard
     
     public BlackMage(AbstractUnit body) : base(body)
     {
-        speedEntity = 0.5f;
-        basisAttack = 10f;
+        MultiplierScore = 2f;
+        basisAttack *= 2;
     }
     
 }

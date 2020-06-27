@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using Utility;
 using WebClient;
+using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 public class EndGame : MonoBehaviour
 {
@@ -17,12 +17,8 @@ public class EndGame : MonoBehaviour
     public SummaryScores summaryScores;
 
     private const int SCORE_MIDDLE = 10;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        //gameObject.SetActive(false);
-    }
+
+    public GameObject endGamePanel;
 
     // Update is called once per frame
     void Update()
@@ -41,7 +37,9 @@ public class EndGame : MonoBehaviour
     {
         string token = PlayerPrefs.GetString("connection.token");
         int nbpoints = GameSingleton.Instance.GetPlayer().currentScore;
-        StartCoroutine(ConnectModule.Instance.RegisterScore(token,0, nbpoints, 1024,
+        int seedBase = GameSingleton.Instance.GetPlayer().currentSeed;
+        int deltatime = (int)(DateTime.Now - GameSingleton.Instance.GetPlayer().beginGame).Seconds;
+        StartCoroutine(ConnectModule.Instance.RegisterScore(token,deltatime, nbpoints, seedBase,
             ProcessScoreResult));
     }
 
@@ -62,5 +60,13 @@ public class EndGame : MonoBehaviour
             }
         }
             
+    }
+
+    public void Back()
+    {
+        endGamePanel.SetActive(false);
+        SceneManager.LoadScene("Menu");
+        endGamePanel.SetActive(false);
+
     }
 }

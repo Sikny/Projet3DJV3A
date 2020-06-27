@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Utility;
 
 public class ConnecteMode : MonoBehaviour
 {
@@ -16,8 +17,8 @@ public class ConnecteMode : MonoBehaviour
     {
         if (connecteIndication != null)
         {
-            string token = PlayerPrefs.GetString("connection.token");
-            if (token == null || token.Length < 8)
+            string token = GameSingleton.Instance.GetPlayer().token;
+            if (string.IsNullOrEmpty(token) || token.Length < 8)
             {
                 connecteIndication.text = "Non-connecté";
                 connecteIndication.color = Color.white;

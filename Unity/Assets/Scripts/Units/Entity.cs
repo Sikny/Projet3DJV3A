@@ -11,7 +11,6 @@ namespace Units {
         private int _life;
         private int _maxLife;
 
-        public MeshRenderer meshRenderer;
         public RectTransform fillBar;
         public MeshRenderer circleRenderer;
 
@@ -19,7 +18,7 @@ namespace Units {
         public GameObject effectiveHitParticles;
         public GameObject notEffectiveHitParticles;
 
-        [SerializeField] private WeaponAnimator weaponAnimator;
+        public WeaponAnimator weaponAnimator;
         
         private void Awake() {
             _strength = 5;
@@ -45,8 +44,12 @@ namespace Units {
             transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, 
                 target.transform.position.z));
             transform.Rotate(0, -90f, 0);
-            if(weaponAnimator != null)
+            if (weaponAnimator != null)
+            {
                 weaponAnimator.Animate();
+                weaponAnimator.SetTarget(target.transform);
+                weaponAnimator.RangeShot();    // activates only on range units
+            }
             return target.ChangeLife(deltaValue, efficiencyType);
         }
 
@@ -57,7 +60,7 @@ namespace Units {
             if (deltaValue < 0)
             {
                 #if UNITY_EDITOR
-                Debug.Log("efficient type is : " + efficiencyType);
+               // Debug.Log("efficient type is : " + efficiencyType);
                 #endif
 
                 if (efficiencyType == -1)

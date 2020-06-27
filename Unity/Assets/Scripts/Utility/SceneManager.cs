@@ -25,8 +25,8 @@ namespace Utility {
 
             }else if (_storedScenesIds[sceneName] == 5)
             {
-                string token = PlayerPrefs.GetString("connection.token");
-                if (token == null || token.Length < 8)
+                string token = GameSingleton.Instance.GetPlayer().token;
+                if (string.IsNullOrEmpty(token) || token.Length < 8)
                 {
                     Debug.Log("Non-connecté");
                 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Game;
+﻿using Game;
 using UnityEngine;
 using UnityEngine.Networking;
 using Utility;
@@ -40,9 +38,9 @@ public class TokenManager : MonoBehaviour
             else
             {
                 cacheValid = false;
-                PlayerPrefs.SetString("connection.token", "");
+                GameSingleton.Instance.GetPlayer().token = "";
                 PlayerPrefs.Save();
-                Debug.Log("Invalid token !!");
+                //Debug.Log("Invalid token !!");
             }
         }
             

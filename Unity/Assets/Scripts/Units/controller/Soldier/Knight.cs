@@ -9,8 +9,8 @@ public class Knight : Soldier
     
     public Knight(AbstractUnit body) : base(body)
     {
-        speedEntity = 0.8f;
-        basisAttack = 1.0f;
+        MultiplierScore = 2f;
+        basisDefense *= 2;
     }
     
 }

@@ -9,8 +9,8 @@ public class Demonist : Wizard
     
     public Demonist(AbstractUnit body) : base(body)
     {
-        speedEntity = 0.5f;
-        basisAttack = 10f;
+        MultiplierScore = 4f;
+        basisAttack *= 4;
     }
     
 }

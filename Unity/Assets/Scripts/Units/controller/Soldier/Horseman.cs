@@ -9,8 +9,8 @@ public class Horseman : Soldier
     
     public Horseman(AbstractUnit body) : base(body)
     {
-        speedEntity = 0.8f;
-        basisAttack = 1.0f;
+        MultiplierScore = 4f;
+        basisSpeed *= 4;
     }
     
 }

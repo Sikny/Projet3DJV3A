@@ -9,8 +9,8 @@ public class Arbalist : Archer
     
     public Arbalist(AbstractUnit body) : base(body)
     {
-        speedEntity = 0.5f;
-        basisAttack = 15f;
+        MultiplierScore = 2f;
+        TICK_ATTACK *= 2;
     }
     
 }

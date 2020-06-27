@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -43,13 +40,12 @@ public class SummaryScores : MonoBehaviour
             Debug.Log(www.error);
         }
         else {
-            Debug.Log("Connect success");
+            //Debug.Log("Connect success");
             string result = www.downloadHandler.text;
-            Debug.Log("Received: " + result);
+            //Debug.Log("Received: " + result);
             
             int nb = 0;
             var json = JsonConvert.DeserializeObject<List<ScoreJson>>(result);
-            json.Reverse(); // pas joli et risqué
             foreach (var scoreJson in json)
             {
                 GameObject scoreNew = Instantiate(score, gameObject.transform);

@@ -53,8 +53,8 @@ namespace Units {
                 if (life == 0)
                 {
                     GameSingleton.Instance.GetPlayer().currentScore += (int)
-                        (GetEfficientCoef(this, anotherUnit) * 200f); // ajouter les types complexes
-                    Debug.Log(GameSingleton.Instance.GetPlayer().currentScore);
+                        (GetEfficientCoef(this, anotherUnit) * 200f * anotherUnit.brain.MultiplierScore); // ajouter les types complexes
+                   // Debug.Log(GameSingleton.Instance.GetPlayer().currentScore);
                     anotherUnit.PopEntity(indexEntityDefense);
                 }
             }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Horseman
   icon: {fileID: 21300000, guid: a4e293942449ba940bbd8bc406cc7b3e, type: 3}
-  price: 100
+  price: 200
   description: Fastest unit in the game. Is very good against ranged units.
   entityType: 6
   upgrades: []

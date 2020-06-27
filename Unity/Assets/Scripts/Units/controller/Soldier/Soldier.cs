@@ -10,8 +10,9 @@ namespace Units{
         private bool _playingSound;
         public Soldier(AbstractUnit body) : base(body)
         {
-            speedEntity = 0.8f;
+            basisSpeed = 0.8f;
             basisAttack = 1.0f;
+            basisDefense = 1.0f;
             
             itineraireNumberRemain = 0;
         }
@@ -49,7 +50,7 @@ namespace Units{
             { 
                 GameSingleton.Instance.levelManager.loadedLevel.aStarHandler.UpdateTransform(body.entities[i].transform, positionTarget, speedEntity);
             }*/
-            GameSingleton.Instance.levelManager.loadedLevel.aStarHandler.UpdateTransform(body, positionTarget, speedEntity);
+            GameSingleton.Instance.levelManager.loadedLevel.aStarHandler.UpdateTransform(body, positionTarget, basisSpeed);
             //SystemUnit.UpdateTransform(body, positionTarget, speedEntity);
 
             //updatePathMove();

@@ -9,8 +9,9 @@ public class Hunter : Archer
     
     public Hunter(AbstractUnit body) : base(body)
     {
-        speedEntity = 0.5f;
-        basisAttack = 10f;
+        MultiplierScore = 2f;
+        accuracy = 1f;
+        basisAttack *= 2;
     }
     
 }

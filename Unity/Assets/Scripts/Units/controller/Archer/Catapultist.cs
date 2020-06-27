@@ -9,8 +9,9 @@ public class Catapultist : Archer
     
     public Catapultist(AbstractUnit body) : base(body)
     {
-        speedEntity = 0.5f;
-        basisAttack = 10f;
+        MultiplierScore = 4f;
+        basisAttack *= 8;
+        TICK_ATTACK /= 2;
     }
     
 }

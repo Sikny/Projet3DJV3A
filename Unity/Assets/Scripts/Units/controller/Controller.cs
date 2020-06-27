@@ -12,14 +12,17 @@ namespace Units
     {
 
         protected AbstractUnit body;
-        protected float speedEntity;
         protected float basisAttack;
         protected List<EntityType> upgrades;
         protected bool isLastUpgarde;
+        protected float basisDefense;
+        protected float basisSpeed;
+        public float MultiplierScore { get; set; }
 
         protected float deltaTime;
         protected Controller(AbstractUnit body)
         {
+            MultiplierScore = 1.0f;
             this.body = body;
             deltaTime = 0.0f;
         }
@@ -32,7 +35,7 @@ namespace Units
 
         protected float getVitessUnit()
         {
-            float baseVitess = UnitLibData.speed * Time.deltaTime * speedEntity;
+            float baseVitess = UnitLibData.speed * Time.deltaTime * basisSpeed;
 
             Effect effect = body.GetEffect(0);
             //EquipmentEffect equipmentEffect = body.GetEquipmentEffect(0);
@@ -51,7 +54,9 @@ namespace Units
             //int bonusEquipmentLevel = equipmentEffect.IdEffect == -1 ? 1 : equipmentEffect.LevelEffect;
 
 
-            return basisAttack / bonusLevel; // + bonusEquipmentLevel;
+            return basisAttack/(bonusLevel*target.brain.basisDefense);// + bonusEquipmentLevel;
+
+
         }
 
         public void calculatePath(Vector3 target)

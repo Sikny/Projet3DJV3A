@@ -13,8 +13,9 @@ namespace Terrain {
                 Quaternion.identity, 20f, 1 << 8)) {
                 position.y = hit.point.y+0.1f;
                 posY = position.y;
+                gameObject.SetActive(true);
             } else {
-                position.y = defaultY+0.1f;
+                gameObject.SetActive(false);
             }
             transform.position = position;
         }

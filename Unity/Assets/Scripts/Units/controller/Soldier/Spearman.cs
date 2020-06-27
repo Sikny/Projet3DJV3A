@@ -9,8 +9,8 @@ public class Spearman : Soldier
     
     public Spearman(AbstractUnit body) : base(body)
     {
-        speedEntity = 0.8f;
-        basisAttack = 1.0f;
+        MultiplierScore = 2f;
+        basisSpeed *= 2;
     }
     
 }
