@@ -5,7 +5,7 @@ using Unity.Jobs;
 using UnityEngine;
 
 namespace Units.PathFinding {
-    public class AStarHandler
+    public class AStarHandler : MonoBehaviour
     {
         public int[][] grid;
         private readonly int _gridSize;
