@@ -26,9 +26,6 @@ namespace Units  {
             
             if (_unitTarget == null) {
                 _unitTarget = GuessTheBestUnitToTarget();
-                if (_unitTarget != null) 
-                    //Debug.Log("posTarget="+_unitTarget.GetPosition());
-                    brain.calculatePath(_unitTarget.GetPosition());
             }
             else {
                 targetPosition = _unitTarget.GetPosition();

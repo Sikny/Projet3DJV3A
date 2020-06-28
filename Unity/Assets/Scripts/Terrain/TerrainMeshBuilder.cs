@@ -31,9 +31,6 @@ namespace Terrain {
         public Cursor cursor;
         public Transform waterObject;
 
-        // Path-finding fields
-        [HideInInspector] public int[][] grid;
-
         private void Clear() {
             int meshesCount = meshObjects.Count;
             for (int i = 0; i < meshesCount; i++) {
@@ -53,8 +50,6 @@ namespace Terrain {
             TerrainGrid.Width = terrainOptions.width;
 
             TerrainGrid.Instance.cursor = cursor;
-
-            grid = new int[terrainOptions.width][];
 
             _waterData.Clear();
 
@@ -116,20 +111,6 @@ namespace Terrain {
             Color[] colours = new Color[textureResolution];
             for (int i = 0; i < textureResolution; i++) {
                 colours[i] = heightGradient.Evaluate(i / (textureResolution - 1f));
-            }
-
-            for (int i = 0; i < terrainOptions.width; i++) {
-                grid[i] = new int[terrainOptions.height];
-                for (int j = 0; j < terrainOptions.height; j++)
-                {
-                    Vector3 vec = new Vector3(i-terrainOptions.width/2,0, j-terrainOptions.height/2);
-                    //Vector2 percent = new Vector2() / ;
-                    float h = CalculateHeight(vec);
-                    if (h > 0.01f || h < -0.01f)
-                        grid[i][j] = 1;
-                    else
-                        grid[i][j] = 0;
-                }
             }
 
             texture.SetPixels(colours);
@@ -329,7 +310,7 @@ namespace Terrain {
 
         private float CalculateHeight(Vector3 vertex) {
             float result = 0;
-            Vector2Int intVec = new Vector2Int((int) (vertex.x+0.5f), (int) (vertex.z+0.5f));
+            Vector2Int intVec = new Vector2Int((int) (vertex.x), (int) (vertex.z));
             if (terrainOptions.modifierHeightMap.ContainsKey(intVec)) {
                 result = terrainOptions.modifierHeightMap[intVec];
             }
@@ -370,7 +351,6 @@ namespace Terrain {
             _waterData.Add(waterList);
         }
 
-        // TODO : ROUND MOUNTAINS ??
         private void BuildOneMountain() {
             int posX = Random.Range(-terrainOptions.width / 2, terrainOptions.width / 2);
             int posZ = Random.Range(-terrainOptions.height / 2, terrainOptions.height / 2);

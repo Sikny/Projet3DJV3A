@@ -68,7 +68,7 @@ namespace Game {
                          Vector3.forward * (TerrainGrid.Height / 2f);
             terrainBuilder.transform.position += offset;
             _systemUnit.cam.transform.position += offset;
-            aStarHandler = new AStarHandler(terrainBuilder.terrainOptions, terrainBuilder);
+            //aStarHandler = new AStarHandler(terrainBuilder.terrainOptions, terrainBuilder);
             /*for (int i = 0; i < aStarHandler.grid.Length; i++)
             {
                 for (int j = 0; j < aStarHandler.grid[i].Length; j++)

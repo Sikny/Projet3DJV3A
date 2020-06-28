@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Utility;
 using Random = UnityEngine.Random;
 
@@ -16,15 +15,8 @@ namespace Units {
         public override void UpdateUnit() {
             if (!initialized) return;
 
-            if(_unitTarget != null)
-            {
-                brain.calculatePath(targetPosition);
-            }
-            else
-            {
+            if(_unitTarget == null) {
                 _unitTarget = GuessTheBestUnitToTarget();
-                if(_unitTarget != null)
-                    brain.calculatePath(_unitTarget.GetPosition());
             }
 
             brain.interract(true,_unitTarget, targetPosition);

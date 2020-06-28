@@ -5,27 +5,52 @@ using Unity.Jobs;
 using UnityEngine;
 
 namespace Units.PathFinding {
-    public class AStarHandler : MonoBehaviour
-    {
-        public int[][] grid;
-        private readonly int _gridSize;
+    public class AStarHandler : MonoBehaviour {
+        [SerializeField] private Transform terrainStart;
+        [SerializeField] private Transform terrainEnd;
+        
+        private int[][] _grid;
+        public int[][] Grid => _grid;
+        private int _gridSize;
 
         private NativeArray<float> _costMatrix;
         private NativeArray<float> _heuristicMatrix;
 
         private List<Vector3> _wayPoints;
-        
-        public AStarHandler(TerrainOptions terrainOptions, TerrainMeshBuilder terrainMesh)
-        {
+
+        public void Init(TerrainOptions terrainOptions) {
             _gridSize = terrainOptions.width;
+            
+            // Terrain limits
+            Vector3 halfVec = Vector3.one / 2;
+            terrainStart.position = halfVec - Vector3.right * terrainOptions.width/2 - Vector3.forward * terrainOptions.height/2;
+            terrainEnd.position = Vector3.right * terrainOptions.width/2 + Vector3.forward * terrainOptions.height/2 - halfVec;
+            float castHeight = terrainOptions.maxMountainHeight+2;
+
+            // INIT GRID
+            int xInd = 0, zInd = 0;
+            _grid = new int[_gridSize][];
+            RaycastHit hitInfo;
+            for (float x = terrainStart.position.x; x <= terrainEnd.position.x; x++) {
+                _grid[xInd] = new int[_gridSize];
+                for (float z = terrainStart.position.z; z <= terrainEnd.position.z; z++) {
+                    Physics.Raycast(new Vector3(x, castHeight, z), Vector3.down,
+                        out hitInfo, 100f, 1 << 8);
+                    _grid[xInd][zInd] = hitInfo.point.y > 0.01f || hitInfo.point.y < -0.01f ? 1 : 0;
+                    zInd++;
+                }
+                zInd = 0;
+                xInd++;
+            }
+            
+            
+            
             _wayPoints = new List<Vector3>();
 
             _wayPoints = new List<Vector3>();
 
-            grid = terrainMesh.grid;
-
-            var linesCount = grid.Length;
-            var colsCount = grid[0].Length;
+            var linesCount = _grid.Length;
+            var colsCount = _grid[0].Length;
             var costMatrixWidth = linesCount * colsCount;
 
             _costMatrix = new NativeArray<float>(costMatrixWidth * costMatrixWidth, Allocator.Persistent);
@@ -39,7 +64,7 @@ namespace Units.PathFinding {
                         for (var j1 = 0; j1 < colsCount; j1++) {
                             var targetIdx = i1 * colsCount + j1;
 
-                            if (grid[i][j] != 1 && grid[i1][j1] != 1 && (i == i1 && Mathf.Abs(j - j1) == 1 ||
+                            if (_grid[i][j] != 1 && _grid[i1][j1] != 1 && (i == i1 && Mathf.Abs(j - j1) == 1 ||
                                                                          j == j1 && Mathf.Abs(i - i1) == 1)) {
                                 _costMatrix[sourceIdx * costMatrixWidth + targetIdx] = 1;
                             }
@@ -51,16 +76,15 @@ namespace Units.PathFinding {
                 }
             }
         }
-        
+
         private int PosToId(Vector3 pos) {
             return Mathf.RoundToInt(pos.z) * _gridSize + Mathf.RoundToInt(pos.x);
         }
 
-        public void UpdateTransform(AbstractUnit unitToMove, Vector3 destination, float unitSpeed)
-        {
+        public void UpdateTransform(Transform unitToMove, Vector3 destination, float unitSpeed) {
             Transform targetTransform = unitToMove.transform;
-            var linesCount = grid.Length;
-            var colsCount = grid[0].Length;
+            var linesCount = _grid.Length;
+            var colsCount = _grid[0].Length;
             var costMatrixWidth = linesCount * colsCount;
 
             //Update Heuristic Matrix to target node
@@ -99,7 +123,7 @@ namespace Units.PathFinding {
             job.bestCost.Dispose();
             job.bestPath.Dispose();
 
-                // Show Debug Path
+            // Show Debug Path
             var lastPoint = targetTransform.position;
             for (var i = 0; i < _wayPoints.Count; i++) {
                 var point = _wayPoints[i];
@@ -121,7 +145,7 @@ namespace Units.PathFinding {
                 }
                 else {
                     targetTransform.position += Time.deltaTime * unitSpeed * UnitLibData.speed * vectorToTarget / distanceToTarget;
-                    unitToMove.SetPosition(unitToMove.transform.position);
+                    //unitToMove.SetPosition(unitToMove.transform.position);
 
                     //_targetRotation = Quaternion.LookRotation(vectorToTarget, Vector3.up);
                 }
