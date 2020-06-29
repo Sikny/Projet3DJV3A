@@ -49,13 +49,14 @@ namespace WebClient {
         /**
          * Registers new user with given data
          */
-        public IEnumerator RegisterUser(string firstname, string lastname, string mail, string password, Action<UnityWebRequest> callback) {
+        public IEnumerator RegisterUser(string firstname, string lastname, string mail, string password,string password2, Action<UnityWebRequest> callback) {
             // TODO VALUES CHECK
             List<IMultipartFormSection> formData = new List<IMultipartFormSection> {
                 new MultipartFormDataSection("firstname", firstname),
                 new MultipartFormDataSection("lastname", lastname),
                 new MultipartFormDataSection("mail", mail),
-                new MultipartFormDataSection("psw", password)
+                new MultipartFormDataSection("psw", password),
+                new MultipartFormDataSection("psw2", password2)
             };
             UnityWebRequest www = UnityWebRequest.Post("http://piwelengine.eu/sauron/WS/INSCRIPTION.php", formData);
             yield return www.SendWebRequest();
