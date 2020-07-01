@@ -54,6 +54,11 @@ public class EndGame : MonoBehaviour
                 classementText.text = "Classement : #" + result;
                 summaryScores.called = false;
             }
+            else if (result != null && result.Equals("NOK-NOT-ACCEPTABLE"))
+            {
+                classementText.text = "Inclassable !!";
+                summaryScores.called = false;
+            }
             else
             {
                 classementText.text = "Impossible d'établir le classement";
