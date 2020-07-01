@@ -29,6 +29,7 @@ public class Descriptions : MonoBehaviour
 
     public void EnterItem()
     {
+        Debug.Log("description enter");
         _descriptionBox.SetActive(true);
 
         Item item = (isUpgrade) ? upgradeManager.GetUnit(isFirstUpgrade) : GetComponent<ItemSlot>().item;;
@@ -39,6 +40,7 @@ public class Descriptions : MonoBehaviour
 
     public void ExitItem()
     {
+        Debug.Log("description exit");
         _descriptionBox.SetActive(false);
         _isTouchingItem = false;
     }

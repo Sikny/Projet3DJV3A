@@ -37,7 +37,7 @@ public class UpgradeManager : MonoBehaviour
 
 
     private void Awake() {
-        if (instance != null) {
+        if (instance != null) { 
             Debug.Log("Several instances");
             return;
         }
@@ -51,13 +51,13 @@ public class UpgradeManager : MonoBehaviour
 
     private void Start()
     {
-        _inventory = GameSingleton.Instance.uiManager.inventory;
+        //_inventory = GameSingleton.Instance.uiManager.inventory;
     }
 
     public void ToggleUpgradePannel()
     {
+        _inventory = GameSingleton.Instance.uiManager.inventory;
         GameSingleton.Instance.uiManager.ToggleUpgradePanel();
-        
     }
     private void UpdateGold() {
         playerGold.SetText(GameSingleton.Instance.GetPlayer().GetGold() + " g");
@@ -68,7 +68,6 @@ public class UpgradeManager : MonoBehaviour
 
     public void SetUIUnits(StoreUnit storeUnit)
     {
-
         GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
         _currentCost = storeUnit.upgradeCost;
         UpdateCost(_currentCost);

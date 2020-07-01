@@ -10,7 +10,8 @@ namespace UI {
         public GameObject upgradePanel;
         public GameObject descriptionBox;
         public TextMeshProUGUI description;
-
+        public GameObject unitNameBox;
+        public TextMeshProUGUI unitName;
         public InventoryManager inventoryUi;
         public Inventory inventory;
 
