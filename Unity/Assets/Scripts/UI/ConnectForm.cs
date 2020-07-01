@@ -13,7 +13,7 @@ namespace UI {
 
         public bool ValidForm() {
             if (!AllFieldsFilled()) return false;
-            confirmButton.enabled = false;
+            //confirmButton.enabled = false;
             return true;
         }
     }

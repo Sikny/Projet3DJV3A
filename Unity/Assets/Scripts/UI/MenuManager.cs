@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 using Utility;
 using WebClient;
 
@@ -21,7 +22,7 @@ namespace UI {
         public void OnRegisterConfirmPressed() {
             if (registerPanel.ValidForm()) {
                 StartCoroutine(ConnectModule.Instance.RegisterUser(registerPanel.firstName.text,
-                    registerPanel.lastName.text, registerPanel.mail.text, registerPanel.password.text,
+                    registerPanel.lastName.text, registerPanel.mail.text, registerPanel.password.text,registerPanel.confirmPassword.text,
                     ProcessRegisterResult));
                 //  TODO CONNECT, LOADING, CONFIRM WINDOW
             }
@@ -41,7 +42,9 @@ namespace UI {
                 Debug.Log("Received: " + result);
                 if (result.Contains("NOK"))
                 {
-                    //message d'erreur
+                    GameObject password = connectionPanel.transform.Find("PasswordInput").gameObject;
+                    InputField passwordIF = password.GetComponent<InputField>();
+                    passwordIF.text = "";
                 }
                 else
                 {
@@ -62,6 +65,15 @@ namespace UI {
                 Debug.Log("Connect success");
                 string result = www.downloadHandler.text;
                 Debug.Log("Received: " + result);
+                if (result.Equals("OK"))
+                {
+                    registerPanel.gameObject.SetActive(false);
+                    background.SetActive(false);
+                }
+                else
+                {
+                    //todo
+                }
             }
             
         }
