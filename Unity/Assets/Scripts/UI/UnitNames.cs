@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Units;
 using UnityEngine.UI;
 using Utility;
 
@@ -20,25 +22,37 @@ public class UnitNames : MonoBehaviour
         _unitNameText = GameSingleton.Instance.uiManager.unitName;
         _unitNameBox = GameSingleton.Instance.uiManager.unitNameBox;
     }
-    public void EnterUnit()
+  /*  public void EnterUnit()
     {
-        Debug.Log("enter");
+        
+
+    }*/
+
+    public void OnMouseEnter()
+    {
+        Debug.Log("enter unit");
         _unitNameBox.SetActive(true);
 
-        
-        //Item item = (isUpgrade) ? upgradeManager.GetUnit(isFirstUpgrade) : GetComponent<ItemSlot>().item;;
+        AbstractUnit unit = GetComponent<AbstractUnit>();
 
+        //Item item = (isUpgrade) ? upgradeManager.GetUnit(isFirstUpgrade) : GetComponent<ItemSlot>().item;;
+        _unitNameText.SetText(unit.GetEntityType().ToString());
         //_unitNameText.SetText(item.description);
         _isTouchingUnit = true;
     }
 
-    public void ExitUnit()
+    public void OnMouseExit()
     {
-        Debug.Log("exit");
+        Debug.Log("exit unit");
 
         _unitNameBox.SetActive(false);
         _isTouchingUnit = false;
     }
+/*
+    public void ExitUnit()
+    {
+
+    }*/
 
 
 
@@ -46,7 +60,7 @@ public class UnitNames : MonoBehaviour
     {
         if (_isTouchingUnit)
         {
-            _unitNameBox.transform.position = new Vector3(Input.mousePosition.x + ( -Screen.width / 8f ), Input.mousePosition.y, _unitNameBox.transform.position.z);
+            _unitNameBox.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y+  ( Screen.height / 8f ), _unitNameBox.transform.position.z);
         }
 
     }

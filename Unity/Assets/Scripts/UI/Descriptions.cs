@@ -29,7 +29,6 @@ public class Descriptions : MonoBehaviour
 
     public void EnterItem()
     {
-        Debug.Log("description enter");
         _descriptionBox.SetActive(true);
 
         Item item = (isUpgrade) ? upgradeManager.GetUnit(isFirstUpgrade) : GetComponent<ItemSlot>().item;;
@@ -40,7 +39,6 @@ public class Descriptions : MonoBehaviour
 
     public void ExitItem()
     {
-        Debug.Log("description exit");
         _descriptionBox.SetActive(false);
         _isTouchingItem = false;
     }
@@ -51,7 +49,8 @@ public class Descriptions : MonoBehaviour
     {
         if (_isTouchingItem)
         {
-            _descriptionBox.transform.position = new Vector3(Input.mousePosition.x + ( -Screen.width / 8f ), Input.mousePosition.y, _descriptionBox.transform.position.z);
+            _descriptionBox.transform.position = new Vector3(Input.mousePosition.x + ( -Screen.width / 6f ), Input.mousePosition.y, _descriptionBox.transform.position.z);
+           //_descriptionBox.transform.position = new Vector3(Input.mousePosition.x  -90f, Input.mousePosition.y, _descriptionBox.transform.position.z);
         }
 
     }
