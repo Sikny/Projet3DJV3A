@@ -46,7 +46,7 @@ namespace UI {
                 else
                 {
                     GameSingleton.Instance.tokenConnection = result;
-                    PlayerPrefs.SetString("connection.token", result);
+                    GameSingleton.Instance.GetPlayer().token = result;
                     PlayerPrefs.Save();
                     connectionPanel.gameObject.SetActive(false);
                     background.SetActive(false);

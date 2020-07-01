@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using Utility;
@@ -36,7 +37,9 @@ public class EndGame : MonoBehaviour
     {
         string token = PlayerPrefs.GetString("connection.token");
         int nbpoints = GameSingleton.Instance.GetPlayer().currentScore;
-        StartCoroutine(ConnectModule.Instance.RegisterScore(token,0, nbpoints, 1024,
+        int seedBase = GameSingleton.Instance.GetPlayer().currentSeed;
+        int deltatime = (int)(DateTime.Now - GameSingleton.Instance.GetPlayer().beginGame).Seconds;
+        StartCoroutine(ConnectModule.Instance.RegisterScore(token,deltatime, nbpoints, seedBase,
             ProcessScoreResult));
     }
 

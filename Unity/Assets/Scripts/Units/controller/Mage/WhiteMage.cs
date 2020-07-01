@@ -9,6 +9,7 @@ public class WhiteMage : Wizard
     
     public WhiteMage(AbstractUnit body) : base(body)
     {
+        MultiplierScore = 2f;
         basisDefense *= 2;
     }
     

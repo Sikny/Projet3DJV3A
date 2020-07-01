@@ -9,6 +9,7 @@ public class Horseman : Soldier
     
     public Horseman(AbstractUnit body) : base(body)
     {
+        MultiplierScore = 4f;
         basisSpeed *= 4;
     }
     

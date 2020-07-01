@@ -38,7 +38,7 @@ public class TokenManager : MonoBehaviour
             else
             {
                 cacheValid = false;
-                PlayerPrefs.SetString("connection.token", "");
+                GameSingleton.Instance.GetPlayer().token = "";
                 PlayerPrefs.Save();
                 //Debug.Log("Invalid token !!");
             }

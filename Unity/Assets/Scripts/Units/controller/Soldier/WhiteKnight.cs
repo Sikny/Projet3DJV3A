@@ -9,6 +9,7 @@ public class WhiteKnight : Soldier
     
     public WhiteKnight(AbstractUnit body) : base(body)
     {
+        MultiplierScore = 4f;
         basisDefense *= 4;
     }
     
