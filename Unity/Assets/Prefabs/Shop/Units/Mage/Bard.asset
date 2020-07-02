@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bard
   m_EditorClassIdentifier: 
   itemName: Bard
-  icon: {fileID: 21300000, guid: a4e293942449ba940bbd8bc406cc7b3e, type: 3}
+  icon: {fileID: 21300000, guid: da444d1a99b793d4395b9dd9bb438753, type: 3}
   price: 200
   description: Bards encourages their allies with their songs. Gives a big defense
     and attack increase to near ally units.

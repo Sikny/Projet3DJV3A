@@ -6,6 +6,7 @@ namespace Units {
     public enum EntityType {
         Soldier, Archer, Mage, Spearman,Knight, WhiteKnight, Horseman, Executionist, BlackMage, WhiteMage, Demonist, RedMage,Bard, Arbalist,Hunter,MachineArc,Catapultist, Sniper
     }
+    
 
     public enum EntityNative
     {

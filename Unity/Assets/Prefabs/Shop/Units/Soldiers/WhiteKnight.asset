@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WhiteKnight
   m_EditorClassIdentifier: 
   itemName: White Knight
-  icon: {fileID: 21300000, guid: a4e293942449ba940bbd8bc406cc7b3e, type: 3}
+  icon: {fileID: 21300000, guid: 41e013f6be6e4134183b3338ad11fb55, type: 3}
   price: 200
   description: White knights have a lot of health and give a defense buff to near
     ally units.

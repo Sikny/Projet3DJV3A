@@ -49,7 +49,8 @@ public class Descriptions : MonoBehaviour
     {
         if (_isTouchingItem)
         {
-            _descriptionBox.transform.position = new Vector3(Input.mousePosition.x + ( -Screen.width / 8f ), Input.mousePosition.y, _descriptionBox.transform.position.z);
+            _descriptionBox.transform.position = new Vector3(Input.mousePosition.x + ( -Screen.width / 6f ), Input.mousePosition.y, _descriptionBox.transform.position.z);
+           //_descriptionBox.transform.position = new Vector3(Input.mousePosition.x  -90f, Input.mousePosition.y, _descriptionBox.transform.position.z);
         }
 
     }

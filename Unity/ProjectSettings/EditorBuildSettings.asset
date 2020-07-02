@@ -21,6 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/loadLvl.unity
     guid: ebbe2187c8d6d2f41a1018e37cce66b5
   - enabled: 1
-    path: Assets/Scenes/Freemode.unity
+    path: Assets/Scenes/FreeMode.unity
     guid: 137648b104c59fa46b66da205de061e3
   m_configObjects: {}

@@ -2,6 +2,7 @@
 using Items;
 using Units.utils;
 using UnityEngine;
+using UnityEngine.UI;
 using Utility;
 
 namespace Units {
@@ -41,7 +42,6 @@ namespace Units {
         
 		public virtual bool Init(EntityType idType,Entity entityModel, int entityCountP) {
             brain = GetControllerFromId(idType);
-            
             entityCount = entityCountP;
             livingEntityCount = entityCountP;
             entities = new Entity[entityCountP];
@@ -246,6 +246,7 @@ namespace Units {
         {
             return _entityType;
         }
+
 
         protected void UpdateTimeoutEffects()
         {
