@@ -70,6 +70,10 @@ namespace UI {
                     registerPanel.gameObject.SetActive(false);
                     background.SetActive(false);
                 }
+                else if (result.Equals("NOK-MAIL-ALREADY-USED"))
+                {
+                    Popups.instance.Popup("Mail is already used!", Color.red);
+                }
                 else
                 {
                     //todo
