@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class Map
 {
-    public const int SIZE = 100;
+    public int SIZE = 50;
     private Camera camera;
     private MeshFilter meshFilter;
     private MeshCollider meshCollider;
@@ -18,9 +18,9 @@ public class Map
     
     public float MinHeight { get; set; }
     public float MaxHeight { get; set; }
-    public Map(Camera camera, GameObject map)
+    public Map(Camera camera, GameObject map, int size)
     {
-
+        this.SIZE = size;
         this.map = map;
         this.meshCollider = map.GetComponent<MeshCollider>();
         this.meshFilter = map.GetComponent<MeshFilter>();

@@ -29,6 +29,7 @@ public class EditorMap : MonoBehaviour
     private int amplitudeTool = 10;
     private float minHeight = -10;
     private float maxHeight = 10;
+    private int size = 50;
     
     public void setRadiusTool()
     {
@@ -72,7 +73,7 @@ public class EditorMap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        map = new Map(camera,mapObject);
+        map = new Map(camera,mapObject, size);
     }
 
     // Update is called once per frame
