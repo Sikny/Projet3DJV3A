@@ -4,23 +4,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Units;
+using UnityEditor.Compilation;
 using UnityEngine.UI;
 using Utility;
 
 public class UnitNames : MonoBehaviour
 {
 
+    
     private TextMeshProUGUI _unitNameText;
 
     private bool _isTouchingUnit;
 
     private GameObject _unitNameBox;
-    
+
+    private Image _icon;
+
+    public Sprite _testIcon;
     // Start is called before the first frame update
     void Start()
     {
         _unitNameText = GameSingleton.Instance.uiManager.unitName;
         _unitNameBox = GameSingleton.Instance.uiManager.unitNameBox;
+        _icon = GameSingleton.Instance.uiManager.image;
     }
   /*  public void EnterUnit()
     {
@@ -35,8 +41,12 @@ public class UnitNames : MonoBehaviour
 
         AbstractUnit unit = GetComponent<AbstractUnit>();
 
-        //Item item = (isUpgrade) ? upgradeManager.GetUnit(isFirstUpgrade) : GetComponent<ItemSlot>().item;;
+        _icon.sprite = GameSingleton.Instance.entityTypeToSprite.GetEntitySprite(unit.GetEntityType());
+        Debug.Log("icon is :" + _icon.name);
         _unitNameText.SetText(unit.GetEntityType().ToString());
+        //_icon = unit.GetIcon();
+        //_icon = _testIcon;
+
         //_unitNameText.SetText(item.description);
         _isTouchingUnit = true;
     }
@@ -67,29 +77,3 @@ public class UnitNames : MonoBehaviour
 
 
 }
-/*
-public class Descriptions : MonoBehaviour
-{
-    private TextMeshProUGUI _description;
-
-    private bool _isTouchingItem;
-
-    private GameObject _descriptionBox;
-
-    public bool isUpgrade;
-    public bool isFirstUpgrade;
-
-    public UpgradeManager upgradeManager;
-
-    private void Start()
-    {
-        _descriptionBox = GameSingleton.Instance.uiManager.descriptionBox;
-        _description = GameSingleton.Instance.uiManager.description;
-    }
-    
-
-
-
-
-}
-*/

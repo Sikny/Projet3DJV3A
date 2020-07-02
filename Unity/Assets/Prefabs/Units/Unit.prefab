@@ -87,3 +87,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85022f33d7e5e9140b447a7d9ea41334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _testIcon: {fileID: 21300000, guid: da444d1a99b793d4395b9dd9bb438753, type: 3}

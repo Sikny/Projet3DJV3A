@@ -39,6 +39,8 @@ namespace Utility {
 
         private Player _player;
 
+        public EntityTypeToSprite entityTypeToSprite;
+
         public string tokenConnection;
 
         public UiManager uiManager;

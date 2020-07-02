@@ -1,6 +1,7 @@
 ﻿using Game;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Utility;
 
 namespace UI {
@@ -11,6 +12,7 @@ namespace UI {
         public GameObject descriptionBox;
         public TextMeshProUGUI description;
         public GameObject unitNameBox;
+        public Image image;
         public TextMeshProUGUI unitName;
         public InventoryManager inventoryUi;
         public Inventory inventory;

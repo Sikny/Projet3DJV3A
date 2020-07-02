@@ -16,6 +16,7 @@ namespace Game {
         public float spawnTime;
         public EntityType entityType;
         public Vector2 position;
+        public Sprite icon;
     }
     public class Level : MonoBehaviour {
         private Shop _shop;
