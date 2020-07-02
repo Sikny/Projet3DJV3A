@@ -8,6 +8,8 @@ using UnityEngine.UIElements;
 public class Map
 {
     public int SIZE = 50;
+    public int money;
+    public string filename;
     private Camera camera;
     private MeshFilter meshFilter;
     private MeshCollider meshCollider;
@@ -18,9 +20,11 @@ public class Map
     
     public float MinHeight { get; set; }
     public float MaxHeight { get; set; }
-    public Map(Camera camera, GameObject map, int size)
+    public Map(Camera camera, GameObject map, int size, int money, string filename)
     {
         this.SIZE = size;
+        this.money = money;
+        this.filename = filename;
         this.map = map;
         this.meshCollider = map.GetComponent<MeshCollider>();
         this.meshFilter = map.GetComponent<MeshFilter>();
@@ -69,12 +73,12 @@ public class Map
          if (Input.GetKeyDown(KeyCode.S))
          {
              Rule r = new Rule(mapVertices, localDifficulty);
-             Rule.saveLevel("test", r);
+             Rule.saveLevel(filename, r);
          }
 
          if (Input.GetKeyDown(KeyCode.L))
          {
-             Rule r = Rule.readLevel("test");
+             Rule r = Rule.readLevel(filename);
              mapVertices = r.loadHeightmap(mapVertices, SIZE);
              localDifficulty = r.loadDifficulty(localDifficulty, SIZE);
              meshFilter.mesh.vertices = mapVertices;

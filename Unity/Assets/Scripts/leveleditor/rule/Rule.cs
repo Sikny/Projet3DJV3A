@@ -138,7 +138,7 @@ public class Rule
     // CALMEZ VOUS
     public static void saveLevel(string file, Rule r)
     {
-        using (Stream stream = File.Open("levels/"+file+".lvl", FileMode.Create))
+        using (Stream stream = File.Open(Application.persistentDataPath +file+".lvl", FileMode.Create))
         {
             var bw = new BinaryWriter(stream);
 
@@ -190,7 +190,7 @@ public class Rule
     }
     public static Rule readLevel(string file)
     {
-        using (Stream stream = File.Open("levels/" + file + ".lvl", FileMode.Open))
+        using (Stream stream = File.Open(Application.persistentDataPath + file + ".lvl", FileMode.Open))
         {
             var br = new BinaryReader(stream);
             Rule r = new Rule();

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -29,8 +30,13 @@ public class EditorMap : MonoBehaviour
     private int amplitudeTool = 10;
     private float minHeight = -10;
     private float maxHeight = 10;
-    private int size = 50;
     
+    public string Size { get; set; }
+    
+    public string Filename { get; set; }
+    
+    public string Money { get; set; }
+
     public void setRadiusTool()
     {
         Slider slider = UIToolRadius.GetComponent<Slider>();
@@ -69,17 +75,32 @@ public class EditorMap : MonoBehaviour
                 break;
         }
     }
-    
-    // Start is called before the first frame update
-    void Start()
+
+    public void generate()
     {
-        map = new Map(camera,mapObject, size);
+        try
+        {
+            map = new Map(camera, mapObject, int.Parse(Size), int.Parse(Money), Filename);
+        }
+        catch
+        {
+            // do something
+        }
+    }
+
+    private void Start()
+    {
+        Size = "50";
+        Money = "200";
     }
 
     // Update is called once per frame
     void Update()
     {
-        map.updateMapProperties( minHeight, maxHeight);
-        map.UpdateMap(currentTool,radiusTool, amplitudeTool);
+        if (map != null)
+        {
+            map.updateMapProperties(minHeight, maxHeight);
+            map.UpdateMap(currentTool, radiusTool, amplitudeTool);
+        }
     }
 }
