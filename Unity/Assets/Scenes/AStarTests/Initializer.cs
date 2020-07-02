@@ -25,6 +25,10 @@ namespace Scenes.AStarTests {
                 debugStr += "\n";
             }
             Debug.Log("Generated grid: " + debugStr);
+            var offset = Vector3.right * (TerrainGrid.Width / 2f) +
+                         Vector3.forward * (TerrainGrid.Height / 2f);
+            terrainMesh.transform.position += offset;
+            Camera.main.transform.position += offset;
         }
 
         private void Update() {

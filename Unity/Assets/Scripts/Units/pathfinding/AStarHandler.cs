@@ -23,7 +23,8 @@ namespace Units.PathFinding {
             
             // Terrain limits
             Vector3 halfVec = Vector3.one / 2;
-            terrainStart.position = halfVec - Vector3.right * terrainOptions.width/2 - Vector3.forward * terrainOptions.height/2;
+            halfVec.y = 0f;
+            terrainStart.position = - Vector3.right * terrainOptions.width/2 - Vector3.forward * terrainOptions.height/2 + halfVec;
             terrainEnd.position = Vector3.right * terrainOptions.width/2 + Vector3.forward * terrainOptions.height/2 - halfVec;
             float castHeight = terrainOptions.maxMountainHeight+2;
 
@@ -43,8 +44,10 @@ namespace Units.PathFinding {
                 xInd++;
             }
             
+            terrainStart.position = halfVec;
+            terrainEnd.position = Vector3.right * terrainOptions.width + Vector3.forward * terrainOptions.height - halfVec;
             
-            
+
             _wayPoints = new List<Vector3>();
 
             _wayPoints = new List<Vector3>();
@@ -127,7 +130,7 @@ namespace Units.PathFinding {
             var lastPoint = targetTransform.position;
             for (var i = 0; i < _wayPoints.Count; i++) {
                 var point = _wayPoints[i];
-                Debug.DrawLine(lastPoint, point, Color.green, 0.1f);
+                Debug.DrawLine(lastPoint, point, Color.green, 1f);
 
                 lastPoint = point;
             }
