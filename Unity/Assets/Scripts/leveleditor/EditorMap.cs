@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,9 @@ public class EditorMap : MonoBehaviour
     public GameObject UIToolAmplitude;
     public GameObject UIMinHeight;
     public GameObject UIMaxHeight;
+
+    public GameObject canvasTool;
+    public GameObject canvasInit;
     
     public Camera camera;
     public GameObject mapObject;
@@ -78,18 +82,45 @@ public class EditorMap : MonoBehaviour
 
     public void generate()
     {
-        try
-        {
-            map = new Map(camera, mapObject, int.Parse(Size), int.Parse(Money), Filename);
-        }
-        catch
-        {
-            // do something
-        }
+            int sizeDemande = int.Parse(Size);
+            int moneyDemande = int.Parse(Money);
+            if (10 > sizeDemande || sizeDemande > 100)
+            {
+                throw new Exception("size invalide" );
+            }
+
+            if (0 > moneyDemande || moneyDemande > 10000)
+            {
+                throw new Exception("money invalide" );
+            }
+
+            if (string.IsNullOrWhiteSpace(Filename))
+            {
+                throw new Exception("filename invalide" );
+            }
+
+            if (File.Exists(Application.persistentDataPath + "/" + Filename + ".lvl"))
+            {
+                map = Map.load(camera, mapObject, Filename);
+            }
+            else
+            {
+                map = new Map(camera, mapObject,sizeDemande ,moneyDemande , Filename);
+            }
+            
+            canvasTool.SetActive(true);
+            canvasInit.SetActive(false);
+       
+    }
+
+    public void save()
+    {
+        map.save();
     }
 
     private void Start()
     {
+        Debug.Log(Application.persistentDataPath);
         Size = "50";
         Money = "200";
     }

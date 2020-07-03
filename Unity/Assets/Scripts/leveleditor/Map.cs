@@ -69,22 +69,31 @@ public class Map
                  }
              }
          }
-
-         if (Input.GetKeyDown(KeyCode.S))
-         {
-             Rule r = new Rule(mapVertices, localDifficulty);
-             Rule.saveLevel(filename, r);
-         }
-
+    /*
          if (Input.GetKeyDown(KeyCode.L))
          {
-             Rule r = Rule.readLevel(filename);
-             mapVertices = r.loadHeightmap(mapVertices, SIZE);
-             localDifficulty = r.loadDifficulty(localDifficulty, SIZE);
-             meshFilter.mesh.vertices = mapVertices;
-             meshCollider.sharedMesh.vertices = mapVertices;
-             meshFilter.mesh.colors = localDifficulty;
-         }
+             
+         }*/
+     }
+
+     public void save()
+     {
+         Rule r = new Rule(mapVertices, localDifficulty, (byte)SIZE, money);
+         Rule.saveLevel(filename, r);
+     }
+
+     [Obsolete]
+     static public Map load(Camera camera, GameObject mapP, string filename)
+     {
+         Rule r = Rule.readLevel(filename);
+         Map map = new Map(camera, mapP, r.size, r.maxBudget, filename);
+         map.mapVertices = r.loadHeightmap(map.mapVertices);
+         map.localDifficulty = r.loadDifficulty(map.localDifficulty);
+         map.meshFilter.mesh.vertices = map.mapVertices;
+         map.meshCollider.sharedMesh.vertices = map.mapVertices;
+         map.meshFilter.mesh.colors = map.localDifficulty;
+
+         return map;
      }
 
      public void UpdateHeighmapRegion(RaycastHit hit,int radiusTool, int amplitude, int mode)
