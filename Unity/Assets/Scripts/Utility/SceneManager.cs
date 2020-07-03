@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Game;
 using Items;
 using Sounds;
@@ -11,7 +12,6 @@ namespace Utility {
     [Serializable]
     public class SceneManager {
         private readonly Dictionary<string, int> _storedScenesIds;
-        private bool _isFirstLoad = true;
         public SceneManager() {
             _storedScenesIds = new Dictionary<string, int> {
                 {"Menu", 1}, {"StoryMode", 2}, {"creator", 3},
@@ -20,15 +20,18 @@ namespace Utility {
         }
         
         public void LoadScene(string sceneName) {
-            if (_storedScenesIds[sceneName] == 1 && !_isFirstLoad)
+            if (_storedScenesIds[sceneName] == 1)
             {
-                _isFirstLoad = false;
-                SoundManager soundManager = GameSingleton.Instance.soundManager;
-                
-                soundManager.StopPlayingAllMusics();
-                soundManager.Play("Menu");
+
+                DOVirtual.DelayedCall(1f, (() => {                
+                            SoundManager soundManager = GameSingleton.Instance.soundManager;
+                            //soundManager.StopPlaying("Level theme");
+                            soundManager.StopPlayingAllMusics();
+                            soundManager.Play("Menu"); }
+                    ));
+
             }
-            if (_storedScenesIds[sceneName] == 2)
+            else if (_storedScenesIds[sceneName] == 2)
             {
                 Shop.Instance.ClearShop();
 
@@ -38,6 +41,8 @@ namespace Utility {
                 SoundManager soundManager = GameSingleton.Instance.soundManager;
                 
                 soundManager.StopPlayingAllMusics();
+
+                //soundManager.StopPlaying("Menu");
                 soundManager.Play("Level theme");
 
             }else if (_storedScenesIds[sceneName] == 5)
@@ -58,6 +63,11 @@ namespace Utility {
                     Shop.Instance.ClearShop();
                     player.gold = 150;
                     player.gamemode = Player.Gamemode.ARCADE;
+                    SoundManager soundManager = GameSingleton.Instance.soundManager;
+
+                    soundManager.StopPlayingAllMusics();
+                    soundManager.Play("Level theme");
+
 
                 }    
                 return; // load somewhere else (need token validation)
