@@ -241,7 +241,7 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  - name: 
+  - name: Menu
     clip: {fileID: 8300000, guid: e61929fe19faaef4c8ae250f6b550333, type: 3}
     volume: 0.02
     pitch: 1
@@ -699,7 +699,7 @@ PrefabInstance:
     - target: {fileID: 6519531714902062876, guid: 65f9c6cc30c64814b83b49a017f1afa5,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6519531714902062876, guid: 65f9c6cc30c64814b83b49a017f1afa5,
         type: 3}
@@ -804,7 +804,7 @@ PrefabInstance:
     - target: {fileID: 6519531715006856772, guid: 65f9c6cc30c64814b83b49a017f1afa5,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.000000059604645
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6519531715199962228, guid: 65f9c6cc30c64814b83b49a017f1afa5,
         type: 3}
@@ -1169,6 +1169,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 52626981739493153}
     m_Modifications:
+    - target: {fileID: 8004838546363136875, guid: e29abdc7691006a44b6f7a1a0bdac6ae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8004838546658651295, guid: e29abdc7691006a44b6f7a1a0bdac6ae,
         type: 3}
       propertyPath: m_textInfo.characterCount

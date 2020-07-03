@@ -19,8 +19,11 @@ public class UnitNames : MonoBehaviour
     private GameObject _unitNameBox;
 
     private Image _icon;
+    
+    private Color _red = Color.red;
+    private Color _green = Color.green;
+    
 
-    public Sprite _testIcon;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,24 +39,21 @@ public class UnitNames : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        Debug.Log("enter unit");
         _unitNameBox.SetActive(true);
 
         AbstractUnit unit = GetComponent<AbstractUnit>();
 
         _icon.sprite = GameSingleton.Instance.entityTypeToSprite.GetEntitySprite(unit.GetEntityType());
-        Debug.Log("icon is :" + _icon.name);
+        
+        var unitType = unit.GetType();
+        _unitNameText.color = unitType == typeof(AiUnit) ? _red : _green;
+        
         _unitNameText.SetText(unit.GetEntityType().ToString());
-        //_icon = unit.GetIcon();
-        //_icon = _testIcon;
-
-        //_unitNameText.SetText(item.description);
         _isTouchingUnit = true;
     }
 
     public void OnMouseExit()
     {
-        Debug.Log("exit unit");
 
         _unitNameBox.SetActive(false);
         _isTouchingUnit = false;

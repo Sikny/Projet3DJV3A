@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game;
+using UI;
 using UnityEngine;
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
@@ -8,7 +9,7 @@ namespace Utility {
     [Serializable]
     public class SceneManager {
         private readonly Dictionary<string, int> _storedScenesIds;
-
+        private bool _isFirstLoad = true;
         public SceneManager() {
             _storedScenesIds = new Dictionary<string, int> {
                 {"Menu", 1}, {"StoryMode", 2}, {"creator", 3},
@@ -17,7 +18,11 @@ namespace Utility {
         }
         
         public void LoadScene(string sceneName) {
-
+            if (_storedScenesIds[sceneName] == 1 && !_isFirstLoad)
+            {
+                _isFirstLoad = false;
+                GameSingleton.Instance.soundManager.Play("Menu");
+            }
             if (_storedScenesIds[sceneName] == 2)
             {
                 GameSingleton.Instance.GetPlayer().gamemode = Player.Gamemode.LEVEL;
@@ -28,6 +33,7 @@ namespace Utility {
                 string token = GameSingleton.Instance.GetPlayer().token;
                 if (string.IsNullOrEmpty(token) || token.Length < 8)
                 {
+                    Popups.instance.Popup("Not connected!", Color.red);
                     Debug.Log("Non-connecté");
                 }
                 else
@@ -36,6 +42,7 @@ namespace Utility {
                 }
                 return; // load somewhere else (need token validation)
             }
+            
             
             UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
         }

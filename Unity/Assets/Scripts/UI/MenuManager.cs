@@ -45,6 +45,7 @@ namespace UI {
                     GameObject password = connectionPanel.transform.Find("PasswordInput").gameObject;
                     InputField passwordIF = password.GetComponent<InputField>();
                     passwordIF.text = "";
+                    Popups.instance.Popup("Wrong identifications!", Color.red);
                 }
                 else
                 {
