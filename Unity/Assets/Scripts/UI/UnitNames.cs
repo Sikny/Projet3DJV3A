@@ -10,8 +10,6 @@ using Utility;
 
 public class UnitNames : MonoBehaviour
 {
-
-    
     private TextMeshProUGUI _unitNameText;
 
     private bool _isTouchingUnit;

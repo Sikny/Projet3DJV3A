@@ -48,6 +48,8 @@ namespace Utility {
         public void NextLevel() {
             if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE)
             {
+                Shop.Instance.ClearShop();
+
                 GameSingleton.Instance.GetPlayer().currentLevelArcade = 
                     (GameSingleton.Instance.GetPlayer().currentLevelArcade + 1) % levelList.LevelCount;
             }

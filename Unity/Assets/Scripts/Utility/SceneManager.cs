@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game;
+using Items;
 using UI;
 using UnityEngine;
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
@@ -25,12 +26,21 @@ namespace Utility {
             }
             if (_storedScenesIds[sceneName] == 2)
             {
-                GameSingleton.Instance.GetPlayer().gamemode = Player.Gamemode.LEVEL;
+                Shop.Instance.ClearShop();
+
+                Player player = GameSingleton.Instance.GetPlayer();
+                player.gold = 100;
+                player.gamemode = Player.Gamemode.LEVEL;
+
                 GameSingleton.Instance.soundManager.Play("Level theme");
 
             }else if (_storedScenesIds[sceneName] == 5)
             {
-                string token = GameSingleton.Instance.GetPlayer().token;
+
+                Player player = GameSingleton.Instance.GetPlayer();
+                
+                string token = player.token;
+                
                 if (string.IsNullOrEmpty(token) || token.Length < 8)
                 {
                     Popups.instance.Popup("Not connected!", Color.red);
@@ -39,6 +49,10 @@ namespace Utility {
                 else
                 {
                     GameSingleton.Instance.tokenManager.CheckToken(token ,"scene.load.freeMode");
+                    Shop.Instance.ClearShop();
+                    player.gamemode = Player.Gamemode.ARCADE;
+
+
                 }
                 return; // load somewhere else (need token validation)
             }

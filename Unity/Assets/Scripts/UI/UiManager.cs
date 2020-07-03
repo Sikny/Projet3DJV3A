@@ -15,13 +15,16 @@ namespace UI {
         public Image image;
         public TextMeshProUGUI unitName;
         public InventoryManager inventoryUi;
-        public Inventory inventory;
+        private Inventory _inventory;
 
         //public UpgradeManager upgradeUI; TODO
         
         private void Start() {
+            _inventory = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
+                ? GameSingleton.Instance.GetPlayer().storyModeInventory
+                : GameSingleton.Instance.GetPlayer().arcadeModeInventory;
             GameSingleton.Instance.uiManager = this;
-            inventory.Load(inventoryUi);
+            _inventory.Load(inventoryUi);
         }
 
         public void ToggleInventory() {

@@ -24,7 +24,9 @@ namespace Items {
 
         public void Start() {
             _player = GameSingleton.Instance.GetPlayer();
-            _inventory = GameSingleton.Instance.uiManager.inventory;
+            _inventory = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
+                ? GameSingleton.Instance.GetPlayer().storyModeInventory
+                : GameSingleton.Instance.GetPlayer().arcadeModeInventory;
             _popup = Popups.instance;
         }
 
