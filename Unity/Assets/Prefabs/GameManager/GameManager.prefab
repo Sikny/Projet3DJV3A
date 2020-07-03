@@ -247,6 +247,12 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: ItemUse
+    clip: {fileID: 8300000, guid: 6b893db8e8707bf499afc77fcc78f47d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!114 &1965247716536981414
 MonoBehaviour:
   m_ObjectHideFlags: 0

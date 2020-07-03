@@ -9,6 +9,7 @@ namespace Items {
         public override void Use()
         {
             base.Use();
+            GameSingleton.Instance.soundManager.Play("ItemUse");
             RemoveFromInventory();
         }
     

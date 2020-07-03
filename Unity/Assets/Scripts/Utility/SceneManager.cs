@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Game;
 using Items;
+using Sounds;
 using UI;
 using UnityEngine;
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
@@ -22,7 +23,10 @@ namespace Utility {
             if (_storedScenesIds[sceneName] == 1 && !_isFirstLoad)
             {
                 _isFirstLoad = false;
-                GameSingleton.Instance.soundManager.Play("Menu");
+                SoundManager soundManager = GameSingleton.Instance.soundManager;
+                
+                soundManager.StopPlayingAllMusics();
+                soundManager.Play("Menu");
             }
             if (_storedScenesIds[sceneName] == 2)
             {
@@ -31,8 +35,10 @@ namespace Utility {
                 Player player = GameSingleton.Instance.GetPlayer();
                 player.gold = 100;
                 player.gamemode = Player.Gamemode.LEVEL;
-
-                GameSingleton.Instance.soundManager.Play("Level theme");
+                SoundManager soundManager = GameSingleton.Instance.soundManager;
+                
+                soundManager.StopPlayingAllMusics();
+                soundManager.Play("Level theme");
 
             }else if (_storedScenesIds[sceneName] == 5)
             {
