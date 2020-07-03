@@ -61,7 +61,7 @@ public class UpgradeManager : MonoBehaviour
             : GameSingleton.Instance.GetPlayer().arcadeModeInventory;
         GameSingleton.Instance.uiManager.ToggleUpgradePanel();
     }
-    private void UpdateGold() {
+    public void UpdateGold() {
         playerGold.SetText(GameSingleton.Instance.GetPlayer().GetGold() + " g");
     }
     private void UpdateCost(int price) {

@@ -50,10 +50,10 @@ namespace Utility {
                 {
                     GameSingleton.Instance.tokenManager.CheckToken(token ,"scene.load.freeMode");
                     Shop.Instance.ClearShop();
+                    player.gold = 150;
                     player.gamemode = Player.Gamemode.ARCADE;
 
-
-                }
+                }    
                 return; // load somewhere else (need token validation)
             }
             
