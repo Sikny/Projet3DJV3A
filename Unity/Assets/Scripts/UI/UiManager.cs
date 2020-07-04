@@ -1,4 +1,5 @@
 ﻿using Game;
+using Terrain;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ namespace UI {
         public GameObject shopPanel;
         public GameObject inventoryPanel;
         public GameObject upgradePanel;
+        public GameObject pausePanel;    
         public GameObject descriptionBox;
         public TextMeshProUGUI description;
         public GameObject unitNameBox;
@@ -46,7 +48,8 @@ namespace UI {
             descriptionBox.SetActive(false);
         }
 
-        public void HideUis() {
+        public void HideUis()
+        {
             descriptionBox.SetActive(false);
             inventoryPanel.SetActive(false);
             shopPanel.SetActive(false);

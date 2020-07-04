@@ -2862,7 +2862,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3095815224864314555}
   m_HandleRect: {fileID: 3095815224864314553}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3172,7 +3172,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3095815223180956894}
   m_HandleRect: {fileID: 3095815223180956893}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3503,7 +3503,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3095815224985226224}
   m_HandleRect: {fileID: 3095815224985226231}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4845,7 +4845,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3095815224999981098}
   m_HandleRect: {fileID: 3095815224999981097}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5964,7 +5964,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3095815224573629727}
   m_HandleRect: {fileID: 3095815224573629726}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7400,7 +7400,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3095815223661562181}
   m_HandleRect: {fileID: 3095815223661562180}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7694,7 +7694,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3095815224453053439}
   m_HandleRect: {fileID: 3095815224453053438}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8697,7 +8697,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3095815224674089560}
   m_HandleRect: {fileID: 3095815224674089567}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -9650,7 +9650,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3095815223245557336}
   m_HandleRect: {fileID: 3095815223245557343}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -12746,13 +12746,13 @@ MonoBehaviour:
   shopPanel: {fileID: 3095815224059158705}
   inventoryPanel: {fileID: 3095815224777121570}
   upgradePanel: {fileID: 8569953419953741236}
+  pausePanel: {fileID: 3095815224313654546}
   descriptionBox: {fileID: 6401904537568397064}
   description: {fileID: 8332041622355089848}
   unitNameBox: {fileID: 8728848005333913192}
   image: {fileID: 8820659955193861373}
   unitName: {fileID: 6912261192123913306}
   inventoryUi: {fileID: 3095815224777121597}
-  inventory: {fileID: 11400000, guid: b7120ce116e92ee4d9d9f6c7f5d23817, type: 2}
 --- !u!114 &7113994883561126791
 MonoBehaviour:
   m_ObjectHideFlags: 0
