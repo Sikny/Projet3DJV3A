@@ -49,23 +49,25 @@ namespace Utility {
             }
         }
 
-        public void NextLevel() {
-            if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE)
+        public void NextLevel()
+        {
+            Player player = GameSingleton.Instance.GetPlayer();
+            if (player.gamemode == Player.Gamemode.ARCADE)
             {
                 Shop.Instance.ClearShop();
 
-                GameSingleton.Instance.GetPlayer().currentLevelArcade = 
-                    (GameSingleton.Instance.GetPlayer().currentLevelArcade + 1) % levelList.LevelCount;
+                player.currentLevelArcade = 
+                    (player.currentLevelArcade + 1) % levelList.LevelCount;
             }
             else
             {
-                if (GameSingleton.Instance.GetPlayer().gold < 50)
-                    GameSingleton.Instance.GetPlayer().gold = 50;
+                if (player.gold < 50)
+                    player.gold = 50;
                 Shop.Instance.ClearShop();
                 GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
                 ShopManager.instance.UpdateGold();
-                GameSingleton.Instance.GetPlayer().currentLevel = 
-                    (GameSingleton.Instance.GetPlayer().currentLevel + 1) % levelList.LevelCount;
+                player.currentLevel = 
+                    (player.currentLevel + 1) % levelList.LevelCount;
             }
         }
 

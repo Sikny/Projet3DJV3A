@@ -106,7 +106,15 @@ namespace Units  {
         }
 
         public override void Kill() {
-            GameSingleton.Instance.GetPlayer().gold += 150;
+
+            
+            Player player = GameSingleton.Instance.GetPlayer();
+            Player.Gamemode playerGamemode = player.gamemode;
+
+            if (playerGamemode == Player.Gamemode.LEVEL)
+                player.gold += 150;
+            else
+                player.arcadeGold += 150;
             base.Kill();
         }
     }

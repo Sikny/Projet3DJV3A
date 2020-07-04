@@ -36,7 +36,6 @@ namespace Utility {
                 Shop.Instance.ClearShop();
 
                 Player player = GameSingleton.Instance.GetPlayer();
-                player.gold = 100;
                 player.gamemode = Player.Gamemode.LEVEL;
                 SoundManager soundManager = GameSingleton.Instance.soundManager;
                 
@@ -61,7 +60,6 @@ namespace Utility {
                 {
                     GameSingleton.Instance.tokenManager.CheckToken(token ,"scene.load.freeMode");
                     Shop.Instance.ClearShop();
-                    player.gold = 150;
                     player.gamemode = Player.Gamemode.ARCADE;
                     SoundManager soundManager = GameSingleton.Instance.soundManager;
 

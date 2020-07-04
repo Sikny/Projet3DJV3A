@@ -4,6 +4,7 @@ using UnityEngine;
 namespace Game {
     public class Player {
         public int gold;
+        public int arcadeGold;
         public int currentLevel;
         public int currentLevelArcade;
         public Gamemode gamemode = Gamemode.LEVEL;
@@ -20,18 +21,16 @@ namespace Game {
 
         public void Load() {
             gold = PlayerPrefs.GetInt("PlayerGold", 100);
+            arcadeGold = PlayerPrefs.GetInt("arcadeGold", 150);
             currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
             currentLevelArcade = PlayerPrefs.GetInt("CurrentLevelArcade", 0);
             goldStartLevel = gold;
             token = PlayerPrefs.GetString("connection.token", "");
         }
 
-        public int GetGold() {
-            return gold;
-        }
-
         public void Save() {
             PlayerPrefs.SetInt("PlayerGold", gold);
+            PlayerPrefs.SetInt("arcadeGold", arcadeGold);
             PlayerPrefs.SetInt("CurrentLevel", currentLevel);
             PlayerPrefs.SetInt("CurrentLevelArcade", currentLevelArcade);
             PlayerPrefs.SetString("connection.token", token);
