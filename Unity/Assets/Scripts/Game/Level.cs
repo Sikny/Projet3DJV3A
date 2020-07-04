@@ -23,8 +23,8 @@ namespace Game {
         private ShopManager _shopManager;
         private SystemUnit _systemUnit;
         [HideInInspector] public AStarHandler aStarHandler;
-        
-        
+
+        public Rule rule;
         public TerrainMeshBuilder terrainBuilder;
         
         [Header("Shop content")]

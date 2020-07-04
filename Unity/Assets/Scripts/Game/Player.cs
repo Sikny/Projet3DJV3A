@@ -42,7 +42,8 @@ namespace Game {
         public enum Gamemode
         {
             LEVEL,
-            ARCADE
+            ARCADE,
+            PERSONNALIZED
         }
     }
     
