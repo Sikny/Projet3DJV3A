@@ -45,6 +45,7 @@ namespace UI {
                     GameObject password = connectionPanel.transform.Find("PasswordInput").gameObject;
                     InputField passwordIF = password.GetComponent<InputField>();
                     passwordIF.text = "";
+                    Popups.instance.Popup("Wrong identifications!", Color.red);
                 }
                 else
                 {
@@ -69,6 +70,10 @@ namespace UI {
                 {
                     registerPanel.gameObject.SetActive(false);
                     background.SetActive(false);
+                }
+                else if (result.Equals("NOK-MAIL-ALREADY-USED"))
+                {
+                    Popups.instance.Popup("Mail is already used!", Color.red);
                 }
                 else
                 {

@@ -2,6 +2,7 @@
 using Items;
 using UI;
 using UnityEngine;
+using Utility;
 
 namespace Game {
     [CreateAssetMenu(fileName = "Inventory", menuName = "ScriptableObject/Inventory")]
@@ -33,8 +34,9 @@ namespace Game {
         }
 
         public void AddItem(Item item) {
-            _inventoryManager.UpdateGold();
-            _shopManager.UpdateGold();
+            GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
+            //_inventoryManager.UpdateGold();
+            ShopManager.instance.UpdateGold();
             var itemType = item.GetType();
 
             if (itemType.IsSubclassOf(typeof(Equipment)) || itemType == typeof(Equipment)) {
@@ -50,28 +52,28 @@ namespace Game {
 
         private void AddConsumable(Consumable item) {
             consumables.Add(item);
-            _inventoryManager.UpdateUiConsumable(item);
+            GameSingleton.Instance.uiManager.inventoryUi.UpdateUiConsumable(item);
         }
 
         private void AddEquipment(Equipment equipment) {
             equipments.Add(equipment);
-            _inventoryManager.UpdateUiEquipment(equipment);
+            GameSingleton.Instance.uiManager.inventoryUi.UpdateUiEquipment(equipment);
         }
 
         private void AddUnit(StoreUnit unit) {
             units.Add(unit);
-            _inventoryManager.UpdateUiUnit(unit);
+            GameSingleton.Instance.uiManager.inventoryUi.UpdateUiUnit(unit);
         }
 
 
         public void RemoveConsumable(Consumable item) {
             consumables.Remove(item);
-            _inventoryManager.RemoveConsumable(item);
+            GameSingleton.Instance.uiManager.inventoryUi.RemoveConsumable(item);
         }
 
         public void RemoveUnit(StoreUnit unit) {
             units.Remove(unit);
-            _inventoryManager.RemoveUnit(unit);
+            GameSingleton.Instance.uiManager.inventoryUi.RemoveUnit(unit);
         }
 
         public void Clear() {

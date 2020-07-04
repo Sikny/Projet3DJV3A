@@ -55,11 +55,13 @@ public class UpgradeManager : MonoBehaviour
     }
 
     public void ToggleUpgradePannel()
-    {
-        _inventory = GameSingleton.Instance.uiManager.inventory;
+    { 
+        _inventory = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
+            ? GameSingleton.Instance.GetPlayer().storyModeInventory
+            : GameSingleton.Instance.GetPlayer().arcadeModeInventory;
         GameSingleton.Instance.uiManager.ToggleUpgradePanel();
     }
-    private void UpdateGold() {
+    public void UpdateGold() {
         playerGold.SetText(GameSingleton.Instance.GetPlayer().GetGold() + " g");
     }
     private void UpdateCost(int price) {

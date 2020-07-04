@@ -84,8 +84,9 @@ namespace UI {
 
             List<AbstractUnit> units = systemUnit.GetUnits();
 
-            Inventory inventory = GameSingleton.Instance.inventory;
-
+            Inventory inventory = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
+                ? GameSingleton.Instance.GetPlayer().storyModeInventory
+                : GameSingleton.Instance.GetPlayer().arcadeModeInventory;
             foreach (var unit in units)
             {
                 EntityType entityType = unit.GetEntityType();

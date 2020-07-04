@@ -12,7 +12,8 @@ namespace Game {
         public int goldStartLevel;
         public int currentSeed;
         public DateTime beginGame;
-        
+        public Inventory storyModeInventory = ScriptableObject.CreateInstance<Inventory>();
+        public Inventory arcadeModeInventory  = ScriptableObject.CreateInstance<Inventory>();
         public Player() {
             Load();
         }
