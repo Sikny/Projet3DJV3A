@@ -52,7 +52,7 @@ public class GenRandomParam : MonoBehaviour
         return levelNew;
     }
 
-    public EntityType softEntityType(Random rand, EntityType type, float difficult)
+    public static EntityType softEntityType(Random rand, EntityType type, float difficult)
     {
         if (rand.NextDouble() > difficult)
         {

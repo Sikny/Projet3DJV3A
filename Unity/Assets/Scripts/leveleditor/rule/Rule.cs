@@ -17,7 +17,7 @@ public class Rule
     char globalDifficulty;
     
     public Dictionary<SeriaVector2, float> mapModifierHeightmap;
-    Dictionary<SeriaVector2, byte> localSpawnDifficulty; //SPEC : to avoid the gen into the castle
+    public Dictionary<SeriaVector2, byte> localSpawnDifficulty; //SPEC : to avoid the gen into the castle
     Dictionary<int, Castle> mapCastlePiecesPlacement;
 
     //TODO

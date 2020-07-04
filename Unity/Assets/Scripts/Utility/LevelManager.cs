@@ -37,7 +37,7 @@ namespace Utility {
             {
                 GameSingleton.Instance.levelManager = this;
                 loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade));
-                loadedLevel.Init(null);
+                loadedLevel.Init();
             }
             else if (player.gamemode == Player.Gamemode.PERSONNALIZED)
             {
@@ -53,7 +53,7 @@ namespace Utility {
                 //GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
                 GameSingleton.Instance.levelManager = this;
                 loadedLevel = Instantiate(levelList.GetLevel(player.currentLevel));
-                loadedLevel.Init(null);
+                loadedLevel.Init();
             }
         }
 
@@ -90,12 +90,10 @@ namespace Utility {
             GameSingleton.Instance.levelManager = this;
 
             Level levelNew = grp.levelBase;
-
             
-            Debug.Log(rule.size);
             loadedLevel = Instantiate(levelNew);
             loadedLevel.rule = rule;
-            loadedLevel.Init(rule);
+            loadedLevel.Init();
             
         }
 
@@ -119,7 +117,7 @@ namespace Utility {
             
             
             loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade-1));
-            loadedLevel.Init(null);
+            loadedLevel.Init();
             
             
 
