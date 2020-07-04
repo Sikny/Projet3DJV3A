@@ -48,7 +48,8 @@ namespace Utility {
         public SoundManager soundManager;
 
         public TokenManager tokenManager;
-        
+
+        public string filename;
         private void Awake() {
             PlayerPrefs.DeleteAll();
             if (_instance != null && _instance != this) {

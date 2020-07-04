@@ -11,7 +11,7 @@ namespace Scenes.AStarTests {
         [SerializeField] private AStarEntity aStarEntity;
 
         private void Awake() {
-            StartCoroutine(terrainMesh.Init(InitAStar));
+            StartCoroutine(terrainMesh.Init(InitAStar, null));
         }
 
         private void InitAStar() {

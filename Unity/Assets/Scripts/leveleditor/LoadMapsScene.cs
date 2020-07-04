@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
 public class LoadMapsScene : MonoBehaviour
 {
     public GameObject file; //Original
 
     public List<GameObject> filesList;
-    
+
     public static string currentSel;
     void Start()
     {
         int nb = 0;
-        DirectoryInfo dir = new DirectoryInfo("levels/");
+        DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath+"/");
         if (!dir.Exists)
         {
             dir.Create();
@@ -43,6 +44,12 @@ public class LoadMapsScene : MonoBehaviour
                 filesList.Add(fileNew);
             }
         }
+    }
+
+    public void loadMap()
+    {
+        GameSingleton.Instance.filename = currentSel;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(6);
     }
 
     void Selectionner(string element)

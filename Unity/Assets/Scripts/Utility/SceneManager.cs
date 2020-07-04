@@ -15,7 +15,7 @@ namespace Utility {
         public SceneManager() {
             _storedScenesIds = new Dictionary<string, int> {
                 {"Menu", 1}, {"StoryMode", 2}, {"creator", 3},
-                {"loadLvl", 4}, {"freeMode", 5}
+                {"loadLvl", 4}, {"freeMode", 5}, {"LevelList",6}
             };
         }
         
@@ -69,6 +69,9 @@ namespace Utility {
 
                 }    
                 return; // load somewhere else (need token validation)
+            }else if (_storedScenesIds[sceneName] == 4)
+            {
+                GameSingleton.Instance.GetPlayer().gamemode = Player.Gamemode.PERSONNALIZED;
             }
             
             

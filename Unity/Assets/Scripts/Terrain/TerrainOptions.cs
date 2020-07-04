@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Terrain {
     public class TerrainOptions : MonoBehaviour {
-        public Rule rules = new Rule();
+        public int seed;
         
         [Tooltip("Number of water areas")]
         public int waterCount;

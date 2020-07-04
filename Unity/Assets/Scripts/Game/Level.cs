@@ -39,9 +39,10 @@ namespace Game {
         private List<PlayerUnit> _playerUnits;
         private bool _levelStarted;
         
-        public void Init() {
+        public void Init(Rule r) {
+            
             _systemUnit = FindObjectOfType<SystemUnit>();
-            StartCoroutine(terrainBuilder.Init(InitAStar));
+            StartCoroutine(terrainBuilder.Init(InitAStar, r));
             
             _shop = Shop.Instance;
             _shop.ClearShop();
