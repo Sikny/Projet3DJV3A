@@ -11,6 +11,7 @@ namespace Game {
         public int currentScore = 0;
         public string token;
         public int goldStartLevel;
+        public Inventory inventoryStartLevel;
         public int currentSeed;
         public DateTime beginGame;
         public Inventory storyModeInventory = ScriptableObject.CreateInstance<Inventory>();
@@ -25,6 +26,7 @@ namespace Game {
             currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
             currentLevelArcade = PlayerPrefs.GetInt("CurrentLevelArcade", 0);
             goldStartLevel = gold;
+            inventoryStartLevel = storyModeInventory;
             token = PlayerPrefs.GetString("connection.token", "");
         }
 

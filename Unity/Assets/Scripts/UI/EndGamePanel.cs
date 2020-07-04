@@ -69,10 +69,17 @@ namespace UI {
                     GameSingleton.Instance.sceneManager.LoadScene("Menu");
                     break;
                 case 1:
-                    int gold = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
-                        ? GameSingleton.Instance.GetPlayer().gold
-                        : GameSingleton.Instance.GetPlayer().arcadeGold;
-                    gold = GameSingleton.Instance.GetPlayer().goldStartLevel;
+                    
+                    Player player = GameSingleton.Instance.GetPlayer();
+                    Player.Gamemode playerGamemode = player.gamemode;
+
+
+                    if (playerGamemode == Player.Gamemode.LEVEL)
+                    {
+                        player.gold = player.goldStartLevel;
+                        player.storyModeInventory = player.inventoryStartLevel;
+                    }
+                    Shop.Instance.ClearShop();
                     GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                     break;
