@@ -82,6 +82,6 @@ public class GenRandomParam : MonoBehaviour
     public void setDefaultGold(Level l)
     {
         
-        GameSingleton.Instance.GetPlayer().gold = l.enemySpawns.Count * 75;
+        //GameSingleton.Instance.GetPlayer().gold = l.enemySpawns.Count * 100;
     }
 }

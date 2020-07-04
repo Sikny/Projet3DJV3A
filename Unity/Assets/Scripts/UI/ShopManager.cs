@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game;
 using Items;
 using TMPro;
 using Units;
@@ -89,7 +90,10 @@ namespace UI {
         }
 
         public void UpdateGold() {
-            goldText.SetText(GameSingleton.Instance.GetPlayer().GetGold() + " g");
+            int gold = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
+                ? GameSingleton.Instance.GetPlayer().gold
+                : GameSingleton.Instance.GetPlayer().arcadeGold;
+            goldText.SetText(gold + " g");
         }
 
         public GameObject fightButton;

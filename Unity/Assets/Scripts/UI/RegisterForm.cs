@@ -31,7 +31,7 @@ namespace UI {
                 errorMessage.text = "Les mots de passe ne correspondent pas";
                 return false;
             }
-            confirmButton.enabled = false;
+            //confirmButton.enabled = false;
             return true;
         }
     }

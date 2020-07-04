@@ -7,7 +7,9 @@ using UnityEngine.UIElements;
 
 public class Map
 {
-    public const int SIZE = 100;
+    public int SIZE = 50;
+    public int money;
+    public string filename;
     private Camera camera;
     private MeshFilter meshFilter;
     private MeshCollider meshCollider;
@@ -18,9 +20,11 @@ public class Map
     
     public float MinHeight { get; set; }
     public float MaxHeight { get; set; }
-    public Map(Camera camera, GameObject map)
+    public Map(Camera camera, GameObject map, int size, int money, string filename)
     {
-
+        this.SIZE = size;
+        this.money = money;
+        this.filename = filename;
         this.map = map;
         this.meshCollider = map.GetComponent<MeshCollider>();
         this.meshFilter = map.GetComponent<MeshFilter>();
@@ -65,22 +69,31 @@ public class Map
                  }
              }
          }
-
-         if (Input.GetKeyDown(KeyCode.S))
-         {
-             Rule r = new Rule(mapVertices, localDifficulty);
-             Rule.saveLevel("test", r);
-         }
-
+    /*
          if (Input.GetKeyDown(KeyCode.L))
          {
-             Rule r = Rule.readLevel("test");
-             mapVertices = r.loadHeightmap(mapVertices, SIZE);
-             localDifficulty = r.loadDifficulty(localDifficulty, SIZE);
-             meshFilter.mesh.vertices = mapVertices;
-             meshCollider.sharedMesh.vertices = mapVertices;
-             meshFilter.mesh.colors = localDifficulty;
-         }
+             
+         }*/
+     }
+
+     public void save()
+     {
+         Rule r = new Rule(mapVertices, localDifficulty, (byte)SIZE, money);
+         Rule.saveLevel(filename, r);
+     }
+
+     [Obsolete]
+     static public Map load(Camera camera, GameObject mapP, string filename)
+     {
+         Rule r = Rule.readLevel(filename);
+         Map map = new Map(camera, mapP, r.size, r.maxBudget, filename);
+         map.mapVertices = r.loadHeightmap(map.mapVertices);
+         map.localDifficulty = r.loadDifficulty(map.localDifficulty);
+         map.meshFilter.mesh.vertices = map.mapVertices;
+         map.meshCollider.sharedMesh.vertices = map.mapVertices;
+         map.meshFilter.mesh.colors = map.localDifficulty;
+
+         return map;
      }
 
      public void UpdateHeighmapRegion(RaycastHit hit,int radiusTool, int amplitude, int mode)

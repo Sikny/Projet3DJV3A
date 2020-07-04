@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game;
 using Items;
 using Terrain;
 using UI;
@@ -73,9 +74,11 @@ namespace Units {
         public void DoClick() {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-           
+            Inventory inventory = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
+                ? GameSingleton.Instance.GetPlayer().storyModeInventory
+                : GameSingleton.Instance.GetPlayer().arcadeModeInventory;
             // Placement d'une unité de l'inventaire
-            if (GameSingleton.Instance.uiManager.inventory.selectedStoreUnit != null
+            if (inventory.selectedStoreUnit != null
                 && Physics.Raycast(ray, out hit, 100f, 1 << 8)) {
                 Vector3 position = new Vector3(Mathf.Floor(hit.point.x)+0.5f, YPos,
                     Mathf.Floor(hit.point.z)+0.5f) ;
@@ -83,10 +86,10 @@ namespace Units {
                 bool isPlaceable = CheckPlaceable();
                 if (isPlaceable)
                 {
-                    StoreUnit unit = GameSingleton.Instance.uiManager.inventory.selectedStoreUnit;
+                    StoreUnit unit = inventory.selectedStoreUnit;
                     SpawnUnit(unit.entityType, playerUnitPrefab, position);
-                    GameSingleton.Instance.uiManager.inventory.RemoveUnit(unit);
-                    GameSingleton.Instance.uiManager.inventory.selectedStoreUnit = null;
+                    inventory.RemoveUnit(unit);
+                    inventory.selectedStoreUnit = null;
                 }
                 else
                 {

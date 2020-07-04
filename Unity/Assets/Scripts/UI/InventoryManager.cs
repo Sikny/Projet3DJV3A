@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game;
 using Items;
 using TMPro;
 using UnityEngine;
@@ -82,7 +83,10 @@ namespace UI {
         }
 
         public void UpdateGold() {
-            goldText.SetText(GameSingleton.Instance.GetPlayer().gold + " g");
+            int gold = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
+                ? GameSingleton.Instance.GetPlayer().gold
+                : GameSingleton.Instance.GetPlayer().arcadeGold;
+            goldText.SetText(gold + " g");
         }
     }
 }

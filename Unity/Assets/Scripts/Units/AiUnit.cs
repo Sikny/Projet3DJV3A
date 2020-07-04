@@ -11,7 +11,8 @@ namespace Units  {
         private float _deltaTime;
         private const float TickAttack = 0.10f; //PARAM OF DIFFICULTY
 
-        public override bool Init(EntityType idType, Entity entityModel, int entityCountP) {
+        public override bool Init(EntityType idType, Entity entityModel, int entityCountP)
+        {
             bool initState = base.Init(idType, entityModel, entityCountP);
             _deltaTime = 0.0f;
             _unitTarget = null;
@@ -102,7 +103,15 @@ namespace Units  {
         }
 
         public override void Kill() {
-            GameSingleton.Instance.GetPlayer().gold += 150;
+
+            
+            Player player = GameSingleton.Instance.GetPlayer();
+            Player.Gamemode playerGamemode = player.gamemode;
+
+            if (playerGamemode == Player.Gamemode.LEVEL)
+                player.gold += 150;
+            else
+                player.arcadeGold += 150;
             base.Kill();
         }
     }
