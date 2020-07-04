@@ -1,5 +1,4 @@
-﻿using System;
-using CustomEvents;
+﻿using CustomEvents;
 using Game;
 using Language;
 using Sounds;
@@ -29,9 +28,6 @@ namespace Utility {
 
         [Space]
         public EndGamePanel endGamePanel;
-        
-        //[Space]
-        //public Inventory inventory;
 
         public StoreUnitList storeUnitList;
         [Space]
@@ -41,7 +37,7 @@ namespace Utility {
 
         public EntityTypeToSprite entityTypeToSprite;
 
-        public string tokenConnection;
+        //public string tokenConnection;
 
         public UiManager uiManager;
 
@@ -50,7 +46,6 @@ namespace Utility {
         public TokenManager tokenManager;
         
         private void Awake() {
-            PlayerPrefs.DeleteAll();
             if (_instance != null && _instance != this) {
                 Destroy(gameObject);
                 return;
@@ -58,6 +53,10 @@ namespace Utility {
             _instance = this;
             DontDestroyOnLoad(gameObject);
             
+#if UNITY_EDITOR
+            PlayerPrefs.DeleteAll();
+#endif
+            soundManager.Init();
             _player = new Player();
             sceneManager = new SceneManager();
             sceneManager.LoadScene("Menu");
@@ -92,19 +91,11 @@ namespace Utility {
         public Player GetPlayer() {
             return _player;
         }
-
-        private bool _gameEnded;
+        
         public void EndGame(int status) { 
-            //if (_gameEnded) return;
-            _gameEnded = true;
             endGamePanel.TypeEndGame = status;
             endGamePanel.gameObject.SetActive(true);
             _player.Save();
-        }
-
-        public void SetGameEnded(bool gameEnded)
-        {
-            _gameEnded = gameEnded;
         }
     
         public void PauseGame() {

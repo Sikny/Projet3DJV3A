@@ -1,5 +1,4 @@
-﻿using TMPro.EditorUtilities;
-using UI;
+﻿using UI;
 using UnityEngine;
 using Utility;
 
@@ -11,7 +10,8 @@ namespace Terrain {
         private UiManager _uiManager;
         private void Awake()
         {
-            _uiManager = GameSingleton.Instance.uiManager;
+            if(GameSingleton.Instance)
+                _uiManager = GameSingleton.Instance.uiManager;
             _cam = Camera.main;
             
         }
@@ -19,7 +19,8 @@ namespace Terrain {
         
         private void Update()
         {
-            if (_uiManager.inventoryPanel.activeSelf || _uiManager.shopPanel.activeSelf || _uiManager.upgradePanel.activeSelf || _uiManager.pausePanel.activeSelf) return ;
+            if(GameSingleton.Instance)
+                if (_uiManager.inventoryPanel.activeSelf || _uiManager.shopPanel.activeSelf || _uiManager.upgradePanel.activeSelf || _uiManager.pausePanel.activeSelf) return ;
             Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
             
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, 1 << 8) ) {

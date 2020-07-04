@@ -96,7 +96,7 @@ namespace Game {
             {
                 _gameEnded = true;
                 GameSingleton.Instance.EndGame(1);    // WIN
-            } else if (_playerUnits.Count == 0) {
+            } else if (_playerUnits.Count == 0 && !_gameEnded) {
                 GameSingleton.Instance.EndGame(0);
             }
             

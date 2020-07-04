@@ -6,8 +6,8 @@ namespace Utility {
      */
     [CreateAssetMenu(fileName = "GameSettings", menuName = "ScriptableObject/GameSettings")]
     public class GameSettings : ScriptableObject {
-        public float soundVolume;
-        public float musicVolume;
+        [Range(0f, 1f)] public float soundVolume;
+        [Range(0f, 1f)] public float musicVolume;
         public Language.Language language;
         public bool invertCameraX;
         public bool invertCameraY;

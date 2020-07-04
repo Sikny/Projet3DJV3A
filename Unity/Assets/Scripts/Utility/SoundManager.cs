@@ -13,7 +13,7 @@ namespace Sounds
         //take game setting volume with gamesingleton.instance.gamesettings.volume 
         public Sound[] sounds;
         private GameSettings _settings;
-        private void Awake()
+        public void Init()
         {
             
             foreach (Sound s in sounds)
@@ -27,13 +27,17 @@ namespace Sounds
             }
         }
 
-        public void Play(string name)
+        public void Play(string soundName)
         {
-            //Debug.Log("PLAYING SOUND: " + name);
-            Sound s = Array.Find(sounds, sound => sound.name == name);
+            #if UNITY_EDITOR
+            Debug.Log("PLAYING SOUND: " + soundName);
+            #endif
+            Sound s = Array.Find(sounds, sound => sound.name == soundName);
             if (s == null)
             {
-                Debug.Log("sound " + name + "does not exist");
+                #if UNITY_EDITOR
+                Debug.LogError("sound " + soundName + "does not exist");
+                #endif
                 return;
             }
             _settings = GameSingleton.Instance.gameSettings;
@@ -42,7 +46,9 @@ namespace Sounds
             else
                 s.source.volume *= _settings.soundVolume;
             
-            //Debug.Log("volume is " + s.source.volume);
+            #if UNITY_EDITOR
+            Debug.Log("volume is " + s.source.volume);
+            #endif
             s.source.Play();
         }
         
