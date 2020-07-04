@@ -10,7 +10,6 @@ namespace Units.PathFinding {
         [SerializeField] private Transform terrainEnd;
         
         private int[][] _grid;
-        public int[][] Grid => _grid;
         private int _gridSize;
 
         private NativeArray<float> _costMatrix;
@@ -31,17 +30,16 @@ namespace Units.PathFinding {
             // INIT GRID
             int xInd = 0, zInd = 0;
             _grid = new int[_gridSize][];
-            RaycastHit hitInfo;
-            for (float x = terrainStart.position.x; x <= terrainEnd.position.x; x++) {
-                _grid[xInd] = new int[_gridSize];
-                for (float z = terrainStart.position.z; z <= terrainEnd.position.z; z++) {
+            for (float z = terrainStart.position.z; z <= terrainEnd.position.z; z++) {
+                _grid[zInd] = new int[_gridSize];
+                for (float x = terrainStart.position.x; x <= terrainEnd.position.x; x++) {
                     Physics.Raycast(new Vector3(x, castHeight, z), Vector3.down,
-                        out hitInfo, 100f, 1 << 8);
-                    _grid[xInd][zInd] = hitInfo.point.y > 0.01f || hitInfo.point.y < -0.01f ? 1 : 0;
-                    zInd++;
+                        out var hitInfo, 100f, 1 << 8);
+                    _grid[zInd][xInd] = hitInfo.point.y > 0.01f || hitInfo.point.y < -0.01f ? 1 : 0;
+                    xInd++;
                 }
-                zInd = 0;
-                xInd++;
+                xInd = 0;
+                zInd++;
             }
             
             terrainStart.position = halfVec;
@@ -80,8 +78,9 @@ namespace Units.PathFinding {
             }
         }
 
-        private int PosToId(Vector3 pos) {
-            return Mathf.RoundToInt(pos.z) * _gridSize + Mathf.RoundToInt(pos.x);
+        private int PosToId(Vector3 pos)
+        {
+            return Mathf.FloorToInt(pos.z) * _gridSize + Mathf.FloorToInt(pos.x);
         }
 
         public void UpdateTransform(Transform unitToMove, Vector3 destination, float unitSpeed) {
@@ -95,10 +94,11 @@ namespace Units.PathFinding {
                 for (var j = 0; j < colsCount; j++) {
                     var sourceIdx = i * colsCount + j;
 
-                    _heuristicMatrix[sourceIdx] = Mathf.Abs(i - Mathf.RoundToInt(destination.z)) +
-                                                 Mathf.Abs(j - Mathf.RoundToInt(destination.x));
+                    _heuristicMatrix[sourceIdx] = Mathf.Abs(i - Mathf.FloorToInt(destination.z)) +
+                                                 Mathf.Abs(j - Mathf.FloorToInt(destination.x));
                 }
             }
+            
             var position = targetTransform.position;
             var job = new PathFindingJob {
                 costMatrix = _costMatrix,
@@ -110,7 +110,7 @@ namespace Units.PathFinding {
                 exploredNodesCount = new NativeArray<int>(1, Allocator.TempJob),
                 bestPath = new NativeList<int>(Allocator.TempJob)
             };
-            
+
             var handler = job.Schedule();
 
             handler.Complete();
@@ -118,7 +118,7 @@ namespace Units.PathFinding {
             _wayPoints.Clear();
             for (var n = 1; n < job.bestPath.Length; n++) {
                 var node = job.bestPath[n];
-                var nodePos = new Vector3(node % _gridSize, targetTransform.position.y, Mathf.FloorToInt(node / (float) _gridSize));
+                var nodePos = new Vector3(node % _gridSize + 0.5f, targetTransform.position.y, Mathf.FloorToInt(node / (float) _gridSize) + 0.5f);
                 _wayPoints.Add(nodePos);
             }
 
