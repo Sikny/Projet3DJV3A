@@ -1,4 +1,6 @@
 ﻿using Game;
+using Items;
+using Terrain;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +11,7 @@ namespace UI {
         public GameObject shopPanel;
         public GameObject inventoryPanel;
         public GameObject upgradePanel;
+        public GameObject pausePanel;    
         public GameObject descriptionBox;
         public TextMeshProUGUI description;
         public GameObject unitNameBox;
@@ -28,6 +31,7 @@ namespace UI {
         }
 
         public void ToggleInventory() {
+            inventoryUi.UpdateGold();
             inventoryPanel.SetActive(!inventoryPanel.activeSelf);
             shopPanel.SetActive(false);
             descriptionBox.SetActive(false);
@@ -35,6 +39,7 @@ namespace UI {
 
         public void ToggleShop()
         {
+            ShopManager.instance.UpdateGold();
             shopPanel.SetActive(!shopPanel.activeSelf);
             inventoryPanel.SetActive(false);
             descriptionBox.SetActive(false);
@@ -42,11 +47,13 @@ namespace UI {
 
         public void ToggleUpgradePanel()
         {
+            UpgradeManager.instance.UpdateGold();
             upgradePanel.SetActive(!upgradePanel.activeSelf);
             descriptionBox.SetActive(false);
         }
 
-        public void HideUis() {
+        public void HideUis()
+        {
             descriptionBox.SetActive(false);
             inventoryPanel.SetActive(false);
             shopPanel.SetActive(false);

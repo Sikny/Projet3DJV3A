@@ -62,7 +62,12 @@ public class UpgradeManager : MonoBehaviour
         GameSingleton.Instance.uiManager.ToggleUpgradePanel();
     }
     public void UpdateGold() {
-        playerGold.SetText(GameSingleton.Instance.GetPlayer().GetGold() + " g");
+        int gold = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
+            ? GameSingleton.Instance.GetPlayer().gold
+            : GameSingleton.Instance.GetPlayer().arcadeGold; 
+        
+
+        playerGold.SetText(gold+ " g");
     }
     private void UpdateCost(int price) {
         cost.SetText("Costs: " + price+"g");
@@ -89,9 +94,19 @@ public class UpgradeManager : MonoBehaviour
 
     public void OnUpgrade(int number)
     {
-        if (GameSingleton.Instance.GetPlayer().GetGold() >= _currentCost)
+        
+        Player player = GameSingleton.Instance.GetPlayer();
+        Player.Gamemode playerGamemode = player.gamemode;
+            
+        int gold  = player.gamemode == Player.Gamemode.LEVEL
+            ? player.gold
+            : player.arcadeGold;
+        if (gold >= _currentCost)
         {
-            GameSingleton.Instance.GetPlayer().gold -= _currentCost;
+            if (playerGamemode == Player.Gamemode.LEVEL)
+                player.gold -= _currentCost;
+            else
+                player.arcadeGold -= _currentCost;
             StoreUnit upgradedUnit = (number == 1) ? _unit.upgrades[0] : _unit.upgrades[1];
             Popups.instance.Popup("Upgraded " + _unit.name + " to " + upgradedUnit.name);
             _inventory.RemoveUnit(_unit);
