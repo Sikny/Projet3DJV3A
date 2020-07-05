@@ -28,6 +28,7 @@ namespace Units {
         public const float YPos = 0.5f;
         private UiManager _uiManager;
 
+        private bool _uiActivated;
         public bool isRunning;
 
         public void SetRunning(bool run)
@@ -75,6 +76,20 @@ namespace Units {
         }
         
         public void DoClick() {
+            if (!_uiManager && GameSingleton.Instance && GameSingleton.Instance.uiManager) {
+                _uiManager = GameSingleton.Instance.uiManager;
+            }
+            else if (_uiManager)
+            {
+                if (_uiManager.inventoryPanel.activeSelf || _uiManager.shopPanel.activeSelf ||
+                    _uiManager.upgradePanel.activeSelf || _uiManager.pausePanel.activeSelf ||
+                    GameSingleton.Instance.endGamePanel.winMessage.IsActive() ||
+                    GameSingleton.Instance.endGamePanel.loseMessage.IsActive()) _uiActivated = true;
+                else
+                    _uiActivated = false;
+            }
+
+
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             Inventory inventory = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
@@ -87,7 +102,7 @@ namespace Units {
                     Mathf.Floor(hit.point.z)+0.5f) ;
 
                 bool isPlaceable = CheckPlaceable();
-                if (isPlaceable)
+                if (isPlaceable && !_uiActivated)
                 {
                     StoreUnit unit = inventory.selectedStoreUnit;
                     SpawnUnit(unit.entityType, playerUnitPrefab, position);
@@ -103,33 +118,31 @@ namespace Units {
             
             // Fight start
             if (!isRunning) return;
-            if (!_uiManager && GameSingleton.Instance && GameSingleton.Instance.uiManager) {
-                _uiManager = GameSingleton.Instance.uiManager;
-            }
-            else if(_uiManager)
-                if (_uiManager.inventoryPanel.activeSelf || _uiManager.shopPanel.activeSelf || _uiManager.upgradePanel.activeSelf || _uiManager.pausePanel.activeSelf || GameSingleton.Instance.endGamePanel.winMessage.IsActive() || GameSingleton.Instance.endGamePanel.loseMessage.IsActive()) return ;
-            // Allied Unit selection
+            if (_uiActivated) return;
+             // Allied Unit selection
             if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
             {
 
                 if (UnitLibData.selectedUnit != null)
                 {
-                    int count = 0;
                     foreach (var entity in UnitLibData.selectedUnit.entities)
                     {
-                        if (count > UnitLibData.selectedUnit.entities.Length)
-                            break;
-                        count++;
+                        if (entity == null)
+                        {
+                            continue;
+                        }
+
                         entity.entityRenderer.material = defaultMaterial;
                     }   
                 }
                 UnitLibData.selectedUnit = hit.transform.GetComponentInParent<PlayerUnit>();
-                int count2 = 0;
                 foreach (var entity in UnitLibData.selectedUnit.entities)
                 {
-                    if (count2 > UnitLibData.selectedUnit.entities.Length)
-                        break;
-                    count2++;
+                    if (entity == null)
+                    {
+                        continue;
+                    }
+
                     entity.entityRenderer.material = selectedMaterial;
                 }
 

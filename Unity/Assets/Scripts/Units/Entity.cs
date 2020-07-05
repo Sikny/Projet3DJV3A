@@ -17,7 +17,8 @@ namespace Units {
         public GameObject notEffectiveHitParticles;
 
         public WeaponAnimator weaponAnimator;
-
+        [HideInInspector]
+        public bool isDead;
         public AStarEntity aStarEntity;
         
         private void Awake() {
@@ -36,7 +37,9 @@ namespace Units {
             return _life;
         }
 
-        private void KillEntity() {
+        private void KillEntity()
+        {
+            isDead = true;
             Destroy(gameObject);
         }
 
