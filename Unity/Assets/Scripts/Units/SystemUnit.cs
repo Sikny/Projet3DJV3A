@@ -111,7 +111,7 @@ namespace Units {
                 }
                 else
                 {
-                    Popups.instance.Popup("Unit is not placeable here, please try somewhere else", Color.red);
+                    Popups.instance.PopupTop("Unit is not placeable here, please try somewhere else", Color.red);
                 }
 
             }

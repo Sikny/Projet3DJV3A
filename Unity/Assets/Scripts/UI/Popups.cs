@@ -7,7 +7,7 @@ namespace UI {
     public class Popups : MonoBehaviour
     {
         public TextMeshProUGUI popupText;
-
+        public TextMeshProUGUI topPopupText;
         public Color defaultColor = Color.yellow;
 
         #region Singleton
@@ -15,7 +15,6 @@ namespace UI {
 
         private void Awake()
         {
-            // TODO INIT IN GAME SINGLETON
             if (instance != null)
             {
                 #if UNITY_EDITOR
@@ -32,7 +31,7 @@ namespace UI {
             popupText.color = color;
             popupText.SetText(content);
             popupText.gameObject.SetActive(true);
-            StartCoroutine(DelayCorouting(3));
+            StartCoroutine(DelayCorouting(3,popupText));
         }
     
         public void Popup(String content)
@@ -40,14 +39,32 @@ namespace UI {
             popupText.color = defaultColor;
             popupText.SetText(content);
             popupText.gameObject.SetActive(true);
-            StartCoroutine(DelayCorouting(3));
+            StartCoroutine(DelayCorouting(3,popupText));
+        }
+        
+        public void PopupTop(String content, Color color)
+        {
+            topPopupText.color = color;
+            topPopupText.SetText(content);
+            topPopupText.gameObject.SetActive(true);
+            StartCoroutine(DelayCorouting(3,topPopupText));
+        }
+    
+        public void PopupTop(String content)
+        {
+            topPopupText.color = defaultColor;
+            topPopupText.SetText(content);
+            topPopupText.gameObject.SetActive(true);
+            StartCoroutine(DelayCorouting(3,topPopupText));
         }
 
-        IEnumerator DelayCorouting(int seconds)
+        IEnumerator DelayCorouting(int seconds, TextMeshProUGUI text)
         {
             yield return new WaitForSeconds(seconds);
         
-            popupText.gameObject.SetActive(false);
+            text.gameObject.SetActive(false);
         }
+        
+        
     }
 }
