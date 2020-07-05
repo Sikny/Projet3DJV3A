@@ -102,14 +102,14 @@ namespace Units {
                     Mathf.Floor(hit.point.z)+0.5f) ;
 
                 bool isPlaceable = CheckPlaceable();
-                if (isPlaceable && !_uiActivated)
+                if (isPlaceable)
                 {
                     StoreUnit unit = inventory.selectedStoreUnit;
                     SpawnUnit(unit.entityType, playerUnitPrefab, position);
                     inventory.RemoveUnit(unit);
                     inventory.selectedStoreUnit = null;
                 }
-                else
+                else if(_uiActivated)
                 {
                     Popups.instance.Popup("Unit is not placeable here, please try somewhere else", Color.red);
                 }

@@ -79,8 +79,9 @@ namespace Units.PathFinding {
             }
         }
 
-        private int PosToId(Vector3 pos)
-        {
+        private int PosToId(Vector3 pos) {
+            if (pos.x < 0) pos.x = 0;
+            if (pos.z < 0) pos.z = 0;
             return Mathf.FloorToInt(pos.z) * _gridSize + Mathf.FloorToInt(pos.x);
         }
 

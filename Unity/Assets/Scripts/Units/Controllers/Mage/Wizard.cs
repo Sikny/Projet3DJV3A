@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Terrain;
+using UnityEngine;
 using Utility;
 
 namespace Units.Controllers.Mage {
@@ -35,21 +36,36 @@ namespace Units.Controllers.Mage {
         }
 
         private bool Move(bool isRemoted, AbstractUnit target, Vector3 positionTarget) {
-            if (target == null) return false;
+            if (!isRemoted && target == null) return false;
 
-            if (isRemoted) {
-                int ind = 0;
-                for (int x = -1; x <= 1; x++) {
-                    for (int y = -1; y <= 1; y++) {
-                        Vector3 position = positionTarget + Vector3.right * x + Vector3.forward * y;
-                        if (body.entities[ind] == null) continue;
-                        if (body.entities[ind++].aStarEntity.MoveTo(position, GameSingleton.Instance.aStarHandler)) {
-                            body.SetPosition(positionTarget);
-                        }
+            int ind = 0;
+            if (!isRemoted) {
+                Entity entityTarget = GetFirstLivingEntity();
+                if (entityTarget == null) return false;
+                if (Vector3.Distance(entityTarget.transform.position, target.GetPosition()) <= OptimalDistance) {
+                    Vector3 destination = TerrainGrid.Instance.GetClosestValidPosition(entityTarget.transform.position);
+                    if (destination.x > -0.1f) {    // if < 0 not valid
+                        LockPosition(destination);
                     }
                 }
             }
-            else {
+
+            bool isOnDest = false;
+        
+            for (int x = -1; x <= 1; x++) {
+                for (int y = -1; y <= 1; y++) {
+                    if (body.entities[ind] != null) {
+                        Vector3 position = positionTarget + Vector3.right * x + Vector3.forward * y;
+                        if (body.entities[ind].aStarEntity.MoveTo(position, GameSingleton.Instance.aStarHandler)) {
+                            body.SetPosition(positionTarget);
+                            isOnDest = true;
+                        }
+                    }
+                    ind++;
+                }
+            }
+            
+            /*else {
                 Vector3 last = body.GetPosition();
                 Vector3 posTarget = target.GetPosition();
                 if (Vector3.Distance(last, posTarget) <= OptimalDistance - 1f) {
@@ -64,8 +80,8 @@ namespace Units.Controllers.Mage {
                     // Ok
                     _canShoot = true;
                 }
-            }
-            return false;
+            }*/
+            return isOnDest;
         }
     }
 }
