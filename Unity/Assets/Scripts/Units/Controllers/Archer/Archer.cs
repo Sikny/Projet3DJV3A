@@ -1,5 +1,4 @@
-﻿using Units.PathFinding;
-using UnityEngine;
+﻿using UnityEngine;
 using Utility;
 using Random = UnityEngine.Random;
 
@@ -54,18 +53,18 @@ namespace Units.Controllers.Archer {
                 Vector3 last = body.GetPosition();
                 Vector3 posTarget = positionTarget;
                 
-                //body.SetPosition(Vector3.MoveTowards(last, posTarget, getVitessUnit()));
+                body.transform.position = Vector3.MoveTowards(last, posTarget, getVitessUnit());
                 _canShoot = true;
             }
             else {
                 Vector3 last = body.GetPosition();
                 Vector3 posTarget = target.GetPosition();
                 if (Vector3.Distance(last, posTarget) <= OptimalDistance - 0.2f) {
-                    body.SetPosition(Vector3.MoveTowards(last, posTarget, -getVitessUnit()));
+                    body.transform.position = Vector3.MoveTowards(last, posTarget, -getVitessUnit());
                     _canShoot = false;
                 }
                 else if (Vector3.Distance(last, posTarget) >= OptimalDistance + 0.2f) {
-                    body.SetPosition(Vector3.MoveTowards(last, posTarget, getVitessUnit()));
+                    body.transform.position = Vector3.MoveTowards(last, posTarget, getVitessUnit());
                     _canShoot = false;
                 }
                 else {
