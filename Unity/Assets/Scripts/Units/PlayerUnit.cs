@@ -34,7 +34,7 @@ namespace Units {
             float coef = GetEfficientCoef(this, anotherUnit);
             int efficientCoef = GetEfficiencyType(coef);
 
-            if (anotherUnit.GetNumberAlive() > 0) {
+            if (anotherUnit.GetNumberAlive() > 1) {
                 int indexEntityDefense = Random.Range(0, entityCount);
                 Entity entityDefense = anotherUnit.GetEntity(indexEntityDefense);
 
@@ -50,13 +50,13 @@ namespace Units {
                 }
             }
 
-            /*else if(anotherUnit.GetNumberAlive() == 1) {
+            else if(anotherUnit.GetNumberAlive() == 1) {
                 if (entityAttack != null) {
                     entityAttack.Attack(anotherUnit.GetEntity(0), -100, efficientCoef);
                     anotherUnit.PopEntity(0); // Le leader est attrapé
                     unitTarget = null; //important pour indiquer à l'IA de commencer de nouvelles recherches
                 }
-            }*/
+            }
         }
 
         private AiUnit GuessTheBestUnitToTarget() {
