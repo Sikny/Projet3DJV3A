@@ -17,7 +17,7 @@ namespace Units {
         [HideInInspector] public List<AbstractUnit> units = new List<AbstractUnit>();
 
 
-        /** Données de l'ancien système nécessaire aux unités*/
+        /* Données de l'ancien système nécessaire aux unités */
         public Camera cam;
         public LayerMask groundMask;
         public float rotationSpeed = 300f;
@@ -46,9 +46,9 @@ namespace Units {
         }
 
         public Transform SpawnUnit(EntityType unitType, AbstractUnit unit, Vector3 position) {
-            var newUnit = Instantiate(unit);
-            newUnit.SetPosition(position);
+            var newUnit = Instantiate(unit, position, Quaternion.identity);
             newUnit.Init(unitType, entityDict.GetEntityType(unitType), sizeUnit);
+            newUnit.SetPosition(position);
             units.Add(newUnit);
             UnitLibData.units = units;
             return newUnit.transform;
@@ -60,10 +60,9 @@ namespace Units {
             
             foreach (var cell in cursor.cursorCells)
             {
-                if (cell.posY > 1 || cell.posY <= -0.4)
+                if (cell.posY > 0.1f || cell.posY <= -0.1f)
                     return false;
             }
-
             return true;
         }
 
@@ -71,6 +70,7 @@ namespace Units {
         {
             return units;
         }
+        
         public void DoClick() {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -103,7 +103,7 @@ namespace Units {
             // Allied Unit selection
             if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
             {
-                UnitLibData.selectedUnit = hit.transform.GetComponent<PlayerUnit>();
+                UnitLibData.selectedUnit = hit.transform.GetComponentInParent<PlayerUnit>();
             }
             else if (UnitLibData.selectedUnit != null)
             {

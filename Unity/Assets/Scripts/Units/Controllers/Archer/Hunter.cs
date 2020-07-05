@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Units;
-using Units.controller.Archer;
+using Units.Controllers.Archer;
 using UnityEngine;
 
 public class Hunter : Archer

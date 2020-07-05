@@ -1,6 +1,4 @@
 ﻿using Game;
-using Items;
-using Terrain;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,10 +21,10 @@ namespace UI {
         //public UpgradeManager upgradeUI; TODO
         
         private void Start() {
+            GameSingleton.Instance.uiManager = this;
             _inventory = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
                 ? GameSingleton.Instance.GetPlayer().storyModeInventory
                 : GameSingleton.Instance.GetPlayer().arcadeModeInventory;
-            GameSingleton.Instance.uiManager = this;
             _inventory.Load(inventoryUi);
         }
 

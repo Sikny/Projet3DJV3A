@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Terrain;
 using Unity.Collections;
 using Unity.Jobs;
@@ -83,8 +84,9 @@ namespace Units.PathFinding {
             return Mathf.FloorToInt(pos.z) * _gridSize + Mathf.FloorToInt(pos.x);
         }
 
-        public void UpdateTransform(Transform unitToMove, Vector3 destination, float unitSpeed) {
+        public bool UpdateTransform(Transform unitToMove, Vector3 destination, float unitSpeed) {
             Transform targetTransform = unitToMove.transform;
+            bool isAtDestination = false;
             var linesCount = _grid.Length;
             var colsCount = _grid[0].Length;
             var costMatrixWidth = linesCount * colsCount;
@@ -127,6 +129,7 @@ namespace Units.PathFinding {
             job.bestPath.Dispose();
 
             // Show Debug Path
+            #if UNITY_EDITOR
             var lastPoint = targetTransform.position;
             for (var i = 0; i < _wayPoints.Count; i++) {
                 var point = _wayPoints[i];
@@ -134,28 +137,29 @@ namespace Units.PathFinding {
 
                 lastPoint = point;
             }
+            #endif
 
             // Move Target
             if (_wayPoints.Count > 0) {
                 var point = _wayPoints[0];
                 position = targetTransform.position;
-                var vectorToTarget = (point - position);
+                var vectorToTarget = point - position;
                 var distanceToTarget = vectorToTarget.magnitude;
 
                 if (distanceToTarget <= Time.deltaTime * unitSpeed) {
                     targetTransform.position = point;
                     _wayPoints.RemoveAt(0);
+                    isAtDestination = true;
                 }
                 else {
                     targetTransform.position += Time.deltaTime * unitSpeed * UnitLibData.speed * vectorToTarget / distanceToTarget;
                     //unitToMove.SetPosition(unitToMove.transform.position);
-
                     //_targetRotation = Quaternion.LookRotation(vectorToTarget, Vector3.up);
                 }
             }
-
             /*targetTransform.rotation =
                 Quaternion.RotateTowards(targetTransform.rotation, _targetRotation, rotateSpeed - Time.deltaTime);*/
+            return isAtDestination;
         }
     }
 }

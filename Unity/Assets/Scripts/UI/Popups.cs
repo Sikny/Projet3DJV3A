@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
-using Game;
 using TMPro;
 using UnityEngine;
-using Utility;
 
 namespace UI {
     public class Popups : MonoBehaviour
@@ -13,24 +11,22 @@ namespace UI {
         public Color defaultColor = Color.yellow;
 
         #region Singleton
-    
         public static Popups instance;
-    
-    
+
         private void Awake()
         {
+            // TODO INIT IN GAME SINGLETON
             if (instance != null)
             {
+                #if UNITY_EDITOR
                 Debug.Log("Several instances");
+                #endif
                 return;
             }
             instance = this;
         }
-
         #endregion
-
-
-
+        
         public void Popup(String content, Color color)
         {
             popupText.color = color;

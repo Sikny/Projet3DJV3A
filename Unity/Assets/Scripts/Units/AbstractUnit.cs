@@ -1,13 +1,10 @@
 ﻿using System;
-using Items;
-using Units.controller.Archer;
 using Units.Controllers;
+using Units.Controllers.Archer;
 using Units.Controllers.Mage;
 using Units.Controllers.Soldier;
 using Units.utils;
 using UnityEngine;
-using UnityEngine.UI;
-using Utility;
 
 namespace Units {
     public abstract class AbstractUnit : MonoBehaviour {
@@ -15,33 +12,26 @@ namespace Units {
         public Entity[] entities;
         protected Vector3 position;
         public Vector3 targetPosition;
+        protected Transform colliderObjectTransform;
 
-        protected AbstractUnit _unitTarget;
+        protected AbstractUnit unitTarget;
 
         // The interaction controller (zombie, bowman, giant...)
         public Controller brain;
-        private int idBrain;
-        private EntityNative native;
+        private EntityNative _native;
         private EntityType _entityType;
-        protected Vector3 velocity;
-        
+
         public bool isMoving;
-        protected bool isTurning;
-        /**
-         * Utile pour savoir si le leader doit être attrapé
-         */
+
+        /* Utile pour savoir si le leader doit être attrapé */
         protected int livingEntityCount;
 
-        // On peu imaginer que les ennemis vont moins vite
-        protected float speedEntity;
-
-        protected Rigidbody rigidBody;
 		public Material circleMaterial;
 		private Effect[] effect = new Effect[16]; // max
 
 
         //private EquipmentEffect[] _equipmentEffects = new EquipmentEffect[16];
-        private Equipment _currentEquipment;
+        //private Equipment _currentEquipment;
         protected bool initialized;
         
 		public virtual bool Init(EntityType idType,Entity entityModel, int entityCountP) {
@@ -49,9 +39,7 @@ namespace Units {
             entityCount = entityCountP;
             livingEntityCount = entityCountP;
             entities = new Entity[entityCountP];
-            
-            velocity = new Vector3(0.0f,0.0f,0.0f);
-            
+
             Vector3 entityScale = entityModel.transform.localScale;
             
             int counterInstance = 0;
@@ -67,11 +55,12 @@ namespace Units {
                 }
             }
 
-            BoxCollider col = gameObject.AddComponent<BoxCollider>();
+            GameObject colliderObj = new GameObject("Collider");
+            colliderObj.layer = gameObject.layer;
+            colliderObj.transform.SetParent(transform);
+            BoxCollider col = colliderObj.AddComponent<BoxCollider>();
             col.size = new Vector3(sqrtEntityCount, 1, sqrtEntityCount);
-            rigidBody = gameObject.AddComponent<Rigidbody>();
-            rigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-            rigidBody.constraints = RigidbodyConstraints.FreezePositionY|RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ ;
+            colliderObjectTransform = colliderObj.transform;
 
             for (int i = 0; i < effect.Length; i++)
             {
@@ -86,114 +75,124 @@ namespace Units {
         // Init of unit's controller
         private Controller GetControllerFromId(EntityType id)
         {
-            this.idBrain = (int) id;
             switch (id) 
             {
-                // Lister ici les controlleurs possibles
+                // Lister ici les controllers possibles
                 case EntityType.Soldier:
-                    native = EntityNative.Soldier;
+                    _native = EntityNative.Soldier;
                     _entityType = EntityType.Soldier;
                     return new Soldier(this);
                 case EntityType.Archer:
-                    native = EntityNative.Archer;
+                    _native = EntityNative.Archer;
                     _entityType = EntityType.Archer;
                     return new Archer(this);
                 case EntityType.Mage:
-                    native = EntityNative.Mage;
+                    _native = EntityNative.Mage;
                     _entityType = EntityType.Mage;
                     return new Wizard(this);
                 case EntityType.Spearman:
-                    native = EntityNative.Soldier;
+                    _native = EntityNative.Soldier;
                     _entityType = EntityType.Spearman;
                     return new Spearman(this);
                 case EntityType.Knight:
-                    native = EntityNative.Soldier;
+                    _native = EntityNative.Soldier;
                     _entityType = EntityType.Knight;
                     return new Knight(this);
                 case EntityType.WhiteKnight:
-                    native = EntityNative.Soldier;
+                    _native = EntityNative.Soldier;
                     _entityType = EntityType.WhiteKnight;
                     return new WhiteKnight(this);
                 case EntityType.Horseman:
-                    native = EntityNative.Soldier;
+                    _native = EntityNative.Soldier;
                     _entityType = EntityType.Horseman;
                     return new Horseman(this);
                 case EntityType.Executionist:
-                    native = EntityNative.Mage;
+                    _native = EntityNative.Mage;
                     _entityType = EntityType.Executionist;
                     return new Executionist(this);
                 case EntityType.WhiteMage:
-                    native = EntityNative.Mage;
+                    _native = EntityNative.Mage;
                     _entityType = EntityType.WhiteMage;
                     return new WhiteMage(this);
                 case EntityType.BlackMage:
-                    native = EntityNative.Mage;
+                    _native = EntityNative.Mage;
                     _entityType = EntityType.BlackMage;
                     return new BlackMage(this);
                 case EntityType.Demonist:
-                    native = EntityNative.Mage;
+                    _native = EntityNative.Mage;
                     _entityType = EntityType.Demonist;
                     return new Demonist(this);
                 case EntityType.RedMage:
-                    native = EntityNative.Mage;
+                    _native = EntityNative.Mage;
                     _entityType = EntityType.RedMage;
                     return new RedMage(this);
                 case EntityType.Bard:
-                    native = EntityNative.Mage;
+                    _native = EntityNative.Mage;
                     _entityType = EntityType.Bard;
                     return new Bard(this);
                 case EntityType.Arbalist:
-                    native = EntityNative.Archer;
+                    _native = EntityNative.Archer;
                     _entityType = EntityType.Arbalist;
                     return new Arbalist(this);
                 case EntityType.Hunter:
-                    native = EntityNative.Archer;
+                    _native = EntityNative.Archer;
                     _entityType = EntityType.Hunter;
                     return new Hunter(this);
                 case EntityType.MachineArc:
-                    native = EntityNative.Archer;
+                    _native = EntityNative.Archer;
                     _entityType = EntityType.MachineArc;
                     return new MachineArc(this);
                 case EntityType.Catapultist:
-                    native = EntityNative.Archer;
+                    _native = EntityNative.Archer;
                     _entityType = EntityType.Catapultist;
                     return new Catapultist(this);
                 case EntityType.Sniper:
-                    native = EntityNative.Archer;
+                    _native = EntityNative.Archer;
                     _entityType = EntityType.Sniper;
                     return new Sniper(this);
-                
-
             }
-
             return null;
         }
 
-        protected static float GetEfficientCoef(AbstractUnit from, AbstractUnit to)
-        {
-            float[,] matrixEfficient = new float[,]
-            {
-                {1.0f, 1.25f, 0.75f},
-                {0.75f, 1.0f, 1.25f},
-                {1.25f, 0.75f, 1.0f}
-            };
-
-            return matrixEfficient[(int)from.native, (int)to.native];
+        protected int GetEfficiencyType(float efficientCoef) {
+            int res = 0;
+            //display particule on anotherUnit (targeted unit) 
+            if (Math.Abs(efficientCoef - 1f) < 0.001f) {
+                return res;
+                //attack is neutral gray
+            }
+            else if (efficientCoef < 1f) {
+                res = -1;
+                //attack is inefficient red 
+            }
+            else {
+                res = 1;
+                //attack is efficient green 
+            }
+            return res;
         }
 
-        public void OnCollisionEnter(Collision c)
+        protected static float GetEfficientCoef(AbstractUnit from, AbstractUnit to) {
+            var matrixEfficient = new float[3][];
+            matrixEfficient[0] = new [] {1.0f, 1.25f, 0.75f};
+            matrixEfficient[1] = new [] {0.75f, 1.0f, 1.25f};
+            matrixEfficient[2] = new [] {1.25f, 0.75f, 1.0f};
+            return matrixEfficient[(int)from._native][(int)to._native];
+        }
+
+        /*public void OnCollisionEnter(Collision c)
         {
-            if (c.gameObject.layer == 9 || c.gameObject.layer == 10 )  
+            if (c.gameObject.layer == 9 || c.gameObject.layer == 10)  
             {
                 isMoving = false;
                 targetPosition = transform.position;
             }
-        }
+        }*/
 
 
         public void SetPosition(Vector3 pos) {
             position = pos;
-            transform.position = pos;
+            colliderObjectTransform.position = pos;
         }
 
         public abstract void Attack(AbstractUnit anotherUnit, float damage);
@@ -207,7 +206,6 @@ namespace Units {
         public Vector3 GetPosition() {
             return position;
         }
-        
 
         protected void UpdateGameObject()
         {
@@ -234,7 +232,7 @@ namespace Units {
             effect[idEffect] = new Effect(idEffect, level, timeout);
         }
         
-        public void AddEquipment(int idEffect, int level, Equipment equipment)
+        /*public void AddEquipment(int idEffect, int level, Equipment equipment)
         {
             //effect[idEffect] = new Effect(idEffect, level);
             //add equipment to unit
@@ -243,15 +241,13 @@ namespace Units {
               //  GameSingleton.Instance.inventory.AddItem(equipment); 
             _currentEquipment = equipment;
             //_equipmentEffects[idEffect] = new EquipmentEffect(idEffect, level);
-        }
-
-
+        }*/
+        
         public EntityType GetEntityType()
         {
             return _entityType;
         }
-
-
+        
         protected void UpdateTimeoutEffects()
         {
             for (int i = 0; i < effect.Length; i++)

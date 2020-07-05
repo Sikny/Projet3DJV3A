@@ -67,8 +67,8 @@ namespace Terrain {
             }
 
             BuildTerrain();
-            waterObject.transform.localScale = new Vector3(terrainOptions.width - 0.0001f,
-                waterObject.localScale.y, terrainOptions.height - 0.0001f);
+            waterObject.transform.localScale = new Vector3(terrainOptions.width - 0.001f,
+                waterObject.localScale.y, terrainOptions.height - 0.001f);
             yield return null;
             action();
         }
@@ -88,6 +88,7 @@ namespace Terrain {
                 meshObj.transform.parent = transform;
                 if (terrainSide == TerrainSide.Top) {
                     var terrainRaycaster = meshObj.AddComponent<TerrainRaycaster>();
+                    terrainRaycaster.Init();
                     terrainRaycaster.width = terrainOptions.width;
                     terrainRaycaster.height = terrainOptions.height;
                 }

@@ -8,18 +8,18 @@ namespace Terrain {
         public int height;
         public int width;
         private UiManager _uiManager;
-        private void Awake()
-        {
-            if(GameSingleton.Instance)
-                _uiManager = GameSingleton.Instance.uiManager;
-            _cam = Camera.main;
-            
-        }
         
+        public void Init()
+        {
+            _cam = Camera.main;
+        }
         
         private void Update()
         {
-            if(GameSingleton.Instance)
+            if (!_uiManager && GameSingleton.Instance && GameSingleton.Instance.uiManager) {
+                _uiManager = GameSingleton.Instance.uiManager;
+            }
+            else if(_uiManager)
                 if (_uiManager.inventoryPanel.activeSelf || _uiManager.shopPanel.activeSelf || _uiManager.upgradePanel.activeSelf || _uiManager.pausePanel.activeSelf) return ;
             Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
             

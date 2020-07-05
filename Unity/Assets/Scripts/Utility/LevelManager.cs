@@ -14,22 +14,20 @@ namespace Utility {
         public GenRandomParam grp;
 
         public int seed;
-        public DateTime begintime;
-        
-        public int _levelCountArcade = 0; 
-        private void Start()
+
+        public void Start()
         {
-            GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
-            ShopManager.instance.UpdateGold();
-            UpgradeManager.instance.UpdateGold();
+            // TODO MOVE IN LEVEL SCRIPT
+            //GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
+            //ShopManager.instance.UpdateGold();
+            //UpgradeManager.instance.UpdateGold();
             Player player = GameSingleton.Instance.GetPlayer();
             if (player.gamemode == Player.Gamemode.ARCADE && player.currentScore == 0)
             {
                 
                 levelList.ClearLevels();
                 player.currentLevelArcade = 0;
-                _levelCountArcade = 0;
-                
+
                 GenerateLevel();
   
             }
@@ -88,8 +86,8 @@ namespace Utility {
             {
                 
                 GameSingleton.Instance.GetPlayer().beginGame = DateTime.Now;
-                int seed = Random.Range(Int32.MinValue, Int32.MaxValue);
-                GameSingleton.Instance.GetPlayer().currentSeed = seed;
+                int lvlSeed = Random.Range(Int32.MinValue, Int32.MaxValue);
+                GameSingleton.Instance.GetPlayer().currentSeed = lvlSeed;
             }
             loadedLevel = grp.generateNextLevel(seed,  GameSingleton.Instance.GetPlayer().currentLevelArcade);
             grp.setDefaultGold(loadedLevel);
@@ -98,12 +96,6 @@ namespace Utility {
             
             loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade-1));
             loadedLevel.Init();
-            
-            
-
-            //generate
-            //call when pressing free mode button in menu
-            //call at end of level in arcade mode 
         }
     }
 }

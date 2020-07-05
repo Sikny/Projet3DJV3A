@@ -11,6 +11,5 @@ namespace Utility {
         public Language.Language language;
         public bool invertCameraX;
         public bool invertCameraY;
-
     }
 }

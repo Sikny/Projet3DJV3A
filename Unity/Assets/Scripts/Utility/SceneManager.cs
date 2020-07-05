@@ -11,6 +11,7 @@ namespace Utility {
     [Serializable]
     public class SceneManager {
         private readonly Dictionary<string, int> _storedScenesIds;
+
         public SceneManager() {
             _storedScenesIds = new Dictionary<string, int> {
                 {"Menu", 1}, {"StoryMode", 2}, {"creator", 3},
@@ -18,18 +19,12 @@ namespace Utility {
             };
         }
 
-        public void LoadFirstScene()
-        {
-            UnitySceneManager.LoadScene(0);
-        }
-        
         public void LoadScene(string sceneName) {
             UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
 
             Player player = GameSingleton.Instance.GetPlayer();
             SoundManager soundManager = GameSingleton.Instance.soundManager;
-            switch (sceneName)
-            {
+            switch (sceneName) {
                 case "Menu":
                     //soundManager.StopPlaying("Level theme");
                     soundManager.StopPlayingAllMusics();
@@ -39,7 +34,7 @@ namespace Utility {
                     Shop.Instance.ClearShop();
 
                     player.gamemode = Player.Gamemode.LEVEL;
-                
+
                     soundManager.StopPlayingAllMusics();
 
                     //soundManager.StopPlaying("Menu");
@@ -47,23 +42,22 @@ namespace Utility {
                     break;
                 case "freeMode":
                     string token = player.token;
-                
-                    if (string.IsNullOrEmpty(token) || token.Length < 8)
-                    {
+
+                    if (string.IsNullOrEmpty(token) || token.Length < 8) {
                         Popups.instance.Popup("Not connected!", Color.red);
-                        #if UNITY_EDITOR
+#if UNITY_EDITOR
                         Debug.Log("Non connecté");
-                        #endif
+#endif
                     }
-                    else
-                    {
-                        GameSingleton.Instance.tokenManager.CheckToken(token ,"scene.load.freeMode");
+                    else {
+                        GameSingleton.Instance.tokenManager.CheckToken(token, "scene.load.freeMode");
                         Shop.Instance.ClearShop();
                         player.gamemode = Player.Gamemode.ARCADE;
 
                         soundManager.StopPlayingAllMusics();
                         soundManager.Play("Level theme");
                     }
+
                     // load somewhere else (need token validation)
                     break;
             }

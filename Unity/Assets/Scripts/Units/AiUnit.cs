@@ -1,39 +1,32 @@
 ﻿using Game;
-using Units;
 using UnityEngine;
 using Utility;
+using Random = UnityEngine.Random;
 
 namespace Units  {
-    /**
-     * Cette classe répresente les unités contrôlées par une "IA" 
-     */
     public class AiUnit : AbstractUnit {
-        private float _deltaTime;
-        private const float TickAttack = 0.10f; //PARAM OF DIFFICULTY
-
         public override bool Init(EntityType idType, Entity entityModel, int entityCountP)
         {
             bool initState = base.Init(idType, entityModel, entityCountP);
-            _deltaTime = 0.0f;
-            _unitTarget = null;
+            unitTarget = null;
             gameObject.layer = 10;    // enemy units
+            colliderObjectTransform.gameObject.layer = 10;
             return initState;
         }
         
 
         public override void UpdateUnit() {
             if (!initialized) return;
-            _deltaTime += UnitLibData.deltaTime;
-            
-            if (_unitTarget == null) {
-                _unitTarget = GuessTheBestUnitToTarget();
+
+            if (unitTarget == null) {
+                unitTarget = GuessTheBestUnitToTarget();
             }
             else {
-                targetPosition = _unitTarget.GetPosition();
+                targetPosition = unitTarget.GetPosition();
                 isMoving = true;
             }
             
-            brain.interract(false, _unitTarget, targetPosition);
+            brain.interract(false, unitTarget, targetPosition);
 
             UpdateTimeoutEffects();
             
@@ -42,11 +35,12 @@ namespace Units  {
 
         public override void Attack(AbstractUnit anotherUnit, float damage) {
             int indexEntityAttack = Random.Range(0, entityCount);
-            Entity entityAttack = this.GetEntity(indexEntityAttack);
+            Entity entityAttack = GetEntity(indexEntityAttack);
+            
             float coef = GetEfficientCoef(this, anotherUnit);
             int efficientCoef = GetEfficiencyType(coef);
 
-            if (anotherUnit.GetNumberAlive() > 1) {
+            if (anotherUnit.GetNumberAlive() > 0) {
                 int indexEntityDefense = Random.Range(1, entityCount);
                 Entity entityDefense = anotherUnit.GetEntity(indexEntityDefense);
 
@@ -57,36 +51,15 @@ namespace Units  {
                     anotherUnit.PopEntity(indexEntityDefense);
                 }
             }
-            else if(anotherUnit.GetNumberAlive() == 1) {
+            /*else if(anotherUnit.GetNumberAlive() == 1) {
                 if (entityAttack != null) {
                     entityAttack.Attack(anotherUnit.GetEntity(0), -100, efficientCoef);
                     anotherUnit.PopEntity(0); // Le leader est attrapé
-                    _unitTarget = null; //important pour indiquer à l'IA de commencer de nouvelles recherches
+                    unitTarget = null; //important pour indiquer à l'IA de commencer de nouvelles recherches
                 }
-            }
+            }*/
         }
-        private int GetEfficiencyType(float efficientCoef)
-        {
-            int res = 0; 
-            //display particule on anotherUnit (targeted unit) 
-            if (efficientCoef == 1f)
-            {
-                return res;
-                //attack is neutral gray
-            }
-            else if (efficientCoef < 1f)
-            {
-                res = -1;
-                //attack is unefficient red 
-            }
-            else
-            {
-                res = 1;
-                //attack is efficient green 
-            }
-
-            return res; 
-        }
+        
         private PlayerUnit GuessTheBestUnitToTarget() {
             PlayerUnit best = null;
             float bestDistance = float.PositiveInfinity;
@@ -103,8 +76,6 @@ namespace Units  {
         }
 
         public override void Kill() {
-
-            
             Player player = GameSingleton.Instance.GetPlayer();
             Player.Gamemode playerGamemode = player.gamemode;
 

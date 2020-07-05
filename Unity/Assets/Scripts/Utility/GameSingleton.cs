@@ -3,6 +3,7 @@ using Game;
 using Language;
 using Sounds;
 using UI;
+using Units.PathFinding;
 using UnityEngine;
 
 namespace Utility {
@@ -13,25 +14,21 @@ namespace Utility {
         private static GameSingleton _instance;
         public static GameSingleton Instance => _instance;
 
-        [Header("Events")]
-        public CustomEvent updateLoop;
+        [Header("Events")] public CustomEvent updateLoop;
         public CustomEvent fixedUpdateLoop;
         public CustomEvent lateUpdateLoop;
-        
+
         [HideInInspector] public SceneManager sceneManager;
-        [Space]
-        public GameVariables gameVariables;
+        [Space] public GameVariables gameVariables;
         [HideInInspector] public LevelManager levelManager;
 
         public GameSettings gameSettings;
         public LanguageDictionary languageDictionary;
 
-        [Space]
-        public EndGamePanel endGamePanel;
+        [Space] public EndGamePanel endGamePanel;
 
         public StoreUnitList storeUnitList;
-        [Space]
-        [HideInInspector] public bool gamePaused;
+        [Space] [HideInInspector] public bool gamePaused;
 
         private Player _player;
 
@@ -40,16 +37,17 @@ namespace Utility {
         //public string tokenConnection;
 
         public UiManager uiManager;
-
         public SoundManager soundManager;
-
         public TokenManager tokenManager;
-        
+
+        public AStarHandler aStarHandler;
+
         private void Awake() {
             if (_instance != null && _instance != this) {
                 Destroy(gameObject);
                 return;
             }
+
             _instance = this;
             DontDestroyOnLoad(gameObject);
             
@@ -67,11 +65,12 @@ namespace Utility {
         private void Update() {
             updateLoop.Raise();
         }
+
         private void FixedUpdate() {
             fixedUpdateLoop.Raise();
         }
+
         private void LateUpdate() {
-            
             lateUpdateLoop.Raise();
         }
 
@@ -91,13 +90,13 @@ namespace Utility {
         public Player GetPlayer() {
             return _player;
         }
-        
-        public void EndGame(int status) { 
+
+        public void EndGame(int status) {
             endGamePanel.TypeEndGame = status;
             endGamePanel.gameObject.SetActive(true);
             _player.Save();
         }
-    
+
         public void PauseGame() {
             Time.timeScale = 0f;
             gamePaused = true;

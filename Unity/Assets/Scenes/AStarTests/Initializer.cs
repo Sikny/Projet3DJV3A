@@ -2,6 +2,7 @@
 using Units.Pathfinding;
 using Units.PathFinding;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Scenes.AStarTests {
     public class Initializer : MonoBehaviour {
@@ -28,8 +29,12 @@ namespace Scenes.AStarTests {
             Camera.main.transform.position += offset;
         }
 
+        private bool _mouseDown;
+
         private void Update() {
-            if (Input.GetMouseButtonUp(0)) {
+            if (Input.GetMouseButtonDown(0)) _mouseDown = true;
+            if (Input.GetKeyUp(0)) _mouseDown = false;
+            if (_mouseDown) {
                 aStarEntity.MoveTo(terrainMesh.cursor.transform.position, aStarHandler);
             }
         }
