@@ -324,6 +324,7 @@ MonoBehaviour:
   showAdditionalSettings: 0
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
+  m_AreaLightEmissiveMeshLayer: -1
 --- !u!1 &226159370 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6908428255114755919, guid: c8ceca9275f7b904ebec1c9a31903132,
@@ -511,10 +512,11 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Non connect\xE9"
+  m_text: Not connected
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -583,7 +585,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 869821540}
-    characterCount: 12
+    characterCount: 13
     spriteCount: 0
     spaceCount: 1
     wordCount: 2
@@ -1031,7 +1033,7 @@ PrefabInstance:
     - target: {fileID: 633210206118253867, guid: 2faac54c24c20714184c6ce8eaf41218,
         type: 3}
       propertyPath: m_Text
-      value: levelEditorLabel
+      value: Level Editor
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 633210204896269902, guid: 2faac54c24c20714184c6ce8eaf41218, type: 3}
@@ -1847,7 +1849,7 @@ PrefabInstance:
     - target: {fileID: 1623127170195410349, guid: c8ceca9275f7b904ebec1c9a31903132,
         type: 3}
       propertyPath: m_Text
-      value: loadLevel
+      value: Custom Levels
       objectReference: {fileID: 0}
     - target: {fileID: 2060904556261507078, guid: c8ceca9275f7b904ebec1c9a31903132,
         type: 3}
@@ -1942,32 +1944,37 @@ PrefabInstance:
     - target: {fileID: 5072068989630449710, guid: c8ceca9275f7b904ebec1c9a31903132,
         type: 3}
       propertyPath: m_firstOverflowCharacterIndex
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5072068989630449710, guid: c8ceca9275f7b904ebec1c9a31903132,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5072068989630449710, guid: c8ceca9275f7b904ebec1c9a31903132,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5072068989630449710, guid: c8ceca9275f7b904ebec1c9a31903132,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5072068989630449710, guid: c8ceca9275f7b904ebec1c9a31903132,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5072068989630449710, guid: c8ceca9275f7b904ebec1c9a31903132,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072068989630449710, guid: c8ceca9275f7b904ebec1c9a31903132,
+        type: 3}
+      propertyPath: m_text
+      value: 'Sauron : The Revenge'
       objectReference: {fileID: 0}
     - target: {fileID: 6439147476948821324, guid: c8ceca9275f7b904ebec1c9a31903132,
         type: 3}

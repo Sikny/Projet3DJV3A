@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -96,6 +97,7 @@ public class EditorMap : MonoBehaviour
 
             if (string.IsNullOrWhiteSpace(Filename))
             {
+                Popups.instance.Popup("Level name required.", Color.red);
                 throw new Exception("filename invalide" );
             }
 
