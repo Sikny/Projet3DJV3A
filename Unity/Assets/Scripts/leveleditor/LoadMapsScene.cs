@@ -52,6 +52,9 @@ public class LoadMapsScene : MonoBehaviour
         if (currentSel != null)
         {
             GameSingleton.Instance.filename = currentSel;
+            GameSingleton.Instance.soundManager.StopPlayingAllMusics();
+            GameSingleton.Instance.soundManager.Play("Level theme");
+            //set player gold with settings added during map creation 
             UnityEngine.SceneManagement.SceneManager.LoadScene(6);
         }
         else
