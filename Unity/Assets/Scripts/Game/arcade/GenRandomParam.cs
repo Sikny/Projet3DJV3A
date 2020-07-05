@@ -27,7 +27,7 @@ public class GenRandomParam : MonoBehaviour
 
         TerrainOptions options = levelNew.terrainBuilder.terrainOptions;
 
-        options.rules.seedWorld = seed;
+        options.seed = seed;
         options.mountainCount = rand.Next(2, 8);
         options.waterCount = rand.Next(1, 3);
         options.maxWaterSize = rand.Next(10, 30);
@@ -52,7 +52,7 @@ public class GenRandomParam : MonoBehaviour
         return levelNew;
     }
 
-    public EntityType softEntityType(Random rand, EntityType type, float difficult)
+    public static EntityType softEntityType(Random rand, EntityType type, float difficult)
     {
         if (rand.NextDouble() > difficult)
         {

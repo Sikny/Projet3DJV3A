@@ -42,6 +42,7 @@ namespace Utility {
 
         public AStarHandler aStarHandler;
 
+        public string filename;
         private void Awake() {
             if (_instance != null && _instance != this) {
                 Destroy(gameObject);

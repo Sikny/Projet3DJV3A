@@ -1,5 +1,4 @@
-Axe du zoom de la caméra incorrect
 Unités qui sortent des limites du terrain
-Unités qui marchent sur l'eau
-Certaines données ne sont pas bien sauvegardées
-Quelques objets ne sont pas mis en pause quand on ouvre le menu pause
+Impossible de se connecter après identifiant incorrect
+    Scroll du classement non fonctionnel
+    Crash si spawn d’unité sur la bordure

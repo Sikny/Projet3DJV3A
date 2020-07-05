@@ -15,7 +15,7 @@ namespace Utility {
         public SceneManager() {
             _storedScenesIds = new Dictionary<string, int> {
                 {"Menu", 1}, {"StoryMode", 2}, {"creator", 3},
-                {"loadLvl", 4}, {"freeMode", 5}
+                {"loadLvl", 4}, {"freeMode", 5}, {"LevelList",6}
             };
         }
 
@@ -57,8 +57,9 @@ namespace Utility {
                         soundManager.StopPlayingAllMusics();
                         soundManager.Play("Level theme");
                     }
-
-                    // load somewhere else (need token validation)
+                    break;
+                case "loadLvl":
+                    GameSingleton.Instance.GetPlayer().gamemode = Player.Gamemode.PERSONNALIZED;
                     break;
             }
         }

@@ -511,7 +511,6 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1843,7 +1842,7 @@ PrefabInstance:
     - target: {fileID: 1623127169274367688, guid: c8ceca9275f7b904ebec1c9a31903132,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: creator
+      value: loadLvl
       objectReference: {fileID: 0}
     - target: {fileID: 1623127170195410349, guid: c8ceca9275f7b904ebec1c9a31903132,
         type: 3}

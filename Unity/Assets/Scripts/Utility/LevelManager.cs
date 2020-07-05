@@ -37,6 +37,13 @@ namespace Utility {
                 loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade));
                 loadedLevel.Init();
             }
+            else if (player.gamemode == Player.Gamemode.PERSONNALIZED)
+            {
+                String filename = GameSingleton.Instance.filename;
+                Rule r = Rule.readLevel(filename.Split('.')[0]);
+                
+               loadLevel(r);
+            }
             else
             {
                 player.goldStartLevel = player.gold;
@@ -75,6 +82,19 @@ namespace Utility {
             loadedLevel = level;
         }
 
+        public void loadLevel(Rule rule)
+        {
+            GameSingleton.Instance.GetPlayer().gold = rule.maxBudget;
+            GameSingleton.Instance.levelManager = this;
+
+            Level levelNew = grp.levelBase;
+            
+            loadedLevel = Instantiate(levelNew);
+            loadedLevel.rule = rule;
+            loadedLevel.Init();
+            
+        }
+
         public void GenerateLevel()
         {
             //GameSingleton.Instance.GetPlayer().goldStartLevel = GameSingleton.Instance.GetPlayer().gold;
@@ -86,8 +106,9 @@ namespace Utility {
             {
                 
                 GameSingleton.Instance.GetPlayer().beginGame = DateTime.Now;
-                int lvlSeed = Random.Range(Int32.MinValue, Int32.MaxValue);
-                GameSingleton.Instance.GetPlayer().currentSeed = lvlSeed;
+
+                seed = Random.Range(Int32.MinValue, Int32.MaxValue);
+                GameSingleton.Instance.GetPlayer().currentSeed = seed;
             }
             loadedLevel = grp.generateNextLevel(seed,  GameSingleton.Instance.GetPlayer().currentLevelArcade);
             grp.setDefaultGold(loadedLevel);

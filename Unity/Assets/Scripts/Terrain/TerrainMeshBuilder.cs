@@ -42,28 +42,47 @@ namespace Terrain {
 
         [ContextMenu("Init")]
         private void InitMeshes() {
-            StartCoroutine(Init(null));
+            StartCoroutine(Init(null, null));
         }
 
-        public IEnumerator Init(Action action) {
-            TerrainGrid.Height = terrainOptions.height;
-            TerrainGrid.Width = terrainOptions.width;
+        public IEnumerator Init(Action action, Rule rule) {
+            if (rule == null)
+            {
+                TerrainGrid.Height = terrainOptions.height;
+                TerrainGrid.Width = terrainOptions.width;
+            }
+            else
+            {
+                TerrainGrid.Height = TerrainGrid.Width = rule.size;
+            }
+
+
 
             TerrainGrid.Instance.cursor = cursor;
 
             _waterData.Clear();
-
-            Random.InitState(terrainOptions.rules.seedWorld);
-            // build water areas
-            for (int i = 0; i < terrainOptions.waterCount; i++) {
-                BuildOneWaterArea();
-            }
-
             terrainOptions.modifierHeightMap.Clear();
+            
+            if (rule == null)
+            {
+                Random.InitState(terrainOptions.seed);
+                // build water areas
+                for (int i = 0; i < terrainOptions.waterCount; i++)
+                {
+                    BuildOneWaterArea();
+                }
 
-            // build mountains
-            for (int i = 0; i < terrainOptions.mountainCount; i++) {
-                BuildOneMountain();
+                
+
+                // build mountains
+                for (int i = 0; i < terrainOptions.mountainCount; i++)
+                {
+                    BuildOneMountain();
+                }
+            }
+            else
+            {
+                applyRules(rule);
             }
 
             BuildTerrain();
@@ -73,6 +92,15 @@ namespace Terrain {
             action();
         }
 
+        private void applyRules(Rule r)
+        {
+            var heightmap = r.mapModifierHeightmap;
+
+            foreach (var vec in heightmap)
+            {
+                terrainOptions.modifierHeightMap.Add(new Vector2(vec.Key.X-r.size/2, vec.Key.Z-r.size/2), vec.Value);
+            }
+        }
         private void BuildTerrain() {
             Clear();
             meshObjects = new List<GameObject>();

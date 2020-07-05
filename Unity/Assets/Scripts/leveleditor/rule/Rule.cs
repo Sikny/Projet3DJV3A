@@ -16,8 +16,8 @@ public class Rule
     public int maxBudget;
     char globalDifficulty;
     
-    Dictionary<SeriaVector2, float> mapModifierHeightmap;
-    Dictionary<SeriaVector2, byte> localSpawnDifficulty; //SPEC : to avoid the gen into the castle
+    public Dictionary<SeriaVector2, float> mapModifierHeightmap;
+    public Dictionary<SeriaVector2, byte> localSpawnDifficulty; //SPEC : to avoid the gen into the castle
     Dictionary<int, Castle> mapCastlePiecesPlacement;
 
     //TODO
@@ -54,7 +54,7 @@ public class Rule
         {
             try
             {
-                heightmap[(int) (entry.Key.X+size) * (size*2+1) + (int) entry.Key.Z+size] =
+                heightmap[(int) (entry.Key.X) * (size) + (int) entry.Key.Z] =
                     new Vector3(entry.Key.X, entry.Value, entry.Key.Z);
                 
             }
@@ -74,7 +74,7 @@ public class Rule
         {
             try
             {
-                difficulty[(int) (entry.Key.X+size) * (size*2+1) + (int) entry.Key.Z+size] =
+                difficulty[(int) (entry.Key.X) * (size) + (int) entry.Key.Z] =
                     new Color(entry.Value/4f,0f,0f);
                 Debug.Log("ok");
                 
