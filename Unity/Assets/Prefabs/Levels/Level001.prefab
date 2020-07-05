@@ -129,6 +129,11 @@ PrefabInstance:
       propertyPath: maxWaterSize
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: seed
+      value: 22720
+      objectReference: {fileID: 0}
     - target: {fileID: 4831506940399020680, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
       propertyPath: m_Name

@@ -50,10 +50,10 @@ namespace Units.Controllers.Soldier {
                 }
             }
 
-            for (int i = body.entityCount - 1; i >= 0; i--)
+            /*for (int i = body.entityCount - 1; i >= 0; i--)
             { 
                 GameSingleton.Instance.levelManager.loadedLevel.aStarHandler.UpdateTransform(body.entities[i].transform, positionTarget, basisSpeed);
-            }
+            }*/
             //GameSingleton.Instance.levelManager.loadedLevel.aStarHandler.UpdateTransform(body, positionTarget, basisSpeed);
             //SystemUnit.UpdateTransform(body, positionTarget, speedEntity);
 

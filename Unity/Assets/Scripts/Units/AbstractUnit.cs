@@ -180,14 +180,14 @@ namespace Units {
             return matrixEfficient[(int)from._native][(int)to._native];
         }
 
-        /*public void OnCollisionEnter(Collision c)
+        public void OnCollisionEnter(Collision c)
         {
             if (c.gameObject.layer == 9 || c.gameObject.layer == 10)  
             {
                 isMoving = false;
                 targetPosition = transform.position;
             }
-        }*/
+        }
 
 
         public void SetPosition(Vector3 pos) {
