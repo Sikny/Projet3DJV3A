@@ -59,13 +59,11 @@ namespace Units.Controllers
 
         public bool positionLocked;
         protected void LockPosition(Vector3 position) {
-            Debug.Log("IA LOCKED");
             positionLocked = true;
             body.targetPosition = position;
         }
 
         public void UnlockPosition() {
-            Debug.Log("IA UNLOCKED");
             positionLocked = false;
         }
     }

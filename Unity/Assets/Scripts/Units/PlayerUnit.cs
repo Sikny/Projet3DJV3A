@@ -32,14 +32,14 @@ namespace Units {
         }
 
         public override void Attack(AbstractUnit anotherUnit, float damage) {
-            int indexEntityAttack = Random.Range(0, entityCount);
+            int indexEntityAttack = Random.Range(1, entityCount);
             Entity entityAttack = GetEntity(indexEntityAttack);
 
             float coef = GetEfficientCoef(this, anotherUnit);
             int efficientCoef = GetEfficiencyType(coef);
 
             if (anotherUnit.GetNumberAlive() > 1) {
-                int indexEntityDefense = Random.Range(0, entityCount);
+                int indexEntityDefense = Random.Range(1, entityCount);
                 Entity entityDefense = anotherUnit.GetEntity(indexEntityDefense);
 
                 if (entityAttack == null || entityDefense == null) return;

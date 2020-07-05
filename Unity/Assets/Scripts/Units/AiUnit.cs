@@ -29,7 +29,6 @@ namespace Units  {
             }
             else {
                 if (!brain.positionLocked){
-                    Debug.Log("SETTING NEW POS");
                     targetPosition = unitTarget.GetPosition();
                     isMoving = true;
                 }
@@ -43,7 +42,7 @@ namespace Units  {
         }
 
         public override void Attack(AbstractUnit anotherUnit, float damage) {
-            int indexEntityAttack = Random.Range(0, entityCount);
+            int indexEntityAttack = Random.Range(1, entityCount);
             Entity entityAttack = GetEntity(indexEntityAttack);
             
             float coef = GetEfficientCoef(this, anotherUnit);
