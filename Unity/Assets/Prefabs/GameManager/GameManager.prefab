@@ -912,6 +912,11 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8004838547012426400, guid: e29abdc7691006a44b6f7a1a0bdac6ae,
+        type: 3}
+      propertyPath: quitBtn
+      value: 
+      objectReference: {fileID: 1415078842552286490}
     - target: {fileID: 8004838547012426411, guid: e29abdc7691006a44b6f7a1a0bdac6ae,
         type: 3}
       propertyPath: m_Name
@@ -1074,6 +1079,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e29abdc7691006a44b6f7a1a0bdac6ae, type: 3}
+--- !u!1 &1415078842552286490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8004838546363136875, guid: e29abdc7691006a44b6f7a1a0bdac6ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 8986291537070245489}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1415078842026712273 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8004838547012426400, guid: e29abdc7691006a44b6f7a1a0bdac6ae,
