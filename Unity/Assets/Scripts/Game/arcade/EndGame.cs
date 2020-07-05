@@ -45,7 +45,7 @@ public class EndGame : MonoBehaviour
 
     private void ProcessScoreResult(UnityWebRequest www) {
         if (www.isNetworkError || www.isHttpError) {
-            Debug.Log(www.error);
+            
         }
         else {
             string result = www.downloadHandler.text;

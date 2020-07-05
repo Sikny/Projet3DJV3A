@@ -21,7 +21,6 @@ namespace UI {
         }
 
         public bool ValidForm() {
-            Debug.Log("ok");
             if (!AllFieldsFilled()) {
                 errorMessage.text = "Veuillez renseigner tous les champs";
                 return false;

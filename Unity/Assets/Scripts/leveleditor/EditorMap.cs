@@ -122,7 +122,6 @@ public class EditorMap : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(Application.persistentDataPath);
         Size = "50";
         Money = "200";
     }

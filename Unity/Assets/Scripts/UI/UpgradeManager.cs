@@ -37,8 +37,7 @@ public class UpgradeManager : MonoBehaviour
 
 
     private void Awake() {
-        if (instance != null) { 
-            Debug.Log("Several instances");
+        if (instance != null) {
             return;
         }
 

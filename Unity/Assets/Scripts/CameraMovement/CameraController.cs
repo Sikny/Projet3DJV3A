@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using Utility;
 
 namespace CameraMovement {
@@ -11,13 +9,11 @@ namespace CameraMovement {
     {
         
         public float speed = 15;
-        public float pitch = 2f;
         public float zoomSpeed = 20f;
-        public Camera camera;
+        public Camera mainCamera;
         public int minZoom = 10;
         public int maxZoom = 40;
         private float _currentYaw;
-        private bool _mousePressed;
         
         private bool _isMovingRight;
         private bool _isMovingLeft;
@@ -34,18 +30,6 @@ namespace CameraMovement {
             _invertCameraY = GameSingleton.Instance.gameSettings.invertCameraY;
 
             _currentYaw = maxZoom / 2f;
-
-            //Debug.Log("invert camera X : "  +_invertCameraX);
-            //Debug.Log("invert camera Y : "  +_invertCameraY);
-
-        }
-
-        public void SetRotating() {
-            _mousePressed = true;
-        }
-
-        public void UnsetRotating() {
-            _mousePressed = false;
         }
 
         public void SetMoveRight()
@@ -123,7 +107,7 @@ namespace CameraMovement {
                         : new Vector3(0, 0,-speed * Time.deltaTime), Space.World);
             }
         
-            camera.fieldOfView = _currentYaw;
+            mainCamera.fieldOfView = _currentYaw;
         }
 
     }

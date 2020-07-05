@@ -64,6 +64,14 @@ namespace Units.Controllers.Mage {
                     ind++;
                 }
             }
+
+            float dist = Vector3.Distance(body.GetPosition(), target.GetPosition());
+            if (dist <= OptimalDistance - 1f || dist >= OptimalDistance + 1f) {
+                _canShoot = false;
+            }
+            else {
+                _canShoot = true;
+            }
             
             /*else {
                 Vector3 last = body.GetPosition();
