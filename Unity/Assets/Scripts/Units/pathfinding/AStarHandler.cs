@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terrain;
 using Unity.Collections;
 using Unity.Jobs;
@@ -161,6 +160,11 @@ namespace Units.PathFinding {
             /*targetTransform.rotation =
                 Quaternion.RotateTowards(targetTransform.rotation, _targetRotation, rotateSpeed - Time.deltaTime);*/
             return isAtDestination;
+        }
+
+        private void OnDestroy() {
+            _costMatrix.Dispose();
+            _heuristicMatrix.Dispose();
         }
     }
 }
