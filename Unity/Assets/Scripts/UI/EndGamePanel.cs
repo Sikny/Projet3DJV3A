@@ -38,6 +38,11 @@ namespace UI {
                             retryBtn.SetActive(false);
                             nextBtn.SetActive(false);
                             endGame.gameObject.SetActive(true);
+                            retryBtn.SetActive(false);
+                            GameSingleton.Instance.GetPlayer().arcadeGold = 150;
+                            GameSingleton.Instance.GetPlayer().arcadeModeInventory.Clear();
+                            Shop.Instance.ClearShop();
+                            
                         }
                         break;
                     case 1:    // Win

@@ -57,6 +57,8 @@ MonoBehaviour:
     m_Bits: 256
   rotationSpeed: 300
   speed: 5
+  defaultMaterial: {fileID: 2100000, guid: ca35d911fb1906d4f937af5496c8d8e7, type: 2}
+  selectedMaterial: {fileID: 2100000, guid: 881c6dc11dfc30f4f81892837331f44c, type: 2}
   isRunning: 0
 --- !u!114 &9164305878923577751
 MonoBehaviour:

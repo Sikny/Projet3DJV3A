@@ -1,5 +1,6 @@
 ﻿using CustomEvents;
 using Game;
+using Items;
 using Language;
 using Sounds;
 using UI;
@@ -77,6 +78,16 @@ namespace Utility {
 
         // Do not delete or make private (used by events)
         public void LoadScene(string sceneName) {
+            if (_player != null) 
+            {
+                if(_player.gamemode != Player.Gamemode.LEVEL)
+                {
+                    _player.arcadeModeInventory.Clear();
+                    Shop.Instance.ClearShop();
+                    _player.arcadeGold = 150;
+                }
+            }
+
             sceneManager.LoadScene(sceneName);
         }
 

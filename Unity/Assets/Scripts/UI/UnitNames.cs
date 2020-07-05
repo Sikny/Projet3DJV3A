@@ -18,7 +18,9 @@ namespace UI
     
         private readonly Color _red = Color.red;
         private readonly Color _green = Color.green;
-    
+        private UiManager _uiManager;
+
+        private bool _uiActivated;
 
         // Start is called before the first frame update
         void Start()
@@ -30,6 +32,7 @@ namespace UI
 
         public void OnMouseEnter()
         {
+            if (_uiActivated) return;
             _unitNameBox.SetActive(true);
 
             AbstractUnit unit = GetComponent<AbstractUnit>();
@@ -51,7 +54,19 @@ namespace UI
 
         private void Update()
         {
-            if (_isTouchingUnit)
+            if (!_uiManager && GameSingleton.Instance && GameSingleton.Instance.uiManager) {
+                _uiManager = GameSingleton.Instance.uiManager;
+            }
+            else if (_uiManager)
+            {
+                if (_uiManager.inventoryPanel.activeSelf || _uiManager.shopPanel.activeSelf ||
+                    _uiManager.upgradePanel.activeSelf || _uiManager.pausePanel.activeSelf ||
+                    GameSingleton.Instance.endGamePanel.winMessage.IsActive() ||
+                    GameSingleton.Instance.endGamePanel.loseMessage.IsActive()) _uiActivated = true;
+                else
+                    _uiActivated = false;
+            }
+            if (_isTouchingUnit && !_uiActivated)
             {
                 _unitNameBox.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y+  ( Screen.height / 8f ), _unitNameBox.transform.position.z);
             }

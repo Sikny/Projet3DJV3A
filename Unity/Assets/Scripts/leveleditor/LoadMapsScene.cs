@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility;
@@ -48,8 +49,19 @@ public class LoadMapsScene : MonoBehaviour
 
     public void loadMap()
     {
-        GameSingleton.Instance.filename = currentSel;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(6);
+        if (currentSel != null)
+        {
+            GameSingleton.Instance.filename = currentSel;
+            GameSingleton.Instance.soundManager.StopPlayingAllMusics();
+            GameSingleton.Instance.soundManager.Play("Level theme");
+            //set player gold with settings added during map creation 
+            UnityEngine.SceneManagement.SceneManager.LoadScene(6);
+        }
+        else
+        {
+            Popups.instance.Popup("Please select a map", Color.red);
+        }
+
     }
 
     void Selectionner(string element)
