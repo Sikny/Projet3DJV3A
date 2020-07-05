@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using UI;
 using UnityEngine;
@@ -20,7 +19,6 @@ public class LoadMapsScene : MonoBehaviour
         if (!dir.Exists)
         {
             dir.Create();
-            Debug.Log("Dossier créé!");
         }
         else
         {
@@ -59,7 +57,7 @@ public class LoadMapsScene : MonoBehaviour
         }
         else
         {
-            Popups.instance.Popup("Please select a map", Color.red);
+            Popups.instance.Popup("Please select a level.", Color.red);
         }
 
     }
@@ -67,7 +65,6 @@ public class LoadMapsScene : MonoBehaviour
     void Selectionner(string element)
     {
         currentSel = element;
-        Debug.Log(currentSel);
         foreach (var fileTest in filesList)
         {
             Image image = fileTest.GetComponent<Image>();
@@ -81,11 +78,5 @@ public class LoadMapsScene : MonoBehaviour
             }
         }
             
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

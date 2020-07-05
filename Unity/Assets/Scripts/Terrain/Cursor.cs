@@ -6,10 +6,9 @@ namespace Terrain {
 
         public void SetPosition(float posX, float posZ) {
             var t = transform;
-            float yPos = t.position.y;
-            t.position = new Vector3(posX, yPos, posZ);
+            t.position = new Vector3(posX, 0, posZ);
             foreach (CursorCell cursorCell in cursorCells) {
-                cursorCell.SetAutoHeight(yPos);
+                cursorCell.SetAutoHeight();
             }
         }
     }

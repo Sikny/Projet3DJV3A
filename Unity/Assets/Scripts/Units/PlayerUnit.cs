@@ -1,12 +1,14 @@
-﻿using System;
+﻿using CustomEvents;
 using UnityEngine;
 using Utility;
 using Random = UnityEngine.Random;
 
 namespace Units {
-    public class PlayerUnit : AbstractUnit
-    {
-        private float _timeLeft = 0.0f;
+    public class PlayerUnit : AbstractUnit {
+        [SerializeField] private CustomEvent onPlayerUnitOnDestination;
+        
+        private float _timeLeft;
+        
         public override bool Init(EntityType idType, Entity entityModel, int entityCountP) {
             bool value = base.Init(idType, entityModel, entityCountP);
 
@@ -23,7 +25,9 @@ namespace Units {
                 unitTarget = GuessTheBestUnitToTarget();
             }
 
-            brain.interract(true, unitTarget, targetPosition);
+            if (brain.Interract(true, unitTarget, targetPosition)) {
+                onPlayerUnitOnDestination.Raise();
+            }
 
             UpdateTimeoutEffects();
 
@@ -31,14 +35,14 @@ namespace Units {
         }
 
         public override void Attack(AbstractUnit anotherUnit, float damage) {
-            int indexEntityAttack = Random.Range(0, entityCount);
+            int indexEntityAttack = Random.Range(1, entityCount);
             Entity entityAttack = GetEntity(indexEntityAttack);
 
             float coef = GetEfficientCoef(this, anotherUnit);
             int efficientCoef = GetEfficiencyType(coef);
 
             if (anotherUnit.GetNumberAlive() > 1) {
-                int indexEntityDefense = Random.Range(0, entityCount);
+                int indexEntityDefense = Random.Range(1, entityCount);
                 Entity entityDefense = anotherUnit.GetEntity(indexEntityDefense);
 
                 if (entityAttack == null || entityDefense == null) return;
@@ -82,10 +86,6 @@ namespace Units {
 
         public void SetTargetPosition(Vector3 cursorPos) {
             targetPosition = new Vector3(cursorPos.x, SystemUnit.YPos, cursorPos.z);
-
-            //Vector of unit to point 
-            Vector3 unitToTarget = (targetPosition - position);
-            unitToTarget.Normalize();
 
             isMoving = true;
         }

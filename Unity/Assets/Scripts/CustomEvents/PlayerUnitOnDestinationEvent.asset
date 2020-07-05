@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c92e361e7896504094ff37c61c01548, type: 3}
-  m_Name: HealPotion
+  m_Script: {fileID: 11500000, guid: 237b30ee44c846c4480729f60396204c, type: 3}
+  m_Name: PlayerUnitOnDestinationEvent
   m_EditorClassIdentifier: 
-  itemName: Health potion
-  icon: {fileID: 21300000, guid: 6999056a701cdfd44a16211baa0017c0, type: 3}
-  price: 10
-  description: Heals target unit.

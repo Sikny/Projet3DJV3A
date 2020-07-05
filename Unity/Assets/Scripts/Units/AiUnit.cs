@@ -5,7 +5,9 @@ using Random = UnityEngine.Random;
 
 namespace Units  {
     public class AiUnit : AbstractUnit {
-        private float _timeLeft = 0.0f;
+        private AbstractUnit _previousTarget;
+        
+        private float _timeLeft;
 
         public override bool Init(EntityType idType, Entity entityModel, int entityCountP)
         {
@@ -19,17 +21,24 @@ namespace Units  {
 
         public override void UpdateUnit() {
             if (!initialized) return;
+
             _timeLeft -= Time.deltaTime;
-            if (unitTarget == null || _timeLeft <= 0)
-            {
+            if (unitTarget == null || _timeLeft <= 0) {
+                _previousTarget = unitTarget;
+                
                 unitTarget = GuessTheBestUnitToTarget();
+                if (unitTarget != _previousTarget) {
+                    brain.UnlockPosition();
+                }
             }
             else {
-                targetPosition = unitTarget.GetPosition();
-                isMoving = true;
+                if (!brain.positionLocked){
+                    targetPosition = unitTarget.GetPosition();
+                    isMoving = true;
+                }
             }
             
-            brain.interract(false, unitTarget, targetPosition);
+            brain.Interract(false, unitTarget, targetPosition);
 
             UpdateTimeoutEffects();
             
@@ -37,7 +46,7 @@ namespace Units  {
         }
 
         public override void Attack(AbstractUnit anotherUnit, float damage) {
-            int indexEntityAttack = Random.Range(0, entityCount);
+            int indexEntityAttack = Random.Range(1, entityCount);
             Entity entityAttack = GetEntity(indexEntityAttack);
             
             float coef = GetEfficientCoef(this, anotherUnit);

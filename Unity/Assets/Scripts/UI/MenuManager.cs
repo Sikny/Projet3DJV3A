@@ -34,12 +34,9 @@ namespace UI {
 
         private void ProcessConnectionResult(UnityWebRequest www) {
             if (www.isNetworkError || www.isHttpError) {
-                Debug.Log(www.error);
             }
             else {
-                Debug.Log("Connect success");
                 string result = www.downloadHandler.text;
-                Debug.Log("Received: " + result);
                 if (result.Contains("NOK"))
                 {
                     GameObject password = connectionPanel.transform.Find("PasswordInput").gameObject;
@@ -59,12 +56,10 @@ namespace UI {
         
         private void ProcessRegisterResult(UnityWebRequest www) {
             if (www.isNetworkError || www.isHttpError) {
-                Debug.Log(www.error);
+                
             }
             else {
-                Debug.Log("Connect success");
                 string result = www.downloadHandler.text;
-                Debug.Log("Received: " + result);
                 if (result.Equals("OK"))
                 {
                     registerPanel.gameObject.SetActive(false);

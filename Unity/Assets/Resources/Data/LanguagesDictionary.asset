@@ -88,3 +88,428 @@ MonoBehaviour:
       value: Language
     - key: 1
       value: Langue
+  - values:
+    - key: 0
+      value: Level Editor
+    - key: 1
+      value: Editeur de niveaux
+  - values:
+    - key: 0
+      value: Submit
+    - key: 1
+      value: Confirmer
+  - values:
+    - key: 0
+      value: Invert Camera X
+    - key: 1
+      value: "Inverser la Cam\xE9ra X"
+  - values:
+    - key: 0
+      value: Invert Camera Y
+    - key: 1
+      value: "Inverser la Cam\xE9ra Y"
+  - values:
+    - key: 0
+      value: Custom Levels
+    - key: 1
+      value: "Niveaux personnalis\xE9s"
+  - values:
+    - key: 0
+      value: 'Sauron : The Revenge'
+    - key: 1
+      value: 'Sauron : La revanche'
+  - values:
+    - key: 0
+      value: Back
+    - key: 1
+      value: Retour
+  - values:
+    - key: 0
+      value: Not connected
+    - key: 1
+      value: "Non-connect\xE9"
+  - values:
+    - key: 0
+      value: Connected
+    - key: 1
+      value: "Connect\xE9"
+  - values:
+    - key: 0
+      value: Last Name
+    - key: 1
+      value: Nom
+  - values:
+    - key: 0
+      value: Name
+    - key: 1
+      value: "Pr\xE9nom"
+  - values:
+    - key: 0
+      value: Confirm password
+    - key: 1
+      value: Confirmer le mot de passe
+  - values:
+    - key: 0
+      value: Confirm
+    - key: 1
+      value: Confirmer
+  - values:
+    - key: 0
+      value: 'Shop (u)
+
+'
+    - key: 1
+      value: Mag (u)
+  - values:
+    - key: 0
+      value: 'INV
+
+        (i)'
+    - key: 1
+      value: 'INV
+
+        (i)'
+  - values:
+    - key: 0
+      value: SHOP
+    - key: 1
+      value: MAGASIN
+  - values:
+    - key: 0
+      value: UNITS
+    - key: 1
+      value: UNITES
+  - values:
+    - key: 0
+      value: EQUIPMENTS
+    - key: 1
+      value: EQUIPEMENTS
+  - values:
+    - key: 0
+      value: Shield
+    - key: 1
+      value: Bouclier
+  - values:
+    - key: 0
+      value: Soldier
+    - key: 1
+      value: Soldat
+  - values:
+    - key: 0
+      value: Archer
+    - key: 1
+      value: "Arch\xE9"
+  - values:
+    - key: 0
+      value: Mage
+    - key: 1
+      value: Magicien
+  - values:
+    - key: 0
+      value: Spearman
+    - key: 1
+      value: Lancier
+  - values:
+    - key: 0
+      value: Knight
+    - key: 1
+      value: Guerrier
+  - values:
+    - key: 0
+      value: White Knight
+    - key: 1
+      value: Chevalier Blanc
+  - values:
+    - key: 0
+      value: Horseman
+    - key: 1
+      value: Cavalier
+  - values:
+    - key: 0
+      value: Executionist
+    - key: 1
+      value: Executeur
+  - values:
+    - key: 0
+      value: Base melee unit. Effective against archer units
+    - key: 1
+      value: "Unit\xE9 m\xEAl\xE9e de base.\nEfficace contre les unit\xE9s archer."
+  - values:
+    - key: 0
+      value: Spearmen can attack from further and deal more damage.
+    - key: 1
+      value: "Les lanciers peuvent attaquer de plus loins et effectue plus de d\xE9g\xE2ts."
+  - values:
+    - key: 0
+      value: Knights have a lot of defense and health.
+    - key: 1
+      value: "Les Guerriers ont beaucoup de vies et de d\xE9fense."
+  - values:
+    - key: 0
+      value: Incredibly fast unit. Is very good against ranged units.
+    - key: 1
+      value: "Unit\xE9 incroyablement rapide. Est tr\xE8s efficaces contres les unit\xE9s
+        \xE0 port\xE9e."
+  - values:
+    - key: 0
+      value: Very slow unit but deals a lot of damage and has a lot of health.
+    - key: 1
+      value: "Unit\xE9 tr\xE8s lente mais qui inflige \xE9norm\xE9ment de d\xE9g\xE2ts
+        et a beaucoup de vie."
+  - values:
+    - key: 0
+      value: White knights have a lot of health and  have a lot of defense.
+    - key: 1
+      value: "Les Chevaliers Blanc sont les unit\xE9s la plus r\xE9sistante du jeu."
+  - values:
+    - key: 0
+      value: White Mage
+    - key: 1
+      value: Magicien Blanc
+  - values:
+    - key: 0
+      value: Black Mage
+    - key: 1
+      value: Magicien Noir
+  - values:
+    - key: 0
+      value: Bard
+    - key: 1
+      value: Barde
+  - values:
+    - key: 0
+      value: Red Mage
+    - key: 1
+      value: Magicien Rouge
+  - values:
+    - key: 0
+      value: Demonist
+    - key: 1
+      value: "D\xE9moniste"
+  - values:
+    - key: 0
+      value: Base Mage unit. Effective against Soldier units
+    - key: 1
+      value: "Unit\xE9 Magic de base.\nEfficace contre les unit\xE9s soldat."
+  - values:
+    - key: 0
+      value: Unit suited for defensive strategies.
+    - key: 1
+      value: "Unit\xE9 efficace pour les strat\xE9gies d\xE9fensives."
+  - values:
+    - key: 0
+      value: Black Mages attack slowly but deal a huge amount of damage.
+    - key: 1
+      value: "Les Magiciens Noir attaques lentement mais infliges \xE9norm\xE9ments
+        de d\xE9g\xE2ts."
+  - values:
+    - key: 0
+      value: Bards have very strong defense.
+    - key: 1
+      value: "Les bardes sont tr\xE8s fort d\xE9fensivement."
+  - values:
+    - key: 0
+      value: Demonists are very slow but deal a huge amount of damage.
+    - key: 1
+      value: "Les D\xE9monistes sont tr\xE8s lent mais inflige \xE9norm\xE9ment de
+        d\xE9g\xE2ts."
+  - values:
+    - key: 0
+      value: Red mages are very well rounded units.
+    - key: 1
+      value: "Les Magiciens Rouges sont des unit\xE9s tr\xE8s \xE9quilibr\xE9s."
+  - values:
+    - key: 0
+      value: Hunter
+    - key: 1
+      value: Chasseur
+  - values:
+    - key: 0
+      value: Arbalist
+    - key: 1
+      value: "Arbal\xE9tier"
+  - values:
+    - key: 0
+      value: Catapultist
+    - key: 1
+      value: Cataplutiste
+  - values:
+    - key: 0
+      value: Machine Arc
+    - key: 1
+      value: Mitre Arc
+  - values:
+    - key: 0
+      value: Sniper
+    - key: 1
+      value: Snipeur
+  - values:
+    - key: 0
+      value: Base Archer unit. Effective against mages.
+    - key: 1
+      value: "Unit\xE9 Archer de base.\nEfficace contre les unit\xE9s mages."
+  - values:
+    - key: 0
+      value: Hunters can shoot from a further distance and deal more damage.
+    - key: 1
+      value: "Les chasseurs peuvent tirer d'une distance plus importante et inflig\xE9
+        plus de d\xE9g\xE2ts."
+  - values:
+    - key: 0
+      value: Arbalists shoot very quickly
+    - key: 1
+      value: "Les Arbal\xE9tier tires tr\xE8s rapidement."
+  - values:
+    - key: 0
+      value: Low damage shots but shoot very frequently.
+    - key: 1
+      value: "D\xE9g\xE2ts faibles mais tire tr\xE8s fr\xE9quament."
+  - values:
+    - key: 0
+      value: Catapulitsts are very slow units that don't shoot frequently but deal
+        a lot of damage.
+    - key: 1
+      value: "Les Cataplutiste sont des unit\xE9s tr\xE8s lentes qui ne tire pas
+        souvent mais qui inflige beaucoup de d\xE9g\xE2ts."
+  - values:
+    - key: 0
+      value: 'Snipers shoot much less frequently but will never miss a shot and deals
+        a lot of damage. '
+    - key: 1
+      value: "Les Snipeur tires beaucoup moins fr\xE9qumment mais ne ratent jamais
+        leur tire et inflige beaucoup de d\xE9g\xE2ts."
+  - values:
+    - key: 0
+      value: Health potion
+    - key: 1
+      value: Potion de vie
+  - values:
+    - key: 0
+      value: Speed potion
+    - key: 1
+      value: Potion de vitesse
+  - values:
+    - key: 0
+      value: Heals target unit.
+    - key: 1
+      value: "Soigne l'unit\xE9 cibl\xE9e."
+  - values:
+    - key: 0
+      value: Temporarly increases speed of target unit.
+    - key: 1
+      value: "Augmente temporairement la vitesse de l'unit\xE9 cibl\xE9e."
+  - values:
+    - key: 0
+      value: Iron Shield
+    - key: 1
+      value: Casque de fer
+  - values:
+    - key: 0
+      value: +10 defense
+    - key: 1
+      value: "+10 d\xE9fense"
+  - values:
+    - key: 0
+      value: Load a map
+    - key: 1
+      value: Charger une map
+  - values:
+    - key: 0
+      value: Load
+    - key: 1
+      value: Charger
+  - values:
+    - key: 0
+      value: Select
+    - key: 1
+      value: "S\xE9lectionner"
+  - values:
+    - key: 0
+      value: Resume
+    - key: 1
+      value: "R\xE9sumer"
+  - values:
+    - key: 0
+      value: Main Menu
+    - key: 1
+      value: Menu Principale
+  - values:
+    - key: 0
+      value: Quit
+    - key: 1
+      value: Quitter
+  - values:
+    - key: 0
+      value: Level editor
+    - key: 1
+      value: Editeur de niveau
+  - values:
+    - key: 0
+      value: Size
+    - key: 1
+      value: Taille
+  - values:
+    - key: 0
+      value: Money
+    - key: 1
+      value: Argent
+  - values:
+    - key: 0
+      value: Confirm !
+    - key: 1
+      value: Valider !
+  - values:
+    - key: 0
+      value: Brush
+    - key: 1
+      value: Pinceau
+  - values:
+    - key: 0
+      value: Brush
+    - key: 1
+      value: "Pinceau de difficult\xE9"
+  - values:
+    - key: 0
+      value: Radius
+    - key: 1
+      value: Rayon
+  - values:
+    - key: 0
+      value: Min height
+    - key: 1
+      value: Hauteur min
+  - values:
+    - key: 0
+      value: Max height
+    - key: 1
+      value: Hauteur max
+  - values:
+    - key: 0
+      value: Save
+    - key: 1
+      value: Sauvegarder
+  - values:
+    - key: 0
+      value: Level name required.
+    - key: 1
+      value: Nom de niveau requis.
+  - values:
+    - key: 0
+      value: Please select a level.
+    - key: 1
+      value: Veuillez choisir un niveau
+  - values:
+    - key: 0
+      value: No Unit Selected!
+    - key: 1
+      value: "Pas d'unit\xE9 selectionn\xE9e!"
+  - values:
+    - key: 0
+      value: At least one unit must be placed first
+    - key: 1
+      value: "Au moins une unit\xE9 doit \xEAtre plac\xE9."
+  - values:
+    - key: 0
+      value: Not enough gold!
+    - key: 1
+      value: Pas assez d'argent!

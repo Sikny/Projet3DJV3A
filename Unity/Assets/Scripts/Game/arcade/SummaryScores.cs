@@ -37,13 +37,11 @@ public class SummaryScores : MonoBehaviour
     
     private void ProcessConnectionResult(UnityWebRequest www) {
         if (www.isNetworkError || www.isHttpError) {
-            Debug.Log(www.error);
+            
         }
         else {
-            //Debug.Log("Connect success");
             string result = www.downloadHandler.text;
-            //Debug.Log("Received: " + result);
-            
+
             int nb = 0;
             var json = JsonConvert.DeserializeObject<List<ScoreJson>>(result);
             foreach (var scoreJson in json)

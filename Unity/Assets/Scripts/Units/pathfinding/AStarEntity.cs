@@ -12,6 +12,7 @@ namespace Units.Pathfinding {
             position.y = destination.y;
             float distance = Vector3.Distance(destination, position);
             if (distance <= 0.75f) {
+                transform.DOKill();
                 _movingToDest = true;
                 transform.DOMoveZ(destination.z, UnitLibData.speed).SetSpeedBased().SetEase(Ease.Linear);
                 transform.DOMoveX(destination.x, UnitLibData.speed).SetSpeedBased().SetEase(Ease.Linear).OnComplete(() => {

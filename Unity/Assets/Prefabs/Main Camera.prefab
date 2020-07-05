@@ -111,7 +111,7 @@ MonoBehaviour:
   speed: 15
   pitch: 2
   zoomSpeed: 6
-  camera: {fileID: 1657578593964637179}
+  mainCamera: {fileID: 1657578593964637179}
   minZoom: 10
   maxZoom: 40
 --- !u!114 &1657578593964637178

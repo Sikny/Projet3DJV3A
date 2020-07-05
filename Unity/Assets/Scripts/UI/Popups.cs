@@ -17,9 +17,6 @@ namespace UI {
         {
             if (instance != null)
             {
-                #if UNITY_EDITOR
-                Debug.Log("Several instances");
-                #endif
                 return;
             }
             instance = this;
