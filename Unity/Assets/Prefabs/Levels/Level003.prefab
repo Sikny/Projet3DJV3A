@@ -125,6 +125,106 @@ PrefabInstance:
       propertyPath: meshObjects.Array.data[5]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key1.r
+      value: 0.5660378
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key1.g
+      value: 0.5660378
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key1.b
+      value: 0.5660378
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key2.r
+      value: 0.5188679
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key2.g
+      value: 0.5188679
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key2.b
+      value: 0.5188679
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key3.r
+      value: 0.31132078
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key3.g
+      value: 0.31132078
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key3.b
+      value: 0.31132078
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key4.r
+      value: 0.33962262
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key4.g
+      value: 0.33962262
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key4.b
+      value: 0.33962262
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key5.r
+      value: 0.38679248
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key5.g
+      value: 0.2536045
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key5.b
+      value: 0.2612884
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key6.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key6.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key6.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.ctime5
+      value: 31569
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.ctime6
+      value: 36858
+      objectReference: {fileID: 0}
     - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
       propertyPath: seed
