@@ -43,13 +43,12 @@ namespace UI {
                 if (result.Contains("NOK"))
                 {
                     GameObject password = connectionPanel.transform.Find("PasswordInput").gameObject;
-                    InputField passwordIF = password.GetComponent<InputField>();
-                    passwordIF.text = "";
+                    InputField passwordIn = password.GetComponent<InputField>();
+                    passwordIn.text = "";
                     Popups.instance.Popup("Wrong identifications!", Color.red);
                 }
                 else
                 {
-                    GameSingleton.Instance.tokenConnection = result;
                     GameSingleton.Instance.GetPlayer().token = result;
                     PlayerPrefs.Save();
                     connectionPanel.gameObject.SetActive(false);

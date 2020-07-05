@@ -31,9 +31,6 @@ namespace Terrain {
         public Cursor cursor;
         public Transform waterObject;
 
-        // Path-finding fields
-        [HideInInspector] public int[][] grid;
-
         private void Clear() {
             int meshesCount = meshObjects.Count;
             for (int i = 0; i < meshesCount; i++) {
@@ -45,39 +42,65 @@ namespace Terrain {
 
         [ContextMenu("Init")]
         private void InitMeshes() {
-            StartCoroutine(Init(null));
+            StartCoroutine(Init(null, null));
         }
 
-        public IEnumerator Init(Action action) {
-            TerrainGrid.Height = terrainOptions.height;
-            TerrainGrid.Width = terrainOptions.width;
+        public IEnumerator Init(Action action, Rule rule) {
+            if (rule == null)
+            {
+                TerrainGrid.Height = terrainOptions.height;
+                TerrainGrid.Width = terrainOptions.width;
+            }
+            else
+            {
+                TerrainGrid.Height = TerrainGrid.Width = rule.size;
+            }
+
+
 
             TerrainGrid.Instance.cursor = cursor;
 
-            grid = new int[terrainOptions.width][];
-
             _waterData.Clear();
-
-            Random.InitState(terrainOptions.rules.seedWorld);
-            // build water areas
-            for (int i = 0; i < terrainOptions.waterCount; i++) {
-                BuildOneWaterArea();
-            }
-
             terrainOptions.modifierHeightMap.Clear();
+            
+            if (rule == null)
+            {
+                Random.InitState(terrainOptions.seed);
+                // build water areas
+                for (int i = 0; i < terrainOptions.waterCount; i++)
+                {
+                    BuildOneWaterArea();
+                }
 
-            // build mountains
-            for (int i = 0; i < terrainOptions.mountainCount; i++) {
-                BuildOneMountain();
+                
+
+                // build mountains
+                for (int i = 0; i < terrainOptions.mountainCount; i++)
+                {
+                    BuildOneMountain();
+                }
+            }
+            else
+            {
+                applyRules(rule);
             }
 
             BuildTerrain();
-            waterObject.transform.localScale = new Vector3(terrainOptions.width - 0.0001f,
-                waterObject.localScale.y, terrainOptions.height - 0.0001f);
+            waterObject.transform.localScale = new Vector3(terrainOptions.width - 0.001f,
+                waterObject.localScale.y, terrainOptions.height - 0.001f);
             yield return null;
             action();
         }
 
+        private void applyRules(Rule r)
+        {
+            var heightmap = r.mapModifierHeightmap;
+
+            foreach (var vec in heightmap)
+            {
+                terrainOptions.modifierHeightMap.Add(new Vector2(vec.Key.X-r.size/2, vec.Key.Z-r.size/2), vec.Value);
+            }
+        }
         private void BuildTerrain() {
             Clear();
             meshObjects = new List<GameObject>();
@@ -93,6 +116,7 @@ namespace Terrain {
                 meshObj.transform.parent = transform;
                 if (terrainSide == TerrainSide.Top) {
                     var terrainRaycaster = meshObj.AddComponent<TerrainRaycaster>();
+                    terrainRaycaster.Init();
                     terrainRaycaster.width = terrainOptions.width;
                     terrainRaycaster.height = terrainOptions.height;
                 }
@@ -116,20 +140,6 @@ namespace Terrain {
             Color[] colours = new Color[textureResolution];
             for (int i = 0; i < textureResolution; i++) {
                 colours[i] = heightGradient.Evaluate(i / (textureResolution - 1f));
-            }
-
-            for (int i = 0; i < terrainOptions.width; i++) {
-                grid[i] = new int[terrainOptions.height];
-                for (int j = 0; j < terrainOptions.height; j++)
-                {
-                    Vector3 vec = new Vector3(i-terrainOptions.width/2,0, j-terrainOptions.height/2);
-                    //Vector2 percent = new Vector2() / ;
-                    float h = CalculateHeight(vec);
-                    if (h > 0.01f || h < -0.01f)
-                        grid[i][j] = 1;
-                    else
-                        grid[i][j] = 0;
-                }
             }
 
             texture.SetPixels(colours);
@@ -329,7 +339,7 @@ namespace Terrain {
 
         private float CalculateHeight(Vector3 vertex) {
             float result = 0;
-            Vector2Int intVec = new Vector2Int((int) (vertex.x+0.5f), (int) (vertex.z+0.5f));
+            Vector2Int intVec = new Vector2Int((int) (vertex.x), (int) (vertex.z));
             if (terrainOptions.modifierHeightMap.ContainsKey(intVec)) {
                 result = terrainOptions.modifierHeightMap[intVec];
             }
@@ -370,7 +380,6 @@ namespace Terrain {
             _waterData.Add(waterList);
         }
 
-        // TODO : ROUND MOUNTAINS ??
         private void BuildOneMountain() {
             int posX = Random.Range(-terrainOptions.width / 2, terrainOptions.width / 2);
             int posZ = Random.Range(-terrainOptions.height / 2, terrainOptions.height / 2);

@@ -11,13 +11,13 @@ public class Rule
 
 
     int seedWorld; // used in free-mode(0 in level mode)
-
+    public byte size;
     // This following is set from .lvl file or randomize based on seedWorl in free-mode
-    int maxBudget;
+    public int maxBudget;
     char globalDifficulty;
     
-    Dictionary<SeriaVector2, float> mapModifierHeightmap;
-    Dictionary<SeriaVector2, byte> localSpawnDifficulty; //SPEC : to avoid the gen into the castle
+    public Dictionary<SeriaVector2, float> mapModifierHeightmap;
+    public Dictionary<SeriaVector2, byte> localSpawnDifficulty; //SPEC : to avoid the gen into the castle
     Dictionary<int, Castle> mapCastlePiecesPlacement;
 
     //TODO
@@ -28,8 +28,10 @@ public class Rule
         mapCastlePiecesPlacement = new Dictionary<int, Castle>();
     }
 
-    public Rule(Vector3[] heightmap, Color[] difficulty) : this()
+    public Rule(Vector3[] heightmap, Color[] difficulty, byte size, int money) : this()
     {
+        this.size = size;
+        this.maxBudget = money;
         float accurancyEpsilon = 0.1f;
         for (int i = 0; i < heightmap.Length; i++)
         {
@@ -45,14 +47,14 @@ public class Rule
         }
     }
 
-    public Vector3[] loadHeightmap(Vector3[] heightmap, int size)
+    public Vector3[] loadHeightmap(Vector3[] heightmap)
     {
 
         foreach (var entry in mapModifierHeightmap)
         {
             try
             {
-                heightmap[(int) (entry.Key.X+size) * (size*2+1) + (int) entry.Key.Z+size] =
+                heightmap[(int) (entry.Key.X) * (size) + (int) entry.Key.Z] =
                     new Vector3(entry.Key.X, entry.Value, entry.Key.Z);
                 
             }
@@ -65,14 +67,14 @@ public class Rule
         return heightmap;
     }
     
-    public Color[] loadDifficulty(Color[] difficulty, int size)
+    public Color[] loadDifficulty(Color[] difficulty)
     {
 
         foreach (var entry in localSpawnDifficulty)
         {
             try
             {
-                difficulty[(int) (entry.Key.X+size) * (size*2+1) + (int) entry.Key.Z+size] =
+                difficulty[(int) (entry.Key.X) * (size) + (int) entry.Key.Z] =
                     new Color(entry.Value/4f,0f,0f);
                 Debug.Log("ok");
                 
@@ -138,7 +140,7 @@ public class Rule
     // CALMEZ VOUS
     public static void saveLevel(string file, Rule r)
     {
-        using (Stream stream = File.Open("levels/"+file+".lvl", FileMode.Create))
+        using (Stream stream = File.Open(Application.persistentDataPath+"/" +file+".lvl", FileMode.Create))
         {
             var bw = new BinaryWriter(stream);
 
@@ -146,15 +148,17 @@ public class Rule
             var sizeLocalDifficulty = 5 * r.localSpawnDifficulty.Count;
             var sizeCastle = 7 * r.mapCastlePiecesPlacement.Count;
 
-            var ptrModifier = 27;
+            var ptrModifier = 28; //
             var ptrLocalDifficulty = ptrModifier + sizeModifier;
             var ptrCastle = ptrLocalDifficulty + sizeLocalDifficulty;
 
             sizeModifier += ptrModifier;
             sizeLocalDifficulty += ptrLocalDifficulty;
             
+            
             bw.Write((byte)r.globalDifficulty);
             bw.Write((short)r.maxBudget);
+            bw.Write((byte)r.size);
             
             bw.Write((int)ptrModifier);
             bw.Write((int)sizeModifier);
@@ -190,7 +194,7 @@ public class Rule
     }
     public static Rule readLevel(string file)
     {
-        using (Stream stream = File.Open("levels/" + file + ".lvl", FileMode.Open))
+        using (Stream stream = File.Open(Application.persistentDataPath +"/"+ file + ".lvl", FileMode.Open))
         {
             var br = new BinaryReader(stream);
             Rule r = new Rule();
@@ -201,6 +205,8 @@ public class Rule
             i += 1;
             r.maxBudget = br.ReadInt16();
             i += 2;
+            r.size = br.ReadByte();
+            i += 1;
             
             var ptrModifier = br.ReadInt32();
             var sizeModifier = br.ReadInt32();

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724a60585ba6b8c4aa031c0ca8983301, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  soundVolume: 0
-  musicVolume: 0
+  soundVolume: 0.5
+  musicVolume: 0.5
   language: 0
   invertCameraX: 0
+  invertCameraY: 0

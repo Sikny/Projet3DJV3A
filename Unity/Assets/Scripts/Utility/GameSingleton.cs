@@ -1,9 +1,9 @@
-﻿using System;
-using CustomEvents;
+﻿using CustomEvents;
 using Game;
 using Language;
 using Sounds;
 using UI;
+using Units.PathFinding;
 using UnityEngine;
 
 namespace Utility {
@@ -14,50 +14,48 @@ namespace Utility {
         private static GameSingleton _instance;
         public static GameSingleton Instance => _instance;
 
-        [Header("Events")]
-        public CustomEvent updateLoop;
+        [Header("Events")] public CustomEvent updateLoop;
         public CustomEvent fixedUpdateLoop;
         public CustomEvent lateUpdateLoop;
-        
+
         [HideInInspector] public SceneManager sceneManager;
-        [Space]
-        public GameVariables gameVariables;
+        [Space] public GameVariables gameVariables;
         [HideInInspector] public LevelManager levelManager;
 
         public GameSettings gameSettings;
         public LanguageDictionary languageDictionary;
 
-        [Space]
-        public EndGamePanel endGamePanel;
-        
-        //[Space]
-        //public Inventory inventory;
+        [Space] public EndGamePanel endGamePanel;
 
         public StoreUnitList storeUnitList;
-        [Space]
-        [HideInInspector] public bool gamePaused;
+        [Space] [HideInInspector] public bool gamePaused;
 
         private Player _player;
 
         public EntityTypeToSprite entityTypeToSprite;
 
-        public string tokenConnection;
+        //public string tokenConnection;
 
         public UiManager uiManager;
-
         public SoundManager soundManager;
-
         public TokenManager tokenManager;
-        
+
+        public AStarHandler aStarHandler;
+
+        public string filename;
         private void Awake() {
-            PlayerPrefs.DeleteAll();
             if (_instance != null && _instance != this) {
                 Destroy(gameObject);
                 return;
             }
+
             _instance = this;
             DontDestroyOnLoad(gameObject);
             
+#if UNITY_EDITOR
+            PlayerPrefs.DeleteAll();
+#endif
+            soundManager.Init();
             _player = new Player();
             sceneManager = new SceneManager();
             sceneManager.LoadScene("Menu");
@@ -68,11 +66,12 @@ namespace Utility {
         private void Update() {
             updateLoop.Raise();
         }
+
         private void FixedUpdate() {
             fixedUpdateLoop.Raise();
         }
+
         private void LateUpdate() {
-            
             lateUpdateLoop.Raise();
         }
 
@@ -93,20 +92,12 @@ namespace Utility {
             return _player;
         }
 
-        private bool _gameEnded;
-        public void EndGame(int status) { 
-            //if (_gameEnded) return;
-            _gameEnded = true;
+        public void EndGame(int status) {
             endGamePanel.TypeEndGame = status;
             endGamePanel.gameObject.SetActive(true);
             _player.Save();
         }
 
-        public void SetGameEnded(bool gameEnded)
-        {
-            _gameEnded = gameEnded;
-        }
-    
         public void PauseGame() {
             Time.timeScale = 0f;
             gamePaused = true;

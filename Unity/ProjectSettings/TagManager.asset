@@ -36,7 +36,7 @@ TagManager:
   - 
   - 
   - 
-  - Hidden
+  - CameraHidden
   m_SortingLayers:
   - name: Default
     uniqueID: 0
