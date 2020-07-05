@@ -11,7 +11,7 @@ namespace Units {
 
         public RectTransform fillBar;
         public MeshRenderer circleRenderer;
-
+        public MeshRenderer entityRenderer;
         public GameObject hitParticles;
         public GameObject effectiveHitParticles;
         public GameObject notEffectiveHitParticles;

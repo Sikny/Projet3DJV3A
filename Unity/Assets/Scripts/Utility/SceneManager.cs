@@ -45,9 +45,9 @@ namespace Utility {
 
                     if (string.IsNullOrEmpty(token) || token.Length < 8) {
                         Popups.instance.Popup("Not connected!", Color.red);
-#if UNITY_EDITOR
+                        #if UNITY_EDITOR
                         Debug.Log("Non connecté");
-#endif
+                        #endif
                     }
                     else {
                         GameSingleton.Instance.tokenManager.CheckToken(token, "scene.load.freeMode");

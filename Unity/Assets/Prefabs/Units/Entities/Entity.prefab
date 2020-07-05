@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillBar: {fileID: 3351929016779209979}
   circleRenderer: {fileID: 5705931590385838688}
+  entityRenderer: {fileID: 6425608356802247544}
   hitParticles: {fileID: 5246859762993817986}
   effectiveHitParticles: {fileID: 3615504290006116335}
   notEffectiveHitParticles: {fileID: 4028375930194285825}
@@ -330,7 +331,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 881c6dc11dfc30f4f81892837331f44c, type: 2}
+  - {fileID: 2100000, guid: ca35d911fb1906d4f937af5496c8d8e7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

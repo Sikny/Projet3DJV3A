@@ -22,7 +22,9 @@ namespace Units {
         public LayerMask groundMask;
         public float rotationSpeed = 300f;
         public float speed = 5f;
-        
+
+        public Material defaultMaterial;
+        public Material selectedMaterial;
         public const float YPos = 0.5f;
 
         public bool isRunning;
@@ -103,7 +105,20 @@ namespace Units {
             // Allied Unit selection
             if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
             {
+                if (UnitLibData.selectedUnit != null)
+                {
+                    foreach (var entity in UnitLibData.selectedUnit.entities)
+                    {
+                        entity.entityRenderer.material = defaultMaterial;
+                    }   
+                }
                 UnitLibData.selectedUnit = hit.transform.GetComponentInParent<PlayerUnit>();
+                foreach (var entity in UnitLibData.selectedUnit.entities)
+                {
+                    entity.entityRenderer.material = selectedMaterial;
+                }
+
+                //UnitLibData.selectedUnit.entities
             }
             else if (UnitLibData.selectedUnit != null)
             {
