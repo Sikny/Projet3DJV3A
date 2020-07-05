@@ -12,6 +12,7 @@
         Pass
         {
             CGPROGRAM
+
             #pragma vertex vert
             #pragma fragment frag
             // make fog work
@@ -32,6 +33,7 @@
                 UNITY_FOG_COORDS(1)
                 float4 col:COLOR;
                 float4 vertex : SV_POSITION;
+                float4 global : TEXCOORD1;
             };
 
             sampler2D _MainTex;
@@ -44,13 +46,18 @@
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 o.col = v.col;
+                o.global = mul(unity_ObjectToWorld, v.vertex);
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
+                
                 fixed4 col = i.col;
+                if(!(-0.5 < i.global.y && i.global.y < 0.5)){
+                    col = float4(0,0,0,0);
+                }
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;

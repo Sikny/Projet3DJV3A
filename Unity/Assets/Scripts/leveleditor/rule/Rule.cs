@@ -40,7 +40,7 @@ public class Rule
             {
                 mapModifierHeightmap.Add(new SeriaVector2(heightmap[i].x, heightmap[i].z), heightmap[i].y);
             }
-            if (accurancyEpsilon <= difficulty[i].r)
+            if (accurancyEpsilon <= difficulty[i].r && -0.5f < heightmap[i].y && heightmap[i].y < 0.5f)
             {
                 localSpawnDifficulty.Add(new SeriaVector2(heightmap[i].x,heightmap[i].z),(byte)(difficulty[i].r*4) );
             }
