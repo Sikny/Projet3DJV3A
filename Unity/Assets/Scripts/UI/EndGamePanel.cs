@@ -16,6 +16,7 @@ namespace UI {
         public TextMeshProUGUI loseMessage;
         public GameObject retryBtn;
         public GameObject nextBtn;
+        public GameObject quitBtn;
         public SystemUnit systemUnit;
         public EndGame endGame; // arcade
         
@@ -29,6 +30,7 @@ namespace UI {
                             winMessage.gameObject.SetActive(false);
                             loseMessage.gameObject.SetActive(true);
                             retryBtn.SetActive(true);
+                            quitBtn.SetActive(true);
                             nextBtn.SetActive(false);
                         }
                         else
@@ -37,6 +39,7 @@ namespace UI {
                             loseMessage.gameObject.SetActive(false);
                             retryBtn.SetActive(false);
                             nextBtn.SetActive(false);
+                            quitBtn.SetActive(false);
                             endGame.gameObject.SetActive(true);
                             retryBtn.SetActive(false);
                             GameSingleton.Instance.GetPlayer().arcadeGold = 150;
@@ -49,6 +52,7 @@ namespace UI {
                         winMessage.gameObject.SetActive(true);
                         loseMessage.gameObject.SetActive(false);
                         retryBtn.SetActive(false);
+                        quitBtn.SetActive(true);
                         nextBtn.SetActive(true);
 
                         if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE)

@@ -117,6 +117,7 @@ namespace Utility {
             
             loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade-1));
             loadedLevel.Init();
+            loadedLevel = grp.respawnEnnemies(loadedLevel);
         }
     }
 }

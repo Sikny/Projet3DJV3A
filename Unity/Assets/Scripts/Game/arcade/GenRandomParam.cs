@@ -56,6 +56,20 @@ public class GenRandomParam : MonoBehaviour
         return levelNew;
     }
 
+    public Level respawnEnnemies(Level l)
+    {
+        Random rand = new Random(GameSingleton.Instance.GetPlayer().currentSeed);
+        var height = l.terrainBuilder.terrainOptions.modifierHeightMap;
+        foreach (var ennemy in l.enemySpawns)
+        {
+            while (height.ContainsKey(ennemy.position))
+            {
+                ennemy.position = new Vector2(rand.Next(-25,25),rand.Next(-25,25));
+            }
+        }
+        return l;
+    }
+    
     public static EntityType softEntityType(Random rand, EntityType type, float difficult)
     {
         if (rand.NextDouble() > difficult)

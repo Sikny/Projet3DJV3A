@@ -7,6 +7,8 @@ namespace Units  {
     public class AiUnit : AbstractUnit {
         private AbstractUnit _previousTarget;
         
+        private float _timeLeft;
+
         public override bool Init(EntityType idType, Entity entityModel, int entityCountP)
         {
             bool initState = base.Init(idType, entityModel, entityCountP);
@@ -20,8 +22,10 @@ namespace Units  {
         public override void UpdateUnit() {
             if (!initialized) return;
 
-            if (unitTarget == null) {
+            _timeLeft -= Time.deltaTime;
+            if (unitTarget == null || _timeLeft <= 0) {
                 _previousTarget = unitTarget;
+                
                 unitTarget = GuessTheBestUnitToTarget();
                 if (unitTarget != _previousTarget) {
                     brain.UnlockPosition();
@@ -80,6 +84,8 @@ namespace Units  {
                     }
                 }
             }
+            _timeLeft = 2f;
+
             return best;
         }
 
