@@ -4,7 +4,9 @@ using Utility;
 using Random = UnityEngine.Random;
 
 namespace Units {
-    public class PlayerUnit : AbstractUnit {
+    public class PlayerUnit : AbstractUnit
+    {
+        private float _timeLeft = 0.0f;
         public override bool Init(EntityType idType, Entity entityModel, int entityCountP) {
             bool value = base.Init(idType, entityModel, entityCountP);
 
@@ -15,8 +17,9 @@ namespace Units {
 
         public override void UpdateUnit() {
             if (!initialized) return;
-
-            if (unitTarget == null) {
+            _timeLeft -= Time.deltaTime;
+            if (unitTarget == null || _timeLeft <= 0)
+            {
                 unitTarget = GuessTheBestUnitToTarget();
             }
 
@@ -59,7 +62,8 @@ namespace Units {
             }
         }
 
-        private AiUnit GuessTheBestUnitToTarget() {
+        private AiUnit GuessTheBestUnitToTarget()
+        {
             AiUnit best = null;
             float bestDistance = float.PositiveInfinity;
             foreach (var unit in UnitLibData.units) {
@@ -71,6 +75,8 @@ namespace Units {
                     }
                 }
             }
+            _timeLeft = 0.7f;
+
             return best;
         }
 
