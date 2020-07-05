@@ -103,6 +103,31 @@ PrefabInstance:
       propertyPath: meshObjects.Array.data[5]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key3.r
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key3.g
+      value: 0.45306095
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key4.r
+      value: 0.8018868
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key4.g
+      value: 0.38420963
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key4.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
       propertyPath: rules.seedWorld

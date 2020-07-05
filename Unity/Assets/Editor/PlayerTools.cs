@@ -12,8 +12,9 @@ namespace Editor {
 
         [MenuItem("Tools/Set Player Data As Default")]
         public static void ResetDefaultPlayerData() {
-            InitData();
+            
             PlayerPrefs.DeleteAll();
+            InitData();
             _inventory.Clear();
             var soldierItem = FindUnitByName(_availableUnits, "Soldier");
             // Begin with 2 soldiers
