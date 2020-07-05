@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using leveleditor.rule;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
@@ -130,9 +131,9 @@ public class Map
                      float heightmapOffset =  amplitude * (float) Math.Exp(-1f / radiusTool * (x * x + z * z));
                      if (0 <= globalX && globalX <= SIZE -1 && 0 <= globalZ && globalZ <= SIZE -1)
                          if(mode==0)
-                            localDifficulty[globalX * (SIZE) + globalZ].r += heightmapOffset*Time.deltaTime;
+                            localDifficulty[globalX * (SIZE) + globalZ].r += heightmapOffset*Time.deltaTime/255f;
                         else if(mode==1)
-                             localDifficulty[globalX * (SIZE) + globalZ].r -= heightmapOffset*Time.deltaTime;
+                             localDifficulty[globalX * (SIZE) + globalZ].r -= heightmapOffset*Time.deltaTime/255f;
                  }
              }
          }

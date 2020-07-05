@@ -2,7 +2,6 @@
 using Units.Pathfinding;
 using Units.PathFinding;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Scenes.AStarTests {
     public class Initializer : MonoBehaviour {

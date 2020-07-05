@@ -53,9 +53,6 @@ namespace Utility {
             _instance = this;
             DontDestroyOnLoad(gameObject);
             
-#if UNITY_EDITOR
-            PlayerPrefs.DeleteAll();
-#endif
             soundManager.Init();
             _player = new Player();
             sceneManager = new SceneManager();

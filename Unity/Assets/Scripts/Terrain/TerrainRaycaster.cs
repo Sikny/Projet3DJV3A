@@ -28,8 +28,8 @@ namespace Terrain {
                 Vector3 hitPos = hit.point;
                 float xHit = Mathf.Floor(hitPos.x);
                 float zHit = Mathf.Floor(hitPos.z);
-                int posX = (int) xHit + width/2;
-                int posZ = (int) zHit + height/2;
+                int posX = (int) xHit;
+                int posZ = (int) zHit;
                 TerrainGrid.Instance.SelectZone(posZ, posX);
             }
 

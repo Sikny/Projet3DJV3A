@@ -24,7 +24,6 @@ namespace UI {
 
         private void Awake() {
             if (instance != null) {
-                Debug.Log("Several instances");
                 return;
             }
 

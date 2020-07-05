@@ -1,6 +1,7 @@
 ﻿using System;
 using Game;
 using Items;
+using leveleditor.rule;
 using UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -117,6 +118,7 @@ namespace Utility {
             
             loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade-1));
             loadedLevel.Init();
+            loadedLevel = grp.respawnEnnemies(loadedLevel);
         }
     }
 }

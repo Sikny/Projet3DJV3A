@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using leveleditor.rule;
 using UnityEngine;
 
 public class RuleIOFile : MonoBehaviour

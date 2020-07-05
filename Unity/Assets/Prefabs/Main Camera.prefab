@@ -109,9 +109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  pitch: 2
   zoomSpeed: 6
-  camera: {fileID: 1657578593964637179}
+  mainCamera: {fileID: 1657578593964637179}
   minZoom: 10
   maxZoom: 40
 --- !u!114 &1657578593964637178
@@ -180,7 +179,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   volumeAnchorOverride: {fileID: 0}
-  antialiasing: 0
+  antialiasing: 2
   SMAAQuality: 2
   dithering: 0
   stopNaNs: 0

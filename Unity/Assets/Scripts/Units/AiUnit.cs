@@ -5,7 +5,9 @@ using Random = UnityEngine.Random;
 
 namespace Units  {
     public class AiUnit : AbstractUnit {
-        private float _timeLeft = 0.0f;
+        private AbstractUnit _previousTarget;
+        
+        private float _timeLeft;
 
         public override bool Init(EntityType idType, Entity entityModel, int entityCountP)
         {
@@ -19,17 +21,24 @@ namespace Units  {
 
         public override void UpdateUnit() {
             if (!initialized) return;
+
             _timeLeft -= Time.deltaTime;
-            if (unitTarget == null || _timeLeft <= 0)
-            {
+            if (unitTarget == null || _timeLeft <= 0) {
+                _previousTarget = unitTarget;
+                
                 unitTarget = GuessTheBestUnitToTarget();
+                if (unitTarget != _previousTarget) {
+                    brain.UnlockPosition();
+                }
             }
             else {
-                targetPosition = unitTarget.GetPosition();
-                isMoving = true;
+                if (!brain.positionLocked){
+                    targetPosition = unitTarget.GetPosition();
+                    isMoving = true;
+                }
             }
             
-            brain.interract(false, unitTarget, targetPosition);
+            brain.Interract(false, unitTarget, targetPosition);
 
             UpdateTimeoutEffects();
             
@@ -37,13 +46,13 @@ namespace Units  {
         }
 
         public override void Attack(AbstractUnit anotherUnit, float damage) {
-            int indexEntityAttack = Random.Range(0, entityCount);
+            int indexEntityAttack = Random.Range(1, entityCount);
             Entity entityAttack = GetEntity(indexEntityAttack);
             
             float coef = GetEfficientCoef(this, anotherUnit);
             int efficientCoef = GetEfficiencyType(coef);
 
-            if (anotherUnit.GetNumberAlive() > 0) {
+            if (anotherUnit.GetNumberAlive() > 1) {
                 int indexEntityDefense = Random.Range(1, entityCount);
                 Entity entityDefense = anotherUnit.GetEntity(indexEntityDefense);
 
@@ -54,13 +63,13 @@ namespace Units  {
                     anotherUnit.PopEntity(indexEntityDefense);
                 }
             }
-            /*else if(anotherUnit.GetNumberAlive() == 1) {
+            else if(anotherUnit.GetNumberAlive() == 1) {
                 if (entityAttack != null) {
                     entityAttack.Attack(anotherUnit.GetEntity(0), -100, efficientCoef);
                     anotherUnit.PopEntity(0); // Le leader est attrapé
                     unitTarget = null; //important pour indiquer à l'IA de commencer de nouvelles recherches
                 }
-            }*/
+            }
         }
         
         private PlayerUnit GuessTheBestUnitToTarget() {

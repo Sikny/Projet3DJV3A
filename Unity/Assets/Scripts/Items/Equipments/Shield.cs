@@ -18,7 +18,6 @@ namespace Items.Equipments {
          }
          else
          {
-            //Debug.Log("no selected unit");
             Popups.instance.Popup("No Unit Selected!", Color.red);
          }//TODO gérer un message d'erreur
       }

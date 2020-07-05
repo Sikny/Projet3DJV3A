@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   consumables: []
   equipments: []
-  units: []
+  units:
+  - {fileID: 11400000, guid: f31b04ebfc4748141af4d82e75d1c293, type: 2}
+  - {fileID: 11400000, guid: f31b04ebfc4748141af4d82e75d1c293, type: 2}
   selectedStoreUnit: {fileID: 0}

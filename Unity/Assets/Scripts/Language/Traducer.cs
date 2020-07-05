@@ -33,6 +33,12 @@ namespace Language {
             }
         }
 
+        public string Translate(string value) {
+            return GameSingleton.Instance.languageDictionary.SearchAndTraduce(value,
+                GameSingleton.Instance.gameSettings.language);
+        }
+
+        // for settings
         public void ChangeLanguage(int value) {
             Language oldLanguage = GameSingleton.Instance.gameSettings.language;
             Language newLanguage = (Language) value;

@@ -20,8 +20,6 @@ namespace Utility {
         }
 
         public void LoadScene(string sceneName) {
-            UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
-
             Player player = GameSingleton.Instance.GetPlayer();
             SoundManager soundManager = GameSingleton.Instance.soundManager;
             switch (sceneName) {
@@ -29,6 +27,7 @@ namespace Utility {
                     //soundManager.StopPlaying("Level theme");
                     soundManager.StopPlayingAllMusics();
                     soundManager.Play("Menu");
+                    UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
                     break;
                 case "StoryMode":
                     Shop.Instance.ClearShop();
@@ -39,15 +38,13 @@ namespace Utility {
 
                     //soundManager.StopPlaying("Menu");
                     soundManager.Play("Level theme");
+                    UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
                     break;
                 case "freeMode":
                     string token = player.token;
 
                     if (string.IsNullOrEmpty(token) || token.Length < 8) {
                         Popups.instance.Popup("Not connected!", Color.red);
-                        #if UNITY_EDITOR
-                        Debug.Log("Non connecté");
-                        #endif
                     }
                     else {
                         GameSingleton.Instance.tokenManager.CheckToken(token, "scene.load.freeMode");
@@ -56,10 +53,12 @@ namespace Utility {
 
                         soundManager.StopPlayingAllMusics();
                         soundManager.Play("Level theme");
+                        UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
                     }
                     break;
                 case "loadLvl":
                     GameSingleton.Instance.GetPlayer().gamemode = Player.Gamemode.PERSONNALIZED;
+                    UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
                     break;
             }
         }

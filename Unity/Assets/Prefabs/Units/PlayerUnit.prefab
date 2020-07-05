@@ -17,6 +17,8 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   isMoving: 0
   circleMaterial: {fileID: 2100000, guid: d9d8b48d51921e94891fa5836ac8aa91, type: 2}
+  onPlayerUnitOnDestination: {fileID: 11400000, guid: 6963719cabb43be4a96111c4668c09e6,
+    type: 2}
 --- !u!1001 &5130318464783622912
 PrefabInstance:
   m_ObjectHideFlags: 0

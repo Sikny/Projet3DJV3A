@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terrain;
 using Unity.Collections;
 using Unity.Jobs;
@@ -9,7 +8,7 @@ namespace Units.PathFinding {
     public class AStarHandler : MonoBehaviour {
         [SerializeField] private Transform terrainStart;
         [SerializeField] private Transform terrainEnd;
-        
+
         private int[][] _grid;
         private int _gridSize;
 
@@ -20,13 +19,15 @@ namespace Units.PathFinding {
 
         public void Init(TerrainOptions terrainOptions) {
             _gridSize = terrainOptions.width;
-            
+
             // Terrain limits
             Vector3 halfVec = Vector3.one / 2;
             halfVec.y = 0f;
-            terrainStart.position = - Vector3.right * terrainOptions.width/2 - Vector3.forward * terrainOptions.height/2 + halfVec;
-            terrainEnd.position = Vector3.right * terrainOptions.width/2 + Vector3.forward * terrainOptions.height/2 - halfVec;
-            float castHeight = terrainOptions.maxMountainHeight+2;
+            terrainStart.position = -Vector3.right * terrainOptions.width / 2 -
+                Vector3.forward * terrainOptions.height / 2 + halfVec;
+            terrainEnd.position = Vector3.right * terrainOptions.width / 2 +
+                Vector3.forward * terrainOptions.height / 2 - halfVec;
+            float castHeight = terrainOptions.maxMountainHeight + 2;
 
             // INIT GRID
             int xInd = 0, zInd = 0;
@@ -39,13 +40,15 @@ namespace Units.PathFinding {
                     _grid[zInd][xInd] = hitInfo.point.y > 0.01f || hitInfo.point.y < -0.01f ? 1 : 0;
                     xInd++;
                 }
+
                 xInd = 0;
                 zInd++;
             }
-            
+
             terrainStart.position = halfVec;
-            terrainEnd.position = Vector3.right * terrainOptions.width + Vector3.forward * terrainOptions.height - halfVec;
-            
+            terrainEnd.position =
+                Vector3.right * terrainOptions.width + Vector3.forward * terrainOptions.height - halfVec;
+
 
             _wayPoints = new List<Vector3>();
 
@@ -67,7 +70,7 @@ namespace Units.PathFinding {
                             var targetIdx = i1 * colsCount + j1;
 
                             if (_grid[i][j] != 1 && _grid[i1][j1] != 1 && (i == i1 && Mathf.Abs(j - j1) == 1 ||
-                                                                         j == j1 && Mathf.Abs(i - i1) == 1)) {
+                                                                           j == j1 && Mathf.Abs(i - i1) == 1)) {
                                 _costMatrix[sourceIdx * costMatrixWidth + targetIdx] = 1;
                             }
                             else {
@@ -79,14 +82,14 @@ namespace Units.PathFinding {
             }
         }
 
-        private int PosToId(Vector3 pos)
-        {
+        private int PosToId(Vector3 pos) {
+            if (pos.x < 0) pos.x = 0;
+            if (pos.z < 0) pos.z = 0;
             return Mathf.FloorToInt(pos.z) * _gridSize + Mathf.FloorToInt(pos.x);
         }
 
-        public bool UpdateTransform(Transform unitToMove, Vector3 destination, float unitSpeed) {
+        public void UpdateTransform(Transform unitToMove, Vector3 destination, float unitSpeed) {
             Transform targetTransform = unitToMove.transform;
-            bool isAtDestination = false;
             var linesCount = _grid.Length;
             var colsCount = _grid[0].Length;
             var costMatrixWidth = linesCount * colsCount;
@@ -97,10 +100,10 @@ namespace Units.PathFinding {
                     var sourceIdx = i * colsCount + j;
 
                     _heuristicMatrix[sourceIdx] = Mathf.Abs(i - Mathf.FloorToInt(destination.z)) +
-                                                 Mathf.Abs(j - Mathf.FloorToInt(destination.x));
+                                                  Mathf.Abs(j - Mathf.FloorToInt(destination.x));
                 }
             }
-            
+
             var position = targetTransform.position;
             var job = new PathFindingJob {
                 costMatrix = _costMatrix,
@@ -116,11 +119,12 @@ namespace Units.PathFinding {
             var handler = job.Schedule();
 
             handler.Complete();
-            
+
             _wayPoints.Clear();
             for (var n = 1; n < job.bestPath.Length; n++) {
                 var node = job.bestPath[n];
-                var nodePos = new Vector3(node % _gridSize + 0.5f, targetTransform.position.y, Mathf.FloorToInt(node / (float) _gridSize) + 0.5f);
+                var nodePos = new Vector3(node % _gridSize + 0.5f, targetTransform.position.y,
+                    Mathf.FloorToInt(node / (float) _gridSize) + 0.5f);
                 _wayPoints.Add(nodePos);
             }
 
@@ -129,7 +133,7 @@ namespace Units.PathFinding {
             job.bestPath.Dispose();
 
             // Show Debug Path
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             var lastPoint = targetTransform.position;
             for (var i = 0; i < _wayPoints.Count; i++) {
                 var point = _wayPoints[i];
@@ -137,7 +141,7 @@ namespace Units.PathFinding {
 
                 lastPoint = point;
             }
-            #endif
+#endif
 
             // Move Target
             if (_wayPoints.Count > 0) {
@@ -149,17 +153,17 @@ namespace Units.PathFinding {
                 if (distanceToTarget <= Time.deltaTime * unitSpeed) {
                     targetTransform.position = point;
                     _wayPoints.RemoveAt(0);
-                    isAtDestination = true;
                 }
                 else {
-                    targetTransform.position += Time.deltaTime * unitSpeed * UnitLibData.speed * vectorToTarget / distanceToTarget;
+                    targetTransform.position += Time.deltaTime * unitSpeed * UnitLibData.speed * vectorToTarget /
+                                                distanceToTarget;
                     //unitToMove.SetPosition(unitToMove.transform.position);
                     //_targetRotation = Quaternion.LookRotation(vectorToTarget, Vector3.up);
                 }
             }
+
             /*targetTransform.rotation =
                 Quaternion.RotateTowards(targetTransform.rotation, _targetRotation, rotateSpeed - Time.deltaTime);*/
-            return isAtDestination;
         }
     }
 }
