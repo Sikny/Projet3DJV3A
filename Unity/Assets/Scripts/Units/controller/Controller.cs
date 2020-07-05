@@ -17,11 +17,12 @@ namespace Units
         protected bool isLastUpgarde;
         protected float basisDefense;
         protected float basisSpeed;
-        
+        public float MultiplierScore { get; set; }
 
         protected float deltaTime;
         protected Controller(AbstractUnit body)
         {
+            MultiplierScore = 1.0f;
             this.body = body;
             deltaTime = 0.0f;
         }

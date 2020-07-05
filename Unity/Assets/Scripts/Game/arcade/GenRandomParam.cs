@@ -45,15 +45,43 @@ public class GenRandomParam : MonoBehaviour
 
             Array values = Enum.GetValues(typeof(EntityType));
             es.entityType = (EntityType)values.GetValue(rand.Next(values.Length));
+            es.entityType = softEntityType(rand, es.entityType, (i - 2)/3f );
             levelNew.enemySpawns.Add(es);
         }
         levelList.addLevel(levelNew);
         return levelNew;
     }
 
+    public EntityType softEntityType(Random rand, EntityType type, float difficult)
+    {
+        if (rand.NextDouble() > difficult)
+        {
+            switch (type)
+            {
+                case EntityType.Arbalist: type = EntityType.Archer; break;
+                case EntityType.Bard: type = EntityType.Mage; break;
+                case EntityType.Catapultist: type = EntityType.Archer;break;
+                case EntityType.Demonist: type = EntityType.Mage;break;
+                case EntityType.Executionist: type = EntityType.Soldier;break;
+                case EntityType.Horseman: type = EntityType.Soldier;break;
+                case EntityType.Hunter: type = EntityType.Archer;break;
+                case EntityType.Knight: type = EntityType.Soldier;break;
+                case EntityType.Sniper: type = EntityType.Archer;break;
+                case EntityType.Spearman: type = EntityType.Soldier;break;
+                case EntityType.BlackMage: type = EntityType.Mage;break;
+                case EntityType.MachineArc: type = EntityType.Archer;break;
+                case EntityType.RedMage: type = EntityType.Mage;break;
+                case EntityType.WhiteKnight: type = EntityType.Soldier;break;
+                case EntityType.WhiteMage: type = EntityType.Mage;break;
+            }
+        }
+
+        return type;
+    }
+    
     public void setDefaultGold(Level l)
     {
         
-        GameSingleton.Instance.GetPlayer().gold = l.enemySpawns.Count * 75;
+        //GameSingleton.Instance.GetPlayer().gold = l.enemySpawns.Count * 100;
     }
 }

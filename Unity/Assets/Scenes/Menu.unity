@@ -357,7 +357,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 384324984}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e61929fe19faaef4c8ae250f6b550333, type: 3}
@@ -657,6 +657,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 52626981739493152, guid: 828f59646a6dabd43b01c6ff4f269977,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 52626981739493153, guid: 828f59646a6dabd43b01c6ff4f269977,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -752,6 +757,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1381490061846991134, guid: 828f59646a6dabd43b01c6ff4f269977,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1381490062198467042, guid: 828f59646a6dabd43b01c6ff4f269977,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -787,7 +797,8 @@ PrefabInstance:
       propertyPath: connecteIndication
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2225793017054379525, guid: 828f59646a6dabd43b01c6ff4f269977, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 828f59646a6dabd43b01c6ff4f269977, type: 3}
 --- !u!1 &1188548965 stripped
 GameObject:
@@ -2370,6 +2381,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116286972650189974, guid: 3d42d8c19d71ca84f9f8db280e332ef1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3098614640421977014, guid: 3d42d8c19d71ca84f9f8db280e332ef1,
         type: 3}

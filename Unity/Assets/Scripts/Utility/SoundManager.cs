@@ -41,7 +41,48 @@ namespace Sounds
                 s.source.volume *= _settings.musicVolume;
             else
                 s.source.volume *= _settings.soundVolume;
+            
+            //Debug.Log("volume is " + s.source.volume);
             s.source.Play();
         }
+        
+        public void StopPlaying (string sound)
+        {
+            Sound s = Array.Find(sounds, item => item.name == sound);
+            if (s == null)
+            {
+                Debug.LogWarning("Sound: " + name + " not found!");
+                return;
+            }
+
+            //s.source.volume = s.volume * (1f + UnityEngine.Random.Range(-s.volumeVariance / 2f, s.volumeVariance / 2f));
+            //s.source.pitch = s.pitch * (1f + UnityEngine.Random.Range(-s.pitchVariance / 2f, s.pitchVariance / 2f));
+            //s.source.volume = 0;
+            //Debug.Log("stopping sound" + s.name);
+            s.source.Stop();
+        }
+
+        public void StopPlayingAllMusics()
+        {
+            foreach(var s in sounds)
+            {
+                if (s.loop)
+                {
+                    s.source.Stop();
+                }
+            }
+            //s.source.volume = s.volume * (1f + UnityEngine.Random.Range(-s.volumeVariance / 2f, s.volumeVariance / 2f));
+            //s.source.pitch = s.pitch * (1f + UnityEngine.Random.Range(-s.pitchVariance / 2f, s.pitchVariance / 2f));
+
+        }
+
+        public void StopPlayingAllSounds()
+        {
+            foreach (var s in sounds)
+            {
+                s.source.Stop();
+            }
+        }
+   
     }
 }

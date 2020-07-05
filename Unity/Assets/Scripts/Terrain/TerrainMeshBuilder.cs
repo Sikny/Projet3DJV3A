@@ -24,7 +24,6 @@ namespace Terrain {
         private MeshRenderer[] _meshRenderers;
         private static MeshCollider _meshCollider;
 
-        private MinMax _minMax;
         public Gradient heightGradient;
         public int textureResolution = 150;
 
@@ -88,8 +87,6 @@ namespace Terrain {
             _meshFilters = new MeshFilter[sides.Length];
             _meshRenderers = new MeshRenderer[sides.Length];
 
-            _minMax = new MinMax();
-
             foreach (TerrainSide terrainSide in sides) {
                 GameObject meshObj = new GameObject("TerrainMesh" + Enum.GetName(typeof(TerrainSide), terrainSide));
                 meshObj.layer = 8;    // Ground
@@ -138,7 +135,6 @@ namespace Terrain {
             texture.SetPixels(colours);
             texture.Apply();
 
-            material.SetVector("_YMinMax", new Vector4(_minMax.Min, _minMax.Max));
             material.SetTexture("_terrainTexture", texture);
         }
         
@@ -165,7 +161,6 @@ namespace Terrain {
                                 0f,
                                 -(percent.y - .5f) * TerrainGrid.Height);
                             point.y = CalculateHeight(point);
-                            _minMax.HandleValue(point.y);
                             vertices[i] = point;
 
                             if (x != resolution - 1 && y != resolution - 1) {
@@ -193,7 +188,6 @@ namespace Terrain {
                             Vector3 point = new Vector3((percent.x - .5f) * TerrainGrid.Width,
                                 -1f,
                                 -(percent.y - .5f) * TerrainGrid.Height);
-                            _minMax.HandleValue(point.y);
                             vertices[i] = point;
 
                             if (x != resolution - 1 && y != resolution - 1) {

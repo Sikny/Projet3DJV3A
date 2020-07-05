@@ -30,14 +30,16 @@ namespace Utility {
         [Space]
         public EndGamePanel endGamePanel;
         
-        [Space]
-        public Inventory inventory;
+        //[Space]
+        //public Inventory inventory;
 
         public StoreUnitList storeUnitList;
         [Space]
         [HideInInspector] public bool gamePaused;
 
         private Player _player;
+
+        public EntityTypeToSprite entityTypeToSprite;
 
         public string tokenConnection;
 
@@ -60,7 +62,6 @@ namespace Utility {
             sceneManager = new SceneManager();
             sceneManager.LoadScene("Menu");
         }
-
 
 
         // optimizations purposes

@@ -35,7 +35,7 @@ namespace Units {
         {
             return _life;
         }
-        
+
         private void KillEntity() {
             Destroy(gameObject);
         }
