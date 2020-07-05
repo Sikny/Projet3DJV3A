@@ -64,7 +64,7 @@ namespace Units {
             
             foreach (var cell in cursor.cursorCells)
             {
-                if (cell.posY > 0.1f || cell.posY <= -0.1f)
+                if (cell.posY > 0.1f || cell.posY <= -0.1f || !cell.IsOnGround())
                     return false;
             }
             return true;
@@ -123,37 +123,20 @@ namespace Units {
             if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
             {
 
-                if (UnitLibData.selectedUnit != null)
-                {
-                    foreach (var entity in UnitLibData.selectedUnit.entities)
-                    {
-                        if (entity == null)
-                        {
-                            continue;
-                        }
-
-                        entity.entityRenderer.material = defaultMaterial;
-                    }   
+                if (UnitLibData.selectedUnit != null) {
+                    DeselectUnit();
                 }
-                UnitLibData.selectedUnit = hit.transform.GetComponentInParent<PlayerUnit>();
-                foreach (var entity in UnitLibData.selectedUnit.entities)
-                {
-                    if (entity == null)
-                    {
-                        continue;
-                    }
-
-                    entity.entityRenderer.material = selectedMaterial;
-                }
-
-                //UnitLibData.selectedUnit.entities
+                SelectUnit(hit.transform.GetComponentInParent<PlayerUnit>());
             }
             else if (UnitLibData.selectedUnit != null)
             {
                 // Click on ground
-                if (Physics.Raycast(ray, out hit, 100f, 1 << 8))
-                {
-                    UnitLibData.selectedUnit.SetTargetPosition(TerrainGrid.Instance.cursor.transform.position);
+                if (Physics.Raycast(ray, out hit, 100f, 1 << 8)) {
+                    bool placeable = CheckPlaceable();
+                    if (placeable) {
+                        UnitLibData.selectedUnit.SetTargetPosition(TerrainGrid.Instance.cursor.transform.position);
+                        DeselectUnit();
+                    }
                 }
             }
         }
@@ -172,6 +155,40 @@ namespace Units {
                         units.RemoveAt(i);
                         break;
                     }
+                }
+            }
+        }
+
+        private void SelectUnit(PlayerUnit target) {
+            UnitLibData.selectedUnit = target;
+            foreach (var entity in UnitLibData.selectedUnit.entities)
+            {
+                if (entity == null)
+                {
+                    continue;
+                }
+
+                entity.entityRenderer.material = selectedMaterial;
+            }
+        }
+
+        private void DeselectUnit() {
+            foreach (var entity in UnitLibData.selectedUnit.entities)
+            {
+                if (entity == null)
+                {
+                    continue;
+                }
+
+                entity.entityRenderer.material = defaultMaterial;
+            }
+            UnitLibData.selectedUnit = null;
+        }
+
+        public void UnlockIa() {
+            for (int i = units.Count-1; i >= 0; i--) {
+                if (units[i].GetType() == typeof(AiUnit)) {
+                    units[i].brain.UnlockPosition();
                 }
             }
         }

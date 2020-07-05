@@ -20,14 +20,16 @@ namespace Units.Controllers.Archer {
             tickAttack = 2f;
         }
 
-        public override void interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget) {
-            if (target == null) return;
+        public override bool Interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget) {
+            if (target == null) return false;
             deltaTime += UnitLibData.deltaTime;
 
+            bool result = false;
             if (body.isMoving)
-                Move(isRemoted, target, positionTarget);
+                result = Move(isRemoted, target, positionTarget);
 
             if (_canShoot && deltaTime >= tickAttack) {
+                // TODO CHANGE THIS
                 for (int i = 0; i < body.GetNumberAlive(); i++) // Chaque entité de l'unité
                 {
                     float distance = Vector3.Distance(positionTarget, body.GetPosition());
@@ -36,7 +38,7 @@ namespace Units.Controllers.Archer {
                             2)); // calcul de la précision
                     if (ceilAccuracy >= Random.Range(0f, 1.0f)) {
                         GameSingleton.Instance.soundManager.Play("ArcherAttack");
-                        body.Attack(target, getAttackUnit(target));
+                        body.Attack(target, GetAttackUnit(target));
                     }
 
                     //get efficiency type 
@@ -44,27 +46,33 @@ namespace Units.Controllers.Archer {
 
                 deltaTime -= tickAttack;
             }
+
+            return result;
         }
 
-        private void Move(bool isRemoted, AbstractUnit target, Vector3 positionTarget) {
-            if (target == null) return;
+        private bool Move(bool isRemoted, AbstractUnit target, Vector3 positionTarget) {
+            if (target == null) return false;
 
             if (isRemoted) {
-                Vector3 last = body.GetPosition();
-                Vector3 posTarget = positionTarget;
-                
-                body.transform.position = Vector3.MoveTowards(last, posTarget, getVitessUnit());
-                _canShoot = true;
-            }
-            else {
+                int ind = 0;
+                for (int x = -1; x <= 1; x++) {
+                    for (int y = -1; y <= 1; y++) {
+                        Vector3 position = positionTarget + Vector3.right * x + Vector3.forward * y;
+                        if (body.entities[ind] == null) continue;
+                        if (body.entities[ind++].aStarEntity.MoveTo(position, GameSingleton.Instance.aStarHandler)) {
+                            body.SetPosition(positionTarget);
+                        }
+                    }
+                }
+            } else {
                 Vector3 last = body.GetPosition();
                 Vector3 posTarget = target.GetPosition();
                 if (Vector3.Distance(last, posTarget) <= OptimalDistance - 0.2f) {
-                    body.transform.position = Vector3.MoveTowards(last, posTarget, -getVitessUnit());
+                    body.transform.position = Vector3.MoveTowards(last, posTarget, -GetVitessUnit());
                     _canShoot = false;
                 }
                 else if (Vector3.Distance(last, posTarget) >= OptimalDistance + 0.2f) {
-                    body.transform.position = Vector3.MoveTowards(last, posTarget, getVitessUnit());
+                    body.transform.position = Vector3.MoveTowards(last, posTarget, GetVitessUnit());
                     _canShoot = false;
                 }
                 else {
@@ -72,6 +80,8 @@ namespace Units.Controllers.Archer {
                     _canShoot = true;
                 }
             }
+
+            return false;
         }
     }
 }

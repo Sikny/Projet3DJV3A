@@ -20,9 +20,9 @@ namespace Units.Controllers
             deltaTime = 0.0f;
         }
 
-        public abstract void interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget);
+        public abstract bool Interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget);
 
-        protected float getVitessUnit()
+        protected float GetVitessUnit()
         {
             float baseVitess = UnitLibData.speed * Time.deltaTime * basisSpeed;
 
@@ -33,7 +33,7 @@ namespace Units.Controllers
 
             return baseVitess /*+ bonusEquipmentLevel*/+  bonusLevel * baseVitess * 0.5f;
         }
-        protected float getAttackUnit(AbstractUnit target)
+        protected float GetAttackUnit(AbstractUnit target)
         {
 
             Effect effect = target.GetEffect(1); //defense
@@ -44,8 +44,29 @@ namespace Units.Controllers
 
 
             return basisAttack/(bonusLevel*target.brain.basisDefense);// + bonusEquipmentLevel;
+        }
 
+        protected Entity GetFirstLivingEntity() {
+            int ind = 0;
+            for (int x = -1; x <= 1; x++) {
+                for (int y = -1; y <= 1; y++) {
+                    if (body.entities[ind] != null) return body.entities[ind];
+                    ind++;
+                }
+            }
+            return null;
+        }
 
+        public bool positionLocked;
+        protected void LockPosition(Vector3 position) {
+            Debug.Log("IA LOCKED");
+            positionLocked = true;
+            body.targetPosition = position;
+        }
+
+        public void UnlockPosition() {
+            Debug.Log("IA UNLOCKED");
+            positionLocked = false;
         }
     }
 }

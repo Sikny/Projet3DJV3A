@@ -1,10 +1,12 @@
-﻿using System;
+﻿using CustomEvents;
 using UnityEngine;
 using Utility;
 using Random = UnityEngine.Random;
 
 namespace Units {
     public class PlayerUnit : AbstractUnit {
+        [SerializeField] private CustomEvent onPlayerUnitOnDestination;
+        
         public override bool Init(EntityType idType, Entity entityModel, int entityCountP) {
             bool value = base.Init(idType, entityModel, entityCountP);
 
@@ -20,7 +22,9 @@ namespace Units {
                 unitTarget = GuessTheBestUnitToTarget();
             }
 
-            brain.interract(true, unitTarget, targetPosition);
+            if (brain.Interract(true, unitTarget, targetPosition)) {
+                onPlayerUnitOnDestination.Raise();
+            }
 
             UpdateTimeoutEffects();
 
@@ -76,10 +80,6 @@ namespace Units {
 
         public void SetTargetPosition(Vector3 cursorPos) {
             targetPosition = new Vector3(cursorPos.x, SystemUnit.YPos, cursorPos.z);
-
-            //Vector of unit to point 
-            Vector3 unitToTarget = (targetPosition - position);
-            unitToTarget.Normalize();
 
             isMoving = true;
         }

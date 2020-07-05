@@ -14,45 +14,50 @@ namespace Units.Controllers.Mage {
             //upgrades.Add(EntityType.something);
         }
 
-        public override void interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget) {
+        public override bool Interract(bool isRemoted, AbstractUnit target, Vector3 positionTarget) {
             deltaTime += UnitLibData.deltaTime;
 
+            bool result = false;
             if (body.isMoving)
-                Move(isRemoted, target, positionTarget);
+                result = Move(isRemoted, target, positionTarget);
 
             if (_canShoot && deltaTime >= TickAttack) {
                 GameSingleton.Instance.soundManager.Play("MageAttack");
 
                 for (int i = 0; i < 9; i++) {
-                    body.Attack(target, getAttackUnit(target));
+                    body.Attack(target, GetAttackUnit(target));
                 }
 
                 deltaTime -= TickAttack;
             }
+
+            return result;
         }
 
-        private void Move(bool isRemoted, AbstractUnit target, Vector3 positionTarget) {
-            if (target == null) return;
+        private bool Move(bool isRemoted, AbstractUnit target, Vector3 positionTarget) {
+            if (target == null) return false;
 
             if (isRemoted) {
-                Vector3 last = body.GetPosition();
-                Vector3 posTarget = positionTarget;
-                body.SetPosition(Vector3.MoveTowards(last, posTarget, getVitessUnit()));
-                float dist = Vector3.Distance(last, posTarget);
-                if (OptimalDistance - 1f <= dist && dist <= 1f + OptimalDistance)
-                    _canShoot = true;
-                else
-                    _canShoot = false;
+                int ind = 0;
+                for (int x = -1; x <= 1; x++) {
+                    for (int y = -1; y <= 1; y++) {
+                        Vector3 position = positionTarget + Vector3.right * x + Vector3.forward * y;
+                        if (body.entities[ind] == null) continue;
+                        if (body.entities[ind++].aStarEntity.MoveTo(position, GameSingleton.Instance.aStarHandler)) {
+                            body.SetPosition(positionTarget);
+                        }
+                    }
+                }
             }
             else {
                 Vector3 last = body.GetPosition();
                 Vector3 posTarget = target.GetPosition();
                 if (Vector3.Distance(last, posTarget) <= OptimalDistance - 1f) {
-                    body.SetPosition(Vector3.MoveTowards(last, posTarget, -getVitessUnit()));
+                    body.SetPosition(Vector3.MoveTowards(last, posTarget, -GetVitessUnit()));
                     _canShoot = false;
                 }
                 else if (Vector3.Distance(last, posTarget) >= OptimalDistance + 1f) {
-                    body.SetPosition(Vector3.MoveTowards(last, posTarget, getVitessUnit()));
+                    body.SetPosition(Vector3.MoveTowards(last, posTarget, GetVitessUnit()));
                     _canShoot = false;
                 }
                 else {
@@ -60,6 +65,7 @@ namespace Units.Controllers.Mage {
                     _canShoot = true;
                 }
             }
+            return false;
         }
     }
 }

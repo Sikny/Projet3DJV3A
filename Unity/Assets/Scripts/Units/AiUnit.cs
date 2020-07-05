@@ -5,6 +5,8 @@ using Random = UnityEngine.Random;
 
 namespace Units  {
     public class AiUnit : AbstractUnit {
+        private AbstractUnit _previousTarget;
+        
         public override bool Init(EntityType idType, Entity entityModel, int entityCountP)
         {
             bool initState = base.Init(idType, entityModel, entityCountP);
@@ -19,14 +21,21 @@ namespace Units  {
             if (!initialized) return;
 
             if (unitTarget == null) {
+                _previousTarget = unitTarget;
                 unitTarget = GuessTheBestUnitToTarget();
+                if (unitTarget != _previousTarget) {
+                    brain.UnlockPosition();
+                }
             }
             else {
-                targetPosition = unitTarget.GetPosition();
-                isMoving = true;
+                if (!brain.positionLocked){
+                    Debug.Log("SETTING NEW POS");
+                    targetPosition = unitTarget.GetPosition();
+                    isMoving = true;
+                }
             }
             
-            brain.interract(false, unitTarget, targetPosition);
+            brain.Interract(false, unitTarget, targetPosition);
 
             UpdateTimeoutEffects();
             
