@@ -20,4 +20,4 @@ MonoBehaviour:
   upgrades:
   - {fileID: 11400000, guid: d7cc81eb0e49fb5429ad4838ac2c96c5, type: 2}
   - {fileID: 11400000, guid: 879145365eceffc408423e190298f6dc, type: 2}
-  upgradeCost: 100
+  upgradeCost: 75

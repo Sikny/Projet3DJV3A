@@ -55,7 +55,7 @@ namespace Items {
             }
             else
             {
-                _popup.Popup("Not enough gold !", Color.red);
+                _popup.Popup("Not enough gold!", Color.red);
             }
         }
 

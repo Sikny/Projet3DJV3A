@@ -59,7 +59,7 @@ public class LoadMapsScene : MonoBehaviour
         }
         else
         {
-            Popups.instance.Popup("Please select a map", Color.red);
+            Popups.instance.Popup("Please select a level.", Color.red);
         }
 
     }
