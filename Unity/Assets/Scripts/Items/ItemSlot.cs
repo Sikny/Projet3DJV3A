@@ -1,4 +1,5 @@
 ﻿using Game;
+using Language;
 using TMPro;
 using UI;
 using UnityEngine;
@@ -61,7 +62,8 @@ namespace Items {
 
         public void UseItem() {
             item.Use();
-            _popup.Popup("Used " + item.name + "!");
+            
+            _popup.Popup(Traducer.Translate("Used") + Traducer.Translate(item.name) + "!");
         }
 
         public void UpgradeUnit()
