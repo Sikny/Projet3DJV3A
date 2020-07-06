@@ -49,7 +49,7 @@ namespace Utility {
             {
                 String filename = GameSingleton.Instance.filename;
                 Rule r = Rule.readLevel(filename.Split('.')[0]);
-                
+                player.arcadeGold = r.maxBudget;
                LoadLevel(r);
             }
             else
