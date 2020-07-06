@@ -39,10 +39,6 @@ public class GenRandomParam : MonoBehaviour
         {
             EnemySpawn es = new EnemySpawn();
             
-            //Vector2 spawnPosition = new Vector2(rand.Next(-25,25), rand.Next(-25,25));
-            /*
-             * Check heightmap at coordinate and surrounding, if the heightmap is 0 place unit, else reselect a spawn position
-             */
 
             es.position = new Vector2(rand.Next(-25,25), rand.Next(-25,25));
 

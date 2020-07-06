@@ -67,6 +67,20 @@ namespace UI {
                             //GameSingleton.Instance.SetGameEnded(false);
                         }
                         break;
+                    case 2:    //Retry
+                        winMessage.gameObject.SetActive(false);
+                        loseMessage.gameObject.SetActive(false);
+                        retryBtn.SetActive(false);
+                        quitBtn.SetActive(false);
+                        nextBtn.SetActive(false);
+
+                        Player player = GameSingleton.Instance.GetPlayer();
+                        if (player.gamemode == Player.Gamemode.LEVEL)
+                        {
+                            
+                        }
+                        break;
+                    
                 }
             }
         }

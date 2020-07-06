@@ -66,6 +66,9 @@ namespace Utility {
                     player.arcadeGold = 150;
                     UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
                     break;
+                case "creator":
+                    UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
+                    break;
             }
         }
     }
