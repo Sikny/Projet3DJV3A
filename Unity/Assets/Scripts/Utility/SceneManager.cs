@@ -49,6 +49,10 @@ namespace Utility {
                     else {
                         GameSingleton.Instance.tokenManager.CheckToken(token, "scene.load.freeMode");
                         Shop.Instance.ClearShop();
+                        player.currentLevelArcade = 0;
+                        player.arcadeModeInventory.Clear();
+                        player.arcadeGold = 150;
+
                         player.gamemode = Player.Gamemode.ARCADE;
 
                         soundManager.StopPlayingAllMusics();
@@ -58,6 +62,8 @@ namespace Utility {
                     break;
                 case "loadLvl":
                     GameSingleton.Instance.GetPlayer().gamemode = Player.Gamemode.PERSONNALIZED;
+                    player.arcadeModeInventory.Clear();
+                    player.arcadeGold = 150;
                     UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
                     break;
             }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Game;
 using Items;
 using leveleditor.rule;
@@ -85,11 +86,11 @@ namespace Utility {
 
         public void loadLevel(Rule rule)
         {
+            Shop.Instance.ClearShop();
             GameSingleton.Instance.GetPlayer().gold = rule.maxBudget;
             GameSingleton.Instance.levelManager = this;
 
             Level levelNew = grp.levelBase;
-            
             loadedLevel = Instantiate(levelNew);
             loadedLevel.rule = rule;
             loadedLevel.Init();
@@ -112,12 +113,24 @@ namespace Utility {
                 GameSingleton.Instance.GetPlayer().currentSeed = seed;
             }
             loadedLevel = grp.generateNextLevel(seed,  GameSingleton.Instance.GetPlayer().currentLevelArcade);
+            
+            List<EnemySpawn> enemySpawns = loadedLevel.enemySpawns;
+
+
             grp.setDefaultGold(loadedLevel);
             GameSingleton.Instance.levelManager = this;
             
             
             loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade-1));
             loadedLevel.Init();
+           /* foreach (var enemy in  enemySpawns)
+            {
+                Vector2 spawnPosition = enemy.position;
+
+                float yPosition = loadedLevel.terrainBuilder.terrainOptions.modifierHeightMap[spawnPosition];
+                Debug.Log("position :" + yPosition);
+                Debug.Log(enemy.position);
+            }*/
             loadedLevel = grp.respawnEnnemies(loadedLevel);
         }
     }
