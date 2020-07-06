@@ -1,4 +1,5 @@
-﻿using Utility;
+﻿using Game;
+using Utility;
 
 namespace Items {
     public class Consumable : Item
@@ -8,12 +9,16 @@ namespace Items {
         public override void Use()
         {
             base.Use();
+            GameSingleton.Instance.soundManager.Play("ItemUse");
             RemoveFromInventory();
         }
     
         public void RemoveFromInventory ()
         {
-            GameSingleton.Instance.uiManager.inventory.RemoveConsumable(this);
+            Inventory inventory = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
+                ? GameSingleton.Instance.GetPlayer().storyModeInventory
+                : GameSingleton.Instance.GetPlayer().arcadeModeInventory;
+            inventory.RemoveConsumable(this);
         }
     }
 }

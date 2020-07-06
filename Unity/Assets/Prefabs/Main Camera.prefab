@@ -109,9 +109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  pitch: 2
   zoomSpeed: 6
-  camera: {fileID: 1657578593964637179}
+  mainCamera: {fileID: 1657578593964637179}
   minZoom: 10
   maxZoom: 40
 --- !u!114 &1657578593964637178
@@ -180,7 +179,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   volumeAnchorOverride: {fileID: 0}
-  antialiasing: 0
+  antialiasing: 2
   SMAAQuality: 2
   dithering: 0
   stopNaNs: 0
@@ -523,17 +522,17 @@ PrefabInstance:
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 3.2673e-41
-      objectReference: {fileID: 0}
-    - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
-        type: 3}
-      propertyPath: m_BoundingSphereOverride.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
+        type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: NaN
+      value: -12.799995
       objectReference: {fileID: 0}
     - target: {fileID: 1257621141217613574, guid: fb562738f9ad5b84b9da23063e29f7e6,
         type: 3}

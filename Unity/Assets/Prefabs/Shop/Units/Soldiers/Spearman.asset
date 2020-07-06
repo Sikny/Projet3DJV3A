@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Spearman
   m_EditorClassIdentifier: 
   itemName: Spearman
-  icon: {fileID: 21300000, guid: b46ed1ddf0691d84d951458d6acb3d63, type: 3}
+  icon: {fileID: 21300000, guid: ed65689dc78f74c4799156db50fbdf77, type: 3}
   price: 100
   description: Spearmen can attack from further and deal more damage.
   entityType: 3
   upgrades:
   - {fileID: 11400000, guid: 66eefecb5d8311541bb7046983c6b048, type: 2}
   - {fileID: 11400000, guid: 2e89906105901d84cab21b17a83897f5, type: 2}
-  upgradeCost: 150
+  upgradeCost: 100

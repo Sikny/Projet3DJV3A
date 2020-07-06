@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 using Utility;
 using WebClient;
 
@@ -9,7 +11,9 @@ namespace UI {
         public ConnectForm connectionPanel;
         public RegisterForm registerPanel;
         public GameObject background;
-        
+
+  
+
         public void OnConnectConfirmPressed() {
             if(connectionPanel.ValidForm()) {
                 StartCoroutine(ConnectModule.Instance.ConnectUser(connectionPanel.mail.text, 
@@ -21,7 +25,7 @@ namespace UI {
         public void OnRegisterConfirmPressed() {
             if (registerPanel.ValidForm()) {
                 StartCoroutine(ConnectModule.Instance.RegisterUser(registerPanel.firstName.text,
-                    registerPanel.lastName.text, registerPanel.mail.text, registerPanel.password.text,
+                    registerPanel.lastName.text, registerPanel.mail.text, registerPanel.password.text,registerPanel.confirmPassword.text,
                     ProcessRegisterResult));
                 //  TODO CONNECT, LOADING, CONFIRM WINDOW
             }
@@ -33,20 +37,19 @@ namespace UI {
 
         private void ProcessConnectionResult(UnityWebRequest www) {
             if (www.isNetworkError || www.isHttpError) {
-                Debug.Log(www.error);
             }
             else {
-                Debug.Log("Connect success");
                 string result = www.downloadHandler.text;
-                Debug.Log("Received: " + result);
                 if (result.Contains("NOK"))
                 {
-                    //message d'erreur
+                    GameObject password = connectionPanel.transform.Find("PasswordInput").gameObject;
+                    InputField passwordIn = password.GetComponent<InputField>();
+                    passwordIn.text = "";
+                    Popups.instance.Popup("Wrong identifications!", Color.red);
                 }
                 else
                 {
-                    GameSingleton.Instance.tokenConnection = result;
-                    PlayerPrefs.SetString("connection.token", result);
+                    GameSingleton.Instance.GetPlayer().token = result;
                     PlayerPrefs.Save();
                     connectionPanel.gameObject.SetActive(false);
                     background.SetActive(false);
@@ -56,12 +59,23 @@ namespace UI {
         
         private void ProcessRegisterResult(UnityWebRequest www) {
             if (www.isNetworkError || www.isHttpError) {
-                Debug.Log(www.error);
+                
             }
             else {
-                Debug.Log("Connect success");
                 string result = www.downloadHandler.text;
-                Debug.Log("Received: " + result);
+                if (result.Equals("OK"))
+                {
+                    registerPanel.gameObject.SetActive(false);
+                    background.SetActive(false);
+                }
+                else if (result.Equals("NOK-MAIL-ALREADY-USED"))
+                {
+                    Popups.instance.Popup("Mail is already used!", Color.red);
+                }
+                else
+                {
+                    //todo
+                }
             }
             
         }

@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using leveleditor.rule;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
 public class Map
 {
-    public const int SIZE = 100;
+    public int SIZE = 50;
+    public int money;
+    public string filename;
     private Camera camera;
     private MeshFilter meshFilter;
     private MeshCollider meshCollider;
@@ -18,9 +21,11 @@ public class Map
     
     public float MinHeight { get; set; }
     public float MaxHeight { get; set; }
-    public Map(Camera camera, GameObject map)
+    public Map(Camera camera, GameObject map, int size, int money, string filename)
     {
-
+        this.SIZE = size;
+        this.money = money;
+        this.filename = filename;
         this.map = map;
         this.meshCollider = map.GetComponent<MeshCollider>();
         this.meshFilter = map.GetComponent<MeshFilter>();
@@ -65,22 +70,31 @@ public class Map
                  }
              }
          }
-
-         if (Input.GetKeyDown(KeyCode.S))
-         {
-             Rule r = new Rule(mapVertices, localDifficulty);
-             Rule.saveLevel("test", r);
-         }
-
+    /*
          if (Input.GetKeyDown(KeyCode.L))
          {
-             Rule r = Rule.readLevel("test");
-             mapVertices = r.loadHeightmap(mapVertices, SIZE);
-             localDifficulty = r.loadDifficulty(localDifficulty, SIZE);
-             meshFilter.mesh.vertices = mapVertices;
-             meshCollider.sharedMesh.vertices = mapVertices;
-             meshFilter.mesh.colors = localDifficulty;
-         }
+             
+         }*/
+     }
+
+     public void save()
+     {
+         Rule r = new Rule(mapVertices, localDifficulty, (byte)SIZE, money);
+         Rule.saveLevel(filename, r);
+     }
+
+     [Obsolete]
+     static public Map load(Camera camera, GameObject mapP, string filename)
+     {
+         Rule r = Rule.readLevel(filename);
+         Map map = new Map(camera, mapP, r.size, r.maxBudget, filename);
+         map.mapVertices = r.loadHeightmap(map.mapVertices);
+         map.localDifficulty = r.loadDifficulty(map.localDifficulty);
+         map.meshFilter.mesh.vertices = map.mapVertices;
+         map.meshCollider.sharedMesh.vertices = map.mapVertices;
+         map.meshFilter.mesh.colors = map.localDifficulty;
+
+         return map;
      }
 
      public void UpdateHeighmapRegion(RaycastHit hit,int radiusTool, int amplitude, int mode)
@@ -89,14 +103,14 @@ public class Map
          {
              for (int z = -radiusTool; z <= radiusTool; z++)
              {
-                 int globalX = (int)hit.point.x + SIZE + x;
-                 int globalZ = (int) hit.point.z + SIZE + z;
+                 int globalX = (int)hit.point.x + x;
+                 int globalZ = (int) hit.point.z + z;
                  float heightmapOffset = amplitude * (float)Math.Exp(-1f/radiusTool*(x * x + z * z));
-                 if(0 <= globalX && globalX <= SIZE*2 && 0 <= globalZ && globalZ <= SIZE*2)
-                     if(mode == 0 && MaxHeight > mapVertices[globalX * (SIZE*2+1) + globalZ ].y)
-                        mapVertices[globalX * (SIZE*2+1) + globalZ ].y += heightmapOffset*Time.deltaTime;
-                    else if(mode == 1 && MinHeight < mapVertices[globalX * (SIZE*2+1) + globalZ ].y)
-                         mapVertices[globalX * (SIZE*2+1) + globalZ ].y -= heightmapOffset*Time.deltaTime;
+                 if(0 <= globalX && globalX <= SIZE-1 && 0 <= globalZ && globalZ <= SIZE-1)
+                     if(mode == 0 && MaxHeight > mapVertices[globalX * (SIZE) + globalZ ].y)
+                        mapVertices[globalX * (SIZE) + globalZ ].y += heightmapOffset*Time.deltaTime;
+                    else if(mode == 1 && MinHeight < mapVertices[globalX * (SIZE) + globalZ ].y)
+                         mapVertices[globalX * (SIZE) + globalZ ].y -= heightmapOffset*Time.deltaTime;
              }
          }
          meshFilter.mesh.vertices = mapVertices;
@@ -112,14 +126,14 @@ public class Map
              {
                  if (Math.Sqrt(x * x + z * z) <= radiusTool)
                  {
-                     int globalX = (int) hit.point.x + SIZE + x;
-                     int globalZ = (int) hit.point.z + SIZE + z;
+                     int globalX = (int) hit.point.x + x;
+                     int globalZ = (int) hit.point.z + z;
                      float heightmapOffset =  amplitude * (float) Math.Exp(-1f / radiusTool * (x * x + z * z));
-                     if (0 <= globalX && globalX <= SIZE * 2 && 0 <= globalZ && globalZ <= SIZE * 2)
+                     if (0 <= globalX && globalX <= SIZE -1 && 0 <= globalZ && globalZ <= SIZE -1)
                          if(mode==0)
-                            localDifficulty[globalX * (SIZE * 2 + 1) + globalZ].r += heightmapOffset*Time.deltaTime;
+                            localDifficulty[globalX * (SIZE) + globalZ].r += heightmapOffset*Time.deltaTime/255f;
                         else if(mode==1)
-                             localDifficulty[globalX * (SIZE * 2 + 1) + globalZ].r -= heightmapOffset*Time.deltaTime;
+                             localDifficulty[globalX * (SIZE) + globalZ].r -= heightmapOffset*Time.deltaTime/255f;
                  }
              }
          }
@@ -153,13 +167,13 @@ public class Map
 
      private Vector2[] getUv(int size)
      {
-         Vector2[] result = new Vector2[(size*2+1)*(size*2+1)];
+         Vector2[] result = new Vector2[size*size];
 
-         for(int i = 0;i <= size*2; i++)
+         for(int i = 0;i < size; i++)
          {
-             for(int j = 0;j <= size*2; j++)
+             for(int j = 0;j < size; j++)
              {
-                 result[i*(size*2+1) + j] = new Vector2(i/10f,  j/10f);
+                 result[i*size + j] = new Vector2(i/10f,  j/10f);
              }
          }
 
@@ -168,13 +182,13 @@ public class Map
 
      public Vector3[] getVertices(int size)
     {
-        Vector3[] result = new Vector3[(size*2+1)*(size*2+1)];
+        Vector3[] result = new Vector3[size*size];
 
-        for(int i = 0;i <= size*2; i++)
+        for(int i = 0;i <size; i++)
         {
-            for(int j = 0;j <= size*2; j++)
+            for(int j = 0;j < size; j++)
             {
-                result[i*(size*2+1) + j] = new Vector3(i-size, 0, j-size);
+                result[i*size + j] = new Vector3(i, 0, j);
             }
         }
 
@@ -182,13 +196,13 @@ public class Map
     }
     public Color[] getDifficulty(int size)
     {
-        Color[] result = new Color[(size*2+1)*(size*2+1)];
+        Color[] result = new Color[size*size];
 
-        for(int i = 0;i <= size*2; i++)
+        for(int i = 0;i < size; i++)
         {
-            for(int j = 0;j <= size*2; j++)
+            for(int j = 0;j < size; j++)
             {
-                result[i*(size*2+1) + j] = new Color(0,0,0);
+                result[i*size + j] = new Color(0,0,0);
             }
         }
 
@@ -196,21 +210,21 @@ public class Map
     }
     public int[] getIndices(int size)
     {
-        int[] result = new int[6 * (size*2) * (size*2)];
+        int[] result = new int[6 * (size) * (size)];
         int c = 0;
         int vertexC = 0;
-        for (int i = 0; i < size*2; i++)
+        for (int i = 0; i < size-1; i++)
         {
-            for (int j = 0; j < size*2; j++)
+            for (int j = 0; j < size-1; j++)
             {
 
                 result[c++] = vertexC +1;
-                result[c++] = (size * 2 ) + vertexC + 1;
+                result[c++] = (size - 1 ) + vertexC + 1;
                 result[c++] = vertexC;
 
                 result[c++] = vertexC + 1;
-                result[c++] = (size * 2) + vertexC + 2;
-                result[c++] = (size*2) + vertexC +1;
+                result[c++] = (size - 1) + vertexC + 2;
+                result[c++] = (size - 1) + vertexC +1;
 
                 vertexC++;
             }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c92e361e7896504094ff37c61c01548, type: 3}
   m_Name: HealPotion
   m_EditorClassIdentifier: 
-  itemName: Heal potion
+  itemName: Health potion
   icon: {fileID: 21300000, guid: 6999056a701cdfd44a16211baa0017c0, type: 3}
   price: 10
   description: Heals target unit.

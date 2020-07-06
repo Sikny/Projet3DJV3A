@@ -1,57 +1,68 @@
 ﻿using System;
 using System.Collections;
-using Game;
+using Language;
 using TMPro;
 using UnityEngine;
-using Utility;
 
 namespace UI {
     public class Popups : MonoBehaviour
     {
         public TextMeshProUGUI popupText;
-
+        public TextMeshProUGUI topPopupText;
         public Color defaultColor = Color.yellow;
 
         #region Singleton
-    
         public static Popups instance;
-    
-    
+
         private void Awake()
         {
             if (instance != null)
             {
-                Debug.Log("Several instances");
                 return;
             }
             instance = this;
         }
-
         #endregion
-
-
-
+        
         public void Popup(String content, Color color)
         {
             popupText.color = color;
-            popupText.SetText(content);
+            popupText.SetText(Traducer.Translate(content));
             popupText.gameObject.SetActive(true);
-            StartCoroutine(DelayCorouting(3));
+            StartCoroutine(DelayCorouting(3,popupText));
         }
     
         public void Popup(String content)
         {
             popupText.color = defaultColor;
-            popupText.SetText(content);
+            popupText.SetText(Traducer.Translate(content));
             popupText.gameObject.SetActive(true);
-            StartCoroutine(DelayCorouting(3));
+            StartCoroutine(DelayCorouting(3,popupText));
+        }
+        
+        public void PopupTop(String content, Color color)
+        {
+            topPopupText.color = color;
+            topPopupText.SetText(Traducer.Translate(content));
+            topPopupText.gameObject.SetActive(true);
+            StartCoroutine(DelayCorouting(3,topPopupText));
+        }
+    
+        public void PopupTop(String content)
+        {
+            topPopupText.color = defaultColor;
+            topPopupText.SetText(Traducer.Translate(content));
+            topPopupText.gameObject.SetActive(true);
+            StartCoroutine(DelayCorouting(3,topPopupText));
         }
 
-        IEnumerator DelayCorouting(int seconds)
+        IEnumerator DelayCorouting(int seconds, TextMeshProUGUI text)
         {
             yield return new WaitForSeconds(seconds);
         
-            popupText.gameObject.SetActive(false);
+            text.gameObject.SetActive(false);
         }
+        
+        
     }
 }

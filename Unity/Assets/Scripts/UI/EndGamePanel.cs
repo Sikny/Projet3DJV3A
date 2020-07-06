@@ -16,6 +16,7 @@ namespace UI {
         public TextMeshProUGUI loseMessage;
         public GameObject retryBtn;
         public GameObject nextBtn;
+        public GameObject quitBtn;
         public SystemUnit systemUnit;
         public EndGame endGame; // arcade
         
@@ -29,21 +30,37 @@ namespace UI {
                             winMessage.gameObject.SetActive(false);
                             loseMessage.gameObject.SetActive(true);
                             retryBtn.SetActive(true);
+                            quitBtn.SetActive(true);
                             nextBtn.SetActive(false);
                         }
+                        else if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.PERSONNALIZED)
+                        {
+                            winMessage.gameObject.SetActive(false);
+                            loseMessage.gameObject.SetActive(true);
+                            retryBtn.SetActive(true);
+                            quitBtn.SetActive(true);
+                            nextBtn.SetActive(false);
+                        }  
                         else
                         {
                             winMessage.gameObject.SetActive(false);
                             loseMessage.gameObject.SetActive(false);
                             retryBtn.SetActive(false);
                             nextBtn.SetActive(false);
+                            quitBtn.SetActive(false);
                             endGame.gameObject.SetActive(true);
+                            retryBtn.SetActive(false);
+                            GameSingleton.Instance.GetPlayer().arcadeGold = 150;
+                            GameSingleton.Instance.GetPlayer().arcadeModeInventory.Clear();
+                            Shop.Instance.ClearShop();
+                            
                         }
                         break;
                     case 1:    // Win
                         winMessage.gameObject.SetActive(true);
                         loseMessage.gameObject.SetActive(false);
                         retryBtn.SetActive(false);
+                        quitBtn.SetActive(true);
                         nextBtn.SetActive(true);
 
                         if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE)
@@ -58,6 +75,20 @@ namespace UI {
                             //GameSingleton.Instance.SetGameEnded(false);
                         }
                         break;
+                    case 2:    //Retry
+                        winMessage.gameObject.SetActive(false);
+                        loseMessage.gameObject.SetActive(false);
+                        retryBtn.SetActive(false);
+                        quitBtn.SetActive(false);
+                        nextBtn.SetActive(false);
+
+                        Player player = GameSingleton.Instance.GetPlayer();
+                        if (player.gamemode == Player.Gamemode.LEVEL)
+                        {
+                            
+                        }
+                        break;
+                    
                 }
             }
         }
@@ -69,7 +100,17 @@ namespace UI {
                     GameSingleton.Instance.sceneManager.LoadScene("Menu");
                     break;
                 case 1:
-                    GameSingleton.Instance.GetPlayer().gold = GameSingleton.Instance.GetPlayer().goldStartLevel;
+                    
+                    Player player = GameSingleton.Instance.GetPlayer();
+                    Player.Gamemode playerGamemode = player.gamemode;
+
+
+                    if (playerGamemode == Player.Gamemode.LEVEL)
+                    {
+                        player.gold = player.goldStartLevel;
+                        player.storyModeInventory = player.inventoryStartLevel;
+                    }
+                    Shop.Instance.ClearShop();
                     GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                     break;
@@ -84,8 +125,9 @@ namespace UI {
 
             List<AbstractUnit> units = systemUnit.GetUnits();
 
-            Inventory inventory = GameSingleton.Instance.inventory;
-
+            Inventory inventory = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
+                ? GameSingleton.Instance.GetPlayer().storyModeInventory
+                : GameSingleton.Instance.GetPlayer().arcadeModeInventory;
             foreach (var unit in units)
             {
                 EntityType entityType = unit.GetEntityType();

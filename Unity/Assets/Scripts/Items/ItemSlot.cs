@@ -1,4 +1,5 @@
 ﻿using Game;
+using Language;
 using TMPro;
 using UI;
 using UnityEngine;
@@ -19,18 +20,33 @@ namespace Items {
 
         public Item item;
 
-        private Player _player;
+        private int _playerGold;
         private Inventory _inventory;
 
         public void Start() {
-            _player = GameSingleton.Instance.GetPlayer();
-            _inventory = GameSingleton.Instance.uiManager.inventory;
+            _playerGold = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
+                ? GameSingleton.Instance.GetPlayer().gold
+                : GameSingleton.Instance.GetPlayer().arcadeGold;
+            _inventory = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
+                ? GameSingleton.Instance.GetPlayer().storyModeInventory
+                : GameSingleton.Instance.GetPlayer().arcadeModeInventory;
             _popup = Popups.instance;
         }
 
-        public void BuyItem() {
-            if (_player.gold >= item.price) {
-                _player.gold -= item.price;
+        public void BuyItem()
+        {
+            Player player = GameSingleton.Instance.GetPlayer();
+            Player.Gamemode playerGamemode = player.gamemode;
+            
+            int gold  = player.gamemode == Player.Gamemode.LEVEL
+                ? player.gold
+                : player.arcadeGold;
+            
+            if (gold >= item.price) {
+                if (playerGamemode == Player.Gamemode.LEVEL)
+                    player.gold -= item.price;
+                else
+                    player.arcadeGold -= item.price;
                 ItemSlot boughtSlot = inventoryPrefab;
                 boughtSlot.item = item;
                 boughtSlot.icon.sprite = icon.sprite;
@@ -40,13 +56,14 @@ namespace Items {
             }
             else
             {
-                _popup.Popup("Not enough gold !", Color.red);
+                _popup.Popup("Not enough gold!", Color.red);
             }
         }
 
         public void UseItem() {
             item.Use();
-            _popup.Popup("Used " + item.name + "!");
+            
+            _popup.Popup(Traducer.Translate("Used") + Traducer.Translate(item.name) + "!");
         }
 
         public void UpgradeUnit()

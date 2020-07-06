@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e8925b4cc66eb438052274686b5d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aStarHandler: {fileID: 0}
   terrainBuilder: {fileID: 3903957490331760120}
-  terrainOptions: {fileID: 0}
   consumablesList:
   - {fileID: 11400000, guid: 45b2d4959514bca41b1bc99a1493fc57, type: 2}
   - {fileID: 11400000, guid: 32e5c4bdeb00e0d4b83bc8fedea14800, type: 2}
@@ -59,10 +59,12 @@ MonoBehaviour:
   enemySpawns:
   - spawnTime: 0
     entityType: 1
-    position: {x: -8, y: 2}
+    position: {x: -5, y: 3}
+    icon: {fileID: 0}
   - spawnTime: 0
     entityType: 2
-    position: {x: -3, y: -2}
+    position: {x: -3, y: 0}
+    icon: {fileID: 0}
   livingEnemies: []
 --- !u!1001 &1296933168781156492
 PrefabInstance:
@@ -101,6 +103,31 @@ PrefabInstance:
       propertyPath: meshObjects.Array.data[5]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key3.r
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key3.g
+      value: 0.45306095
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key4.r
+      value: 0.8018868
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key4.g
+      value: 0.38420963
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539124, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: heightGradient.key4.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
       propertyPath: rules.seedWorld
@@ -125,6 +152,11 @@ PrefabInstance:
         type: 3}
       propertyPath: waterCount
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
+        type: 3}
+      propertyPath: seed
+      value: 22811
       objectReference: {fileID: 0}
     - target: {fileID: 4831506940399020680, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}

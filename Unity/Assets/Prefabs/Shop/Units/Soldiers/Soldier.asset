@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Soldier
   m_EditorClassIdentifier: 
   itemName: Soldier
-  icon: {fileID: 21300000, guid: b46ed1ddf0691d84d951458d6acb3d63, type: 3}
+  icon: {fileID: 21300000, guid: 13a15d8145ab07c429ee0e8cab6bd31e, type: 3}
   price: 50
   description: Base melee unit. Effective against archer units
   entityType: 0
   upgrades:
   - {fileID: 11400000, guid: d7cc81eb0e49fb5429ad4838ac2c96c5, type: 2}
   - {fileID: 11400000, guid: 879145365eceffc408423e190298f6dc, type: 2}
-  upgradeCost: 100
+  upgradeCost: 75

@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +16,9 @@ public class EditorMap : MonoBehaviour
     public GameObject UIToolAmplitude;
     public GameObject UIMinHeight;
     public GameObject UIMaxHeight;
+
+    public GameObject canvasTool;
+    public GameObject canvasInit;
     
     public Camera camera;
     public GameObject mapObject;
@@ -30,6 +36,12 @@ public class EditorMap : MonoBehaviour
     private float minHeight = -10;
     private float maxHeight = 10;
     
+    public string Size { get; set; }
+    
+    public string Filename { get; set; }
+    
+    public string Money { get; set; }
+
     public void setRadiusTool()
     {
         Slider slider = UIToolRadius.GetComponent<Slider>();
@@ -68,17 +80,68 @@ public class EditorMap : MonoBehaviour
                 break;
         }
     }
-    
-    // Start is called before the first frame update
-    void Start()
+
+    public void generate()
     {
-        map = new Map(camera,mapObject);
+            int sizeDemande = int.Parse(Size);
+            int moneyDemande = int.Parse(Money);
+            if (10 > sizeDemande || sizeDemande > 100)
+            {
+                throw new Exception("size invalide" );
+            }
+
+            if (0 > moneyDemande || moneyDemande > 10000)
+            {
+                throw new Exception("money invalide" );
+            }
+
+            if (string.IsNullOrWhiteSpace(Filename))
+            {
+                Popups.instance.Popup("Level name required.", Color.red);
+                throw new Exception("filename invalide" );
+            }
+
+            if (File.Exists(Application.persistentDataPath + "/" + Filename + ".lvl"))
+            {
+                map = Map.load(camera, mapObject, Filename);
+            }
+            else
+            {
+                map = new Map(camera, mapObject,sizeDemande ,moneyDemande , Filename);
+            }
+            
+            canvasTool.SetActive(true);
+            canvasInit.SetActive(false);
+       
+    }
+
+    public void save()
+    {
+        if (map != null)
+        {
+            map.save();
+            Popups.instance.Popup("Map was saved!");
+        }
+        else
+        {
+            Popups.instance.Popup("Select settings first!", Color.red);
+        }
+
+    }
+
+    private void Start()
+    {
+        Size = "50";
+        Money = "200";
     }
 
     // Update is called once per frame
     void Update()
     {
-        map.updateMapProperties( minHeight, maxHeight);
-        map.UpdateMap(currentTool,radiusTool, amplitudeTool);
+        if (map != null)
+        {
+            map.updateMapProperties(minHeight, maxHeight);
+            map.UpdateMap(currentTool, radiusTool, amplitudeTool);
+        }
     }
 }

@@ -1,24 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
 public class LoadMapsScene : MonoBehaviour
 {
     public GameObject file; //Original
 
     public List<GameObject> filesList;
-    
+
     public static string currentSel;
     void Start()
     {
         int nb = 0;
-        DirectoryInfo dir = new DirectoryInfo("levels/");
+        DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath+"/");
         if (!dir.Exists)
         {
             dir.Create();
-            Debug.Log("Dossier créé!");
         }
         else
         {
@@ -45,10 +45,26 @@ public class LoadMapsScene : MonoBehaviour
         }
     }
 
+    public void loadMap()
+    {
+        if (currentSel != null)
+        {
+            GameSingleton.Instance.filename = currentSel;
+            GameSingleton.Instance.soundManager.StopPlayingAllMusics();
+            GameSingleton.Instance.soundManager.Play("Level theme");
+            //set player gold with settings added during map creation 
+            UnityEngine.SceneManagement.SceneManager.LoadScene(6);
+        }
+        else
+        {
+            Popups.instance.Popup("Please select a level.", Color.red);
+        }
+
+    }
+
     void Selectionner(string element)
     {
         currentSel = element;
-        Debug.Log(currentSel);
         foreach (var fileTest in filesList)
         {
             Image image = fileTest.GetComponent<Image>();
@@ -62,11 +78,5 @@ public class LoadMapsScene : MonoBehaviour
             }
         }
             
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

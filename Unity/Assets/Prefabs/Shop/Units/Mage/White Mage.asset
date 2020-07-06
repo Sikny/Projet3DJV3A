@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: White Mage
   m_EditorClassIdentifier: 
   itemName: White Mage
-  icon: {fileID: 21300000, guid: a4e293942449ba940bbd8bc406cc7b3e, type: 3}
+  icon: {fileID: 21300000, guid: e44b635ccb8a36d43910d079e0c0047e, type: 3}
   price: 100
-  description: Gives a defensive buff to all units near it.
+  description: Unit suited for defensive strategies.
   entityType: 9
   upgrades:
   - {fileID: 11400000, guid: 0f77ddf4e7861f9499b85b67b52ab66e, type: 2}
   - {fileID: 11400000, guid: 48fe8b56ed7d0684284ca7a4799d2b64, type: 2}
-  upgradeCost: 150
+  upgradeCost: 100

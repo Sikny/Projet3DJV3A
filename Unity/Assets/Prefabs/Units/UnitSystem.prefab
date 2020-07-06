@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 678431467393923813}
   - component: {fileID: 678431467393923812}
   - component: {fileID: 9164305878923577751}
+  - component: {fileID: 1582965612511160660}
   m_Layer: 0
   m_Name: UnitSystem
   m_TagString: Untagged
@@ -51,12 +52,14 @@ MonoBehaviour:
   aiUnitPrefab: {fileID: 2094734722187342622, guid: 728ddf25c15f7df48a69d3c8055d4cb6,
     type: 3}
   units: []
-  cam: {fileID: 1657578593964637179, guid: bc58a38325299384f867c275dfef313e, type: 3}
+  cam: {fileID: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 256
   rotationSpeed: 300
   speed: 5
+  defaultMaterial: {fileID: 2100000, guid: ca35d911fb1906d4f937af5496c8d8e7, type: 2}
+  selectedMaterial: {fileID: 2100000, guid: 881c6dc11dfc30f4f81892837331f44c, type: 2}
   isRunning: 0
 --- !u!114 &9164305878923577751
 MonoBehaviour:
@@ -76,6 +79,33 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 678431467393923812}
         m_MethodName: DoClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1582965612511160660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678431467393923819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ff765aaf74eb34896b6b3ea87a2fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customEventSent: {fileID: 11400000, guid: 6963719cabb43be4a96111c4668c09e6, type: 2}
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 678431467393923812}
+        m_MethodName: UnlockIa
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

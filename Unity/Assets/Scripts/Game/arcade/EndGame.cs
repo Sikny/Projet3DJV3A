@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System;
+using Sounds;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using Utility;
@@ -36,19 +38,26 @@ public class EndGame : MonoBehaviour
     {
         string token = PlayerPrefs.GetString("connection.token");
         int nbpoints = GameSingleton.Instance.GetPlayer().currentScore;
-        StartCoroutine(ConnectModule.Instance.RegisterScore(token,0, nbpoints, 1024,
+        int seedBase = GameSingleton.Instance.GetPlayer().currentSeed;
+        int deltatime = (int)(DateTime.Now - GameSingleton.Instance.GetPlayer().beginGame).Seconds;
+        StartCoroutine(ConnectModule.Instance.RegisterScore(token,deltatime, nbpoints, seedBase,
             ProcessScoreResult));
     }
 
     private void ProcessScoreResult(UnityWebRequest www) {
         if (www.isNetworkError || www.isHttpError) {
-            Debug.Log(www.error);
+            
         }
         else {
             string result = www.downloadHandler.text;
             if (result != null && !result.Contains("NOK"))
             {
                 classementText.text = "Classement : #" + result;
+                summaryScores.called = false;
+            }
+            else if (result != null && result.Equals("NOK-NOT-ACCEPTABLE"))
+            {
+                classementText.text = "Inclassable !!";
                 summaryScores.called = false;
             }
             else
@@ -61,7 +70,10 @@ public class EndGame : MonoBehaviour
 
     public void Back()
     {
+        SoundManager soundManager = GameSingleton.Instance.soundManager;
+        soundManager.StopPlayingAllMusics();
         endGamePanel.SetActive(false);
+        soundManager.Play("Menu");
         SceneManager.LoadScene("Menu");
         endGamePanel.SetActive(false);
 

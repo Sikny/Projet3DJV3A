@@ -6,7 +6,7 @@ namespace Terrain {
 
         public float posY;
         
-        public void SetAutoHeight(float defaultY) {
+        public void SetAutoHeight() {
             RaycastHit hit;
             Vector3 position = transform.position;
             if (Physics.BoxCast(position+Vector3.up*10f, transform.localScale, Vector3.down, out hit,
@@ -18,6 +18,10 @@ namespace Terrain {
                 gameObject.SetActive(false);
             }
             transform.position = position;
+        }
+
+        public bool IsOnGround() {
+            return Physics.Raycast(transform.position + Vector3.up, Vector3.down, 2f, 1 << 8);
         }
     }
 }

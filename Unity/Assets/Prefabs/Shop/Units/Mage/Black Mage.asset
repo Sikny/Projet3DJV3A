@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Black Mage
   m_EditorClassIdentifier: 
   itemName: Black Mage
-  icon: {fileID: 21300000, guid: a4e293942449ba940bbd8bc406cc7b3e, type: 3}
+  icon: {fileID: 21300000, guid: e44b635ccb8a36d43910d079e0c0047e, type: 3}
   price: 100
   description: Black Mages attack slowly but deal a huge amount of damage.
   entityType: 8
   upgrades:
   - {fileID: 11400000, guid: 9d4c57af1aa9ea64fa1e6cd58a423709, type: 2}
   - {fileID: 11400000, guid: 0f77ddf4e7861f9499b85b67b52ab66e, type: 2}
-  upgradeCost: 150
+  upgradeCost: 100

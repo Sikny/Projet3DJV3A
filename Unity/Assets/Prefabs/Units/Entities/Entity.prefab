@@ -109,6 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2633175725685055759}
   - component: {fileID: 7468583631191037214}
+  - component: {fileID: 5077273059335671782}
   m_Layer: 0
   m_Name: Entity
   m_TagString: Untagged
@@ -149,10 +150,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillBar: {fileID: 3351929016779209979}
   circleRenderer: {fileID: 5705931590385838688}
+  entityRenderer: {fileID: 6425608356802247544}
   hitParticles: {fileID: 5246859762993817986}
   effectiveHitParticles: {fileID: 3615504290006116335}
   notEffectiveHitParticles: {fileID: 4028375930194285825}
   weaponAnimator: {fileID: 0}
+  aStarEntity: {fileID: 5077273059335671782}
+--- !u!114 &5077273059335671782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633175725685055793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71649fb177f6c43418cb6359fe4524f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4447490344473291523
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,7 +331,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 881c6dc11dfc30f4f81892837331f44c, type: 2}
+  - {fileID: 2100000, guid: ca35d911fb1906d4f937af5496c8d8e7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -21,7 +21,7 @@ public class TokenManager : MonoBehaviour
     }
     private void ProcessTokenResult(UnityWebRequest www) {
         if (www.isNetworkError || www.isHttpError) {
-            Debug.Log(www.error);
+            
         }
         else {
             string result = www.downloadHandler.text;
@@ -38,9 +38,8 @@ public class TokenManager : MonoBehaviour
             else
             {
                 cacheValid = false;
-                PlayerPrefs.SetString("connection.token", "");
+                GameSingleton.Instance.GetPlayer().token = "";
                 PlayerPrefs.Save();
-                //Debug.Log("Invalid token !!");
             }
         }
             
