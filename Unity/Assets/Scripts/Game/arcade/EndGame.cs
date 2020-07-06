@@ -1,4 +1,5 @@
 ﻿using System;
+using Sounds;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -69,7 +70,10 @@ public class EndGame : MonoBehaviour
 
     public void Back()
     {
+        SoundManager soundManager = GameSingleton.Instance.soundManager;
+        soundManager.StopPlayingAllMusics();
         endGamePanel.SetActive(false);
+        soundManager.Play("Menu");
         SceneManager.LoadScene("Menu");
         endGamePanel.SetActive(false);
 

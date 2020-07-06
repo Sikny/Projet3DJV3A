@@ -82,6 +82,7 @@ namespace Utility {
                     _player.arcadeModeInventory.Clear();
                     Shop.Instance.ClearShop();
                     _player.arcadeGold = 150;
+                    _player.currentLevelArcade = 0;
                 }
             }
 
