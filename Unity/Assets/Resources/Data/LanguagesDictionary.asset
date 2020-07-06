@@ -502,6 +502,11 @@ MonoBehaviour:
       value: Pas assez d'argent!
   - values:
     - key: 0
+      value: INVENTORY
+    - key: 1
+      value: INVENTAIRE
+  - values:
+    - key: 0
       value: Wrong identifications!
     - key: 1
       value: Mauvais identifiants!
