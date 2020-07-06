@@ -38,7 +38,7 @@ namespace UI {
 
             UpdateUiItems();
             UpdateUiEquipments();
-            UpdateUIUnits();
+            UpdateUiUnits();
             UpdateGold();
             shopPanel.SetActive(false);
         }
@@ -47,7 +47,7 @@ namespace UI {
             _shop = shop;
             UpdateUiItems();
             UpdateUiEquipments();
-            UpdateUIUnits();
+            UpdateUiUnits();
             UpdateGold();
         }
 
@@ -75,7 +75,7 @@ namespace UI {
             }
         }
 
-        private void UpdateUIUnits() {
+        private void UpdateUiUnits() {
             List<StoreUnit> shopUnits = _shop.shopUnits;
 
             for (int i = 0; i < shopUnits.Count; i++) {

@@ -43,7 +43,6 @@ namespace Game {
         private bool _levelStarted;
 
         public void Init() {
-            
             _systemUnit = FindObjectOfType<SystemUnit>();
             
             GameSingleton.Instance.aStarHandler = transform.GetComponentInChildren<AStarHandler>();
