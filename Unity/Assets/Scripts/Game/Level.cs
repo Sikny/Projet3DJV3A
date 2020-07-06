@@ -69,7 +69,7 @@ namespace Game {
                 _shop.AddStoreUnit(storeUnit);
             }
 
-            _shopManager.UpdateUI(_shop);
+            _shopManager.UpdateUi(_shop);
         }
 
         private void InitAStar() {
