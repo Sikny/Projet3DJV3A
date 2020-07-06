@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Game;
 using Items;
 using leveleditor.rule;
+using Terrain;
 using UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -16,6 +17,8 @@ namespace Utility {
         public GenRandomParam grp;
 
         public int seed;
+
+        public GradientList gradientList;
 
         public void Start()
         {
@@ -37,6 +40,9 @@ namespace Utility {
             {
                 GameSingleton.Instance.levelManager = this;
                 loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade));
+                var matGradPair = gradientList.GetRandomGradient();
+                loadedLevel.terrainBuilder.heightGradient = matGradPair.gradient;
+                loadedLevel.terrainBuilder.waterObject.GetComponent<MeshRenderer>().material = matGradPair.material;
                 loadedLevel.Init();
             }
             else if (player.gamemode == Player.Gamemode.PERSONNALIZED)
@@ -44,7 +50,7 @@ namespace Utility {
                 String filename = GameSingleton.Instance.filename;
                 Rule r = Rule.readLevel(filename.Split('.')[0]);
                 
-               loadLevel(r);
+               LoadLevel(r);
             }
             else
             {
@@ -84,7 +90,7 @@ namespace Utility {
             loadedLevel = level;
         }
 
-        public void loadLevel(Rule rule)
+        public void LoadLevel(Rule rule)
         {
             Shop.Instance.ClearShop();
             GameSingleton.Instance.GetPlayer().gold = rule.maxBudget;
@@ -122,6 +128,9 @@ namespace Utility {
             
             
             loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade-1));
+            var matGradPair = gradientList.GetRandomGradient();
+            loadedLevel.terrainBuilder.heightGradient = matGradPair.gradient;
+            loadedLevel.terrainBuilder.waterObject.GetComponent<MeshRenderer>().material = matGradPair.material;
             loadedLevel.Init();
            /* foreach (var enemy in  enemySpawns)
             {

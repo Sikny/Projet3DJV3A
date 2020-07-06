@@ -69,10 +69,10 @@ MonoBehaviour:
     ctime1: 5570
     ctime2: 6554
     ctime3: 7864
-    ctime4: 22937
-    ctime5: 32768
-    ctime6: 55705
-    ctime7: 65535
+    ctime4: 19661
+    ctime5: 29491
+    ctime6: 42598
+    ctime7: 58982
     atime0: 0
     atime1: 65535
     atime2: 65535
@@ -100,8 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1879b5cab859f8843b9ce7ab49eabbed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rules:
-    seedWorld: 22746
+  seed: 0
   waterCount: 3
   maxWaterSize: 50
   mountainCount: 6
