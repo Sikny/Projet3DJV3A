@@ -73,6 +73,12 @@ namespace Utility {
 
                 player.currentLevelArcade = 
                     (player.currentLevelArcade + 1) % levelList.LevelCount;
+            }else if (player.gamemode == Player.Gamemode.PERSONNALIZED)
+            {
+                String filename = GameSingleton.Instance.filename;
+                Rule r = Rule.readLevel(filename.Split('.')[0]);
+                
+                LoadLevel(r);
             }
             else
             {
@@ -95,6 +101,7 @@ namespace Utility {
         {
             Shop.Instance.ClearShop();
             GameSingleton.Instance.GetPlayer().gold = rule.maxBudget;
+            GameSingleton.Instance.GetPlayer().goldStartLevel = rule.maxBudget;
             GameSingleton.Instance.levelManager = this;
 
             Level levelNew = grp.levelBase;
@@ -102,6 +109,8 @@ namespace Utility {
             loadedLevel.rule = rule;
             loadedLevel.Init();
             
+            GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
+            ShopManager.instance.UpdateGold();
         }
 
         public void GenerateLevel()
