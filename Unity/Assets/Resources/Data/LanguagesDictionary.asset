@@ -500,3 +500,8 @@ MonoBehaviour:
       value: Not enough gold!
     - key: 1
       value: Pas assez d'argent!
+  - values:
+    - key: 0
+      value: INVENTORY
+    - key: 1
+      value: INVENTAIRE
