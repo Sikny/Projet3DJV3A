@@ -50,7 +50,7 @@ namespace Game {
 
             StartCoroutine(terrainBuilder.Init(InitAStar, rule));
 
-            if (rule != null) loadEnnemiesRule();
+            if (rule != null) LoadEnnemiesRule();
             
             _shop = Shop.Instance;
             _shop.ClearShop();
@@ -79,9 +79,11 @@ namespace Game {
                          Vector3.forward * (TerrainGrid.Height / 2f);
             terrainBuilder.transform.position += offset;
             _systemUnit.cam.transform.position += offset;
+            
+            GameSingleton.Instance.ResumeGame();
         }
 
-        private void loadEnnemiesRule()
+        private void LoadEnnemiesRule()
         {
             int counter = 0;
             foreach (var spawn in rule.localSpawnDifficulty)

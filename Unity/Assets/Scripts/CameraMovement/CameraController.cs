@@ -69,7 +69,6 @@ namespace CameraMovement {
         }
         void Update()
         {
- 
             _currentYaw -= Input.mouseScrollDelta.y * (zoomSpeed * speed * Time.deltaTime);// Input.GetAxis("Mouse ScrollWheel") * speed * Time.deltaTime;
             _currentYaw = Mathf.Clamp(_currentYaw, minZoom, maxZoom);
             //StoreUnit upgradedUnit = (number == 1) ? _unit.upgrades[0] : _unit.upgrades[1];
