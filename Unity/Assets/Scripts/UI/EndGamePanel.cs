@@ -33,6 +33,14 @@ namespace UI {
                             quitBtn.SetActive(true);
                             nextBtn.SetActive(false);
                         }
+                        else if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.PERSONNALIZED)
+                        {
+                            winMessage.gameObject.SetActive(false);
+                            loseMessage.gameObject.SetActive(true);
+                            retryBtn.SetActive(true);
+                            quitBtn.SetActive(true);
+                            nextBtn.SetActive(false);
+                        }  
                         else
                         {
                             winMessage.gameObject.SetActive(false);
