@@ -54,12 +54,13 @@ namespace Utility {
             }
             else
             {
-                player.goldStartLevel = player.gold;
-                player.inventoryStartLevel = player.storyModeInventory;
+
                 //GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
                 GameSingleton.Instance.levelManager = this;
                 loadedLevel = Instantiate(levelList.GetLevel(player.currentLevel));
                 loadedLevel.Init();
+                player.goldStartLevel = player.gold;
+                player.inventoryStartLevel = player.storyModeInventory;
             }
         }
 

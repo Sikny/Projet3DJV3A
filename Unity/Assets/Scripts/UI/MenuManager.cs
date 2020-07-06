@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using Utility;
@@ -10,7 +11,9 @@ namespace UI {
         public ConnectForm connectionPanel;
         public RegisterForm registerPanel;
         public GameObject background;
-        
+
+  
+
         public void OnConnectConfirmPressed() {
             if(connectionPanel.ValidForm()) {
                 StartCoroutine(ConnectModule.Instance.ConnectUser(connectionPanel.mail.text, 

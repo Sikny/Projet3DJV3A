@@ -13,6 +13,17 @@ namespace UI {
 
         public bool invertCameraX;
         public bool invertCameraY;
+        
+        #region Singleton
+        private static OptionsPanel _instance;
+
+        public static OptionsPanel Instance {
+            get {
+                if(_instance == null) _instance = new OptionsPanel();
+                return _instance;
+            }
+        }
+        #endregion
         private void Awake() {
             soundsSlider.value = GameSingleton.Instance.gameSettings.soundVolume;
             musicSlider.value = GameSingleton.Instance.gameSettings.musicVolume;
