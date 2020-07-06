@@ -30,7 +30,11 @@ namespace UI {
         }
 
 
-
+        public void ResetSave()
+        {
+            PlayerPrefs.DeleteAll();
+            Popups.instance.PopupTop("Save has been reset! Restart game to take effect.");
+        }
 
         public void SetInvertCameraX()
         {

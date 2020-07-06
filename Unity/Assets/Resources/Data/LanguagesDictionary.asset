@@ -525,3 +525,9 @@ MonoBehaviour:
       value: Unit is not placeable here, please try somewhere else
     - key: 1
       value: "Impossible de placer l'unit\xE9 ici. Essayez ailleur."
+  - values:
+    - key: 0
+      value: Save has been reset! Restart game to take effect.
+    - key: 1
+      value: "Sauvegarde \xE0 \xE9t\xE9 remis \xE0 zero! Red\xE9marrez le jeu pour
+        prendre effet."
