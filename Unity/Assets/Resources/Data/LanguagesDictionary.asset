@@ -127,7 +127,7 @@ MonoBehaviour:
     - key: 0
       value: Not connected
     - key: 1
-      value: "Non-connect\xE9"
+      value: "Non connect\xE9"
   - values:
     - key: 0
       value: Connected
