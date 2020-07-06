@@ -117,7 +117,16 @@ public class EditorMap : MonoBehaviour
 
     public void save()
     {
-        map.save();
+        if (map != null)
+        {
+            map.save();
+            Popups.instance.Popup("Map was saved!");
+        }
+        else
+        {
+            Popups.instance.Popup("Select settings first!", Color.red);
+        }
+
     }
 
     private void Start()

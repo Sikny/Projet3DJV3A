@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Game;
 using Terrain;
 using Units;
@@ -20,7 +21,6 @@ public class GenRandomParam : MonoBehaviour
     {
         //int difficulty;
         seed = seed + (seed+1) * i;
-        
         Random rand = new Random(seed);
 
         Level levelNew = levelBase;//Instantiate(levelBase);
@@ -28,9 +28,9 @@ public class GenRandomParam : MonoBehaviour
         TerrainOptions options = levelNew.terrainBuilder.terrainOptions;
 
         options.seed = seed;
-        options.mountainCount = rand.Next(2, 8);
-        options.waterCount = rand.Next(1, 3);
-        options.maxWaterSize = rand.Next(10, 30);
+        options.mountainCount = rand.Next(2, 15);
+        options.waterCount = rand.Next(1, 5);
+        options.maxWaterSize = rand.Next(10, 50);
 
         int nbEnnemy =  rand.Next(1, i) + rand.Next( (int)(i/4f), (int)(i/2f));
         nbEnnemy = nbEnnemy > 8 ? 8 : nbEnnemy;
@@ -39,12 +39,9 @@ public class GenRandomParam : MonoBehaviour
         {
             EnemySpawn es = new EnemySpawn();
             
-            Vector2 spawnPosition = new Vector2(rand.Next(-25,25), rand.Next(-25,25));
-            /*
-             * Check heightmap at coordinate and surrounding, if the heightmap is 0 place unit, else reselect a spawn position
-             */
+
             es.position = new Vector2(rand.Next(-25,25), rand.Next(-25,25));
-            
+
             
 
             Array values = Enum.GetValues(typeof(EntityType));
@@ -60,15 +57,37 @@ public class GenRandomParam : MonoBehaviour
     {
         Random rand = new Random(GameSingleton.Instance.GetPlayer().currentSeed);
         var height = l.terrainBuilder.terrainOptions.modifierHeightMap;
+        var heightNotGround = height.Where(x => x.Value != 0).Select(x => x.Key).ToList();
         foreach (var ennemy in l.enemySpawns)
         {
-            while (height.ContainsKey(ennemy.position))
+            bool noHeightNear = true;
+
+            while (heightNotGround.Contains(ennemy.position) && noHeightNear)
             {
-                ennemy.position = new Vector2(rand.Next(-25,25),rand.Next(-25,25));
+                noHeightNear = true;
+                ennemy.position = new Vector2(rand.Next(-24,24),rand.Next(-24,24));
+                if (heightNotGround.Contains(ennemy.position))
+                {
+                    for (int x = -1; x <= 1; x++)
+                    {
+                        for (int y = -1; y <= 1; y++)
+                        {
+                            Vector2 nextPos = new Vector2(x,y);
+                            if (heightNotGround.Contains(nextPos))
+                            {
+                                noHeightNear = false;
+                                //ennemy.position = nextPos;
+                                break;
+                            }
+                        }
+                    }
+                }
+
             }
         }
         return l;
     }
+
     
     public static EntityType softEntityType(Random rand, EntityType type, float difficult)
     {

@@ -1320,7 +1320,7 @@ PrefabInstance:
     - target: {fileID: 382855533145592570, guid: 265474c8405563c4e930af98a02ac188,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 114
+      value: 57.999992
       objectReference: {fileID: 0}
     - target: {fileID: 382855533145592571, guid: 265474c8405563c4e930af98a02ac188,
         type: 3}
@@ -1421,6 +1421,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842717335955377868, guid: 265474c8405563c4e930af98a02ac188,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 114.39999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842717335955377869, guid: 265474c8405563c4e930af98a02ac188,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1477455463}
+    - target: {fileID: 5842717335955377869, guid: 265474c8405563c4e930af98a02ac188,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetSave
       objectReference: {fileID: 0}
     - target: {fileID: 7657159801012224842, guid: 265474c8405563c4e930af98a02ac188,
         type: 3}

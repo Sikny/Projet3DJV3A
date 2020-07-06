@@ -127,7 +127,7 @@ MonoBehaviour:
     - key: 0
       value: Not connected
     - key: 1
-      value: "Non-connect\xE9"
+      value: "Non connect\xE9"
   - values:
     - key: 0
       value: Connected
@@ -162,15 +162,6 @@ MonoBehaviour:
       value: Mag (u)
   - values:
     - key: 0
-      value: 'INV
-
-        (i)'
-    - key: 1
-      value: 'INV
-
-        (i)'
-  - values:
-    - key: 0
       value: SHOP
     - key: 1
       value: MAGASIN
@@ -194,11 +185,6 @@ MonoBehaviour:
       value: Soldier
     - key: 1
       value: Soldat
-  - values:
-    - key: 0
-      value: Archer
-    - key: 1
-      value: "Arch\xE9"
   - values:
     - key: 0
       value: Mage
@@ -238,18 +224,18 @@ MonoBehaviour:
     - key: 0
       value: Spearmen can attack from further and deal more damage.
     - key: 1
-      value: "Les lanciers peuvent attaquer de plus loins et effectue plus de d\xE9g\xE2ts."
+      value: "Les lanciers peuvent attaquer de plus loins et effectuent plus de d\xE9g\xE2ts."
   - values:
     - key: 0
       value: Knights have a lot of defense and health.
     - key: 1
-      value: "Les Guerriers ont beaucoup de vies et de d\xE9fense."
+      value: "Les Guerriers ont beaucoup de vie et de d\xE9fense."
   - values:
     - key: 0
       value: Incredibly fast unit. Is very good against ranged units.
     - key: 1
-      value: "Unit\xE9 incroyablement rapide. Est tr\xE8s efficaces contres les unit\xE9s
-        \xE0 port\xE9e."
+      value: "Unit\xE9 incroyablement rapide. Est tr\xE8s efficace contre les unit\xE9s
+        \xE0 distance."
   - values:
     - key: 0
       value: Very slow unit but deals a lot of damage and has a lot of health.
@@ -260,7 +246,8 @@ MonoBehaviour:
     - key: 0
       value: White knights have a lot of health and  have a lot of defense.
     - key: 1
-      value: "Les Chevaliers Blanc sont les unit\xE9s la plus r\xE9sistante du jeu."
+      value: "Les Chevaliers Blancs sont les unit\xE9s les plus r\xE9sistantes du
+        jeu."
   - values:
     - key: 0
       value: White Mage
@@ -290,7 +277,7 @@ MonoBehaviour:
     - key: 0
       value: Base Mage unit. Effective against Soldier units
     - key: 1
-      value: "Unit\xE9 Magic de base.\nEfficace contre les unit\xE9s soldat."
+      value: "Unit\xE9 Magique de base.\nEfficace contre les unit\xE9s soldat."
   - values:
     - key: 0
       value: Unit suited for defensive strategies.
@@ -300,24 +287,24 @@ MonoBehaviour:
     - key: 0
       value: Black Mages attack slowly but deal a huge amount of damage.
     - key: 1
-      value: "Les Magiciens Noir attaques lentement mais infliges \xE9norm\xE9ments
+      value: "Les Magiciens Noir attaquent lentement mais infligent \xE9norm\xE9ment
         de d\xE9g\xE2ts."
   - values:
     - key: 0
       value: Bards have very strong defense.
     - key: 1
-      value: "Les bardes sont tr\xE8s fort d\xE9fensivement."
+      value: "Les bardes sont tr\xE8s forts d\xE9fensivement."
   - values:
     - key: 0
       value: Demonists are very slow but deal a huge amount of damage.
     - key: 1
-      value: "Les D\xE9monistes sont tr\xE8s lent mais inflige \xE9norm\xE9ment de
-        d\xE9g\xE2ts."
+      value: "Les D\xE9monistes sont tr\xE8s lents mais infligent \xE9norm\xE9ment
+        de d\xE9g\xE2ts."
   - values:
     - key: 0
       value: Red mages are very well rounded units.
     - key: 1
-      value: "Les Magiciens Rouges sont des unit\xE9s tr\xE8s \xE9quilibr\xE9s."
+      value: "Les Magiciens Rouges sont des unit\xE9s tr\xE8s \xE9quilibr\xE9es."
   - values:
     - key: 0
       value: Hunter
@@ -352,32 +339,32 @@ MonoBehaviour:
     - key: 0
       value: Hunters can shoot from a further distance and deal more damage.
     - key: 1
-      value: "Les chasseurs peuvent tirer d'une distance plus importante et inflig\xE9
+      value: "Les chasseurs peuvent tirer d'une distance plus importante et infliger
         plus de d\xE9g\xE2ts."
   - values:
     - key: 0
       value: Arbalists shoot very quickly
     - key: 1
-      value: "Les Arbal\xE9tier tires tr\xE8s rapidement."
+      value: "Les Arbal\xE9tiers tirent tr\xE8s rapidement."
   - values:
     - key: 0
       value: Low damage shots but shoot very frequently.
     - key: 1
-      value: "D\xE9g\xE2ts faibles mais tire tr\xE8s fr\xE9quament."
+      value: "D\xE9g\xE2ts faibles mais tirent tr\xE8s fr\xE9quemment."
   - values:
     - key: 0
       value: Catapulitsts are very slow units that don't shoot frequently but deal
         a lot of damage.
     - key: 1
-      value: "Les Cataplutiste sont des unit\xE9s tr\xE8s lentes qui ne tire pas
-        souvent mais qui inflige beaucoup de d\xE9g\xE2ts."
+      value: "Les Cataplutistes sont des unit\xE9s tr\xE8s lentes qui ne tirent pas
+        souvent mais qui infligent beaucoup de d\xE9g\xE2ts."
   - values:
     - key: 0
       value: 'Snipers shoot much less frequently but will never miss a shot and deals
         a lot of damage. '
     - key: 1
-      value: "Les Snipeur tires beaucoup moins fr\xE9qumment mais ne ratent jamais
-        leur tire et inflige beaucoup de d\xE9g\xE2ts."
+      value: "Les Snipeur tirent beaucoup moins fr\xE9quemment mais ne ratent jamais
+        leur tirs et infligent beaucoup de d\xE9g\xE2ts."
   - values:
     - key: 0
       value: Health potion
@@ -513,3 +500,34 @@ MonoBehaviour:
       value: Not enough gold!
     - key: 1
       value: Pas assez d'argent!
+  - values:
+    - key: 0
+      value: INVENTORY
+    - key: 1
+      value: INVENTAIRE
+  - values:
+    - key: 0
+      value: Wrong identifications!
+    - key: 1
+      value: Mauvais identifiants!
+  - values:
+    - key: 0
+      value: Mail is already used!
+    - key: 1
+      value: "Mail d\xE9j\xE0 utilis\xE9!"
+  - values:
+    - key: 0
+      value: Not connected!
+    - key: 1
+      value: "Pas connect\xE9!"
+  - values:
+    - key: 0
+      value: Unit is not placeable here, please try somewhere else
+    - key: 1
+      value: "Impossible de placer l'unit\xE9 ici. Essayez ailleur."
+  - values:
+    - key: 0
+      value: Save has been reset! Restart game to take effect.
+    - key: 1
+      value: "Sauvegarde \xE0 \xE9t\xE9 remis \xE0 zero! Red\xE9marrez le jeu pour
+        prendre effet."

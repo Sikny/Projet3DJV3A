@@ -64,7 +64,7 @@ namespace Language {
         }
 
         public void DeleteEntry(int index) {
-            if (index < dictionary.Count - 1)
+            if (index > dictionary.Count - 1)
                 return;
             dictionary.RemoveAt(index);
         }

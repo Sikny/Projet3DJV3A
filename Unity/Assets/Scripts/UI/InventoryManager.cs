@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Game;
 using Items;
+using Language;
 using TMPro;
 using UnityEngine;
 using Utility;
@@ -27,7 +28,7 @@ namespace UI {
         public void UpdateUiConsumable(Consumable consumable) {
             var addedItem = Instantiate(prefabSlot, itemsParent, false);
             addedItem.item = consumable;
-            addedItem.itemName.SetText(consumable.itemName);
+            addedItem.itemName.SetText(Traducer.Translate(consumable.itemName));
             addedItem.icon.sprite = consumable.icon;
 
             _consumableSlots.Add(addedItem);
@@ -36,19 +37,18 @@ namespace UI {
         public void UpdateUiEquipment(Equipment equipment) {
             var addedItem = Instantiate(prefabSlot, equipmentsParent, false);
             addedItem.item = equipment;
-            addedItem.itemName.SetText(equipment.itemName);
+            addedItem.itemName.SetText(Traducer.Translate(equipment.itemName));
             addedItem.icon.sprite = equipment.icon;
         }
 
         public void UpdateUiUnit(StoreUnit unit)
         {
-
             ItemSlot targetSlot = (unit.upgrades.Count > 0) ? unitPrefabSlot : prefabSlot;
  
             var addedItem = Instantiate(targetSlot, unitsParent, false);
             
             addedItem.item = unit;
-            addedItem.itemName.SetText(unit.itemName);
+            addedItem.itemName.SetText(Traducer.Translate(unit.itemName));
             addedItem.icon.sprite = unit.icon;
             
             _unitSlots.Add(addedItem);

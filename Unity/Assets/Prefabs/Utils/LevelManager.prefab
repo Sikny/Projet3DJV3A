@@ -47,6 +47,8 @@ MonoBehaviour:
   levelList: {fileID: 11400000, guid: 757716f91318dec439002e3f46856d9b, type: 2}
   loadedLevel: {fileID: 0}
   grp: {fileID: 4978998015009354484}
+  seed: 0
+  gradientList: {fileID: 11400000, guid: deb3c1b1df4563f42a3ebb7f9b4332c2, type: 2}
 --- !u!114 &4978998015009354484
 MonoBehaviour:
   m_ObjectHideFlags: 0

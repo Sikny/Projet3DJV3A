@@ -1,38 +1,38 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Language;
 using TMPro;
 using UnityEngine;
 using Utility;
 
-public class ConnecteMode : MonoBehaviour
-{
-    public TMP_Text connecteIndication;
-    // Start is called before the first frame update
-    void Start()
+namespace UI {
+    public class ConnecteMode : MonoBehaviour
     {
-         updateConnecteIndication();
-    }
-    public void updateConnecteIndication()
-    {
-        if (connecteIndication != null)
+        public TMP_Text connecteIndication;
+        // Start is called before the first frame update
+        void Start()
         {
-            string token = GameSingleton.Instance.GetPlayer().token;
-            if (string.IsNullOrEmpty(token) || token.Length < 8)
+            UpdateConnecteIndication();
+        }
+        public void UpdateConnecteIndication()
+        {
+            if (connecteIndication != null)
             {
-                connecteIndication.text = "Non-connecté";
-                connecteIndication.color = Color.white;
-            }
-            else
-            {
-                connecteIndication.text = "Connecté";
-                connecteIndication.color = Color.green;
+                string token = GameSingleton.Instance.GetPlayer().token;
+                if (string.IsNullOrEmpty(token) || token.Length < 8)
+                {
+                    connecteIndication.text = Traducer.Translate("Not connected");
+                    connecteIndication.color = Color.white;
+                }
+                else
+                {
+                    connecteIndication.text = Traducer.Translate("Connected");
+                    connecteIndication.color = Color.green;
+                }
             }
         }
-    }
 
-    public void Update()
-    {
-        updateConnecteIndication();
+        public void Update()
+        {
+            UpdateConnecteIndication();
+        }
     }
 }

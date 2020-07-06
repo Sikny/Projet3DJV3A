@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Game;
 using Items;
 using leveleditor.rule;
+using Terrain;
 using UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -15,6 +17,8 @@ namespace Utility {
         public GenRandomParam grp;
 
         public int seed;
+
+        public GradientList gradientList;
 
         public void Start()
         {
@@ -36,6 +40,9 @@ namespace Utility {
             {
                 GameSingleton.Instance.levelManager = this;
                 loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade));
+                var matGradPair = gradientList.GetRandomGradient();
+                loadedLevel.terrainBuilder.heightGradient = matGradPair.gradient;
+                loadedLevel.terrainBuilder.waterObject.GetComponent<MeshRenderer>().material = matGradPair.material;
                 loadedLevel.Init();
             }
             else if (player.gamemode == Player.Gamemode.PERSONNALIZED)
@@ -43,16 +50,17 @@ namespace Utility {
                 String filename = GameSingleton.Instance.filename;
                 Rule r = Rule.readLevel(filename.Split('.')[0]);
                 
-               loadLevel(r);
+               LoadLevel(r);
             }
             else
             {
-                player.goldStartLevel = player.gold;
-                player.inventoryStartLevel = player.storyModeInventory;
+
                 //GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
                 GameSingleton.Instance.levelManager = this;
                 loadedLevel = Instantiate(levelList.GetLevel(player.currentLevel));
                 loadedLevel.Init();
+                player.goldStartLevel = player.gold;
+                player.inventoryStartLevel = player.storyModeInventory;
             }
         }
 
@@ -83,13 +91,13 @@ namespace Utility {
             loadedLevel = level;
         }
 
-        public void loadLevel(Rule rule)
+        public void LoadLevel(Rule rule)
         {
+            Shop.Instance.ClearShop();
             GameSingleton.Instance.GetPlayer().gold = rule.maxBudget;
             GameSingleton.Instance.levelManager = this;
 
             Level levelNew = grp.levelBase;
-            
             loadedLevel = Instantiate(levelNew);
             loadedLevel.rule = rule;
             loadedLevel.Init();
@@ -112,12 +120,27 @@ namespace Utility {
                 GameSingleton.Instance.GetPlayer().currentSeed = seed;
             }
             loadedLevel = grp.generateNextLevel(seed,  GameSingleton.Instance.GetPlayer().currentLevelArcade);
+            
+            List<EnemySpawn> enemySpawns = loadedLevel.enemySpawns;
+
+
             grp.setDefaultGold(loadedLevel);
             GameSingleton.Instance.levelManager = this;
             
             
             loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade-1));
+            var matGradPair = gradientList.GetRandomGradient();
+            loadedLevel.terrainBuilder.heightGradient = matGradPair.gradient;
+            loadedLevel.terrainBuilder.waterObject.GetComponent<MeshRenderer>().material = matGradPair.material;
             loadedLevel.Init();
+           /* foreach (var enemy in  enemySpawns)
+            {
+                Vector2 spawnPosition = enemy.position;
+
+                float yPosition = loadedLevel.terrainBuilder.terrainOptions.modifierHeightMap[spawnPosition];
+                Debug.Log("position :" + yPosition);
+                Debug.Log(enemy.position);
+            }*/
             loadedLevel = grp.respawnEnnemies(loadedLevel);
         }
     }

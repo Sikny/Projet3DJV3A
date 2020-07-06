@@ -22,11 +22,27 @@ namespace Utility {
         public void LoadScene(string sceneName) {
             Player player = GameSingleton.Instance.GetPlayer();
             SoundManager soundManager = GameSingleton.Instance.soundManager;
+
             switch (sceneName) {
                 case "Menu":
                     //soundManager.StopPlaying("Level theme");
                     soundManager.StopPlayingAllMusics();
                     soundManager.Play("Menu");
+
+                    if(player.gamemode != Player.Gamemode.LEVEL)
+                    {
+                        player.arcadeModeInventory.Clear();
+                        Shop.Instance.ClearShop();
+                        player.arcadeGold = 150;
+                        player.currentLevelArcade = 0;
+                    }
+                    else
+                    {
+                        player.storyModeInventory.Clear();
+                        player.storyModeInventory = player.inventoryStartLevel;
+                        player.gold = player.goldStartLevel;
+                    }
+
                     UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
                     break;
                 case "StoryMode":
@@ -49,6 +65,10 @@ namespace Utility {
                     else {
                         GameSingleton.Instance.tokenManager.CheckToken(token, "scene.load.freeMode");
                         Shop.Instance.ClearShop();
+                        player.currentLevelArcade = 0;
+                        player.arcadeModeInventory.Clear();
+                        player.arcadeGold = 150;
+
                         player.gamemode = Player.Gamemode.ARCADE;
 
                         soundManager.StopPlayingAllMusics();
@@ -58,6 +78,11 @@ namespace Utility {
                     break;
                 case "loadLvl":
                     GameSingleton.Instance.GetPlayer().gamemode = Player.Gamemode.PERSONNALIZED;
+                    player.arcadeModeInventory.Clear();
+                    player.arcadeGold = 150;
+                    UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
+                    break;
+                case "creator":
                     UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
                     break;
             }
