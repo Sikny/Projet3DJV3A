@@ -33,7 +33,7 @@ namespace Language {
             }
         }
 
-        public string Translate(string value) {
+        public static string Translate(string value) {
             return GameSingleton.Instance.languageDictionary.SearchAndTraduce(value,
                 GameSingleton.Instance.gameSettings.language);
         }

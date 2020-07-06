@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Language;
 using TMPro;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ namespace UI {
         public void Popup(String content, Color color)
         {
             popupText.color = color;
-            popupText.SetText(content);
+            popupText.SetText(Traducer.Translate(content));
             popupText.gameObject.SetActive(true);
             StartCoroutine(DelayCorouting(3,popupText));
         }
@@ -34,7 +35,7 @@ namespace UI {
         public void Popup(String content)
         {
             popupText.color = defaultColor;
-            popupText.SetText(content);
+            popupText.SetText(Traducer.Translate(content));
             popupText.gameObject.SetActive(true);
             StartCoroutine(DelayCorouting(3,popupText));
         }
@@ -42,7 +43,7 @@ namespace UI {
         public void PopupTop(String content, Color color)
         {
             topPopupText.color = color;
-            topPopupText.SetText(content);
+            topPopupText.SetText(Traducer.Translate(content));
             topPopupText.gameObject.SetActive(true);
             StartCoroutine(DelayCorouting(3,topPopupText));
         }
@@ -50,7 +51,7 @@ namespace UI {
         public void PopupTop(String content)
         {
             topPopupText.color = defaultColor;
-            topPopupText.SetText(content);
+            topPopupText.SetText(Traducer.Translate(content));
             topPopupText.gameObject.SetActive(true);
             StartCoroutine(DelayCorouting(3,topPopupText));
         }
