@@ -21,8 +21,6 @@ namespace Game {
             public KeyCode cameraLeft = KeyCode.Q;
             public KeyCode cameraDown = KeyCode.S;
             public KeyCode cameraUp = KeyCode.Z;
-
-
         }
 
         public KeyMap keyMap;
@@ -35,8 +33,6 @@ namespace Game {
             public CustomEvent toggleInventoryEvent;
             public CustomEvent toggleShopEvent;
             public CustomEvent selectionEvent;
-            public CustomEvent cameraRotateOnEvent;
-            public CustomEvent cameraRotateOffEvent;
             public CustomEvent cameraMoveRightOnEvent;
             public CustomEvent cameraMoveRightOffEvent;
             public CustomEvent cameraMoveLeftOnEvent;
@@ -69,14 +65,6 @@ namespace Game {
 
             if (Input.GetKeyDown(keyMap.selectKey)) {
                 gameEvents.selectionEvent.Raise();
-            }
-
-            if (Input.GetKeyDown(keyMap.cameraRotateKey)) {
-                gameEvents.cameraRotateOnEvent.Raise();
-            }
-
-            if (Input.GetKeyUp(keyMap.cameraRotateKey)) {
-                gameEvents.cameraRotateOffEvent.Raise();
             }
 
             if (Input.GetKeyDown(keyMap.cameraRight) || Input.GetKeyDown(keyMap.arrowCameraRight))
