@@ -1,18 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Spawner : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+namespace Units {
+    public class Spawner : MonoBehaviour {
+        public GameObject spriteRenderer;
+        public GameObject spriteMask;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private Vector3 _firstScale;
+
+        private void Awake() {
+            _firstScale = spriteRenderer.transform.localScale;
+        }
+
+        public void UpdateScale(float time) { // time between 0 & 1
+            float clamped = Mathf.Clamp01(time);
+            spriteRenderer.transform.localScale = (clamped + 0.01f) * _firstScale;
+            spriteMask.transform.localScale = clamped * _firstScale;
+        }
     }
 }
