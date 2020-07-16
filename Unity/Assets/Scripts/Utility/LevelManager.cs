@@ -30,6 +30,7 @@ namespace Utility {
             if (player.gamemode == Player.Gamemode.ARCADE && player.currentScore == 0) {
                 levelList.ClearLevels();
                 player.currentLevelArcade = 0;
+                GameSingleton.Instance.GetPlayer().beginGame = DateTime.Now;
 
                 GenerateLevel();
             } else if (player.gamemode == Player.Gamemode.ARCADE) {
@@ -105,7 +106,6 @@ namespace Utility {
             GameSingleton.Instance.GetPlayer().currentLevelArcade += 1;
 
             if (GameSingleton.Instance.GetPlayer().currentLevelArcade == 1) {
-                GameSingleton.Instance.GetPlayer().beginGame = DateTime.Now;
 
                 seed = Random.Range(Int32.MinValue, Int32.MaxValue);
                 GameSingleton.Instance.GetPlayer().currentSeed = seed;
