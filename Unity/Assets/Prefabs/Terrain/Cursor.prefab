@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6589ae109bddf94abde7c4a2a9d402a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posY: 0
 --- !u!114 &7321384622003979866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24,6 +25,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6589ae109bddf94abde7c4a2a9d402a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posY: 0
 --- !u!114 &790584882765948653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,6 +38,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6589ae109bddf94abde7c4a2a9d402a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posY: 0
 --- !u!114 &3010822133086843317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6589ae109bddf94abde7c4a2a9d402a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posY: 0
 --- !u!114 &1337121114878954844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6589ae109bddf94abde7c4a2a9d402a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posY: 0
 --- !u!1 &4553015665887392913
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6589ae109bddf94abde7c4a2a9d402a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posY: 0
 --- !u!114 &7054301094760128456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6589ae109bddf94abde7c4a2a9d402a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posY: 0
 --- !u!114 &5216295930689034733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6589ae109bddf94abde7c4a2a9d402a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posY: 0
 --- !u!114 &458341683760712798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6589ae109bddf94abde7c4a2a9d402a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posY: 0
 --- !u!1001 &856303996851327761
 PrefabInstance:
   m_ObjectHideFlags: 0

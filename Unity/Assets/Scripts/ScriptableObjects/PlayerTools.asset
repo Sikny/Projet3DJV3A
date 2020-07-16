@@ -9,6 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 237b30ee44c846c4480729f60396204c, type: 3}
-  m_Name: CameraRotateOffEvent
+  m_Script: {fileID: 11500000, guid: 998b3f5997158d04f9d8c605ebbc7212, type: 3}
+  m_Name: PlayerTools
   m_EditorClassIdentifier: 
+  storyModeInventory: {fileID: 11400000, guid: b7120ce116e92ee4d9d9f6c7f5d23817, type: 2}
+  goldAmount: 0
+  availableUnits: []
+  availableConsumables: []

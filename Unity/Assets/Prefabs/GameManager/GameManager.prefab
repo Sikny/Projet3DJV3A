@@ -158,10 +158,6 @@ MonoBehaviour:
       type: 2}
     toggleShopEvent: {fileID: 11400000, guid: 7e9e76694cf1e6c4f94104a48156f31f, type: 2}
     selectionEvent: {fileID: 11400000, guid: a1db9c368c2bcc0478010da2fb2aaa47, type: 2}
-    cameraRotateOnEvent: {fileID: 11400000, guid: ea8cb18e30a55204a8d356fc7e077c4f,
-      type: 2}
-    cameraRotateOffEvent: {fileID: 11400000, guid: 198d50b2c1b235a41a762615c51fc901,
-      type: 2}
     cameraMoveRightOnEvent: {fileID: 11400000, guid: d50691883190ba64091b10522b86a893,
       type: 2}
     cameraMoveRightOffEvent: {fileID: 11400000, guid: df8ddf7b67ed1104e95ce3f71551aff1,

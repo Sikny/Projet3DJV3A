@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 1657578593964637156}
   - component: {fileID: 1657578593964637157}
   - component: {fileID: 1657578593964637178}
-  - component: {fileID: 1657578593964637177}
-  - component: {fileID: 1657578593964637176}
   - component: {fileID: 1657578593964637183}
   - component: {fileID: 1657578593964637182}
   - component: {fileID: 1657578593964637180}
@@ -217,60 +215,6 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
---- !u!114 &1657578593964637177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1657578593964637159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93ff765aaf74eb34896b6b3ea87a2fc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  customEventSent: {fileID: 11400000, guid: ea8cb18e30a55204a8d356fc7e077c4f, type: 2}
-  action:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1657578593964637157}
-        m_MethodName: SetRotating
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1657578593964637176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1657578593964637159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93ff765aaf74eb34896b6b3ea87a2fc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  customEventSent: {fileID: 11400000, guid: 198d50b2c1b235a41a762615c51fc901, type: 2}
-  action:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1657578593964637157}
-        m_MethodName: UnsetRotating
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1657578593964637183
 MonoBehaviour:
   m_ObjectHideFlags: 0

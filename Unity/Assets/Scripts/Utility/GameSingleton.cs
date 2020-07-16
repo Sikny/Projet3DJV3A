@@ -1,8 +1,5 @@
-﻿using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using CustomEvents;
+﻿using CustomEvents;
 using Game;
-using Items;
 using Language;
 using Sounds;
 using UI;
@@ -77,8 +74,6 @@ namespace Utility {
 
         // Do not delete or make private (used by events)
         public void LoadScene(string sceneName) {
-
-
             sceneManager.LoadScene(sceneName);
         }
 
@@ -103,11 +98,17 @@ namespace Utility {
         public void PauseGame() {
             Time.timeScale = 0f;
             gamePaused = true;
+            if (levelManager != null) {
+                levelManager.loadedLevel.PauseDelayedSpawns();
+            }
         }
 
         public void ResumeGame() {
             Time.timeScale = gameVariables.timeScaleGameActive;
             gamePaused = false;
+            if (levelManager != null) {
+                levelManager.loadedLevel.ResumeDelayedSpawns();
+            }
         }
 
         public void QuitGame() {
