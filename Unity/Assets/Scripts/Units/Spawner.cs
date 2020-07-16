@@ -1,20 +1,29 @@
 ﻿using UnityEngine;
+using Utility.PoolManager;
 
 namespace Units {
-    public class Spawner : MonoBehaviour {
-        public GameObject spriteRenderer;
-        public GameObject spriteMask;
+    public class Spawner : PoolableObject {
+        public Transform spriteRenderer;
+        public Transform spriteMask;
 
         private Vector3 _firstScale;
+        private Vector3 _offset = Vector3.one * 0.015f;
+
+        public static float timeToSpawn = 2.5f;
+        private float _time;
 
         private void Awake() {
-            _firstScale = spriteRenderer.transform.localScale;
+            _firstScale = spriteRenderer.localScale;
+            _time = timeToSpawn;
         }
 
-        public void UpdateScale(float time) { // time between 0 & 1
-            float clamped = Mathf.Clamp01(time);
-            spriteRenderer.transform.localScale = (clamped + 0.01f) * _firstScale;
-            spriteMask.transform.localScale = clamped * _firstScale;
+        public void UpdateTime() {
+            _time -= Time.deltaTime;
+            float lerp = Mathf.InverseLerp(0f, timeToSpawn, _time);
+            spriteRenderer.localScale = lerp * _firstScale;
+            spriteMask.localScale = lerp * _firstScale - _offset;
+            if(_time > timeToSpawn)
+                DeInit();
         }
     }
 }

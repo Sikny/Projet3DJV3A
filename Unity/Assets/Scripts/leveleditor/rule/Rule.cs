@@ -59,7 +59,7 @@ namespace leveleditor.rule {
                         new Vector3(entry.Key.X, entry.Value, entry.Key.Z);
                 
                 }
-                catch (Exception ex) {
+                catch (Exception) {
                     // ignored
                 }
             }
@@ -78,7 +78,7 @@ namespace leveleditor.rule {
                         new Color(entry.Value/4f,0f,0f);
                 
                 }
-                catch (Exception ex) {
+                catch (Exception) {
                     // ignored
                 }
             }

@@ -10,6 +10,7 @@ using Units;
 using Units.PathFinding;
 using UnityEngine;
 using Utility;
+using Utility.PoolManager;
 using Random = UnityEngine.Random;
 
 namespace Game {
@@ -18,7 +19,6 @@ namespace Game {
         public float spawnTime;
         public EntityType entityType;
         public Vector2 position;
-        public Sprite icon;
     }
 
     public class Level : MonoBehaviour {
@@ -41,6 +41,7 @@ namespace Game {
         private bool _levelStarted;
 
         private List<Tween> _enemySpawnsDelayedCalls;
+        private List<Tween> _spawningEnemies;
 
         // Initializes level with terrain, a*, shop
         public void Init() {
@@ -68,6 +69,7 @@ namespace Game {
             _shopManager.UpdateUi(_shop);
             
             _enemySpawnsDelayedCalls = new List<Tween>();
+            _spawningEnemies = new List<Tween>();
         }
 
         // Initializes a*, called after terrain generation
@@ -136,17 +138,36 @@ namespace Game {
 
         public IEnumerator StartLevel() {
             _playerUnits = new List<PlayerUnit>();
+            Transform newUnit;
             for (int i = enemySpawns.Count - 1; i >= 0; i--) {
                 EnemySpawn current = enemySpawns[0];
                 var offset = Vector3.right * (TerrainGrid.Width / 2f) +
                              Vector3.forward * (TerrainGrid.Height / 2f);
                 Vector3 position = new Vector3(current.position.x, SystemUnit.YPos, current.position.y) + offset;
-                // enemy spawns (can be delayed)
-                _enemySpawnsDelayedCalls.Add(DOVirtual.DelayedCall(current.spawnTime, () => {
-                    Transform newUnit = _systemUnit.SpawnUnit(current.entityType, _systemUnit.aiUnitPrefab, position);
+                // enemy spawn (can be delayed)
+                if (current.spawnTime > 0) {
+                    // todo update delayed calls when finished
+                    _enemySpawnsDelayedCalls.Add(DOVirtual.DelayedCall(
+                        Mathf.Max(0f, current.spawnTime - Spawner.timeToSpawn), () => {
+                            Spawner spawner = (Spawner) PoolManager.Instance().GetPoolableObject(typeof(Spawner));
+                            spawner.transform.position = position;
+                            spawner.Init();
+
+                            _spawningEnemies.Add(DOVirtual.DelayedCall(Spawner.timeToSpawn, () => {
+                                newUnit = _systemUnit.SpawnUnit(current.entityType, _systemUnit.aiUnitPrefab,
+                                    position);
+                                livingEnemies.Add(newUnit);
+                            }).OnUpdate(() => {
+                                spawner.UpdateTime();
+                            }));
+                        }));
+                } else {
+                    newUnit = _systemUnit.SpawnUnit(current.entityType, _systemUnit.aiUnitPrefab,
+                        position);
                     livingEnemies.Add(newUnit);
-                    enemySpawns.Remove(current);
-                }));
+                }
+                enemySpawns.Remove(current);
+
                 yield return null;
             }
 
@@ -155,14 +176,22 @@ namespace Game {
         }
 
         public void PauseDelayedSpawns() {
-            for (int i = _enemySpawnsDelayedCalls.Count - 1; i >= 0; i--) {
+            for (int i = _enemySpawnsDelayedCalls.Count - 1; i >= 0; --i) {
                 _enemySpawnsDelayedCalls[i].Pause();
+            }
+
+            for (int i = _spawningEnemies.Count - 1; i >= 0; --i) {
+                _spawningEnemies[i].Pause();
             }
         }
         
         public void ResumeDelayedSpawns() {
-            for (int i = _enemySpawnsDelayedCalls.Count - 1; i >= 0; i--) {
+            for (int i = _enemySpawnsDelayedCalls.Count - 1; i >= 0; --i) {
                 _enemySpawnsDelayedCalls[i].Play();
+            }
+            
+            for (int i = _spawningEnemies.Count - 1; i >= 0; --i) {
+                _spawningEnemies[i].Pause();
             }
         }
 
@@ -172,7 +201,7 @@ namespace Game {
             // Enemy spawns
             Gizmos.color = Color.red;
             int enemyLen = enemySpawns.Count;
-            for (int i = 0; i < enemyLen; i++) {
+            for (int i = 0; i < enemyLen; ++i) {
                 Vector3 position = new Vector3(enemySpawns[i].position.x, SystemUnit.YPos, enemySpawns[i].position.y);
                 Gizmos.DrawSphere(position, 0.5f);
             }
