@@ -96,7 +96,8 @@ namespace UI {
 
         public GameObject fightButton;
 
-        public void Fight() {
+        public void Fight()
+        {
             int playerCount = FindObjectsOfType<PlayerUnit>().Length;
             if (playerCount == 0) {
                 Popups.instance.Popup("At least one unit must be placed first", Color.red);

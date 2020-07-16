@@ -508,6 +508,11 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3707213596347971376, guid: 3c3a0d18b81786f469d674dcd8ff9df2,
+        type: 3}
+      propertyPath: systemUnit
+      value: 
+      objectReference: {fileID: 755814114}
     - target: {fileID: 3756505003360005069, guid: 3c3a0d18b81786f469d674dcd8ff9df2,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -652,6 +657,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 678431467393923812, guid: df1ad11a2ccf53a45a280522fc3640de,
+        type: 3}
+      propertyPath: isRunning
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 678431467393923813, guid: df1ad11a2ccf53a45a280522fc3640de,
         type: 3}
       propertyPath: m_LocalPosition.x
