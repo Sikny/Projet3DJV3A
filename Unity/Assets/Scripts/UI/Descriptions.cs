@@ -9,6 +9,7 @@ namespace UI {
     {
         private TextMeshProUGUI _description;
 
+        private Transform _mousePos;
         private bool _isTouchingItem;
 
         private GameObject _descriptionBox;
@@ -45,9 +46,16 @@ namespace UI {
 
         private void Update()
         {
+            
             if (_isTouchingItem)
             {
-                _descriptionBox.transform.position = new Vector3(Input.mousePosition.x + ( -Screen.width / 6f ), Input.mousePosition.y, _descriptionBox.transform.position.z);
+                
+                if(Input.mousePosition.x < Screen.width/2f)
+                    _descriptionBox.transform.position = new Vector3(Input.mousePosition.x + ( Screen.width / 6f ), Input.mousePosition.y, _descriptionBox.transform.position.z);
+                else
+                    _descriptionBox.transform.position = new Vector3(Input.mousePosition.x + ( -Screen.width / 6f ), Input.mousePosition.y, _descriptionBox.transform.position.z);
+
+                
                 //_descriptionBox.transform.position = new Vector3(Input.mousePosition.x  -90f, Input.mousePosition.y, _descriptionBox.transform.position.z);
             }
 

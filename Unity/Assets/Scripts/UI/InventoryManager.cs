@@ -21,7 +21,7 @@ namespace UI {
         private List<ItemSlot> _unitSlots = new List<ItemSlot>();
 
         void Start() {
-            inventoryPanel.SetActive(false);
+            //inventoryPanel.SetActive(false);
             UpdateGold();
         }
 

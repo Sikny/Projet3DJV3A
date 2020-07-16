@@ -29,11 +29,12 @@ namespace Units {
         private UiManager _uiManager;
 
         private bool _uiActivated;
-        public bool isRunning;
+        public bool isRunning = false;
 
         public void SetRunning(bool run)
         {
             isRunning = run;
+            Debug.Log("is running equal to :" + isRunning);
         }
         
         public void Start() {
@@ -47,6 +48,7 @@ namespace Units {
             UnitLibData.groundMask = groundMask;
             UnitLibData.units = units; // Penser à update si 
             UnitLibData.deltaTime = 0;
+            //isRunning = false;
         }
 
         public Transform SpawnUnit(EntityType unitType, AbstractUnit unit, Vector3 position) {
@@ -81,12 +83,18 @@ namespace Units {
             }
             else if (_uiManager)
             {
-                if (_uiManager.inventoryPanel.activeSelf || _uiManager.shopPanel.activeSelf ||
+                if ( _uiManager.upgradePanel.activeSelf ||_uiManager.pausePanel.activeSelf ||
+                    GameSingleton.Instance.endGamePanel.winMessage.IsActive() ||
+                    GameSingleton.Instance.endGamePanel.loseMessage.IsActive()) 
+                    _uiActivated = true;
+                else
+                    _uiActivated = false;
+                /* if (_uiManager.inventoryPanel.activeSelf || _uiManager.shopPanel.activeSelf ||
                     _uiManager.upgradePanel.activeSelf || _uiManager.pausePanel.activeSelf ||
                     GameSingleton.Instance.endGamePanel.winMessage.IsActive() ||
                     GameSingleton.Instance.endGamePanel.loseMessage.IsActive()) _uiActivated = true;
                 else
-                    _uiActivated = false;
+                    _uiActivated = false;*/
             }
 
 
@@ -119,7 +127,8 @@ namespace Units {
             // Fight start
             if (!isRunning) return;
             if (_uiActivated) return;
-             // Allied Unit selection
+            Debug.Log("isrunning is : " + isRunning);
+            // Allied Unit selection
             if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
             {
 

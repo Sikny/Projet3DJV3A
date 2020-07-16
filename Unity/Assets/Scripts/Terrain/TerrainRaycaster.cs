@@ -20,7 +20,7 @@ namespace Terrain {
                 _uiManager = GameSingleton.Instance.uiManager;
             }
             else if(_uiManager)
-                if (_uiManager.inventoryPanel.activeSelf || _uiManager.shopPanel.activeSelf || _uiManager.upgradePanel.activeSelf || _uiManager.pausePanel.activeSelf 
+                if (_uiManager.upgradePanel.activeSelf || _uiManager.pausePanel.activeSelf 
                     || GameSingleton.Instance.endGamePanel.winMessage.IsActive() || GameSingleton.Instance.endGamePanel.loseMessage.IsActive()) return ;
             Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
             

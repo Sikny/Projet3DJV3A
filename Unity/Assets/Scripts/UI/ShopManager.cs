@@ -18,7 +18,7 @@ namespace UI {
         private Shop _shop;
 
 
-        #region Singletonto
+        #region Singleton
 
         public static ShopManager instance;
 
@@ -40,7 +40,7 @@ namespace UI {
             UpdateUiEquipments();
             UpdateUiUnits();
             UpdateGold();
-            shopPanel.SetActive(false);
+            //shopPanel.SetActive(false);
         }
 
         public void UpdateUi(Shop shop) {
@@ -96,16 +96,16 @@ namespace UI {
 
         public GameObject fightButton;
 
-        public void Fight() {
+        public void Fight()
+        {
             int playerCount = FindObjectsOfType<PlayerUnit>().Length;
             if (playerCount == 0) {
                 Popups.instance.Popup("At least one unit must be placed first", Color.red);
                 return;
             }
-
             systemUnit.SetRunning(true);
             fightButton.SetActive(false);
-            shopPanel.SetActive(false);
+            //shopPanel.SetActive(false);
             GameSingleton.Instance.StartFight();
         }
     }
