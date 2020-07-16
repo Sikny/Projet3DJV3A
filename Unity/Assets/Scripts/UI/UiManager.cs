@@ -31,21 +31,21 @@ namespace UI {
         public void ToggleInventory() {
             inventoryUi.UpdateGold();
             inventoryPanel.SetActive(!inventoryPanel.activeSelf);
-            shopPanel.SetActive(false);
-            descriptionBox.SetActive(false);
+            //shopPanel.SetActive(false);
+            //descriptionBox.SetActive(false);
         }
 
         public void ToggleShop() {
             ShopManager.instance.UpdateGold();
             shopPanel.SetActive(!shopPanel.activeSelf);
-            inventoryPanel.SetActive(false);
-            descriptionBox.SetActive(false);
+            //inventoryPanel.SetActive(false);
+            //descriptionBox.SetActive(false);
         }
 
         public void ToggleUpgradePanel() {
             UpgradeManager.instance.UpdateGold();
             upgradePanel.SetActive(!upgradePanel.activeSelf);
-            descriptionBox.SetActive(false);
+            //descriptionBox.SetActive(false);
         }
 
         public void HideUis() {

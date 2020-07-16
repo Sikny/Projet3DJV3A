@@ -1,4 +1,4 @@
-Unités qui sortent des limites du terrain
-Impossible de se connecter après identifiant incorrect
-    Scroll du classement non fonctionnel
-    Crash si spawn d’unité sur la bordure
+Sons qui ne jouent pas parfois
+AStar qui peut causer des ralentissements
+Quelques traductions manquantes (mineures)
+AStar avec un custom level peut disfonctionner
