@@ -102,10 +102,9 @@ namespace UI {
                 Popups.instance.Popup("At least one unit must be placed first", Color.red);
                 return;
             }
-
             systemUnit.SetRunning(true);
             fightButton.SetActive(false);
-            shopPanel.SetActive(false);
+            //shopPanel.SetActive(false);
             GameSingleton.Instance.StartFight();
         }
     }

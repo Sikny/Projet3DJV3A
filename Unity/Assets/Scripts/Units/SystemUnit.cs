@@ -125,7 +125,7 @@ namespace Units {
             // Fight start
             if (!isRunning) return;
             if (_uiActivated) return;
-             // Allied Unit selection
+            // Allied Unit selection
             if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
             {
 
