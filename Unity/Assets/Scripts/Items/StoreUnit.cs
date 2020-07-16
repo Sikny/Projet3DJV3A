@@ -15,8 +15,8 @@ namespace Items {
         public override void Use() {
             base.Use();
 
-            GameSingleton.Instance.uiManager.HideUis();
-            ShopManager.instance.gameObject.SetActive(false);
+            //GameSingleton.Instance.uiManager.HideUis();
+            //ShopManager.instance.gameObject.SetActive(false);
             Inventory inventory = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
                     ? GameSingleton.Instance.GetPlayer().storyModeInventory
                     : GameSingleton.Instance.GetPlayer().arcadeModeInventory;

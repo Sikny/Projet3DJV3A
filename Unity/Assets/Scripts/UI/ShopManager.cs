@@ -18,7 +18,7 @@ namespace UI {
         private Shop _shop;
 
 
-        #region Singletonto
+        #region Singleton
 
         public static ShopManager instance;
 
@@ -40,7 +40,7 @@ namespace UI {
             UpdateUiEquipments();
             UpdateUiUnits();
             UpdateGold();
-            shopPanel.SetActive(false);
+            //shopPanel.SetActive(false);
         }
 
         public void UpdateUi(Shop shop) {
