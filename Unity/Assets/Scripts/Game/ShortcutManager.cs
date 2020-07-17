@@ -23,8 +23,8 @@ namespace Game {
             public KeyCode cameraUp = KeyCode.Z;
         }
 
+        public bool isEnabled= true;
         public KeyMap keyMap;
-
         [Serializable]
         public class GameEvents {
             public CustomEvent pauseEvent;
@@ -46,15 +46,15 @@ namespace Game {
         public GameEvents gameEvents;
         
         public void DoUpdate() {
-            if (Input.GetKeyDown(keyMap.shopKey)) {
+            if (Input.GetKeyDown(keyMap.shopKey) && isEnabled) {
                 gameEvents.toggleShopEvent.Raise();
             }
 
-            if (Input.GetKeyDown(keyMap.inventoryKey)) {
+            if (Input.GetKeyDown(keyMap.inventoryKey) && isEnabled) {
                 gameEvents.toggleInventoryEvent.Raise();
             }
 
-            if (Input.GetKeyDown(keyMap.pauseKey)) {
+            if (Input.GetKeyDown(keyMap.pauseKey) && isEnabled) {
                 if (GameSingleton.Instance.gamePaused) {
                     gameEvents.resumeEvent.Raise();
                 }
@@ -63,48 +63,45 @@ namespace Game {
                 }
             }
 
-            if (Input.GetKeyDown(keyMap.selectKey)) {
+            if (Input.GetKeyDown(keyMap.selectKey) && isEnabled) {
                 gameEvents.selectionEvent.Raise();
             }
 
-            if (Input.GetKeyDown(keyMap.cameraRight) || Input.GetKeyDown(keyMap.arrowCameraRight))
+            if ((Input.GetKeyDown(keyMap.cameraRight) || Input.GetKeyDown(keyMap.arrowCameraRight)) && isEnabled)
             {
                 gameEvents.cameraMoveRightOnEvent.Raise();
             }
-            if (Input.GetKeyUp(keyMap.cameraRight) || Input.GetKeyUp(keyMap.arrowCameraRight))
+            if ((Input.GetKeyUp(keyMap.cameraRight) || Input.GetKeyUp(keyMap.arrowCameraRight)) && isEnabled)
             {
                 gameEvents.cameraMoveRightOffEvent.Raise();
             }
             
-            if (Input.GetKeyDown(keyMap.cameraLeft) || Input.GetKeyDown(keyMap.arrowCameraLeft))
+            if ((Input.GetKeyDown(keyMap.cameraLeft) || Input.GetKeyDown(keyMap.arrowCameraLeft)) && isEnabled)
             {
                 gameEvents.cameraMoveLeftOnEvent.Raise();
             }
-            if (Input.GetKeyUp(keyMap.cameraLeft) || Input.GetKeyUp(keyMap.arrowCameraLeft))
+            if ((Input.GetKeyUp(keyMap.cameraLeft) || Input.GetKeyUp(keyMap.arrowCameraLeft)) && isEnabled)
             {
                 gameEvents.cameraMoveLeftOffEvent.Raise();
             }
             
-            if (Input.GetKeyDown(keyMap.cameraDown) || Input.GetKeyDown(keyMap.arrowCameraDown))
+            if ((Input.GetKeyDown(keyMap.cameraDown) || Input.GetKeyDown(keyMap.arrowCameraDown)) && isEnabled)
             {
                 gameEvents.cameraMoveDownOnEvent.Raise();
             }
-            if (Input.GetKeyUp(keyMap.cameraDown) || Input.GetKeyUp(keyMap.arrowCameraDown))
+            if ((Input.GetKeyUp(keyMap.cameraDown) || Input.GetKeyUp(keyMap.arrowCameraDown)) & isEnabled)
             {
                 gameEvents.cameraMoveDownOffEvent.Raise();
             }
             
-            if (Input.GetKeyDown(keyMap.cameraUp) || Input.GetKeyDown(keyMap.arrowCameraUp))
+            if ((Input.GetKeyDown(keyMap.cameraUp) || Input.GetKeyDown(keyMap.arrowCameraUp)) & isEnabled)
             {
                 gameEvents.cameraMoveUpOnEvent.Raise();
             }
-            if (Input.GetKeyUp(keyMap.cameraUp) || Input.GetKeyUp(keyMap.arrowCameraUp))
+            if ((Input.GetKeyUp(keyMap.cameraUp) || Input.GetKeyUp(keyMap.arrowCameraUp)) && isEnabled)
             {
                 gameEvents.cameraMoveUpOffEvent.Raise();
             }
-
-
-                
 
         }
     }

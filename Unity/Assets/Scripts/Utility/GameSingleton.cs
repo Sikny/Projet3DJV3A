@@ -1,4 +1,5 @@
-﻿using CustomEvents;
+﻿using CameraMovement;
+using CustomEvents;
 using Game;
 using Language;
 using Sounds;
@@ -30,7 +31,11 @@ namespace Utility {
         public StoreUnitList storeUnitList;
         [Space] [HideInInspector] public bool gamePaused;
 
+        public CameraController cameraController;
+
         private Player _player;
+
+        public ShortcutManager shortcutManager;
 
         public EntityTypeToSprite entityTypeToSprite;
 

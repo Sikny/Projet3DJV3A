@@ -34,7 +34,6 @@ namespace Units {
         public void SetRunning(bool run)
         {
             isRunning = run;
-            Debug.Log("is running equal to :" + isRunning);
         }
         
         public void Start() {
@@ -85,7 +84,7 @@ namespace Units {
             {
                 if ( _uiManager.upgradePanel.activeSelf ||_uiManager.pausePanel.activeSelf ||
                     GameSingleton.Instance.endGamePanel.winMessage.IsActive() ||
-                    GameSingleton.Instance.endGamePanel.loseMessage.IsActive()) 
+                    GameSingleton.Instance.endGamePanel.loseMessage.IsActive() || GameSingleton.Instance.cameraController.isZooming) 
                     _uiActivated = true;
                 else
                     _uiActivated = false;
@@ -127,7 +126,6 @@ namespace Units {
             // Fight start
             if (!isRunning) return;
             if (_uiActivated) return;
-            Debug.Log("isrunning is : " + isRunning);
             // Allied Unit selection
             if (Physics.Raycast(ray, out hit, 100f, 1 << 9))
             {

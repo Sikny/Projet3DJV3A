@@ -65,6 +65,7 @@ MonoBehaviour:
   endGamePanel: {fileID: 1415078842026712273}
   storeUnitList: {fileID: 11400000, guid: 8591522ae67de054f9990aff0c226b93, type: 2}
   gamePaused: 0
+  shortcutManager: {fileID: 658092536201835094}
   entityTypeToSprite: {fileID: 1965247716536981414}
   uiManager: {fileID: 0}
   soundManager: {fileID: -4084212933205450926}
@@ -137,6 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bf3d06af9904bacfff0f63051e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnabled: 1
   keyMap:
     selectKey: 323
     cameraRotateKey: 324
