@@ -45,12 +45,16 @@ namespace Game {
         private AiUnit _lastUnit;
         private Entity _lastEntity;
         private bool _checkForCinematic;
-
+        private bool _isWeak;
         private bool _cinematicPlayed;
+        private bool _mageCheck;
+
+        private bool _skipCutscene;
         // Initializes level with terrain, a*, shop
         public void Init() {
             _systemUnit = FindObjectOfType<SystemUnit>();
- 
+
+            Player player = GameSingleton.Instance.GetPlayer();
             GameSingleton.Instance.aStarHandler = transform.GetComponentInChildren<AStarHandler>();
 
             StartCoroutine(terrainBuilder.Init(InitAStar, rule));
@@ -75,6 +79,7 @@ namespace Game {
             _enemySpawnsDelayedCalls = new List<Tween>();
             _spawningEnemies = new List<Tween>();
 
+     
             ShowNextSpawns();
         }
 
@@ -146,31 +151,68 @@ namespace Game {
                 }
             }
 
+            if (_skipCutscene) return;
+
             if (!_checkForCinematic)
             {
+                if (!_mageCheck)
+                {
+                    _mageCheck = true;
+                    bool onlyMages = false;
+                    foreach (var unit in _playerUnits)
+                    {
+                        EntityType type = unit.GetEntityType();
+                        if (type != EntityType.Mage && type != EntityType.Bard && type != EntityType.BlackMage &&
+                            type != EntityType.Demonist && type != EntityType.WhiteMage && type != EntityType.RedMage)
+                        {
+                            onlyMages = false;
+                            break;
+                        }
+                    }
+
+                    if (onlyMages)
+                    {
+                        _skipCutscene = true;
+                        return;
+                    }
+
+                }
+                
                 if (enemySpawns.Count == 0 && livingEnemies.Count == 1 && !_gameEnded)
                 {
                     //Debug.Log("start checking for cinematic");
                     _lastUnit = livingEnemies[0].GetComponent<AiUnit>();
                     _lastEntity = _lastUnit.entities[0];
                     _checkForCinematic = true;
+                    if (_playerUnits.Count < 3)
+                    {
+                        _isWeak = true;
+                    }
                 }
             }
+
             if (_cinematicPlayed) return;
             if (!_checkForCinematic) return;
             if (_lastUnit.GetNumberAlive() == 1)
             {
-                //if (_lastEntity.GetLife() < _lastEntity.GetMaxLife()/2) maybe at half hp?
-
-                if (_lastEntity.GetLife() < _lastEntity.GetMaxLife())
+                if (_isWeak)
                 {
-                    _cinematicPlayed = true;
-                    GameSingleton.Instance.cameraController.PlayCinematic(livingEnemies[0]);
+                    if (_lastEntity.GetLife() < _lastEntity.GetMaxLife()/2)
+                    {
+                        _cinematicPlayed = true;
+                        GameSingleton.Instance.cameraController.PlayCinematic(livingEnemies[0]);
+                    }
+                }
+                else
+                {
+                    if (_lastEntity.GetLife() < _lastEntity.GetMaxLife())
+                    {
+                        _cinematicPlayed = true;
+                        GameSingleton.Instance.cameraController.PlayCinematic(livingEnemies[0]);
+                    }
+
                 }
             }
-
-
-
         }
 
         public IEnumerator StartLevel() {

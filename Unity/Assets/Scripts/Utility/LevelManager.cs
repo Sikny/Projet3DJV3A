@@ -49,8 +49,8 @@ namespace Utility {
                 GameSingleton.Instance.levelManager = this;
                 loadedLevel = Instantiate(levelList.GetLevel(player.currentLevel));
                 loadedLevel.Init();
-                player.goldStartLevel = player.gold;
-                player.inventoryStartLevel = player.storyModeInventory;
+                //player.goldStartLevel = player.gold;
+                //player.inventoryStartLevel = player.storyModeInventory;  //TODO doit etre remis si pas fix
             }
         }
 

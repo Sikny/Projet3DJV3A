@@ -27,7 +27,7 @@ namespace UI {
         public void Init() {
             //inventoryPanel.SetActive(false);
             Player player = GameSingleton.Instance.GetPlayer();
-            if (player.currentLevel == 0 && !player.storyModeInventory.units.Any()) 
+            if (player.currentLevel == 0 && !player.storyModeInventory.units.Any() && player.gamemode == Player.Gamemode.LEVEL) 
             {
                 for (int i = 0; i < 2; i++)
                 {
@@ -53,6 +53,15 @@ namespace UI {
                     player.storyModeInventory.AddItem(storeUnit);
                 }
             }
+                   
+            Debug.Log("setting start gold to : " + player.gold);
+            Debug.Log("setting inventory to : ");
+            foreach (var unit in player.storyModeInventory.units)
+            {
+                Debug.Log(unit.itemName);
+            }
+            player.goldStartLevel = player.gold;
+            player.inventoryStartLevel = player.storyModeInventory; 
             UpdateGold();
         }
 
