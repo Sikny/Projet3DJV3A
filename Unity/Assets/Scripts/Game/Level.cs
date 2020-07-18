@@ -42,6 +42,9 @@ namespace Game {
 
         private List<Tween> _enemySpawnsDelayedCalls;
         private List<Tween> _spawningEnemies;
+        private AiUnit _lastUnit;
+        private Entity _lastEntity;
+        private bool checkForCinematic;
 
         // Initializes level with terrain, a*, shop
         public void Init() {
@@ -114,15 +117,20 @@ namespace Game {
                     _playerUnits.Add((PlayerUnit) unit);
                 }
             }
-            
-            if (enemySpawns.Count == 0 && livingEnemies.Count == 0 && !_gameEnded) {
+
+
+            if (enemySpawns.Count == 0 && livingEnemies.Count == 0 && !_gameEnded)
+            {
+                Time.timeScale = 1;
                 _gameEnded = true;
                 GameSingleton.Instance.EndGame(1); // WIN
             }
-            else if (_playerUnits.Count == 0 && !_gameEnded) {
+            else if (_playerUnits.Count == 0 && !_gameEnded)
+            {
+                Time.timeScale = 1;
+                _gameEnded = true;
                 GameSingleton.Instance.EndGame(0);
-            }
-
+            } 
             for (int i = 0; i < livingEnemies.Count; i++) {
                 if (livingEnemies[i] == null) {
                     livingEnemies.RemoveAt(i);
@@ -136,6 +144,31 @@ namespace Game {
                     break;
                 }
             }
+
+            if (!checkForCinematic)
+            {
+                if (enemySpawns.Count == 0 && livingEnemies.Count == 1 && !_gameEnded)
+                {
+                    //Debug.Log("start checking for cinematic");
+                    _lastUnit = livingEnemies[0].GetComponent<AiUnit>();
+                    _lastEntity = _lastUnit.entities[0];
+                    checkForCinematic = true;
+                }
+            }
+
+            if (!checkForCinematic) return;
+            if (_lastUnit.GetNumberAlive() == 1)
+            {
+                //if (_lastEntity.GetLife() < _lastEntity.GetMaxLife()/2) maybe at half hp?
+
+                if (_lastEntity.GetLife() < _lastEntity.GetMaxLife())
+                {
+                    GameSingleton.Instance.cameraController.PlayCinematic(livingEnemies[0]);
+                }
+            }
+
+
+
         }
 
         public IEnumerator StartLevel() {

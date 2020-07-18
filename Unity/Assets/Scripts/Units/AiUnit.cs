@@ -65,6 +65,9 @@ namespace Units  {
             }
             else if(anotherUnit.GetNumberAlive() == 0) {
                 if (entityAttack != null) {
+
+                    entityAttack.Attack(anotherUnit.GetEntity(0), -100, efficientCoef);
+                    anotherUnit.PopEntity(0); // Le leader est attrapé
                     unitTarget = null; //important pour indiquer à l'IA de commencer de nouvelles recherches
                 }
             }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using Utility;
 
 namespace CameraMovement {
@@ -22,6 +23,8 @@ namespace CameraMovement {
 
         private bool _invertCameraX;
         private bool _invertCameraY;
+
+        public bool isZooming;
         
 
         private void Start()
@@ -30,6 +33,7 @@ namespace CameraMovement {
             _invertCameraY = GameSingleton.Instance.gameSettings.invertCameraY;
 
             _currentYaw = maxZoom / 2f;
+            GameSingleton.Instance.cameraController = this;
         }
 
         public void SetMoveRight()
@@ -69,8 +73,17 @@ namespace CameraMovement {
         }
         void Update()
         {
-            _currentYaw -= Input.mouseScrollDelta.y * (zoomSpeed * speed * Time.deltaTime);// Input.GetAxis("Mouse ScrollWheel") * speed * Time.deltaTime;
-            _currentYaw = Mathf.Clamp(_currentYaw, minZoom, maxZoom);
+            if (isZooming)
+            {
+                _currentYaw -= zoomSpeed * speed * Time.deltaTime/5;
+                _currentYaw = Mathf.Clamp(_currentYaw, minZoom, maxZoom);
+            }
+            else if (!isZooming)
+            {
+                
+                _currentYaw -= Input.mouseScrollDelta.y * (zoomSpeed * speed * Time.deltaTime);// Input.GetAxis("Mouse ScrollWheel") * speed * Time.deltaTime;
+                _currentYaw = Mathf.Clamp(_currentYaw, minZoom, maxZoom);
+            }
             //StoreUnit upgradedUnit = (number == 1) ? _unit.upgrades[0] : _unit.upgrades[1];
 
 
@@ -105,9 +118,29 @@ namespace CameraMovement {
                         ? new Vector3(0, 0,speed * Time.deltaTime)
                         : new Vector3(0, 0,-speed * Time.deltaTime), Space.World);
             }
-        
             mainCamera.fieldOfView = _currentYaw;
+
         }
 
+        public void PlayCinematic(Transform target)
+        {
+            GameSingleton.Instance.uiManager.HideUis();
+            GameSingleton.Instance.shortcutManager.isEnabled = false;
+            mainCamera.transform.LookAt(target); 
+            isZooming = true;
+            Time.timeScale = 0.5f;
+            StartCoroutine(ZoomCoroutine(1));
+        }
+
+        IEnumerator ZoomCoroutine(int seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            isZooming = false;
+        }
+        
+    
+
     }
+    
+    
 }

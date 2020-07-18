@@ -21,7 +21,7 @@ namespace Terrain {
             }
             else if(_uiManager)
                 if (_uiManager.upgradePanel.activeSelf || _uiManager.pausePanel.activeSelf 
-                    || GameSingleton.Instance.endGamePanel.winMessage.IsActive() || GameSingleton.Instance.endGamePanel.loseMessage.IsActive()) return ;
+                    || GameSingleton.Instance.endGamePanel.winMessage.IsActive() || GameSingleton.Instance.endGamePanel.loseMessage.IsActive() || GameSingleton.Instance.cameraController.isZooming) return ;
             Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
             
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, 1 << 8) ) {
