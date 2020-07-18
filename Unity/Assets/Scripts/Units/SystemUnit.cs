@@ -29,7 +29,7 @@ namespace Units {
         private UiManager _uiManager;
 
         private bool _uiActivated;
-        public bool isRunning = false;
+        public bool isRunning;
 
         public void SetRunning(bool run)
         {
@@ -148,7 +148,7 @@ namespace Units {
             }
         }
 
-        public void Update() {
+        public void FixedUpdate() {
             if (isRunning)
             {
                 UnitLibData.deltaTime = Time.deltaTime;
