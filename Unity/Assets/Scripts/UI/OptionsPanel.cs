@@ -14,16 +14,6 @@ namespace UI {
         public bool invertCameraX;
         public bool invertCameraY;
         
-        #region Singleton
-        private static OptionsPanel _instance;
-
-        public static OptionsPanel Instance {
-            get {
-                if(_instance == null) _instance = new OptionsPanel();
-                return _instance;
-            }
-        }
-        #endregion
         private void Awake() {
             soundsSlider.value = GameSingleton.Instance.gameSettings.soundVolume;
             musicSlider.value = GameSingleton.Instance.gameSettings.musicVolume;
@@ -36,11 +26,8 @@ namespace UI {
                 }
                 value++;
             }
-
-
         }
-
-
+        
         public void ResetSave()
         {
             PlayerPrefs.DeleteAll();
@@ -62,7 +49,16 @@ namespace UI {
             GameSingleton.Instance.gameSettings.musicVolume = musicSlider.value;
             GameSingleton.Instance.gameSettings.invertCameraX = invertCameraX;
             GameSingleton.Instance.gameSettings.invertCameraY = invertCameraY;
+        }
 
+        public void UpdateSoundValue() {
+            GameSingleton.Instance.gameSettings.soundVolume = soundsSlider.value;
+            GameSingleton.Instance.soundManager.UpdateVolume();
+        }
+
+        public void UpdateMusicValue() {
+            GameSingleton.Instance.gameSettings.musicVolume = musicSlider.value;
+            GameSingleton.Instance.soundManager.UpdateVolume();
         }
     }
     

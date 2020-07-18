@@ -30,9 +30,9 @@ namespace Sounds
                 return;
             _settings = GameSingleton.Instance.gameSettings;
             if (s.loop) //is a music
-                s.source.volume *= _settings.musicVolume;
+                s.source.volume = s.volume*_settings.musicVolume;
             else
-                s.source.volume *= _settings.soundVolume;
+                s.source.volume = s.volume*_settings.soundVolume;
             s.source.Play();
         }
 
@@ -54,6 +54,16 @@ namespace Sounds
             foreach (var s in sounds)
             {
                 s.source.Stop();
+            }
+        }
+
+        public void UpdateVolume() {
+            for (int i = sounds.Length - 1; i >= 0; --i) {
+                Sound s = sounds[i];
+                if (s.loop) //is a music
+                    s.source.volume = s.volume*_settings.musicVolume;
+                else
+                    s.source.volume = s.volume*_settings.soundVolume;
             }
         }
    
