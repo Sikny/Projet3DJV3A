@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using Game;
 using Items;
-using leveleditor.rule;
+using LevelEditor.Rule;
 using Terrain;
 using UI;
-using Units;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -30,6 +29,7 @@ namespace Utility {
             if (player.gamemode == Player.Gamemode.ARCADE && player.currentScore == 0) {
                 levelList.ClearLevels();
                 player.currentLevelArcade = 0;
+                GameSingleton.Instance.GetPlayer().beginGame = DateTime.Now;
 
                 GenerateLevel();
             } else if (player.gamemode == Player.Gamemode.ARCADE) {
@@ -41,7 +41,7 @@ namespace Utility {
                 loadedLevel.Init();
             } else if (player.gamemode == Player.Gamemode.PERSONNALIZED) {
                 String filename = GameSingleton.Instance.filename;
-                Rule r = Rule.readLevel(filename.Split('.')[0]);
+                Rule r = Rule.ReadLevel(filename.Split('.')[0]);
                 player.arcadeGold = r.maxBudget;
                 LoadLevel(r);
             } else {
@@ -64,7 +64,7 @@ namespace Utility {
             }
             else if (player.gamemode == Player.Gamemode.PERSONNALIZED) {
                 String filename = GameSingleton.Instance.filename;
-                Rule r = Rule.readLevel(filename.Split('.')[0]);
+                Rule r = Rule.ReadLevel(filename.Split('.')[0]);
 
                 LoadLevel(r);
             }
@@ -105,7 +105,6 @@ namespace Utility {
             GameSingleton.Instance.GetPlayer().currentLevelArcade += 1;
 
             if (GameSingleton.Instance.GetPlayer().currentLevelArcade == 1) {
-                GameSingleton.Instance.GetPlayer().beginGame = DateTime.Now;
 
                 seed = Random.Range(Int32.MinValue, Int32.MaxValue);
                 GameSingleton.Instance.GetPlayer().currentSeed = seed;

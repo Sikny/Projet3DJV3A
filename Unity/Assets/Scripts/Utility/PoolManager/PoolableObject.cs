@@ -6,11 +6,11 @@ namespace Utility.PoolManager {
             return gameObject.activeInHierarchy;
         }
 
-        public void Init() {
+        public virtual void Init() {
             gameObject.SetActive(true);
         }
 
-        public void DeInit() {
+        public virtual void DeInit() {
             gameObject.SetActive(false);
         }
     }

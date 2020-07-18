@@ -8,7 +8,6 @@ namespace Game {
         [Serializable]
         public class KeyMap {
             public KeyCode selectKey = KeyCode.Mouse0;
-            public KeyCode cameraRotateKey = KeyCode.Mouse1;
             public KeyCode shopKey = KeyCode.U;
             public KeyCode inventoryKey = KeyCode.I;
             public KeyCode pauseKey = KeyCode.Escape;

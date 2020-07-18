@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Items;
-using leveleditor.rule;
+using LevelEditor.Rule;
 using Terrain;
 using UI;
 using Units;
@@ -73,6 +73,8 @@ namespace Game {
             
             _enemySpawnsDelayedCalls = new List<Tween>();
             _spawningEnemies = new List<Tween>();
+
+            ShowNextSpawns();
         }
 
         // Initializes a*, called after terrain generation
@@ -170,6 +172,11 @@ namespace Game {
         }
 
         public IEnumerator StartLevel() {
+            for (int i = _waitingSpawners.Count - 1; i >= 0; --i) {
+                _waitingSpawners[i].SetAnimating(false);
+                _waitingSpawners[i].DeInit();
+            }
+            _waitingSpawners.Clear();
             _playerUnits = new List<PlayerUnit>();
             Transform newUnit;
             for (int i = enemySpawns.Count - 1; i >= 0; i--) {
@@ -206,6 +213,23 @@ namespace Game {
 
             GameSingleton.Instance.ResumeGame();
             _levelStarted = true;
+        }
+
+        private List<Spawner> _waitingSpawners = new List<Spawner>();
+        private void ShowNextSpawns() {
+            for (int i = enemySpawns.Count - 1; i >= 0; --i) {
+                EnemySpawn current = enemySpawns[i];
+                if (Math.Abs(current.spawnTime) < 0.001f) {
+                    var offset = Vector3.right * (TerrainGrid.Width / 2f) +
+                                 Vector3.forward * (TerrainGrid.Height / 2f);
+                    Vector3 position = new Vector3(current.position.x, SystemUnit.YPos, current.position.y) + offset;
+                    Spawner spawner = (Spawner) PoolManager.Instance().GetPoolableObject(typeof(Spawner));
+                    spawner.transform.position = position;
+                    spawner.Init();
+                    spawner.SetAnimating(true);
+                    _waitingSpawners.Add(spawner);
+                }
+            }
         }
 
         public void PauseDelayedSpawns() {
