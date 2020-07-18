@@ -20,7 +20,7 @@ namespace Game {
             _inventoryManager = inventoryUi;
             _shopManager = ShopManager.instance;
 
-            foreach (var unit in units) {
+            /*foreach (var unit in units) {
                 _inventoryManager.UpdateUiUnit(unit);
             }
 
@@ -30,7 +30,7 @@ namespace Game {
 
             foreach (var equips in equipments) {
                 _inventoryManager.UpdateUiEquipment(equips);
-            }
+            }*/
         }
 
         public void AddItem(Item item) {
