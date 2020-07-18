@@ -157,7 +157,9 @@ namespace Game {
             if (!checkForCinematic) return;
             if (_lastUnit.GetNumberAlive() == 1)
             {
-                if (_lastEntity.GetLife() < _lastEntity.GetMaxLife()/2)
+                //if (_lastEntity.GetLife() < _lastEntity.GetMaxLife()/2) maybe at half hp?
+
+                if (_lastEntity.GetLife() < _lastEntity.GetMaxLife())
                 {
                     GameSingleton.Instance.cameraController.PlayCinematic(livingEnemies[0]);
                 }
