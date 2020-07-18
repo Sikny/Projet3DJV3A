@@ -42,6 +42,9 @@ namespace Game {
 
         private List<Tween> _enemySpawnsDelayedCalls;
         private List<Tween> _spawningEnemies;
+        private AiUnit _lastUnit;
+        private Entity _lastEntity;
+        private bool checkForCinematic;
 
         // Initializes level with terrain, a*, shop
         public void Init() {
@@ -139,14 +142,29 @@ namespace Game {
                     break;
                 }
             }
-            if (enemySpawns.Count == 0 && livingEnemies.Count == 1 && !_gameEnded)
+
+            if (!checkForCinematic)
             {
-                GameSingleton.Instance.uiManager.HideUis();
-                GameSingleton.Instance.shortcutManager.isEnabled = false;
-                AiUnit livingEnnemy = livingEnemies[0].GetComponent<AiUnit>();
-                GameSingleton.Instance.cameraController.PlayCinematic(livingEnemies[0]);
-                Debug.Log(livingEnemies[0].name + "is alive");
+                if (enemySpawns.Count == 0 && livingEnemies.Count == 1 && !_gameEnded)
+                {
+                    //Debug.Log("start checking for cinematic");
+                    _lastUnit = livingEnemies[0].GetComponent<AiUnit>();
+                    _lastEntity = _lastUnit.entities[0];
+                    checkForCinematic = true;
+                }
             }
+
+            if (!checkForCinematic) return;
+            if (_lastUnit.GetNumberAlive() == 1)
+            {
+                if (_lastEntity.GetLife() < _lastEntity.GetMaxLife()/2)
+                {
+                    GameSingleton.Instance.cameraController.PlayCinematic(livingEnemies[0]);
+                }
+            }
+
+
+
         }
 
         public IEnumerator StartLevel() {

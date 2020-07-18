@@ -37,6 +37,10 @@ namespace Units {
             return _life;
         }
 
+        public int GetMaxLife()
+        {
+            return _maxLife;
+        }
         private void KillEntity()
         {
             isDead = true;

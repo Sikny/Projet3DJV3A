@@ -34,7 +34,7 @@ namespace Utility {
         public CameraController cameraController;
 
         private Player _player;
-
+        private bool _isLastEnnemyUnit;
         public ShortcutManager shortcutManager;
 
         public EntityTypeToSprite entityTypeToSprite;
@@ -94,7 +94,10 @@ namespace Utility {
             return _player;
         }
 
-        public void EndGame(int status) {
+        public void EndGame(int status)
+        {
+            Time.timeScale = 1f;
+            GameSingleton.Instance.shortcutManager.isEnabled = true;
             endGamePanel.TypeEndGame = status;
             endGamePanel.gameObject.SetActive(true);
             _player.Save();
@@ -119,5 +122,7 @@ namespace Utility {
         public void QuitGame() {
             Application.Quit();
         }
+
+
     }
 }

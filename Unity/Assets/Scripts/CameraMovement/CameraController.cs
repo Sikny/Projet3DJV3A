@@ -124,6 +124,8 @@ namespace CameraMovement {
 
         public void PlayCinematic(Transform target)
         {
+            GameSingleton.Instance.uiManager.HideUis();
+            GameSingleton.Instance.shortcutManager.isEnabled = false;
             mainCamera.transform.LookAt(target); 
             isZooming = true;
             Time.timeScale = 0.5f;
