@@ -49,7 +49,7 @@ namespace Game {
         // Initializes level with terrain, a*, shop
         public void Init() {
             _systemUnit = FindObjectOfType<SystemUnit>();
-            
+ 
             GameSingleton.Instance.aStarHandler = transform.GetComponentInChildren<AStarHandler>();
 
             StartCoroutine(terrainBuilder.Init(InitAStar, rule));

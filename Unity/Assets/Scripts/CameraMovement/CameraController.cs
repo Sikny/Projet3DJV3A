@@ -124,6 +124,7 @@ namespace CameraMovement {
 
         public void PlayCinematic(Transform target)
         {
+            GameSingleton.Instance.soundManager.Play("Cinematic");
             GameSingleton.Instance.uiManager.HideUis();
             GameSingleton.Instance.shortcutManager.isEnabled = false;
             mainCamera.transform.LookAt(target); 
