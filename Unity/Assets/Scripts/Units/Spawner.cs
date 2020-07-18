@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using Utility;
 using Utility.PoolManager;
 
 namespace Units {
     public class Spawner : PoolableObject {
         public Transform spriteRenderer;
         public Transform spriteMask;
+        public SpriteRenderer icon;
 
         private Vector3 _firstScale = Vector3.one * 0.1f;
         private Vector3 _offset = Vector3.one * 0.015f;
@@ -29,6 +31,11 @@ namespace Units {
             spriteRenderer.localScale = _firstScale;
             spriteMask.localScale = _firstScale - _offset;
             _time = timeToSpawn;
+        }
+
+        public void Init(EntityType unitType) {
+            Init();
+            icon.sprite = GameSingleton.Instance.entityTypeToSprite.GetEntitySprite(unitType);
         }
 
         private List<Tween> _animations = new List<Tween>();

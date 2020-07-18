@@ -158,7 +158,7 @@ namespace Game {
                         Mathf.Max(0f, current.spawnTime - Spawner.timeToSpawn), () => {
                             Spawner spawner = (Spawner) PoolManager.Instance().GetPoolableObject(typeof(Spawner));
                             spawner.transform.position = position;
-                            spawner.Init();
+                            spawner.Init(current.entityType);
 
                             _spawningEnemies.Add(DOVirtual.DelayedCall(Spawner.timeToSpawn, () => {
                                 newUnit = _systemUnit.SpawnUnit(current.entityType, _systemUnit.aiUnitPrefab,
@@ -192,7 +192,7 @@ namespace Game {
                     Vector3 position = new Vector3(current.position.x, SystemUnit.YPos, current.position.y) + offset;
                     Spawner spawner = (Spawner) PoolManager.Instance().GetPoolableObject(typeof(Spawner));
                     spawner.transform.position = position;
-                    spawner.Init();
+                    spawner.Init(current.entityType);
                     spawner.SetAnimating(true);
                     _waitingSpawners.Add(spawner);
                 }
