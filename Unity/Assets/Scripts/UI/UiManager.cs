@@ -25,8 +25,8 @@ namespace UI {
             _inventory = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
                 ? GameSingleton.Instance.GetPlayer().storyModeInventory
                 : GameSingleton.Instance.GetPlayer().arcadeModeInventory;
-            inventoryUi.Init();
             _inventory.Load(inventoryUi);
+            inventoryUi.Init();
         }
 
         public void ToggleInventory() {
