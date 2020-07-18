@@ -1,11 +1,12 @@
 ﻿using System;
 using System.IO;
+using LevelEditor;
 using TMPro;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace leveleditor {
+namespace LevelEditor {
     public class EditorMap : MonoBehaviour
     {
         [SerializeField] public ToolsEnum currentTool = ToolsEnum.MAP_BRUSH;
@@ -102,7 +103,7 @@ namespace leveleditor {
 
             if (File.Exists(Application.persistentDataPath + "/" + Filename + ".lvl"))
             {
-                map = Map.load(camera, mapObject, Filename);
+                map = Map.Load(camera, mapObject, Filename);
             }
             else
             {
@@ -118,7 +119,7 @@ namespace leveleditor {
         {
             if (map != null)
             {
-                map.save();
+                map.Save();
                 Popups.instance.Popup("Map was saved!");
             }
             else
@@ -139,7 +140,7 @@ namespace leveleditor {
         {
             if (map != null)
             {
-                map.updateMapProperties(minHeight, maxHeight);
+                map.UpdateMapProperties(minHeight, maxHeight);
                 map.UpdateMap(currentTool, radiusTool, amplitudeTool);
             }
         }

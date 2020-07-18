@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Game;
 using Items;
-using leveleditor.rule;
+using LevelEditor.Rule;
 using Terrain;
 using UI;
 using UnityEngine;
@@ -41,7 +41,7 @@ namespace Utility {
                 loadedLevel.Init();
             } else if (player.gamemode == Player.Gamemode.PERSONNALIZED) {
                 String filename = GameSingleton.Instance.filename;
-                Rule r = Rule.readLevel(filename.Split('.')[0]);
+                Rule r = Rule.ReadLevel(filename.Split('.')[0]);
                 player.arcadeGold = r.maxBudget;
                 LoadLevel(r);
             } else {
@@ -64,7 +64,7 @@ namespace Utility {
             }
             else if (player.gamemode == Player.Gamemode.PERSONNALIZED) {
                 String filename = GameSingleton.Instance.filename;
-                Rule r = Rule.readLevel(filename.Split('.')[0]);
+                Rule r = Rule.ReadLevel(filename.Split('.')[0]);
 
                 LoadLevel(r);
             }

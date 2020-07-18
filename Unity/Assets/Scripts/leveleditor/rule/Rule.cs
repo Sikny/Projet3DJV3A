@@ -1,54 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using LevelEditor.Rule.Math;
 using UnityEngine;
 
-namespace leveleditor.rule {
+namespace LevelEditor.Rule {
     public class Rule
     {
-        const int MAX_BUDGET = 2000;
-        const int MIN_BUDGET = 1000;
-        const int ENNEMY_SPAWN_RADIUS = 100; // Temporary
-
-
-        int seedWorld; // used in free-mode(0 in level mode)
         public byte size;
         // This following is set from .lvl file or randomize based on seedWorl in free-mode
         public int maxBudget;
-        char globalDifficulty;
+        private char _globalDifficulty;
     
-        public Dictionary<SeriaVector2, float> mapModifierHeightmap;
-        public Dictionary<SeriaVector2, byte> localSpawnDifficulty; //SPEC : to avoid the gen into the castle
-        Dictionary<int, Castle> mapCastlePiecesPlacement;
+        public Dictionary<SerializedVector2, float> mapModifierHeightmap;
+        public Dictionary<SerializedVector2, byte> localSpawnDifficulty; //SPEC : to avoid the gen into the castle
 
         //TODO
         public Rule()
         {
-            mapModifierHeightmap = new Dictionary<SeriaVector2, float>();
-            localSpawnDifficulty = new Dictionary<SeriaVector2, byte>();
-            mapCastlePiecesPlacement = new Dictionary<int, Castle>();
+            mapModifierHeightmap = new Dictionary<SerializedVector2, float>();
+            localSpawnDifficulty = new Dictionary<SerializedVector2, byte>();
         }
 
         public Rule(Vector3[] heightmap, Color[] difficulty, byte size, int money) : this()
         {
             this.size = size;
-            this.maxBudget = money;
+            maxBudget = money;
             float accurancyEpsilon = 0.1f;
             for (int i = 0; i < heightmap.Length; i++)
             {
             
                 if (!(-accurancyEpsilon <= heightmap[i].y && heightmap[i].y <= accurancyEpsilon ))
                 {
-                    mapModifierHeightmap.Add(new SeriaVector2(heightmap[i].x, heightmap[i].z), heightmap[i].y);
+                    mapModifierHeightmap.Add(new SerializedVector2(heightmap[i].x, heightmap[i].z), heightmap[i].y);
                 }
                 if (accurancyEpsilon <= difficulty[i].r && -0.5f < heightmap[i].y && heightmap[i].y < 0.5f)
                 {
-                    localSpawnDifficulty.Add(new SeriaVector2(heightmap[i].x,heightmap[i].z),(byte)(difficulty[i].r*4) );
+                    localSpawnDifficulty.Add(new SerializedVector2(heightmap[i].x,heightmap[i].z),(byte)(difficulty[i].r*4) );
                 }
             }
         }
 
-        public Vector3[] loadHeightmap(Vector3[] heightmap)
+        public Vector3[] LoadHeightmap(Vector3[] heightmap)
         {
 
             foreach (var entry in mapModifierHeightmap)
@@ -67,7 +60,7 @@ namespace leveleditor.rule {
             return heightmap;
         }
     
-        public Color[] loadDifficulty(Color[] difficulty)
+        public Color[] LoadDifficulty(Color[] difficulty)
         {
 
             foreach (var entry in localSpawnDifficulty)
@@ -88,7 +81,7 @@ namespace leveleditor.rule {
     
 
         // CALMEZ VOUS
-        public static void saveLevel(string file, Rule r)
+        public static void SaveLevel(string file, Rule r)
         {
             using (Stream stream = File.Open(Application.persistentDataPath+"/" +file+".lvl", FileMode.Create))
             {
@@ -96,29 +89,24 @@ namespace leveleditor.rule {
 
                 var sizeModifier = 12 * r.mapModifierHeightmap.Count;
                 var sizeLocalDifficulty = 5 * r.localSpawnDifficulty.Count;
-                var sizeCastle = 7 * r.mapCastlePiecesPlacement.Count;
 
                 var ptrModifier = 28; //
                 var ptrLocalDifficulty = ptrModifier + sizeModifier;
-                var ptrCastle = ptrLocalDifficulty + sizeLocalDifficulty;
 
                 sizeModifier += ptrModifier;
                 sizeLocalDifficulty += ptrLocalDifficulty;
             
             
-                bw.Write((byte)r.globalDifficulty);
+                bw.Write((byte)r._globalDifficulty);
                 bw.Write((short)r.maxBudget);
-                bw.Write((byte)r.size);
+                bw.Write(r.size);
             
-                bw.Write((int)ptrModifier);
-                bw.Write((int)sizeModifier);
+                bw.Write(ptrModifier);
+                bw.Write(sizeModifier);
             
-                bw.Write((int)ptrLocalDifficulty);
-                bw.Write((int)sizeLocalDifficulty);
-            
-                bw.Write((int)ptrCastle);
-                bw.Write((int)sizeCastle);
-            
+                bw.Write(ptrLocalDifficulty);
+                bw.Write(sizeLocalDifficulty);
+
                 //Debug.Log($"write {r.mapModifierHeightmap.Count*12}");
                 //Debug.Log($"write {r.localSpawnDifficulty.Count*5}");
             
@@ -133,7 +121,7 @@ namespace leveleditor.rule {
                 {
                     bw.Write((short)difficulty.Key.X);
                     bw.Write((short)difficulty.Key.Z);
-                    bw.Write((byte)difficulty.Value);
+                    bw.Write(difficulty.Value);
                 }
             
                 bw.Close();
@@ -142,7 +130,7 @@ namespace leveleditor.rule {
             }
         
         }
-        public static Rule readLevel(string file)
+        public static Rule ReadLevel(string file)
         {
             using (Stream stream = File.Open(Application.persistentDataPath +"/"+ file + ".lvl", FileMode.Open))
             {
@@ -151,31 +139,25 @@ namespace leveleditor.rule {
 
                 var i = 0;
             
-                r.globalDifficulty = (char) br.ReadByte();
-                i += 1;
+                r._globalDifficulty = (char) br.ReadByte();
+                ++i;
                 r.maxBudget = br.ReadInt16();
                 i += 2;
                 r.size = br.ReadByte();
-                i += 1;
+                ++i;
             
-                var ptrModifier = br.ReadInt32();
+                var unusedPtrModifier = br.ReadInt32();
                 var sizeModifier = br.ReadInt32();
                 var ptrLocalDifficulty = br.ReadInt32();
                 var sizeLocalDifficulty = br.ReadInt32();
-                var ptrCastle = br.ReadInt32();
-                var sizeCastle = br.ReadInt32();
                 i += 24;
-
-                var nbWrite = 0;
-                var nbWrite2 = 0;
 
                 for (; i+12 <= sizeModifier; i += 12)
                 {
                     var xCoord = br.ReadInt16();
                     var zCoord = br.ReadInt16();
                     var heightmap = br.ReadDouble();
-                    nbWrite+= 12;
-                    r.mapModifierHeightmap.Add(new SeriaVector2(xCoord, zCoord), (float) heightmap);
+                    r.mapModifierHeightmap.Add(new SerializedVector2(xCoord, zCoord), (float) heightmap);
                 }
 
                 for (; i+5 <= sizeLocalDifficulty; i += 5)
@@ -183,8 +165,7 @@ namespace leveleditor.rule {
                     var xCoord = br.ReadInt16();
                     var zCoord = br.ReadInt16();
                     var difficulty = br.ReadByte();
-                    nbWrite2 += 5;
-                    r.localSpawnDifficulty.Add(new SeriaVector2(xCoord, zCoord), difficulty);
+                    r.localSpawnDifficulty.Add(new SerializedVector2(xCoord, zCoord), difficulty);
                 }
             
                 //Debug.Log($"read {nbWrite}");

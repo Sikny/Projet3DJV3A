@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Items;
-using leveleditor.rule;
+using LevelEditor.Rule;
 using Terrain;
 using UI;
 using Units;
