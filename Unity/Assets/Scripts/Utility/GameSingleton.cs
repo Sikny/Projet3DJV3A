@@ -101,7 +101,12 @@ namespace Utility {
             shortcutManager.isEnabled = true;
             endGamePanel.TypeEndGame = status;
             endGamePanel.gameObject.SetActive(true);
-            _player.Save();
+            if (status == 0 && _player.gamemode == Player.Gamemode.LEVEL) // lose
+            {
+                _player.storyModeInventory = _player.inventoryStartLevel;
+                _player.gold = _player.goldStartLevel;
+            }
+            _player.Save(); 
         }
 
         public void PauseGame() {

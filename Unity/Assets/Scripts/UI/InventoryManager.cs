@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game;
 using Items;
 using Language;
@@ -26,7 +27,7 @@ namespace UI {
         void Start() {
             //inventoryPanel.SetActive(false);
             Player player = GameSingleton.Instance.GetPlayer();
-            if (player.currentLevel == 0)
+            if (player.currentLevel == 0 && !player.storyModeInventory.units.Any()) 
             {
                 for (int i = 0; i < 2; i++)
                 {
@@ -112,6 +113,13 @@ namespace UI {
             Destroy(slotGameObject);
             _unitSlots.Remove(_unitSlots[targetIndex]);
         }
+
+        public void ClearUiInventory()
+        {
+            _unitSlots.Clear();
+            _consumableSlots.Clear();
+        }
+  
 
         public void UpdateGold() {
             int gold = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL

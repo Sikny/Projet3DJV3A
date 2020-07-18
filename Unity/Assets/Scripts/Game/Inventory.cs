@@ -80,6 +80,9 @@ namespace Game {
             units.Clear();
             consumables.Clear();
             equipments.Clear();
+            
+            //GameSingleton.Instance.uiManager.inventoryUi.ClearUiInventory();
+
         }
     }
 }

@@ -44,8 +44,9 @@ namespace Game {
         private List<Tween> _spawningEnemies;
         private AiUnit _lastUnit;
         private Entity _lastEntity;
-        private bool checkForCinematic;
+        private bool _checkForCinematic;
 
+        private bool _cinematicPlayed;
         // Initializes level with terrain, a*, shop
         public void Init() {
             _systemUnit = FindObjectOfType<SystemUnit>();
@@ -145,24 +146,25 @@ namespace Game {
                 }
             }
 
-            if (!checkForCinematic)
+            if (!_checkForCinematic)
             {
                 if (enemySpawns.Count == 0 && livingEnemies.Count == 1 && !_gameEnded)
                 {
                     //Debug.Log("start checking for cinematic");
                     _lastUnit = livingEnemies[0].GetComponent<AiUnit>();
                     _lastEntity = _lastUnit.entities[0];
-                    checkForCinematic = true;
+                    _checkForCinematic = true;
                 }
             }
-
-            if (!checkForCinematic) return;
+            if (_cinematicPlayed) return;
+            if (!_checkForCinematic) return;
             if (_lastUnit.GetNumberAlive() == 1)
             {
                 //if (_lastEntity.GetLife() < _lastEntity.GetMaxLife()/2) maybe at half hp?
 
                 if (_lastEntity.GetLife() < _lastEntity.GetMaxLife())
                 {
+                    _cinematicPlayed = true;
                     GameSingleton.Instance.cameraController.PlayCinematic(livingEnemies[0]);
                 }
             }

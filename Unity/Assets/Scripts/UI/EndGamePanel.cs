@@ -92,6 +92,7 @@ namespace UI {
         private int _typeEndGame;
 
         public void CallBtn(int idBtn) {
+            //GameSingleton.Instance.GetPlayer().Save();
             switch (idBtn) {
                 case 0:
                     GameSingleton.Instance.sceneManager.LoadScene("Menu");

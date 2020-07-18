@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
+using Utility;
 
 namespace Items {
     public class Shop
@@ -35,9 +37,12 @@ namespace Items {
         }
 
         public void ClearShop() {
+
             shopConsummables.Clear();
             shopEquipments.Clear();
             shopUnits.Clear();
+            //GameSingleton.Instance.uiManager.inventoryUi.ClearUiInventory();
+
         }
     }
 }
