@@ -24,14 +24,13 @@ namespace UI {
 
         private List<ItemSlot> _unitSlots = new List<ItemSlot>();
 
-        void Start() {
+        public void Init() {
             //inventoryPanel.SetActive(false);
             Player player = GameSingleton.Instance.GetPlayer();
             if (player.currentLevel == 0 && !player.storyModeInventory.units.Any() && player.gamemode == Player.Gamemode.LEVEL) 
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    int seed = player.currentSeed;
                     //int seed = UnityRandom.Range(Int32.MinValue, Int32.MaxValue);
                     Random rand = new Random(DateTime.Now.Millisecond);
 
