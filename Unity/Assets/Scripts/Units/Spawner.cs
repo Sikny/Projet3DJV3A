@@ -38,6 +38,11 @@ namespace Units {
             icon.sprite = GameSingleton.Instance.entityTypeToSprite.GetEntitySprite(unitType);
         }
 
+        public override void DeInit() {
+            base.DeInit();
+            SetAnimating(false);
+        }
+
         private List<Tween> _animations = new List<Tween>();
         public void SetAnimating(bool state) {
             if (state == false) {

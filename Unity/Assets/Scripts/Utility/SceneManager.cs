@@ -25,6 +25,8 @@ namespace Utility {
         public void LoadScene(string sceneName) {
             Player player = GameSingleton.Instance.GetPlayer();
             SoundManager soundManager = GameSingleton.Instance.soundManager;
+            
+            PoolManager.PoolManager.Instance().ReleaseAll();
 
             switch (sceneName) {
                 case "Menu":

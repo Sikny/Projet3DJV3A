@@ -35,5 +35,12 @@ namespace Utility.PoolManager {
         public void ReleasePooledObject(PoolableObject obj) {
             obj.DeInit();
         }
+
+        // On scene change
+        public void ReleaseAll() {
+            foreach (var pair in _pools) {
+                pair.Value.ReleaseAll();
+            }
+        }
     }
 }

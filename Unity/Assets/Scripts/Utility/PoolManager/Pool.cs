@@ -36,5 +36,11 @@ namespace Utility.PoolManager {
             }
             return _objectsInPool[index];
         }
+
+        public void ReleaseAll() {
+            for (int i = _objectsInPool.Count - 1; i >= 0; --i) {
+                _objectsInPool[i].DeInit();
+            }
+        }
     }
 }
