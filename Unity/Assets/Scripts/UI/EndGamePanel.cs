@@ -69,7 +69,6 @@ namespace UI {
                         if (GameSingleton.Instance.levelManager != null) {
                             UnitRecovery();
                             GameSingleton.Instance.levelManager.NextLevel();
-                            //GameSingleton.Instance.SetGameEnded(false);
                         }
 
                         break;
@@ -81,7 +80,10 @@ namespace UI {
                         nextBtn.SetActive(false);
 
                         Player player = GameSingleton.Instance.GetPlayer();
-                        if (player.gamemode == Player.Gamemode.LEVEL) {
+                        if (player.gamemode == Player.Gamemode.LEVEL)
+                        {
+                            player.storyModeInventory = player.inventoryStartLevel;
+                            player.gold = player.goldStartLevel;
                         }
 
                         break;
@@ -122,7 +124,9 @@ namespace UI {
             systemUnit = FindObjectOfType<SystemUnit>();
 
             List<AbstractUnit> units = systemUnit.GetUnits();
-
+            
+            Player player = GameSingleton.Instance.GetPlayer();
+            
             Inventory inventory = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
                 ? GameSingleton.Instance.GetPlayer().storyModeInventory
                 : GameSingleton.Instance.GetPlayer().arcadeModeInventory;
@@ -130,7 +134,16 @@ namespace UI {
                 EntityType entityType = unit.GetEntityType();
                 StoreUnit storeUnit = GameSingleton.Instance.storeUnitList.GetStoreUnitByEntityType(entityType);
                 inventory.AddItem(storeUnit);
+                if (player.gamemode == Player.Gamemode.LEVEL)
+                {
+                    player.inventoryStartLevel = inventory;
+                    player.goldStartLevel = player.gold;
+                }
+
             }
+
+
+
         }
     }
 }

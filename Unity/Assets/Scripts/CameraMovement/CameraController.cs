@@ -25,7 +25,7 @@ namespace CameraMovement {
         private bool _invertCameraY;
 
         public bool isZooming;
-        
+        private Transform _target;
 
         private void Start()
         {
@@ -75,6 +75,7 @@ namespace CameraMovement {
         {
             if (isZooming)
             {
+                mainCamera.transform.LookAt(_target); 
                 _currentYaw -= zoomSpeed * speed * Time.deltaTime/5;
                 _currentYaw = Mathf.Clamp(_currentYaw, minZoom, maxZoom);
             }
@@ -124,10 +125,10 @@ namespace CameraMovement {
 
         public void PlayCinematic(Transform target)
         {
+            _target = target;
             GameSingleton.Instance.soundManager.Play("Cinematic");
             GameSingleton.Instance.uiManager.HideUis();
             GameSingleton.Instance.shortcutManager.isEnabled = false;
-            mainCamera.transform.LookAt(target); 
             isZooming = true;
             Time.timeScale = 0.5f;
             StartCoroutine(ZoomCoroutine(1));

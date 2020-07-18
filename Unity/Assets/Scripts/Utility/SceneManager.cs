@@ -44,8 +44,8 @@ namespace Utility {
                     else
                     {
                         player.storyModeInventory.Clear();
-                        player.storyModeInventory = player.inventoryStartLevel;
-                        player.gold = player.goldStartLevel;
+                        //player.storyModeInventory = player.inventoryStartLevel; //TODO PUT BACK IF BREAKS
+                        //player.gold = player.goldStartLevel;
                         
                     }
                     UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
