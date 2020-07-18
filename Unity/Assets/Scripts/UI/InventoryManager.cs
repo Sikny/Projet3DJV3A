@@ -10,8 +10,6 @@ namespace UI {
     public class InventoryManager : ItemsPanel {
         public TextMeshProUGUI goldText;
 
-        public GameObject inventoryPanel;
-
         public ItemSlot prefabSlot;
 
         public ItemSlot unitPrefabSlot;

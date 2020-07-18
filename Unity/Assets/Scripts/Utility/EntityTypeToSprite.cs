@@ -5,28 +5,29 @@ using Units;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-
-[Serializable]
-public struct EntitySprite {
-    public EntityType entityType;
-    public Sprite sprite;
-}
-public class EntityTypeToSprite : MonoBehaviour
-{
-    public EntitySprite[] entitySprites;
-
-    public Dictionary<EntityType, Sprite> dict;
-
-    public Sprite GetEntitySprite(EntityType entityType)
+namespace Utility {
+    [Serializable]
+    public struct EntitySprite {
+        public EntityType entityType;
+        public Sprite sprite;
+    }
+    public class EntityTypeToSprite : MonoBehaviour
     {
-        int i;
-        for (i = 0; i < entitySprites.Length; i++)
+        public EntitySprite[] entitySprites;
+
+        public Dictionary<EntityType, Sprite> dict;
+
+        public Sprite GetEntitySprite(EntityType entityType)
         {
-            if (entityType == entitySprites[i].entityType)
+            int i;
+            for (i = 0; i < entitySprites.Length; i++)
             {
-                break;
+                if (entityType == entitySprites[i].entityType)
+                {
+                    break;
+                }
             }
+            return entitySprites[i].sprite;
         }
-        return entitySprites[i].sprite;
     }
 }
