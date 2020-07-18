@@ -254,18 +254,24 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Victory
     clip: {fileID: 8300000, guid: 2b8c188ce28ec3e4395135ff7b743add, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Defeat
     clip: {fileID: 8300000, guid: 7893e1b1c4ca8a142b739eb71f73d836, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Cinematic
     clip: {fileID: 8300000, guid: f60e39eab8746cc4c92065368c06a96b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Buy
+    clip: {fileID: 8300000, guid: 0d5284f2be1267a498bb6372053cf409, type: 3}
     volume: 1
     pitch: 1
     loop: 0
