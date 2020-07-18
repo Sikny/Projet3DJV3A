@@ -4,7 +4,10 @@ using Game;
 using Items;
 using Sounds;
 using UI;
+using Units;
+using Units.Controllers.Soldier;
 using UnityEngine;
+using Random = System.Random;
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace Utility {
@@ -43,13 +46,13 @@ namespace Utility {
                         player.storyModeInventory.Clear();
                         player.storyModeInventory = player.inventoryStartLevel;
                         player.gold = player.goldStartLevel;
+                        
                     }
-
                     UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
                     break;
                 case "StoryMode":
                     Shop.Instance.ClearShop();
-
+                   
                     player.gamemode = Player.Gamemode.LEVEL;
 
                     soundManager.StopPlayingAllMusics();

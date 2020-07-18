@@ -52,6 +52,7 @@ namespace Items {
                 boughtSlot.icon.sprite = icon.sprite;
                 boughtSlot.itemName.SetText(itemName.text);
                 _inventory.AddItem(boughtSlot.item);
+                GameSingleton.Instance.soundManager.Play("Buy");
                 _popup.Popup("Bought " + item.name + "!");
             }
             else

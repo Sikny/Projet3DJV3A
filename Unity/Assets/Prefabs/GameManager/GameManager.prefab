@@ -65,6 +65,7 @@ MonoBehaviour:
   endGamePanel: {fileID: 1415078842026712273}
   storeUnitList: {fileID: 11400000, guid: 8591522ae67de054f9990aff0c226b93, type: 2}
   gamePaused: 0
+  cameraController: {fileID: 0}
   shortcutManager: {fileID: 658092536201835094}
   entityTypeToSprite: {fileID: 1965247716536981414}
   uiManager: {fileID: 0}
@@ -141,7 +142,6 @@ MonoBehaviour:
   isEnabled: 1
   keyMap:
     selectKey: 323
-    cameraRotateKey: 324
     shopKey: 117
     inventoryKey: 105
     pauseKey: 27
@@ -248,6 +248,30 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: ItemUse
     clip: {fileID: 8300000, guid: 6b893db8e8707bf499afc77fcc78f47d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Victory
+    clip: {fileID: 8300000, guid: 2b8c188ce28ec3e4395135ff7b743add, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Defeat
+    clip: {fileID: 8300000, guid: 7893e1b1c4ca8a142b739eb71f73d836, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Cinematic
+    clip: {fileID: 8300000, guid: f60e39eab8746cc4c92065368c06a96b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Buy
+    clip: {fileID: 8300000, guid: 0d5284f2be1267a498bb6372053cf409, type: 3}
     volume: 1
     pitch: 1
     loop: 0

@@ -22,6 +22,8 @@ namespace UI {
                 _typeEndGame = value;
                 switch (_typeEndGame) {
                     case 0: // Lose
+                        GameSingleton.Instance.soundManager.StopPlayingAllSounds();
+                        GameSingleton.Instance.soundManager.Play("Defeat");
                         if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL) {
                             winMessage.gameObject.SetActive(false);
                             loseMessage.gameObject.SetActive(true);
@@ -51,6 +53,8 @@ namespace UI {
 
                         break;
                     case 1: // Win
+                        GameSingleton.Instance.soundManager.StopPlayingAllSounds();
+                        GameSingleton.Instance.soundManager.Play("Victory");
                         winMessage.gameObject.SetActive(true);
                         loseMessage.gameObject.SetActive(false);
                         retryBtn.SetActive(false);
@@ -88,6 +92,7 @@ namespace UI {
         private int _typeEndGame;
 
         public void CallBtn(int idBtn) {
+            //GameSingleton.Instance.GetPlayer().Save();
             switch (idBtn) {
                 case 0:
                     GameSingleton.Instance.sceneManager.LoadScene("Menu");

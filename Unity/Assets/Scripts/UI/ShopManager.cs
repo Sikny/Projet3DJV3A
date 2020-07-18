@@ -15,6 +15,9 @@ namespace UI {
 
         public ItemSlot prefabSlot;
 
+        //private List<ItemSlot> _unitSlots;
+        //private List<ItemSlot> _consummableSlots;
+        
         private Shop _shop;
 
 
@@ -36,10 +39,10 @@ namespace UI {
         void Start() {
             _shop = Shop.Instance;
 
-            UpdateUiItems();
-            UpdateUiEquipments();
-            UpdateUiUnits();
-            UpdateGold();
+            //UpdateUiItems();
+            //UpdateUiEquipments();
+            //UpdateUiUnits();
+            //UpdateGold();
             //shopPanel.SetActive(false);
         }
 
@@ -94,6 +97,9 @@ namespace UI {
             goldText.SetText(gold + " g");
         }
 
+        public void ClearUiShop()
+        {
+        }
         public GameObject fightButton;
 
         public void Fight()

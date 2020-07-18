@@ -1,10 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Game;
 using Items;
 using Language;
 using TMPro;
+using Units;
 using UnityEngine;
 using Utility;
+using Random = System.Random;
+using UnityRandom = UnityEngine.Random;
+
 
 namespace UI {
     public class InventoryManager : ItemsPanel {
@@ -20,6 +26,34 @@ namespace UI {
 
         void Start() {
             //inventoryPanel.SetActive(false);
+            Player player = GameSingleton.Instance.GetPlayer();
+            if (player.currentLevel == 0 && !player.storyModeInventory.units.Any()) 
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    int seed = player.currentSeed;
+                    //int seed = UnityRandom.Range(Int32.MinValue, Int32.MaxValue);
+                    Random rand = new Random(DateTime.Now.Millisecond);
+
+
+                    int randEntity = rand.Next(0, 3);
+                    EntityType entityType = EntityType.Soldier;
+                    switch (randEntity)
+                    {
+                        case 0:
+                            entityType = EntityType.Soldier;
+                            break;
+                        case 1:
+                            entityType = EntityType.Archer;
+                            break;
+                        case 2:
+                            entityType = EntityType.Mage;
+                            break;
+                    }
+                    StoreUnit storeUnit = GameSingleton.Instance.storeUnitList.GetStoreUnitByEntityType(entityType);
+                    player.storyModeInventory.AddItem(storeUnit);
+                }
+            }
             UpdateGold();
         }
 
@@ -79,6 +113,13 @@ namespace UI {
             Destroy(slotGameObject);
             _unitSlots.Remove(_unitSlots[targetIndex]);
         }
+
+        public void ClearUiInventory()
+        {
+            _unitSlots.Clear();
+            _consumableSlots.Clear();
+        }
+  
 
         public void UpdateGold() {
             int gold = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
