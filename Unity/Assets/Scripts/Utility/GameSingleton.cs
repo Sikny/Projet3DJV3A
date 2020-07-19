@@ -103,11 +103,13 @@ namespace Utility {
             /*if (status == 0 && _player.gamemode == Player.Gamemode.LEVEL) // lose
             {
                 Debug.Log("gold is : " + _player.gold);
-                foreach (var unit in _player.inventoryStartLevel.units)
+                /*foreach (var unit in _player.inventoryStartLevel.units)
                 {
                     Debug.Log(unit.itemName);
-                }
-                _player.storyModeInventory = _player.inventoryStartLevel;
+                }*/
+
+                _player.storyModeInventory = _player.GetInventoryBackup();
+                //_player.storyModeInventory = _player.inventoryStartLevel;
                 _player.gold = _player.goldStartLevel;
             }*/
             _player.Save(); 

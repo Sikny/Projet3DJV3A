@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using Units.Pathfinding;
 using UnityEngine;
-using Utility;
 
 namespace Units {
     public class Entity : MonoBehaviour {
