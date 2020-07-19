@@ -110,7 +110,7 @@ namespace Units {
                     Mathf.Floor(hit.point.z)+0.5f) ;
 
                 bool isPlaceable = CheckPlaceable();
-                if (isPlaceable)
+                if (isPlaceable && !_uiActivated)
                 {
                     StoreUnit unit = inventory.selectedStoreUnit;
                     SpawnUnit(unit.entityType, playerUnitPrefab, position);

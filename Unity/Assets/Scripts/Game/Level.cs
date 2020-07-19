@@ -158,7 +158,7 @@ namespace Game {
                 if (!_mageCheck)
                 {
                     _mageCheck = true;
-                    bool onlyMages = false;
+                    bool onlyMages = true;
                     foreach (var unit in _playerUnits)
                     {
                         EntityType type = unit.GetEntityType();

@@ -95,9 +95,9 @@ namespace Units  {
             Player.Gamemode playerGamemode = player.gamemode;
 
             if (playerGamemode == Player.Gamemode.LEVEL)
-                player.gold += 150;
+                player.gold += 100;
             else
-                player.arcadeGold += 150;
+                player.arcadeGold += 100;
             base.Kill();
         }
     }

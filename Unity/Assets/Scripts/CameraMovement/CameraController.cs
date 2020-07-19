@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using Units;
-using UnityEditor.ShortcutManagement;
 using UnityEngine;
 using Utility;
 using ShortcutManager = Game.ShortcutManager;
@@ -81,7 +80,7 @@ namespace CameraMovement {
             {
                 if (_target != null)
                 {
-                    mainCamera.transform.LookAt(_target.transform); 
+                    mainCamera.transform.LookAt(_target.transform.position); 
                 }
                 _currentYaw -= zoomSpeed * speed * Time.deltaTime/5;
                 _currentYaw = Mathf.Clamp(_currentYaw, minZoom, maxZoom);

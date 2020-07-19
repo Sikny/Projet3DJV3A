@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8626388362009609748}
   - component: {fileID: 7930927643086367806}
   m_Layer: 0
-  m_Name: Level006
+  m_Name: Level005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e8925b4cc66eb438052274686b5d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aStarHandler: {fileID: 0}
   terrainBuilder: {fileID: 5793058475430699794}
   consumablesList:
   - {fileID: 11400000, guid: 45b2d4959514bca41b1bc99a1493fc57, type: 2}
@@ -68,52 +67,40 @@ MonoBehaviour:
   enemySpawns:
   - spawnTime: 0
     entityType: 0
-    position: {x: 0, y: 0}
-    icon: {fileID: 0}
+    position: {x: 0, y: -4}
   - spawnTime: 0
     entityType: 0
-    position: {x: 0, y: 4}
-    icon: {fileID: 0}
+    position: {x: 0, y: 5}
   - spawnTime: 0
     entityType: 1
-    position: {x: -13, y: 17}
-    icon: {fileID: 0}
+    position: {x: -10, y: 17}
   - spawnTime: 0
     entityType: 1
     position: {x: -16, y: 17}
-    icon: {fileID: 0}
   - spawnTime: 0
     entityType: 2
-    position: {x: 21, y: 17}
-    icon: {fileID: 0}
+    position: {x: 17, y: 17}
   - spawnTime: 0
     entityType: 2
-    position: {x: 21, y: 22}
-    icon: {fileID: 0}
+    position: {x: 2, y: 12}
   - spawnTime: 10
     entityType: 9
-    position: {x: 21, y: 22}
-    icon: {fileID: 0}
+    position: {x: 10, y: 17}
   - spawnTime: 10
     entityType: 13
-    position: {x: 21, y: -24}
-    icon: {fileID: 0}
+    position: {x: 10, y: -10}
   - spawnTime: 10
     entityType: 3
-    position: {x: 0, y: -24}
-    icon: {fileID: 0}
+    position: {x: 17, y: -10}
   - spawnTime: 20
     entityType: 10
-    position: {x: -13, y: -24}
-    icon: {fileID: 0}
+    position: {x: -13, y: -13}
   - spawnTime: 20
     entityType: 15
-    position: {x: 2, y: 20}
-    icon: {fileID: 0}
-  - spawnTime: 10
+    position: {x: 2, y: 17}
+  - spawnTime: 20
     entityType: 6
-    position: {x: -11, y: 4}
-    icon: {fileID: 0}
+    position: {x: -18, y: 4}
   livingEnemies: []
 --- !u!1001 &8626388362022925926
 PrefabInstance:
@@ -265,12 +252,12 @@ PrefabInstance:
     - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
       propertyPath: width
-      value: 50
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
       propertyPath: height
-      value: 50
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
@@ -370,12 +357,12 @@ PrefabInstance:
     - target: {fileID: 5612446399517519283, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 49.9999
+      value: 39.999
       objectReference: {fileID: 0}
     - target: {fileID: 5612446399517519283, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 49.9999
+      value: 39.999
       objectReference: {fileID: 0}
     - target: {fileID: 5637388254737945374, guid: 023c5a39670951d49be3c39d866d3307,
         type: 3}
