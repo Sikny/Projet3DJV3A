@@ -116,7 +116,7 @@ namespace Units {
                     inventory.RemoveUnit(unit);
                     inventory.selectedStoreUnit = null;
                 }
-                else if(_uiActivated)
+                else
                 {
                     Popups.instance.PopupTop("Unit is not placeable here, please try somewhere else", Color.red);
                 }
