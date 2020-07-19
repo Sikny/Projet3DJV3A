@@ -82,7 +82,7 @@ namespace UI {
                         Player player = GameSingleton.Instance.GetPlayer();
                         if (player.gamemode == Player.Gamemode.LEVEL)
                         {
-                            player.storyModeInventory = player.inventoryStartLevel;
+                            player.storyModeInventory = player.GetInventoryBackup();
                             player.gold = player.goldStartLevel;
                         }
 
@@ -107,7 +107,7 @@ namespace UI {
 
                     if (playerGamemode == Player.Gamemode.LEVEL) {
                         player.gold = player.goldStartLevel;
-                        player.storyModeInventory = player.inventoryStartLevel;
+                        player.storyModeInventory = player.GetInventoryBackup();
                     }
 
                     Shop.Instance.ClearShop();
@@ -136,7 +136,7 @@ namespace UI {
                 inventory.AddItem(storeUnit);
                 if (player.gamemode == Player.Gamemode.LEVEL)
                 {
-                    player.inventoryStartLevel = inventory;
+                    player.BackupInventory(inventory);
                     player.goldStartLevel = player.gold;
                 }
 

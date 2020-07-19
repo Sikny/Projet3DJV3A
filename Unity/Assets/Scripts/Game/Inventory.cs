@@ -14,11 +14,9 @@ namespace Game {
         public StoreUnit selectedStoreUnit;
 
         private InventoryManager _inventoryManager;
-        private ShopManager _shopManager;
-        
+
         public void Load(InventoryManager inventoryUi) {
             _inventoryManager = inventoryUi;
-            _shopManager = ShopManager.instance;
 
             foreach (var unit in units) {
                 _inventoryManager.UpdateUiUnit(unit);

@@ -61,7 +61,8 @@ namespace UI {
                 Debug.Log(unit.itemName);
             }
             player.goldStartLevel = player.gold;
-            player.inventoryStartLevel = player.storyModeInventory; 
+            player.BackupInventory(player.storyModeInventory);
+            //player.inventoryStartLevel = player.storyModeInventory;
             UpdateGold();
         }
 
