@@ -97,9 +97,6 @@ namespace UI {
             goldText.SetText(gold + " g");
         }
 
-        public void ClearUiShop()
-        {
-        }
         public GameObject fightButton;
 
         public void Fight()

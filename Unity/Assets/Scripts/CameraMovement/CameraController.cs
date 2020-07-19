@@ -28,7 +28,7 @@ namespace CameraMovement {
         private bool _invertCameraY;
 
         public bool isZooming;
-        private AbstractUnit _target;
+        private Entity _target;
         private ShortcutManager _shortcutManager;
 
         private void Start()
@@ -133,7 +133,7 @@ namespace CameraMovement {
 
         }
 
-        public void PlayCinematic(AbstractUnit target)
+        public void PlayCinematic(Entity target)
         {
             _target = target;
             GameSingleton.Instance.soundManager.Play("Cinematic");

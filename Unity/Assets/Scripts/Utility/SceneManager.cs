@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game;
 using Items;
 using Language;
@@ -45,8 +46,6 @@ namespace Utility {
                     else
                     {
                         player.storyModeInventory.Clear();
-                        //player.storyModeInventory = player.inventoryStartLevel; //TODO PUT BACK IF BREAKS
-                        //player.gold = player.goldStartLevel;
                         
                     }
                     UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);

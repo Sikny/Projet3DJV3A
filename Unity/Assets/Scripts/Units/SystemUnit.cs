@@ -66,7 +66,7 @@ namespace Units {
             
             foreach (var cell in cursor.cursorCells)
             {
-                if (cell.posY > 0.1f || cell.posY <= -0.1f || !cell.IsOnGround())
+                if (cell.posY > 0.3f || cell.posY <= -0.3f || !cell.IsOnGround())
                     return false;
             }
             return true;
