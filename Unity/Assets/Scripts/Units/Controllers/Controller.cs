@@ -24,14 +24,14 @@ namespace Units.Controllers
 
         protected float GetVitessUnit()
         {
-            float baseVitess = UnitLibData.speed * Time.deltaTime * basisSpeed;
+            float baseVitess = basisSpeed;
 
             Effect effect = body.GetEffect(0);
             //EquipmentEffect equipmentEffect = body.GetEquipmentEffect(0);
             int bonusLevel = effect.IdEffect == -1 ? 0 : effect.LevelEffect;
            // int bonusEquipmentLevel = equipmentEffect.IdEffect == -1 ? 0 : equipmentEffect.LevelEffect;
 
-            return baseVitess /*+ bonusEquipmentLevel*/+  bonusLevel * baseVitess * 0.5f;
+           return baseVitess + bonusLevel * 0.5f;
         }
         protected float GetAttackUnit(AbstractUnit target)
         {
