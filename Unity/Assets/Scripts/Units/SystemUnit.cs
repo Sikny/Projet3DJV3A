@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Game;
 using Items;
+using Language;
 using Terrain;
 using UI;
 using UnityEngine;
@@ -118,7 +119,7 @@ namespace Units {
                 }
                 else
                 {
-                    Popups.instance.PopupTop("Unit is not placeable here, please try somewhere else", Color.red);
+                    Popups.instance.PopupTop(Traducer.Translate("Unit is not placeable here, please try somewhere else"), Color.red);
                 }
 
             }

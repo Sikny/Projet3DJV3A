@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using Items;
 using UnityEngine;
 
-namespace Game {
-    public class Player {
+namespace Game
+{
+    public class Player
+    {
         public int gold;
         public int arcadeGold;
         public int currentLevel;
@@ -17,12 +19,15 @@ namespace Game {
         public int currentSeed;
         public DateTime beginGame;
         public Inventory storyModeInventory = ScriptableObject.CreateInstance<Inventory>();
-        public Inventory arcadeModeInventory  = ScriptableObject.CreateInstance<Inventory>();
-        public Player() {
+        public Inventory arcadeModeInventory = ScriptableObject.CreateInstance<Inventory>();
+
+        public Player()
+        {
             Load();
         }
 
-        public void Load() {
+        public void Load()
+        {
             gold = PlayerPrefs.GetInt("PlayerGold", 20);
             arcadeGold = PlayerPrefs.GetInt("arcadeGold", 150);
             currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
@@ -32,7 +37,8 @@ namespace Game {
             token = PlayerPrefs.GetString("connection.token", "");
         }
 
-        public void Save() {
+        public void Save()
+        {
             PlayerPrefs.SetInt("PlayerGold", gold);
             PlayerPrefs.SetInt("arcadeGold", arcadeGold);
             PlayerPrefs.SetInt("CurrentLevel", currentLevel);
@@ -41,37 +47,17 @@ namespace Game {
             PlayerPrefs.Save();
         }
 
-        public void BackupInventory(Inventory inventory) {
+        public void BackupInventory(Inventory inventory)
+        {
             inventoryBackup = new Inventory();
             inventoryBackup.consumables = new List<Consumable>(inventory.consumables);
             inventoryBackup.equipments = new List<Equipment>(inventory.equipments);
             inventoryBackup.units = new List<StoreUnit>(inventory.units);
         }
 
-        public Inventory GetInventoryBackup() {
+        public Inventory GetInventoryBackup()
+        {
             return inventoryBackup;
-        }
-        
-        public void SetGold()
-        {
-            gold = goldStartLevel;
-        }
-
-        public void SetInventoryStart(Inventory inventory)
-        {
-            inventoryStartLevel.Clear();
-            
-            foreach (Consumable cons in inventory.consumables) {
-                inventoryStartLevel.AddItem(cons);
-            }
-            foreach (StoreUnit storeUnit in inventory.units) {
-                inventoryStartLevel.AddItem(storeUnit);
-            }
-        }
-
-        public void SetStartGold(int g)
-        {
-            goldStartLevel = g;
         }
 
         public enum Gamemode
@@ -81,5 +67,4 @@ namespace Game {
             PERSONNALIZED
         }
     }
-    
 }

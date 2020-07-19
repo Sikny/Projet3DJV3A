@@ -1,4 +1,5 @@
-﻿using UI;
+﻿using Language;
+using UI;
 using Units;
 using UnityEngine;
 
@@ -28,7 +29,7 @@ namespace Items.Consumables {
             }
             else
             {
-                Popups.instance.PopupTop("Select a unit first.", Color.red);
+                Popups.instance.PopupTop(Traducer.Translate("Select a unit first."), Color.red);
             }
 
         }

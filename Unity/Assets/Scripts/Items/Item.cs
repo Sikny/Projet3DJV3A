@@ -1,4 +1,5 @@
-﻿using Sounds;
+﻿using Language;
+using Sounds;
 using UI;
 using UnityEngine;
 using Utility;
@@ -16,7 +17,7 @@ namespace Items {
         // Called when the item is pressed in the inventory
         public virtual void Use() {
             
-            Popups.instance.Popup("using " + itemName);
+            Popups.instance.Popup(Traducer.Translate("using ") + Traducer.Translate(itemName));
         }
 
         public virtual void Upgrade()

@@ -106,7 +106,7 @@ namespace Utility {
                 /*foreach (var unit in _player.inventoryStartLevel.units)
                 {
                     Debug.Log(unit.itemName);
-                }*/
+                }
 
                 _player.storyModeInventory = _player.GetInventoryBackup();
                 //_player.storyModeInventory = _player.inventoryStartLevel;

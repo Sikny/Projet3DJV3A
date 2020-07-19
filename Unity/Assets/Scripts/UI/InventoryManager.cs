@@ -54,26 +54,12 @@ namespace UI {
                 }
             }
                    
-            Inventory inventory = GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.LEVEL
-                ? GameSingleton.Instance.GetPlayer().storyModeInventory
-                : GameSingleton.Instance.GetPlayer().arcadeModeInventory;
-            if (player.gamemode == Player.Gamemode.LEVEL)
-            {
-                Debug.Log("setting gold to " + player.gold);
-                Debug.Log("setting inventory to");
-                foreach (var unit in inventory.units)
-                {
-                    Debug.Log(unit.itemName);
-                } 
-                player.SetInventoryStart(inventory);
-                player.SetStartGold(player.gold);
-            }
             /*Debug.Log("setting start gold to : " + player.gold);
             Debug.Log("setting inventory to : ");
             foreach (var unit in player.storyModeInventory.units)
             {
                 Debug.Log(unit.itemName);
-            }
+            }*/
             player.goldStartLevel = player.gold;
             player.BackupInventory(player.storyModeInventory);
             //player.inventoryStartLevel = player.storyModeInventory;

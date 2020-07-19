@@ -106,7 +106,7 @@ namespace UI {
         {
             int playerCount = FindObjectsOfType<PlayerUnit>().Length;
             if (playerCount == 0) {
-                Popups.instance.Popup("At least one unit must be placed first", Color.red);
+                Popups.instance.Popup(Traducer.Translate("At least one unit must be placed first"), Color.red);
                 return;
             }
             systemUnit.SetRunning(true);

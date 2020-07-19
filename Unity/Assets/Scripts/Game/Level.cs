@@ -200,7 +200,7 @@ namespace Game {
                     if (_lastEntity.GetLife() < _lastEntity.GetMaxLife()/2)
                     {
                         _cinematicPlayed = true;
-                        GameSingleton.Instance.cameraController.PlayCinematic(_lastEntity);
+                        GameSingleton.Instance.cameraController.PlayCinematic(_lastUnit);
                     }
                 }
                 else
@@ -208,7 +208,7 @@ namespace Game {
                     if (_lastEntity.GetLife() < _lastEntity.GetMaxLife())
                     {
                         _cinematicPlayed = true;
-                        GameSingleton.Instance.cameraController.PlayCinematic(_lastEntity);
+                        GameSingleton.Instance.cameraController.PlayCinematic(_lastUnit);
                     }
 
                 }
