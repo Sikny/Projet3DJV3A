@@ -15,6 +15,7 @@ namespace Items {
 
         // Called when the item is pressed in the inventory
         public virtual void Use() {
+            
             Popups.instance.Popup("using " + itemName);
         }
 

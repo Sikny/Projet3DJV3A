@@ -4,6 +4,7 @@ using Items;
 using TMPro;
 using Units;
 using UnityEngine;
+using UnityEngine.WSA;
 using Utility;
 using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
@@ -61,10 +62,10 @@ namespace UI {
                         quitBtn.SetActive(true);
                         nextBtn.SetActive(true);
 
-                        if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE) {
+                        /*if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE) {
                             Shop.Instance.ClearShop();
-                            GameSingleton.Instance.levelManager.GenerateLevel();
-                        }
+                            //GameSingleton.Instance.levelManager.GenerateLevel();
+                        }*/
 
                         if (GameSingleton.Instance.levelManager != null) {
                             UnitRecovery();
@@ -73,18 +74,23 @@ namespace UI {
 
                         break;
                     case 2: //Retry
+
+                        Player player = GameSingleton.Instance.GetPlayer();
+                        player.SetGold();
+                        player.SetInventory();
                         winMessage.gameObject.SetActive(false);
                         loseMessage.gameObject.SetActive(false);
                         retryBtn.SetActive(false);
                         quitBtn.SetActive(false);
                         nextBtn.SetActive(false);
 
+                        /*
                         Player player = GameSingleton.Instance.GetPlayer();
                         if (player.gamemode == Player.Gamemode.LEVEL)
                         {
                             player.storyModeInventory = player.inventoryStartLevel;
                             player.gold = player.goldStartLevel;
-                        }
+                        }*/
 
                         break;
                 }
@@ -103,12 +109,15 @@ namespace UI {
 
                     Player player = GameSingleton.Instance.GetPlayer();
                     Player.Gamemode playerGamemode = player.gamemode;
-
-
-                    if (playerGamemode == Player.Gamemode.LEVEL) {
+                    
+                    if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE) {
+                        Shop.Instance.ClearShop();
+                        GameSingleton.Instance.levelManager.GenerateLevel();
+                    }
+                    /*if (playerGamemode == Player.Gamemode.LEVEL) {
                         player.gold = player.goldStartLevel;
                         player.storyModeInventory = player.inventoryStartLevel;
-                    }
+                    }*/
 
                     Shop.Instance.ClearShop();
                     GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
@@ -134,13 +143,9 @@ namespace UI {
                 EntityType entityType = unit.GetEntityType();
                 StoreUnit storeUnit = GameSingleton.Instance.storeUnitList.GetStoreUnitByEntityType(entityType);
                 inventory.AddItem(storeUnit);
-                if (player.gamemode == Player.Gamemode.LEVEL)
-                {
-                    player.inventoryStartLevel = inventory;
-                    player.goldStartLevel = player.gold;
-                }
-
             }
+     
+
 
 
 

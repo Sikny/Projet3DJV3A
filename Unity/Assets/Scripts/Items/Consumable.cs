@@ -11,6 +11,8 @@ namespace Items {
             base.Use();
             GameSingleton.Instance.soundManager.Play("ItemUse");
             RemoveFromInventory();
+            GameSingleton.Instance.uiManager.descriptionBox.SetActive(false);
+
         }
     
         public void RemoveFromInventory ()

@@ -1,4 +1,5 @@
 ﻿using System;
+using Items;
 using UnityEngine;
 
 namespace Game {
@@ -38,7 +39,41 @@ namespace Game {
             PlayerPrefs.SetString("connection.token", token);
             PlayerPrefs.Save();
         }
+
+        public void SetInventory()
+        {
+            storyModeInventory.Clear();
+            
+            foreach (Consumable cons in inventoryStartLevel.consumables) {
+                inventoryStartLevel.AddItem(cons);
+            }
+            foreach (StoreUnit storeUnit in inventoryStartLevel.units) {
+                inventoryStartLevel.AddItem(storeUnit);
+            }
+        }
         
+        public void SetGold()
+        {
+            gold = goldStartLevel;
+        }
+
+        public void SetInventoryStart(Inventory inventory)
+        {
+            inventoryStartLevel.Clear();
+            
+            foreach (Consumable cons in inventory.consumables) {
+                inventoryStartLevel.AddItem(cons);
+            }
+            foreach (StoreUnit storeUnit in inventory.units) {
+                inventoryStartLevel.AddItem(storeUnit);
+            }
+        }
+
+        public void SetStartGold(int g)
+        {
+            goldStartLevel = g;
+        }
+
         public enum Gamemode
         {
             LEVEL,
