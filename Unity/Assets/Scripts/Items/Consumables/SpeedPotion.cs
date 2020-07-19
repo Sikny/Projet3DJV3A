@@ -18,7 +18,7 @@ namespace Items.Consumables {
         {
             if (UnitLibData.selectedUnit != null)
             {
-                UnitLibData.selectedUnit.AddEffect(0, 3, 20f);
+                UnitLibData.selectedUnit.AddEffect(0, 10, 20f);
 
                 base.Use();
             }

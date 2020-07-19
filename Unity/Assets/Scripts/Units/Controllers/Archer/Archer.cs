@@ -72,7 +72,7 @@ namespace Units.Controllers.Archer {
                 for (int y = -1; y <= 1; y++) {
                     if (body.entities[ind] != null) {
                         Vector3 position = positionTarget + Vector3.right * x + Vector3.forward * y;
-                        if (body.entities[ind].aStarEntity.MoveTo(position, GameSingleton.Instance.aStarHandler)) {
+                        if (body.entities[ind].aStarEntity.MoveTo(position, GameSingleton.Instance.aStarHandler, GetVitessUnit())) {
                             body.SetPosition(positionTarget);
                             isOnDest = true;
                         }
