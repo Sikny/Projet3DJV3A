@@ -58,7 +58,7 @@ namespace Units.Controllers.Archer {
             if (!isRemoted) {
                 Entity entityTarget = GetFirstLivingEntity();
                 if (entityTarget == null) return false;
-                if (Vector3.Distance(entityTarget.transform.position, target.GetPosition()) <= OptimalDistance) {
+                if (Vector3.Distance(entityTarget.transform.position, target.transform.position) <= OptimalDistance) {
                     Vector3 destination = TerrainGrid.Instance.GetClosestValidPosition(entityTarget.transform.position);
                     if (destination.x > -0.1f) {    // if < 0 not valid
                         LockPosition(destination);
