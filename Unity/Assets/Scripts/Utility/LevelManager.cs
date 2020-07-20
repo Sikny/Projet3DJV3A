@@ -56,6 +56,7 @@ namespace Utility {
         }
 
         public void NextLevel() {
+            PoolManager.PoolManager.Instance().ReleaseAll();
             Player player = GameSingleton.Instance.GetPlayer();
             if (player.gamemode == Player.Gamemode.ARCADE) {
                 Shop.Instance.ClearShop();
