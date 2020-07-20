@@ -56,7 +56,7 @@ namespace Game {
         public void Init() {
             _systemUnit = FindObjectOfType<SystemUnit>();
 
-            Player player = GameSingleton.Instance.GetPlayer();
+            //Player player = GameSingleton.Instance.GetPlayer();
             GameSingleton.Instance.aStarHandler = transform.GetComponentInChildren<AStarHandler>();
 
             StartCoroutine(terrainBuilder.Init(InitAStar, rule));
@@ -238,6 +238,7 @@ namespace Game {
                 var offset = Vector3.right * (TerrainGrid.Width / 2f) +
                              Vector3.forward * (TerrainGrid.Height / 2f);
                 Vector3 position = new Vector3(current.position.x, SystemUnit.YPos, current.position.y) + offset;
+                
                 // enemy spawn (can be delayed)
                 if (current.spawnTime > 0) {
                     // todo update delayed calls when finished
@@ -246,8 +247,9 @@ namespace Game {
                             Spawner spawner = (Spawner) PoolManager.Instance().GetPoolableObject(typeof(Spawner));
                             spawner.transform.position = position;
                             spawner.Init(current.entityType);
-
+                            
                             _spawningEnemies.Add(DOVirtual.DelayedCall(Spawner.timeToSpawn, () => {
+                                spawner.DeInit();
                                 newUnit = _systemUnit.SpawnUnit(current.entityType, _systemUnit.aiUnitPrefab,
                                     position);
                                 livingEnemies.Add(newUnit);
