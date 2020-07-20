@@ -155,9 +155,7 @@ MonoBehaviour:
       value: Confirmer
   - values:
     - key: 0
-      value: 'Shop (u)
-
-'
+      value: Shop (u)
     - key: 1
       value: Mag (u)
   - values:
@@ -482,9 +480,9 @@ MonoBehaviour:
       value: Veuillez choisir un niveau
   - values:
     - key: 0
-      value: No Unit Selected!
+      value: No Unit Selected !
     - key: 1
-      value: "Pas d'unit\xE9 selectionn\xE9e!"
+      value: "Pas d'unit\xE9 selectionn\xE9e !"
   - values:
     - key: 0
       value: At least one unit must be placed first
@@ -492,9 +490,9 @@ MonoBehaviour:
       value: "Au moins une unit\xE9 doit \xEAtre plac\xE9e."
   - values:
     - key: 0
-      value: Not enough gold!
+      value: Not enough gold !
     - key: 1
-      value: Pas assez d'argent!
+      value: Pas assez d'argent !
   - values:
     - key: 0
       value: INVENTORY
@@ -537,24 +535,24 @@ MonoBehaviour:
       value: Editeur de niveau
   - values:
     - key: 0
-      value: 'Name :'
+      value: 'Name : '
     - key: 1
       value: 'Nom : '
   - values:
     - key: 0
-      value: 'Size :'
+      value: 'Size : '
     - key: 1
       value: 'Taille : '
   - values:
     - key: 0
-      value: 'Money :'
+      value: 'Money : '
     - key: 1
       value: 'Argent : '
   - values:
     - key: 0
       value: Reset Save
     - key: 1
-      value: Reinitialiser la Sauvegarde
+      value: "R\xE9initialiser la Sauvegarde"
   - values:
     - key: 0
       value: Map saved!
@@ -574,7 +572,7 @@ MonoBehaviour:
     - key: 0
       value: 'Upgraded '
     - key: 1
-      value: "Am\xE9lior\xE9"
+      value: "Am\xE9lior\xE9 "
   - values:
     - key: 0
       value: ' to '
@@ -594,12 +592,12 @@ MonoBehaviour:
     - key: 0
       value: 'Bought '
     - key: 1
-      value: "Achet\xE9"
+      value: "Achet\xE9 "
   - values:
     - key: 0
       value: 'Used '
     - key: 1
-      value: "Utilis\xE9"
+      value: "Utilis\xE9 "
   - values:
     - key: 0
       value: Please select a level.
@@ -634,7 +632,7 @@ MonoBehaviour:
     - key: 0
       value: Retry
     - key: 1
-      value: Ressayer
+      value: "R\xE9essayer"
   - values:
     - key: 0
       value: Restart
@@ -660,4 +658,4 @@ MonoBehaviour:
     - key: 0
       value: Heals target unit to full health.
     - key: 1
-      value: "Soigne l'unit\xE9e cibl\xE9e pour toute sa vitalit\xE9."
+      value: "Soigne l'unit\xE9 cibl\xE9e pour toute sa vitalit\xE9."
