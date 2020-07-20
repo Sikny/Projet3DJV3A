@@ -155,9 +155,7 @@ MonoBehaviour:
       value: Confirmer
   - values:
     - key: 0
-      value: 'Shop (u)
-
-'
+      value: Shop (u)
     - key: 1
       value: Mag (u)
   - values:
@@ -224,7 +222,7 @@ MonoBehaviour:
     - key: 0
       value: Spearmen can attack from further and deal more damage.
     - key: 1
-      value: "Les lanciers peuvent attaquer de plus loins et effectuent plus de d\xE9g\xE2ts."
+      value: "Les lanciers peuvent attaquer de plus loin et effectuent plus de d\xE9g\xE2ts."
   - values:
     - key: 0
       value: Knights have a lot of defense and health.
@@ -329,7 +327,7 @@ MonoBehaviour:
     - key: 0
       value: Sniper
     - key: 1
-      value: Snipeur
+      value: Sniper
   - values:
     - key: 0
       value: Base Archer unit. Effective against mages.
@@ -385,11 +383,6 @@ MonoBehaviour:
       value: Increases speed of target unit for 10 seconds.
     - key: 1
       value: "Augmente la vitesse de l'unit\xE9 cibl\xE9e pendant 10 secondes."
-  - values:
-    - key: 0
-      value: Iron Shield
-    - key: 1
-      value: Casque de fer
   - values:
     - key: 0
       value: +10 defense
@@ -494,7 +487,7 @@ MonoBehaviour:
     - key: 0
       value: At least one unit must be placed first
     - key: 1
-      value: "Au moins une unit\xE9 doit \xEAtre plac\xE9."
+      value: "Au moins une unit\xE9 doit \xEAtre plac\xE9e."
   - values:
     - key: 0
       value: Not enough gold!
@@ -529,8 +522,7 @@ MonoBehaviour:
     - key: 0
       value: Save has been reset! Restart game to take effect.
     - key: 1
-      value: "La sauvegarde \xE0 \xE9t\xE9 remise \xE0 zero! Red\xE9marrez le jeu
-        pour prendre effet."
+      value: "Sauvegarde r\xE9initialis\xE9e! Red\xE9marrez le jeu pour prendre effet."
   - values:
     - key: 0
       value: Enter name of map...
@@ -543,17 +535,17 @@ MonoBehaviour:
       value: Editeur de niveau
   - values:
     - key: 0
-      value: 'Name :'
+      value: 'Name : '
     - key: 1
       value: 'Nom : '
   - values:
     - key: 0
-      value: 'Size :'
+      value: 'Size : '
     - key: 1
       value: 'Taille : '
   - values:
     - key: 0
-      value: 'Money :'
+      value: 'Money : '
     - key: 1
       value: 'Argent : '
   - values:
@@ -605,7 +597,7 @@ MonoBehaviour:
     - key: 0
       value: 'Used '
     - key: 1
-      value: 'Utilise '
+      value: "Utilis\xE9"
   - values:
     - key: 0
       value: Please select a level.
@@ -615,7 +607,7 @@ MonoBehaviour:
     - key: 0
       value: At least one unit must be placed first
     - key: 1
-      value: "Au moins une unit\xE9 doit \xEAtre plac\xE9."
+      value: "Au moins une unit\xE9 doit \xEAtre plac\xE9e."
   - values:
     - key: 0
       value: Wrong identifications
