@@ -62,8 +62,6 @@ namespace UI {
                             GameSingleton.Instance.levelManager.NextLevel();
                         }
                         Player plr = GameSingleton.Instance.GetPlayer();
-                        Debug.Log("current level is : " + plr.currentLevel);
-                        Debug.Log("max level is : " + GameSingleton.Instance.levelManager.levelList.LevelCount);
                         if (plr.currentLevel >= GameSingleton.Instance.levelManager.levelList.LevelCount)
                         {
                             winMessage.gameObject.SetActive(false);
