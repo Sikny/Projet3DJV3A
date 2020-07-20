@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game;
+using Game.arcade;
 using Items;
 using LevelEditor.Rule;
 using Terrain;
@@ -109,7 +110,7 @@ namespace Utility {
                 GameSingleton.Instance.GetPlayer().currentSeed = seed;
             }
 
-            loadedLevel = grp.generateNextLevel(seed, GameSingleton.Instance.GetPlayer().currentLevelArcade);
+            loadedLevel = grp.GenerateNextLevel(seed, GameSingleton.Instance.GetPlayer().currentLevelArcade);
 
             List<EnemySpawn> enemySpawns = loadedLevel.enemySpawns;
 
@@ -129,7 +130,7 @@ namespace Utility {
                  Debug.Log("position :" + yPosition);
                  Debug.Log(enemy.position);
              }*/
-            loadedLevel = grp.respawnEnnemies(loadedLevel);
+            loadedLevel = grp.RespawnEnnemies(loadedLevel);
         }
     }
 }
