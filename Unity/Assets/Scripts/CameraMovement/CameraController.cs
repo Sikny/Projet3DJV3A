@@ -97,7 +97,7 @@ namespace CameraMovement {
             //StoreUnit upgradedUnit = (number == 1) ? _unit.upgrades[0] : _unit.upgrades[1];
 
 
-            if (_isMovingRight)
+            if (_isMovingRight && _shortcutManager.isEnabled)
             {
                 transform.Translate(
                     _invertCameraX
@@ -105,7 +105,7 @@ namespace CameraMovement {
                         : new Vector3(-speed * Time.deltaTime, 0, 0), Space.World);
             }
 
-            if (_isMovingLeft)
+            if (_isMovingLeft && _shortcutManager.isEnabled)
             {
                 transform.Translate(
                     _invertCameraX
@@ -113,7 +113,7 @@ namespace CameraMovement {
                         : new Vector3(speed * Time.deltaTime, 0,0), Space.World);
             }
 
-            if (_isMovingDown)
+            if (_isMovingDown && _shortcutManager.isEnabled)
             {
                 transform.Translate(
                     _invertCameraY
@@ -121,7 +121,7 @@ namespace CameraMovement {
                         : new Vector3(0, 0,speed * Time.deltaTime), Space.World);
             }
 
-            if (_isMovingUp)
+            if (_isMovingUp && _shortcutManager.isEnabled)
             {
                 transform.Translate(
                     _invertCameraY
