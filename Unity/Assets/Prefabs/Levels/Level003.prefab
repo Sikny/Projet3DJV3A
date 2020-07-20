@@ -47,7 +47,9 @@ MonoBehaviour:
   terrainBuilder: {fileID: 3903957490331760120}
   consumablesList:
   - {fileID: 11400000, guid: 45b2d4959514bca41b1bc99a1493fc57, type: 2}
+  - {fileID: 11400000, guid: 477beba9000d77747a7af8786a35f3c7, type: 2}
   - {fileID: 11400000, guid: 32e5c4bdeb00e0d4b83bc8fedea14800, type: 2}
+  - {fileID: 11400000, guid: d77f1ff6476be564fbab8b2281a475cf, type: 2}
   equipmentsList:
   - {fileID: 11400000, guid: 562d4cdd855182b4aaba4df92b254a72, type: 2}
   - {fileID: 11400000, guid: c6c585167ec9aa84ca22053c44395c1b, type: 2}

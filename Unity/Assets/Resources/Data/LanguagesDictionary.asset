@@ -377,14 +377,14 @@ MonoBehaviour:
       value: Potion de vitesse
   - values:
     - key: 0
-      value: Heals target unit.
+      value: Heals target unit for half its health.
     - key: 1
-      value: "Soigne l'unit\xE9 cibl\xE9e."
+      value: "Soigne l'unit\xE9 cibl\xE9e pour la moitier de sa vitalit\xE9."
   - values:
     - key: 0
-      value: Temporarly increases speed of target unit.
+      value: Increases speed of target unit for 10 seconds.
     - key: 1
-      value: "Augmente temporairement la vitesse de l'unit\xE9 cibl\xE9e."
+      value: "Augmente la vitesse de l'unit\xE9 cibl\xE9e pendant 10 secondes."
   - values:
     - key: 0
       value: Iron Shield
@@ -656,3 +656,14 @@ MonoBehaviour:
       value: You have bought piece to your people.
     - key: 1
       value: "Vous avez amenez la paix \xE0 votre peuple."
+  - values:
+    - key: 0
+      value: Drastically Increases speed of target unit for 5 seconds.
+    - key: 1
+      value: "Augmente drastiquement la vitesse de l'unit\xE9 cibl\xE9e pendant 5
+        secondes."
+  - values:
+    - key: 0
+      value: Heals target unit to full health.
+    - key: 1
+      value: "Soigne l'unit\xE9e cibl\xE9e pour toute sa vitalit\xE9."
