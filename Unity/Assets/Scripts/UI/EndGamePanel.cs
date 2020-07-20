@@ -16,7 +16,7 @@ namespace UI {
         public GameObject quitBtn;
         public GameObject finishStoryModePanel;
         public TextMeshProUGUI endMessage;
-        public SystemUnit systemUnit;
+        public SystemUnit systemUnit; 
         public EndGame endGame; // arcade
 
         public int TypeEndGame {

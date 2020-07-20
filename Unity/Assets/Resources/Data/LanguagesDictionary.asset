@@ -648,9 +648,9 @@ MonoBehaviour:
       value: Recommencer
   - values:
     - key: 0
-      value: Congratulation!
+      value: Congratulations!
     - key: 1
-      value: "F\xE9licitation!"
+      value: "F\xE9licitations!"
   - values:
     - key: 0
       value: You have bought piece to your people.
