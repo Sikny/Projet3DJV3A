@@ -480,9 +480,9 @@ MonoBehaviour:
       value: Veuillez choisir un niveau
   - values:
     - key: 0
-      value: No Unit Selected!
+      value: No Unit Selected !
     - key: 1
-      value: "Pas d'unit\xE9 selectionn\xE9e!"
+      value: "Pas d'unit\xE9 selectionn\xE9e !"
   - values:
     - key: 0
       value: At least one unit must be placed first
@@ -490,9 +490,9 @@ MonoBehaviour:
       value: "Au moins une unit\xE9 doit \xEAtre plac\xE9e."
   - values:
     - key: 0
-      value: Not enough gold!
+      value: Not enough gold !
     - key: 1
-      value: Pas assez d'argent!
+      value: Pas assez d'argent !
   - values:
     - key: 0
       value: INVENTORY
@@ -597,7 +597,7 @@ MonoBehaviour:
     - key: 0
       value: 'Used '
     - key: 1
-      value: "Utilis\xE9"
+      value: "Utilis\xE9 "
   - values:
     - key: 0
       value: Please select a level.
