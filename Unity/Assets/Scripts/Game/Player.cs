@@ -11,6 +11,7 @@ namespace Game
         public int arcadeGold;
         public int currentLevel;
         public int currentLevelArcade;
+        public Language.Language currentLanguage;
         public Gamemode gamemode = Gamemode.NONE;
         public int currentScore = 0;
         public string token;
@@ -32,6 +33,7 @@ namespace Game
             arcadeGold = PlayerPrefs.GetInt("arcadeGold", 150);
             currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
             currentLevelArcade = PlayerPrefs.GetInt("CurrentLevelArcade", 0);
+            currentLanguage = (Language.Language) PlayerPrefs.GetInt("CurrentLanguage", (int) Language.Language.English);
             goldStartLevel = gold;
             inventoryBackup = null;
             token = PlayerPrefs.GetString("connection.token", "");
@@ -43,6 +45,7 @@ namespace Game
             PlayerPrefs.SetInt("arcadeGold", arcadeGold);
             PlayerPrefs.SetInt("CurrentLevel", currentLevel);
             PlayerPrefs.SetInt("CurrentLevelArcade", currentLevelArcade);
+            PlayerPrefs.SetInt("CurrentLanguage", (int) currentLanguage);
             PlayerPrefs.SetString("connection.token", token);
             PlayerPrefs.Save();
         }
