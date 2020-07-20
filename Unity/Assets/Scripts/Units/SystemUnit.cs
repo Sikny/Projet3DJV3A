@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Game;
 using Items;
+using Language;
 using Terrain;
 using UI;
 using UnityEngine;
@@ -65,7 +66,7 @@ namespace Units {
             
             foreach (var cell in cursor.cursorCells)
             {
-                if (cell.posY > 0.1f || cell.posY <= -0.1f || !cell.IsOnGround())
+                if (cell.posY > 0.3f || cell.posY <= -0.3f || !cell.IsOnGround())
                     return false;
             }
             return true;
@@ -109,16 +110,16 @@ namespace Units {
                     Mathf.Floor(hit.point.z)+0.5f) ;
 
                 bool isPlaceable = CheckPlaceable();
-                if (isPlaceable)
+                if (isPlaceable && !_uiActivated)
                 {
                     StoreUnit unit = inventory.selectedStoreUnit;
                     SpawnUnit(unit.entityType, playerUnitPrefab, position);
                     inventory.RemoveUnit(unit);
                     inventory.selectedStoreUnit = null;
                 }
-                else if(_uiActivated)
+                else
                 {
-                    Popups.instance.PopupTop("Unit is not placeable here, please try somewhere else", Color.red);
+                    Popups.instance.PopupTop(Traducer.Translate("Unit is not placeable here, please try somewhere else"), Color.red);
                 }
 
             }

@@ -49,12 +49,26 @@ namespace Sounds
             //s.source.pitch = s.pitch * (1f + UnityEngine.Random.Range(-s.pitchVariance / 2f, s.pitchVariance / 2f));
         }
 
-        public void StopPlayingAllSounds()
+        public void StopPlayingAllAudioSources()
         {
             foreach (var s in sounds)
             {
                 s.source.Stop();
             }
+        }
+
+        public void StopPlayingAllSounds()
+        {
+            foreach (var s in sounds)
+            {
+                if (!s.loop)
+                    StopPlayingSource(s);
+            }
+        }
+
+        public void StopPlayingSource(Sound s)
+        {
+            s.source.Stop();
         }
 
         public void UpdateVolume() {

@@ -1,5 +1,6 @@
 ﻿using Game;
 using Items;
+using Language;
 using TMPro;
 using UI;
 using Units;
@@ -78,13 +79,13 @@ public class UpgradeManager : MonoBehaviour
         _currentCost = storeUnit.upgradeCost;
         UpdateCost(_currentCost);
         _unit = storeUnit;
-        unitName.SetText(storeUnit.name);
+        unitName.SetText(Traducer.Translate(storeUnit.name));
         unitImage.sprite = storeUnit.icon;
 
-        unitUpgrade1Name.SetText(storeUnit.upgrades[0].name);
+        unitUpgrade1Name.SetText(Traducer.Translate(storeUnit.upgrades[0].name));
         unitUpgrade1Image.sprite = storeUnit.upgrades[0].icon;
         
-        unitUpgrade2Name.SetText(storeUnit.upgrades[1].name);
+        unitUpgrade2Name.SetText(Traducer.Translate(storeUnit.upgrades[1].name));
         unitUpgrade2Image.sprite = storeUnit.upgrades[1].icon;
         
         ToggleUpgradePannel();
@@ -107,14 +108,17 @@ public class UpgradeManager : MonoBehaviour
             else
                 player.arcadeGold -= _currentCost;
             StoreUnit upgradedUnit = (number == 1) ? _unit.upgrades[0] : _unit.upgrades[1];
-            Popups.instance.Popup("Upgraded " + _unit.name + " to " + upgradedUnit.name);
+            Popups.instance.Popup(Traducer.Translate("Upgraded ") + Traducer.Translate(_unit.name) + Traducer.Translate(" to ") + Traducer.Translate(
+                                      upgradedUnit.name));
             _inventory.RemoveUnit(_unit);
             _inventory.AddItem(upgradedUnit);
             ToggleUpgradePannel();
+            GameSingleton.Instance.uiManager.descriptionBox.SetActive(false);
         }
         else
         {
-            Popups.instance.Popup("Not enough gold!", Color.red);
+            Popups.instance.Popup(Traducer.Translate("Not enough gold!"), Color.red);
+            GameSingleton.Instance.uiManager.descriptionBox.SetActive(false);
             ToggleUpgradePannel();
         }
 

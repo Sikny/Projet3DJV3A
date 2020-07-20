@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game;
 using Items;
+using Language;
 using Sounds;
 using UI;
 using Units;
@@ -44,8 +46,6 @@ namespace Utility {
                     else
                     {
                         player.storyModeInventory.Clear();
-                        //player.storyModeInventory = player.inventoryStartLevel; //TODO PUT BACK IF BREAKS
-                        //player.gold = player.goldStartLevel;
                         
                     }
                     UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
@@ -65,7 +65,7 @@ namespace Utility {
                     string token = player.token;
 
                     if (string.IsNullOrEmpty(token) || token.Length < 8) {
-                        Popups.instance.Popup("Not connected!", Color.red);
+                        Popups.instance.Popup(Traducer.Translate("Not connected!"), Color.red);
                     }
                     else {
                         GameSingleton.Instance.tokenManager.CheckToken(token, "scene.load.freeMode");

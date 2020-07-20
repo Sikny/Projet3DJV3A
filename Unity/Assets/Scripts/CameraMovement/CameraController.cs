@@ -1,6 +1,8 @@
 ﻿using System.Collections;
+using Units;
 using UnityEngine;
 using Utility;
+using ShortcutManager = Game.ShortcutManager;
 
 namespace CameraMovement {
     /**
@@ -25,13 +27,14 @@ namespace CameraMovement {
         private bool _invertCameraY;
 
         public bool isZooming;
-        private Transform _target;
+        private Entity _target;
+        private ShortcutManager _shortcutManager;
 
         private void Start()
         {
             _invertCameraX = GameSingleton.Instance.gameSettings.invertCameraX;
             _invertCameraY = GameSingleton.Instance.gameSettings.invertCameraY;
-
+            _shortcutManager = GameSingleton.Instance.shortcutManager;
             _currentYaw = maxZoom / 2f;
             GameSingleton.Instance.cameraController = this;
         }
@@ -75,15 +78,21 @@ namespace CameraMovement {
         {
             if (isZooming)
             {
-                mainCamera.transform.LookAt(_target); 
+                if (_target != null)
+                {
+                    mainCamera.transform.LookAt(_target.transform.position); 
+                }
                 _currentYaw -= zoomSpeed * speed * Time.deltaTime/5;
                 _currentYaw = Mathf.Clamp(_currentYaw, minZoom, maxZoom);
             }
             else if (!isZooming)
             {
+                if (_shortcutManager.isEnabled)
+                {
+                    _currentYaw -= Input.mouseScrollDelta.y * (zoomSpeed * speed * Time.deltaTime);// Input.GetAxis("Mouse ScrollWheel") * speed * Time.deltaTime;
+                    _currentYaw = Mathf.Clamp(_currentYaw, minZoom, maxZoom);
+                }
                 
-                _currentYaw -= Input.mouseScrollDelta.y * (zoomSpeed * speed * Time.deltaTime);// Input.GetAxis("Mouse ScrollWheel") * speed * Time.deltaTime;
-                _currentYaw = Mathf.Clamp(_currentYaw, minZoom, maxZoom);
             }
             //StoreUnit upgradedUnit = (number == 1) ? _unit.upgrades[0] : _unit.upgrades[1];
 
@@ -123,7 +132,7 @@ namespace CameraMovement {
 
         }
 
-        public void PlayCinematic(Transform target)
+        public void PlayCinematic(Entity target)
         {
             _target = target;
             GameSingleton.Instance.soundManager.Play("Cinematic");

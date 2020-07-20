@@ -1,4 +1,6 @@
-﻿using Units;
+﻿using Language;
+using UI;
+using Units;
 using UnityEngine;
 
 /*
@@ -24,6 +26,10 @@ namespace Items.Consumables {
                         UnitLibData.selectedUnit.GetEntity(i).ResetLife();
                 }
                 base.Use();
+            }
+            else
+            {
+                Popups.instance.PopupTop(Traducer.Translate("Select a unit first."), Color.red);
             }
 
         }

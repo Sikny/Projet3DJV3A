@@ -452,7 +452,7 @@ MonoBehaviour:
       value: Pinceau
   - values:
     - key: 0
-      value: Brush
+      value: Difficulty Brush
     - key: 1
       value: "Pinceau de difficult\xE9"
   - values:
@@ -531,3 +531,118 @@ MonoBehaviour:
     - key: 1
       value: "Sauvegarde \xE0 \xE9t\xE9 remis \xE0 zero! Red\xE9marrez le jeu pour
         prendre effet."
+  - values:
+    - key: 0
+      value: Enter name of map...
+    - key: 1
+      value: Entrez le nom de map...
+  - values:
+    - key: 0
+      value: Level editor
+    - key: 1
+      value: Editeur de niveau
+  - values:
+    - key: 0
+      value: 'Name :'
+    - key: 1
+      value: 'Nom : '
+  - values:
+    - key: 0
+      value: 'Size :'
+    - key: 1
+      value: 'Taille : '
+  - values:
+    - key: 0
+      value: 'Money :'
+    - key: 1
+      value: 'Argent : '
+  - values:
+    - key: 0
+      value: Reset Save
+    - key: 1
+      value: Reinitializer la Sauvegarde
+  - values:
+    - key: 0
+      value: Map saved!
+    - key: 1
+      value: Map sauvegarder!
+  - values:
+    - key: 0
+      value: Select settings first!
+    - key: 1
+      value: "Choisissez d'abord des param\xE8tres!"
+  - values:
+    - key: 0
+      value: Next
+    - key: 1
+      value: Suivant
+  - values:
+    - key: 0
+      value: 'Upgraded '
+    - key: 1
+      value: "Am\xE9lior\xE9"
+  - values:
+    - key: 0
+      value: ' to '
+    - key: 1
+      value: " \xE0 "
+  - values:
+    - key: 0
+      value: 'using '
+    - key: 1
+      value: 'utilise '
+  - values:
+    - key: 0
+      value: Select a unit first.
+    - key: 1
+      value: "Selectionnez d'abord une unit\xE9."
+  - values:
+    - key: 0
+      value: 'Bought '
+    - key: 1
+      value: "Achet\xE9"
+  - values:
+    - key: 0
+      value: 'Used '
+    - key: 1
+      value: 'Utilise '
+  - values:
+    - key: 0
+      value: Please select a level.
+    - key: 1
+      value: Veuillez choisir un niveau.
+  - values:
+    - key: 0
+      value: At least one unit must be placed first
+    - key: 1
+      value: "Au moins une unit\xE9 doit \xEAtre plac\xE9."
+  - values:
+    - key: 0
+      value: Wrong identifications
+    - key: 1
+      value: Mauvais identifians!
+  - values:
+    - key: 0
+      value: Mail is already used!
+    - key: 1
+      value: "Mail d\xE9j\xE0 utilis\xE9!"
+  - values:
+    - key: 0
+      value: Level name required.
+    - key: 1
+      value: Nom de niveau requis.
+  - values:
+    - key: 0
+      value: You won !
+    - key: 1
+      value: Victoire!
+  - values:
+    - key: 0
+      value: Retry
+    - key: 1
+      value: Ressayer
+  - values:
+    - key: 0
+      value: Restart
+    - key: 1
+      value: Recommencer

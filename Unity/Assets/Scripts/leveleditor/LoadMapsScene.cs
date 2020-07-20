@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using Language;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -58,7 +59,7 @@ namespace LevelEditor {
             }
             else
             {
-                Popups.instance.Popup("Please select a level.", Color.red);
+                Popups.instance.Popup(Traducer.Translate("Please select a level."), Color.red);
             }
 
         }

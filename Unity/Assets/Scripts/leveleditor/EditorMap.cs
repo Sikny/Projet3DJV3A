@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Language;
 using LevelEditor;
 using TMPro;
 using UI;
@@ -30,6 +31,7 @@ namespace LevelEditor {
             DIFFICULTY_PAINTING
         }
 
+        
         private Map map;
         private int radiusTool = 20;
         private int amplitudeTool = 10;
@@ -42,6 +44,7 @@ namespace LevelEditor {
     
         public string Money { get; set; }
 
+        
         public void setRadiusTool()
         {
             Slider slider = UIToolRadius.GetComponent<Slider>();
@@ -71,6 +74,7 @@ namespace LevelEditor {
             switch (dropdown.value)
             {
                 case 0:
+                    
                     currentTool = ToolsEnum.MAP_BRUSH;
                     mapObject.GetComponent<MeshRenderer>().material = materialMatchingToToolMode[0];
                     break;
@@ -120,11 +124,11 @@ namespace LevelEditor {
             if (map != null)
             {
                 map.Save();
-                Popups.instance.Popup("Map was saved!");
+                Popups.instance.Popup(Traducer.Translate("Map saved!"));
             }
             else
             {
-                Popups.instance.Popup("Select settings first!", Color.red);
+                Popups.instance.Popup(Traducer.Translate("Select settings first!"), Color.red);
             }
 
         }
@@ -133,6 +137,9 @@ namespace LevelEditor {
         {
             Size = "50";
             Money = "200";
+            Dropdown dropdown = UIToolSelect.GetComponent<Dropdown>();
+            dropdown.options[0].text = Traducer.Translate("Brush");
+            dropdown.options[1].text = Traducer.Translate("Difficulty Brush");
         }
 
         // Update is called once per frame

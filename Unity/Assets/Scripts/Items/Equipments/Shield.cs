@@ -1,4 +1,5 @@
-﻿using UI;
+﻿using Language;
+using UI;
 using Units;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace Items.Equipments {
          }
          else
          {
-            Popups.instance.Popup("No Unit Selected!", Color.red);
+            Popups.instance.Popup(Traducer.Translate("No Unit Selected!"), Color.red);
          }//TODO gérer un message d'erreur
       }
    }

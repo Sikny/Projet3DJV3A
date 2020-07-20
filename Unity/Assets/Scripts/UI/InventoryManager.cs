@@ -54,14 +54,15 @@ namespace UI {
                 }
             }
                    
-            Debug.Log("setting start gold to : " + player.gold);
+            /*Debug.Log("setting start gold to : " + player.gold);
             Debug.Log("setting inventory to : ");
             foreach (var unit in player.storyModeInventory.units)
             {
                 Debug.Log(unit.itemName);
-            }
+            }*/
             player.goldStartLevel = player.gold;
-            player.inventoryStartLevel = player.storyModeInventory; 
+            player.BackupInventory(player.storyModeInventory);
+            //player.inventoryStartLevel = player.storyModeInventory;
             UpdateGold();
         }
 

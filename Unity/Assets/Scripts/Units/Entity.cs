@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using Units.Pathfinding;
 using UnityEngine;
-using Utility;
 
 namespace Units {
     public class Entity : MonoBehaviour {
@@ -48,8 +47,9 @@ namespace Units {
         }
 
         public int Attack(Entity target, int deltaValue, int efficiencyType) {
-            transform.LookAt(new Vector3(target.transform.position.x, transform.position.y, 
-                target.transform.position.z));
+            Vector3 targetPos = target.transform.position; 
+            transform.LookAt(new Vector3(targetPos.x, transform.position.y, 
+                targetPos.z));
             transform.Rotate(0, -90f, 0);    // entity Z axis is not on world Z axis
             if (weaponAnimator != null)
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using Language;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -45,7 +46,7 @@ namespace UI {
                     GameObject password = connectionPanel.transform.Find("PasswordInput").gameObject;
                     InputField passwordIn = password.GetComponent<InputField>();
                     passwordIn.text = "";
-                    Popups.instance.Popup("Wrong identifications!", Color.red);
+                    Popups.instance.Popup(Traducer.Translate("Wrong identifications!"), Color.red);
                 }
                 else
                 {

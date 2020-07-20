@@ -53,18 +53,18 @@ namespace Items {
                 boughtSlot.itemName.SetText(itemName.text);
                 _inventory.AddItem(boughtSlot.item);
                 GameSingleton.Instance.soundManager.Play("Buy");
-                _popup.Popup("Bought " + item.name + "!");
+                _popup.Popup(Traducer.Translate("Bought ") + Traducer.Translate(item.name) + "!");
             }
             else
             {
-                _popup.Popup("Not enough gold!", Color.red);
+                _popup.Popup(Traducer.Translate("Not enough gold!"), Color.red);
             }
         }
 
         public void UseItem() {
             item.Use();
             
-            _popup.Popup(Traducer.Translate("Used") + Traducer.Translate(item.name) + "!");
+            _popup.Popup(Traducer.Translate("Used ") + Traducer.Translate(item.name) + "!");
         }
 
         public void UpgradeUnit()
