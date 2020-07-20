@@ -224,7 +224,7 @@ MonoBehaviour:
     - key: 0
       value: Spearmen can attack from further and deal more damage.
     - key: 1
-      value: "Les lanciers peuvent attaquer de plus loins et effectuent plus de d\xE9g\xE2ts."
+      value: "Les lanciers peuvent attaquer de plus loin et effectuent plus de d\xE9g\xE2ts."
   - values:
     - key: 0
       value: Knights have a lot of defense and health.
@@ -329,7 +329,7 @@ MonoBehaviour:
     - key: 0
       value: Sniper
     - key: 1
-      value: Snipeur
+      value: Sniper
   - values:
     - key: 0
       value: Base Archer unit. Effective against mages.
@@ -379,17 +379,12 @@ MonoBehaviour:
     - key: 0
       value: Heals target unit for half its health.
     - key: 1
-      value: "Soigne l'unit\xE9 cibl\xE9e pour la moitier de sa vitalit\xE9."
+      value: "Soigne l'unit\xE9 cibl\xE9e pour la moiti\xE9 de sa vitalit\xE9."
   - values:
     - key: 0
       value: Increases speed of target unit for 10 seconds.
     - key: 1
       value: "Augmente la vitesse de l'unit\xE9 cibl\xE9e pendant 10 secondes."
-  - values:
-    - key: 0
-      value: Iron Shield
-    - key: 1
-      value: Casque de fer
   - values:
     - key: 0
       value: +10 defense
@@ -419,7 +414,7 @@ MonoBehaviour:
     - key: 0
       value: Main Menu
     - key: 1
-      value: Menu Principale
+      value: Menu Principal
   - values:
     - key: 0
       value: Quit
@@ -494,7 +489,7 @@ MonoBehaviour:
     - key: 0
       value: At least one unit must be placed first
     - key: 1
-      value: "Au moins une unit\xE9 doit \xEAtre plac\xE9."
+      value: "Au moins une unit\xE9 doit \xEAtre plac\xE9e."
   - values:
     - key: 0
       value: Not enough gold!
@@ -524,13 +519,12 @@ MonoBehaviour:
     - key: 0
       value: Unit is not placeable here, please try somewhere else
     - key: 1
-      value: "Impossible de placer l'unit\xE9 ici. Essayez ailleur."
+      value: "Impossible de placer l'unit\xE9 ici. Essayez ailleurs."
   - values:
     - key: 0
       value: Save has been reset! Restart game to take effect.
     - key: 1
-      value: "Sauvegarde \xE0 \xE9t\xE9 remis \xE0 zero! Red\xE9marrez le jeu pour
-        prendre effet."
+      value: "Sauvegarde r\xE9initialis\xE9e! Red\xE9marrez le jeu pour prendre effet."
   - values:
     - key: 0
       value: Enter name of map...
@@ -565,7 +559,7 @@ MonoBehaviour:
     - key: 0
       value: Map saved!
     - key: 1
-      value: Map sauvegarder!
+      value: "Map sauvegard\xE9e!"
   - values:
     - key: 0
       value: Select settings first!
@@ -605,7 +599,7 @@ MonoBehaviour:
     - key: 0
       value: 'Used '
     - key: 1
-      value: 'Utilise '
+      value: "Utilis\xE9"
   - values:
     - key: 0
       value: Please select a level.
@@ -615,7 +609,7 @@ MonoBehaviour:
     - key: 0
       value: At least one unit must be placed first
     - key: 1
-      value: "Au moins une unit\xE9 doit \xEAtre plac\xE9."
+      value: "Au moins une unit\xE9 doit \xEAtre plac\xE9e."
   - values:
     - key: 0
       value: Wrong identifications
@@ -655,7 +649,7 @@ MonoBehaviour:
     - key: 0
       value: You have bought piece to your people.
     - key: 1
-      value: "Vous avez amenez la paix \xE0 votre peuple."
+      value: "Vous avez amen\xE9 la paix \xE0 votre peuple."
   - values:
     - key: 0
       value: Drastically Increases speed of target unit for 5 seconds.
