@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12436625, g: 0.4327459, b: 0.8330084, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -231,6 +231,21 @@ PrefabInstance:
     - target: {fileID: 52626981739493153, guid: 828f59646a6dabd43b01c6ff4f269977,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1415078842026712282, guid: 828f59646a6dabd43b01c6ff4f269977,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747179453702169005, guid: 828f59646a6dabd43b01c6ff4f269977,
+        type: 3}
+      propertyPath: m_text
+      value: You have bought piece to your people.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483780435706908169, guid: 828f59646a6dabd43b01c6ff4f269977,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

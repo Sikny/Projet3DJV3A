@@ -12,7 +12,7 @@ public class Catapultist : Archer
     {
         MultiplierScore = 4f;
         basisAttack *= 8;
-        tickAttack /= 2;
+        tickAttack /= 8;
     }
     
 }

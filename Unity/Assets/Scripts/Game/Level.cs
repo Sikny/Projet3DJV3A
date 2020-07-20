@@ -11,7 +11,8 @@ using Units.PathFinding;
 using UnityEngine;
 using Utility;
 using Utility.PoolManager;
-using Random = UnityEngine.Random;
+using Random = System.Random;
+using rand = UnityEngine.Random;
 
 namespace Game {
     [Serializable]
@@ -97,15 +98,22 @@ namespace Game {
 
         private void LoadEnnemiesRule()
         {
+            Random rando = new Random();
+
             foreach (var spawn in rule.localSpawnDifficulty)
             {
-                if (Random.Range(0, 4 * 128) <= spawn.Value * 128 && (int)spawn.Key.X%3==0 && (int)spawn.Key.Z%3==0 )
+                if (rand.Range(0, 4 * 128) <= spawn.Value * 128 && (int)spawn.Key.X%3==0 && (int)spawn.Key.Z%3==0 )
                 {
                     EnemySpawn es = new EnemySpawn();
                     
                     es.position = new Vector2(spawn.Key.X-rule.size/2f, spawn.Key.Z-rule.size/2f);
                     //es.spawnTime = counter == 0 ? 0 : Random.Range(0, 60);
-                    es.entityType = GenRandomParam.softEntityType(new System.Random(), es.entityType, 0.25f);
+                    
+                    Array values = Enum.GetValues(typeof(EntityType));
+                    es.entityType = (EntityType)values.GetValue(rando.Next(values.Length));
+                    
+                    
+                    es.entityType = GenRandomParam.softEntityType(rando, es.entityType, 0.25f);
                     enemySpawns.Add(es);
                 }
             }

@@ -414,7 +414,7 @@ MonoBehaviour:
     - key: 0
       value: Resume
     - key: 1
-      value: "R\xE9sumer"
+      value: Reprendre
   - values:
     - key: 0
       value: Main Menu
@@ -560,7 +560,7 @@ MonoBehaviour:
     - key: 0
       value: Reset Save
     - key: 1
-      value: Reinitializer la Sauvegarde
+      value: Reinitialiser la Sauvegarde
   - values:
     - key: 0
       value: Map saved!
@@ -646,3 +646,13 @@ MonoBehaviour:
       value: Restart
     - key: 1
       value: Recommencer
+  - values:
+    - key: 0
+      value: Congratulation!
+    - key: 1
+      value: "F\xE9licitation!"
+  - values:
+    - key: 0
+      value: You have bought piece to your people.
+    - key: 1
+      value: "Vous avez amenez la paix \xE0 votre peuple."

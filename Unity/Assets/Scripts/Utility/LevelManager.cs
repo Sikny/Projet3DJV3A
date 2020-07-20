@@ -69,13 +69,12 @@ namespace Utility {
                 LoadLevel(r);
             }
             else {
-                if (player.gold < 50)
-                    player.gold = 50;
+
                 Shop.Instance.ClearShop();
                 GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
                 ShopManager.instance.UpdateGold();
                 player.currentLevel =
-                    (player.currentLevel + 1) % levelList.LevelCount;
+                    (player.currentLevel + 1);// % levelList.LevelCount;
             }
         }
 

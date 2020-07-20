@@ -39,6 +39,7 @@ namespace Units.Controllers.Mage {
             if (!isRemoted && target == null) return false;
 
             int ind = 0;
+            
             if (!isRemoted) {
                 Entity entityTarget = GetFirstLivingEntity();
                 if (entityTarget == null) return false;
