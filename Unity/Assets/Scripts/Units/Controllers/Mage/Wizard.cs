@@ -66,6 +66,7 @@ namespace Units.Controllers.Mage {
             }
 
             Vector3 bodyPos = body.GetPosition();
+            if (target == null) return isOnDest;
             Vector3 targetPos = target.GetPosition();
             float dist = Vector3.Distance(bodyPos, targetPos);
             if (dist >= OptimalDistance + 2f) {

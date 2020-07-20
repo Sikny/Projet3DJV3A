@@ -11,7 +11,7 @@ namespace Game
         public int arcadeGold;
         public int currentLevel;
         public int currentLevelArcade;
-        public Gamemode gamemode = Gamemode.LEVEL;
+        public Gamemode gamemode = Gamemode.NONE;
         public int currentScore = 0;
         public string token;
         public int goldStartLevel;
@@ -55,13 +55,9 @@ namespace Game
             inventoryBackup.units = new List<StoreUnit>(inventory.units);
         }
 
-        public Inventory GetInventoryBackup()
-        {
-            return inventoryBackup;
-        }
-
         public enum Gamemode
         {
+            NONE,
             LEVEL,
             ARCADE,
             PERSONNALIZED

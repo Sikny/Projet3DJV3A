@@ -45,12 +45,20 @@ namespace Utility {
                     }
                     else
                     {
-                        player.storyModeInventory.Clear();
+                        player.storyModeInventory = player.inventoryBackup;
+                        player.gold = player.goldStartLevel;
+                        //player.storyModeInventory.Clear();
                         
                     }
+
+                    player.gamemode = Player.Gamemode.NONE;
                     UnitySceneManager.LoadScene(_storedScenesIds[sceneName]);
                     break;
                 case "StoryMode":
+                    if (player.gamemode == Player.Gamemode.LEVEL) {    // button restart
+                        player.storyModeInventory = player.inventoryBackup;
+                        player.gold = player.goldStartLevel;
+                    }
                     Shop.Instance.ClearShop();
                    
                     player.gamemode = Player.Gamemode.LEVEL;

@@ -79,7 +79,7 @@ namespace UI {
                         Player player = GameSingleton.Instance.GetPlayer();
                         if (player.gamemode == Player.Gamemode.LEVEL)
                         {
-                            player.storyModeInventory = player.GetInventoryBackup();
+                            player.storyModeInventory = player.inventoryBackup;
                             player.gold = player.goldStartLevel;
                         }
 
@@ -104,7 +104,7 @@ namespace UI {
 
                     if (playerGamemode == Player.Gamemode.LEVEL) {
                         player.gold = player.goldStartLevel;
-                        player.storyModeInventory = player.GetInventoryBackup();
+                        player.storyModeInventory = player.inventoryBackup;
                     }
                     else if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE) {
                         Shop.Instance.ClearShop();
