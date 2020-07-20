@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 637722ed7f7c421eb6eaec3fa1c582eb, type: 3}
-  m_Name: SpeedPotion
+  m_Script: {fileID: 11500000, guid: 1b1e163f9cd1e354fba83c543baf14d6, type: 3}
+  m_Name: MagicHealPotion
   m_EditorClassIdentifier: 
-  itemName: Speed potion
-  icon: {fileID: 21300000, guid: b9b8eb1532f33a942b47740d6a07e547, type: 3}
-  price: 10
-  description: Increases speed of target unit for 10 seconds.
+  itemName: Magic Health Potion
+  icon: {fileID: 21300000, guid: 6999056a701cdfd44a16211baa0017c0, type: 3}
+  price: 25
+  description: Heals target unit to full health.

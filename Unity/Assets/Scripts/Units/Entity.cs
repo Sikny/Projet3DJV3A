@@ -31,6 +31,10 @@ namespace Units {
             _life = 100;
         }
 
+        public void SetLife(int life)
+        {
+            _life = life;
+        }
         public int GetLife()
         {
             return _life;

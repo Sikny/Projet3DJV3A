@@ -11,8 +11,8 @@ using UnityEngine;
  * pour crée un nouveau à partir de sa clique droit dans l'asset --> scriptable objec --> le nom que t'as mis dans menuName
  */
 namespace Items.Consumables {
-    [CreateAssetMenu(fileName = "SpeedPotion", menuName = "ScriptableObject/Consumables/SpeedPotion")] 
-    public class SpeedPotion : Consumable  //hérite de consommable ou équipement dépendant du type 
+    [CreateAssetMenu(fileName = "SprintPotion", menuName = "ScriptableObject/Consumables/SprintPotion")] 
+    public class SprintPotion : Consumable  //hérite de consommable ou équipement dépendant du type 
     {
 
         //par défaut a un nom, prix, sprite, tu peux ajouter d'autre type en faisant des variables public comme healAmount ici 
@@ -20,7 +20,7 @@ namespace Items.Consumables {
         {
             if (UnitLibData.selectedUnit != null)
             {
-                UnitLibData.selectedUnit.AddEffect(0, 3, 10f);
+                UnitLibData.selectedUnit.AddEffect(0, 4, 5f);
 
                 base.Use();
             }
