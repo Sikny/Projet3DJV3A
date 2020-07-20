@@ -62,7 +62,7 @@ namespace UI {
                             GameSingleton.Instance.levelManager.NextLevel();
                         }
                         Player plr = GameSingleton.Instance.GetPlayer();
-                        if (plr.currentLevel >= GameSingleton.Instance.levelManager.levelList.LevelCount)
+                        if (plr.currentLevel >= GameSingleton.Instance.levelManager.levelList.LevelCount && plr.gamemode == Player.Gamemode.LEVEL)
                         {
                             winMessage.gameObject.SetActive(false);
                             loseMessage.gameObject.SetActive(false);
