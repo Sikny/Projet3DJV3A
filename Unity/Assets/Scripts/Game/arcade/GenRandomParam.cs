@@ -27,7 +27,7 @@ namespace Game.arcade {
             options.seed = seed;
             options.mountainCount = rand.Next(2, 15);
             options.waterCount = rand.Next(1, 5);
-            options.maxWaterSize = rand.Next(10, 50);
+            options.maxWaterSize = rand.Next(10, 40);
 
             levelNew.enemySpawns.Clear();
             
