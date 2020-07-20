@@ -78,6 +78,7 @@ namespace Utility {
                     else {
                         GameSingleton.Instance.tokenManager.CheckToken(token, "scene.load.freeMode");
                         Shop.Instance.ClearShop();
+                        
                         player.currentLevelArcade = 0;
                         player.arcadeModeInventory.Clear();
                         player.arcadeGold = 150;
