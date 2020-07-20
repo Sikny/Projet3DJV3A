@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Game.arcade;
 using Items;
 using LevelEditor.Rule;
 using Terrain;
@@ -96,6 +97,7 @@ namespace Game {
             GameSingleton.Instance.ResumeGame();
         }
 
+        // CUSTOM LEVELS
         private void LoadEnnemiesRule()
         {
             Random rando = new Random();
@@ -113,7 +115,7 @@ namespace Game {
                     es.entityType = (EntityType)values.GetValue(rando.Next(values.Length));
                     
                     
-                    es.entityType = GenRandomParam.softEntityType(rando, es.entityType, 0.25f);
+                    es.entityType = GenRandomParam.SoftEntityType(rando, es.entityType, 0.25f);
                     enemySpawns.Add(es);
                 }
             }
