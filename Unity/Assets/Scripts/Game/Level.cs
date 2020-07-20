@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Game.arcade;
 using Items;
 using LevelEditor.Rule;
 using Terrain;
@@ -11,7 +12,8 @@ using Units.PathFinding;
 using UnityEngine;
 using Utility;
 using Utility.PoolManager;
-using Random = UnityEngine.Random;
+using Random = System.Random;
+using rand = UnityEngine.Random;
 
 namespace Game {
     [Serializable]
@@ -54,7 +56,7 @@ namespace Game {
         public void Init() {
             _systemUnit = FindObjectOfType<SystemUnit>();
 
-            Player player = GameSingleton.Instance.GetPlayer();
+            //Player player = GameSingleton.Instance.GetPlayer();
             GameSingleton.Instance.aStarHandler = transform.GetComponentInChildren<AStarHandler>();
 
             StartCoroutine(terrainBuilder.Init(InitAStar, rule));
@@ -95,17 +97,25 @@ namespace Game {
             GameSingleton.Instance.ResumeGame();
         }
 
+        // CUSTOM LEVELS
         private void LoadEnnemiesRule()
         {
+            Random rando = new Random();
+
             foreach (var spawn in rule.localSpawnDifficulty)
             {
-                if (Random.Range(0, 4 * 128) <= spawn.Value * 128 && (int)spawn.Key.X%3==0 && (int)spawn.Key.Z%3==0 )
+                if (rand.Range(0, 4 * 128) <= spawn.Value * 128 && (int)spawn.Key.X%3==0 && (int)spawn.Key.Z%3==0 )
                 {
                     EnemySpawn es = new EnemySpawn();
                     
                     es.position = new Vector2(spawn.Key.X-rule.size/2f, spawn.Key.Z-rule.size/2f);
                     //es.spawnTime = counter == 0 ? 0 : Random.Range(0, 60);
-                    es.entityType = GenRandomParam.softEntityType(new System.Random(), es.entityType, 0.25f);
+                    
+                    Array values = Enum.GetValues(typeof(EntityType));
+                    es.entityType = (EntityType)values.GetValue(rando.Next(values.Length));
+                    
+                    
+                    es.entityType = GenRandomParam.SoftEntityType(rando, es.entityType, 0.25f);
                     enemySpawns.Add(es);
                 }
             }
@@ -228,6 +238,7 @@ namespace Game {
                 var offset = Vector3.right * (TerrainGrid.Width / 2f) +
                              Vector3.forward * (TerrainGrid.Height / 2f);
                 Vector3 position = new Vector3(current.position.x, SystemUnit.YPos, current.position.y) + offset;
+                
                 // enemy spawn (can be delayed)
                 if (current.spawnTime > 0) {
                     // todo update delayed calls when finished
@@ -236,8 +247,9 @@ namespace Game {
                             Spawner spawner = (Spawner) PoolManager.Instance().GetPoolableObject(typeof(Spawner));
                             spawner.transform.position = position;
                             spawner.Init(current.entityType);
-
+                            
                             _spawningEnemies.Add(DOVirtual.DelayedCall(Spawner.timeToSpawn, () => {
+                                spawner.DeInit();
                                 newUnit = _systemUnit.SpawnUnit(current.entityType, _systemUnit.aiUnitPrefab,
                                     position);
                                 livingEnemies.Add(newUnit);

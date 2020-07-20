@@ -14,7 +14,9 @@ namespace UI {
         public GameObject retryBtn;
         public GameObject nextBtn;
         public GameObject quitBtn;
-        public SystemUnit systemUnit;
+        public GameObject finishStoryModePanel;
+        public TextMeshProUGUI endMessage;
+        public SystemUnit systemUnit; 
         public EndGame endGame; // arcade
 
         public int TypeEndGame {
@@ -55,18 +57,37 @@ namespace UI {
                     case 1: // Win
                         GameSingleton.Instance.soundManager.StopPlayingAllSounds();
                         GameSingleton.Instance.soundManager.Play("Victory");
-                        winMessage.gameObject.SetActive(true);
-                        loseMessage.gameObject.SetActive(false);
-                        retryBtn.SetActive(false);
-                        quitBtn.SetActive(true);
-                        nextBtn.SetActive(true);
-
-           
-
                         if (GameSingleton.Instance.levelManager != null) {
                             UnitRecovery();
                             GameSingleton.Instance.levelManager.NextLevel();
                         }
+                        Player plr = GameSingleton.Instance.GetPlayer();
+                        if (plr.currentLevel >= GameSingleton.Instance.levelManager.levelList.LevelCount && plr.gamemode == Player.Gamemode.LEVEL)
+                        {
+                            winMessage.gameObject.SetActive(false);
+                            loseMessage.gameObject.SetActive(false);
+                            quitBtn.SetActive(true);
+                            nextBtn.SetActive(false);
+                            finishStoryModePanel.SetActive(true);
+                            plr.currentLevel = 0;
+                            plr.gold = 20;
+                            plr.storyModeInventory.Clear();
+                            plr.inventoryBackup.Clear();
+                            plr.goldStartLevel = 0;
+                        }
+                        else
+                        {
+                            winMessage.gameObject.SetActive(true);
+                            loseMessage.gameObject.SetActive(false);
+                            retryBtn.SetActive(false);
+                            quitBtn.SetActive(true);
+                            nextBtn.SetActive(true);
+                        }
+                       
+
+           
+
+                      
 
                         break;
                     case 2: //Retry
@@ -79,7 +100,7 @@ namespace UI {
                         Player player = GameSingleton.Instance.GetPlayer();
                         if (player.gamemode == Player.Gamemode.LEVEL)
                         {
-                            player.storyModeInventory = player.GetInventoryBackup();
+                            player.storyModeInventory = player.inventoryBackup;
                             player.gold = player.goldStartLevel;
                         }
 
@@ -103,8 +124,9 @@ namespace UI {
 
 
                     if (playerGamemode == Player.Gamemode.LEVEL) {
+                       
                         player.gold = player.goldStartLevel;
-                        player.storyModeInventory = player.GetInventoryBackup();
+                        player.storyModeInventory = player.inventoryBackup;
                     }
                     else if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE) {
                         Shop.Instance.ClearShop();

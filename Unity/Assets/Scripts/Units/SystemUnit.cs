@@ -85,7 +85,7 @@ namespace Units {
             {
                 if ( _uiManager.upgradePanel.activeSelf ||_uiManager.pausePanel.activeSelf ||
                     GameSingleton.Instance.endGamePanel.winMessage.IsActive() ||
-                    GameSingleton.Instance.endGamePanel.loseMessage.IsActive() || GameSingleton.Instance.cameraController.isZooming) 
+                    GameSingleton.Instance.endGamePanel.loseMessage.IsActive() || GameSingleton.Instance.endGamePanel.endMessage.IsActive()||GameSingleton.Instance.cameraController.isZooming) 
                     _uiActivated = true;
                 else
                     _uiActivated = false;

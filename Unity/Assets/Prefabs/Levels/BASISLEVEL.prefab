@@ -45,10 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainBuilder: {fileID: 5922126048193946748}
-  terrainOptions: {fileID: 5922126048193946749}
   consumablesList:
   - {fileID: 11400000, guid: 45b2d4959514bca41b1bc99a1493fc57, type: 2}
+  - {fileID: 11400000, guid: 477beba9000d77747a7af8786a35f3c7, type: 2}
   - {fileID: 11400000, guid: 32e5c4bdeb00e0d4b83bc8fedea14800, type: 2}
+  - {fileID: 11400000, guid: d77f1ff6476be564fbab8b2281a475cf, type: 2}
   equipmentsList:
   - {fileID: 11400000, guid: 562d4cdd855182b4aaba4df92b254a72, type: 2}
   - {fileID: 11400000, guid: c6c585167ec9aa84ca22053c44395c1b, type: 2}
@@ -243,17 +244,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04c4f47c54a8925479dc24797ab9acf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5922126048193946749 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2869361956478539125, guid: 023c5a39670951d49be3c39d866d3307,
-    type: 3}
-  m_PrefabInstance: {fileID: 8502122356403892488}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1879b5cab859f8843b9ce7ab49eabbed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
