@@ -233,6 +233,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 658092536201835094, guid: 828f59646a6dabd43b01c6ff4f269977,
+        type: 3}
+      propertyPath: keyMap.shopKey
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 658092536201835094, guid: 828f59646a6dabd43b01c6ff4f269977,
+        type: 3}
+      propertyPath: keyMap.inventoryKey
+      value: 101
+      objectReference: {fileID: 0}
     - target: {fileID: 1415078842026712282, guid: 828f59646a6dabd43b01c6ff4f269977,
         type: 3}
       propertyPath: m_IsActive

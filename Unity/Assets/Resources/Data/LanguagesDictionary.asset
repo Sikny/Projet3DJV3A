@@ -155,11 +155,11 @@ MonoBehaviour:
       value: Confirmer
   - values:
     - key: 0
-      value: 'Shop (u)
+      value: 'Shop (a)
 
 '
     - key: 1
-      value: Mag (u)
+      value: Mag (a)
   - values:
     - key: 0
       value: SHOP
@@ -224,7 +224,7 @@ MonoBehaviour:
     - key: 0
       value: Spearmen can attack from further and deal more damage.
     - key: 1
-      value: "Les lanciers peuvent attaquer de plus loins et effectuent plus de d\xE9g\xE2ts."
+      value: "Les lanciers peuvent attaquer de plus loin et effectuent plus de d\xE9g\xE2ts."
   - values:
     - key: 0
       value: Knights have a lot of defense and health.
@@ -329,7 +329,7 @@ MonoBehaviour:
     - key: 0
       value: Sniper
     - key: 1
-      value: Snipeur
+      value: Sniper
   - values:
     - key: 0
       value: Base Archer unit. Effective against mages.
@@ -385,11 +385,6 @@ MonoBehaviour:
       value: Increases speed of target unit for 10 seconds.
     - key: 1
       value: "Augmente la vitesse de l'unit\xE9 cibl\xE9e pendant 10 secondes."
-  - values:
-    - key: 0
-      value: Iron Shield
-    - key: 1
-      value: Casque de fer
   - values:
     - key: 0
       value: +10 defense
@@ -494,7 +489,7 @@ MonoBehaviour:
     - key: 0
       value: At least one unit must be placed first
     - key: 1
-      value: "Au moins une unit\xE9 doit \xEAtre plac\xE9."
+      value: "Au moins une unit\xE9 doit \xEAtre plac\xE9e."
   - values:
     - key: 0
       value: Not enough gold!
@@ -529,8 +524,7 @@ MonoBehaviour:
     - key: 0
       value: Save has been reset! Restart game to take effect.
     - key: 1
-      value: "La sauvegarde \xE0 \xE9t\xE9 remise \xE0 zero! Red\xE9marrez le jeu
-        pour prendre effet."
+      value: "Sauvegarde r\xE9initialis\xE9e! Red\xE9marrez le jeu pour prendre effet."
   - values:
     - key: 0
       value: Enter name of map...
@@ -560,7 +554,7 @@ MonoBehaviour:
     - key: 0
       value: Reset Save
     - key: 1
-      value: "R\xE9initialiser la Sauvegarde"
+      value: Reinitialiser la Sauvegarde
   - values:
     - key: 0
       value: Map saved!
@@ -580,7 +574,7 @@ MonoBehaviour:
     - key: 0
       value: 'Upgraded '
     - key: 1
-      value: "Am\xE9lior\xE9 "
+      value: "Am\xE9lior\xE9"
   - values:
     - key: 0
       value: ' to '
@@ -600,12 +594,12 @@ MonoBehaviour:
     - key: 0
       value: 'Bought '
     - key: 1
-      value: "Achet\xE9 "
+      value: "Achet\xE9"
   - values:
     - key: 0
       value: 'Used '
     - key: 1
-      value: 'Utilise '
+      value: "Utilis\xE9"
   - values:
     - key: 0
       value: Please select a level.
@@ -615,7 +609,7 @@ MonoBehaviour:
     - key: 0
       value: At least one unit must be placed first
     - key: 1
-      value: "Au moins une unit\xE9 doit \xEAtre plac\xE9."
+      value: "Au moins une unit\xE9 doit \xEAtre plac\xE9e."
   - values:
     - key: 0
       value: Wrong identifications
@@ -640,7 +634,7 @@ MonoBehaviour:
     - key: 0
       value: Retry
     - key: 1
-      value: "R\xE9essayer"
+      value: Ressayer
   - values:
     - key: 0
       value: Restart
@@ -666,4 +660,4 @@ MonoBehaviour:
     - key: 0
       value: Heals target unit to full health.
     - key: 1
-      value: "Soigne l'unit\xE9 cibl\xE9e pour toute sa vitalit\xE9."
+      value: "Soigne l'unit\xE9e cibl\xE9e pour toute sa vitalit\xE9."
