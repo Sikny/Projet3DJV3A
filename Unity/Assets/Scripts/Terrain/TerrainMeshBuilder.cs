@@ -338,7 +338,7 @@ namespace Terrain {
             mesh.RecalculateNormals();
         }
 
-        private float CalculateHeight(Vector3 vertex) {
+        public float CalculateHeight(Vector3 vertex) {
             float result = 0;
             Vector2Int intVec = new Vector2Int((int) (vertex.x), (int) (vertex.z));
             if (terrainOptions.modifierHeightMap.ContainsKey(intVec)) {

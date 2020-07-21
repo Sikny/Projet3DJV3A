@@ -54,17 +54,48 @@ namespace Game.arcade {
         {
             Random rand = new Random(GameSingleton.Instance.GetPlayer().currentSeed);
             var height = l.terrainBuilder.terrainOptions.modifierHeightMap;
-            var epsilon = 0.1f;
+            var w = l.terrainBuilder.terrainOptions.width;
+            var h = l.terrainBuilder.terrainOptions.height;
+            var epsilon = 0.3f;
             var heightNotGround = height.Where(x => x.Value < -epsilon || epsilon < x.Value).Select(x => x.Key).ToList();
+
+            
+            
+            String buffer = "";
+            for (int i = -w; i < w; i++)
+            {
+                
+                for (int j = -h; j < h; j++)
+                {
+                    if (l.terrainBuilder.CalculateHeight(new Vector3(i,0,j)) != 0)
+                    {
+                        GameObject go;
+                        go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        go.transform.position = new Vector3(i, 2,j) + Vector3.right * (w / 2f + 0.5f) +
+                                                Vector3.forward * (h / 2f -0.5f);
+                    }
+
+                    else
+                    {
+                        buffer += " :";
+                    }
+                }
+
+                buffer += "\n";
+
+            }
+            //Debug.Log(buffer);
+            
             foreach (var ennemy in l.enemySpawns)
             {
                 bool noHeightNear = true;
-                
-                while (heightNotGround.Contains(ennemy.position) && noHeightNear)
+                int attempt = 0;
+                while (heightNotGround.Contains(ennemy.position) && noHeightNear && attempt < 100)
                 {
-                    
-                    ennemy.position = new Vector2(rand.Next(-l.rule.size/2+1,l.rule.size/2-1), rand.Next(-l.rule.size/2+1,l.rule.size/2-1));
-                    
+                    Debug.Log("attempt" + attempt);
+                    attempt++;
+                    ennemy.position = new Vector2(rand.Next(-w/2+1,w/2-1), rand.Next(-h/2+1,h/2-1));
+                    //noHeightNear = false;
                     if (heightNotGround.Contains(ennemy.position))
                     {
                         for (int x = -1; x <= 1; x++)
