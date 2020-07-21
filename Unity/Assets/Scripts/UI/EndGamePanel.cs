@@ -82,12 +82,12 @@ namespace UI {
                             retryBtn.SetActive(false);
                             quitBtn.SetActive(true);
                             nextBtn.SetActive(true);
+                            if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE) {
+                                Shop.Instance.ClearShop();
+                                GameSingleton.Instance.levelManager.GenerateLevel();
+                            }
                         }
-                       
 
-           
-
-                      
 
                         break;
                     case 2: //Retry
@@ -128,10 +128,7 @@ namespace UI {
                         player.gold = player.goldStartLevel;
                         player.storyModeInventory = player.inventoryBackup;
                     }
-                    else if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE) {
-                        Shop.Instance.ClearShop();
-                        GameSingleton.Instance.levelManager.GenerateLevel();
-                    }
+                    
 
                     Shop.Instance.ClearShop();
                     GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();

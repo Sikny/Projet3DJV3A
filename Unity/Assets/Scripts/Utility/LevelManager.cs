@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Game;
 using Game.arcade;
 using Items;
@@ -35,7 +34,7 @@ namespace Utility {
                 GenerateLevel();
             } else if (player.gamemode == Player.Gamemode.ARCADE) {
                 GameSingleton.Instance.levelManager = this;
-                loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade));
+                loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade-1<0?0:GameSingleton.Instance.GetPlayer().currentLevelArcade-1));
                 var matGradPair = gradientList.GetRandomGradient();
                 loadedLevel.terrainBuilder.heightGradient = matGradPair.gradient;
                 loadedLevel.terrainBuilder.waterObject.GetComponent<MeshRenderer>().material = matGradPair.material;
@@ -60,9 +59,9 @@ namespace Utility {
             Player player = GameSingleton.Instance.GetPlayer();
             if (player.gamemode == Player.Gamemode.ARCADE) {
                 Shop.Instance.ClearShop();
-
-                player.currentLevelArcade =
-                    (player.currentLevelArcade + 1) % levelList.LevelCount;
+                
+                
+                //player.currentLevelArcade = player.currentLevelArcade + 1;
             }
             else if (player.gamemode == Player.Gamemode.PERSONNALIZED) {
                 String filename = GameSingleton.Instance.filename;
@@ -104,9 +103,8 @@ namespace Utility {
             //GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
             //update gold inventoryUI
             Player player = GameSingleton.Instance.GetPlayer();
-            Debug.Log("BEFORE current level arcade is : " + GameSingleton.Instance.GetPlayer().currentLevelArcade);
+            //player.currentLevelArcade = PlayerPrefs.GetInt("CurrentLevelArcade", 0);
             player.currentLevelArcade = player.currentLevelArcade + 1;
-            Debug.Log("AFTER current level arcade is : " + GameSingleton.Instance.GetPlayer().currentLevelArcade);
 
             if (player.currentLevelArcade == 1) {
 
@@ -114,12 +112,8 @@ namespace Utility {
                 player.currentSeed = seed;
             }
 
-            Debug.Log("i="+player.currentLevelArcade);
             loadedLevel = grp.GenerateNextLevel(seed, player.currentLevelArcade);
 
-            List<EnemySpawn> enemySpawns = loadedLevel.enemySpawns;
-
-            grp.setDefaultGold(loadedLevel);
             GameSingleton.Instance.levelManager = this;
             
             loadedLevel = Instantiate(levelList.GetLevel(player.currentLevelArcade - 1));
