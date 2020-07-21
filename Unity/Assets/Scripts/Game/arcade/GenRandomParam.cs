@@ -24,21 +24,22 @@ namespace Game.arcade {
 
             TerrainOptions options = levelNew.terrainBuilder.terrainOptions;
 
+            options.width = options.height = rand.Next(20, 40);
             options.seed = seed;
-            options.mountainCount = rand.Next(2, 15);
+            options.mountainCount = rand.Next(2, 8);
             options.waterCount = rand.Next(1, 5);
             options.maxWaterSize = rand.Next(10, 40);
 
             levelNew.enemySpawns.Clear();
-            
-            int nbEnnemy =  rand.Next(1, i) + rand.Next( (int)(i/4f), (int)(i/2f));
-            nbEnnemy = nbEnnemy > 8 ? 8 : nbEnnemy;
+            Debug.Log("i="+i);
+            int nbEnnemy =  rand.Next(i, i*2);
+            nbEnnemy = 8;//nbEnnemy > 8 ? 8 : nbEnnemy;
 
             for (int j = 0; j < nbEnnemy; j++)
             {
                 EnemySpawn es = new EnemySpawn();
 
-                es.position = new Vector2(rand.Next(-25,25), rand.Next(-25,25));
+                es.position = new Vector2(rand.Next(-options.width/2+1,options.width/2-1), rand.Next(-options.height/2+1,options.height/2-1));
                 
                 Array values = Enum.GetValues(typeof(EntityType));
                 es.entityType = (EntityType)values.GetValue(rand.Next(values.Length));
@@ -53,16 +54,48 @@ namespace Game.arcade {
         {
             Random rand = new Random(GameSingleton.Instance.GetPlayer().currentSeed);
             var height = l.terrainBuilder.terrainOptions.modifierHeightMap;
-            var heightNotGround = height.Where(x => x.Value != 0).Select(x => x.Key).ToList();
+            var w = l.terrainBuilder.terrainOptions.width;
+            var h = l.terrainBuilder.terrainOptions.height;
+            var epsilon = 0.3f;
+            var heightNotGround = height.Where(x => x.Value < -epsilon || epsilon < x.Value).Select(x => x.Key).ToList();
+
+            
+            
+            String buffer = "";
+            for (int i = -w; i < w; i++)
+            {
+                
+                for (int j = -h; j < h; j++)
+                {
+                    if (l.terrainBuilder.CalculateHeight(new Vector3(i,0,j)) != 0)
+                    {
+                        GameObject go;
+                        go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        go.transform.position = new Vector3(i, 2,j) + Vector3.right * (w / 2f + 0.5f) +
+                                                Vector3.forward * (h / 2f -0.5f);
+                    }
+
+                    else
+                    {
+                        buffer += " :";
+                    }
+                }
+
+                buffer += "\n";
+
+            }
+            //Debug.Log(buffer);
+            
             foreach (var ennemy in l.enemySpawns)
             {
                 bool noHeightNear = true;
-
-                while (heightNotGround.Contains(ennemy.position) && noHeightNear)
+                int attempt = 0;
+                while (heightNotGround.Contains(ennemy.position) && noHeightNear && attempt < 100)
                 {
-                    
-                    ennemy.position = new Vector2(rand.Next(-24,24),rand.Next(-24,24));
-                    
+                    Debug.Log("attempt" + attempt);
+                    attempt++;
+                    ennemy.position = new Vector2(rand.Next(-w/2+1,w/2-1), rand.Next(-h/2+1,h/2-1));
+                    //noHeightNear = false;
                     if (heightNotGround.Contains(ennemy.position))
                     {
                         for (int x = -1; x <= 1; x++)

@@ -103,22 +103,24 @@ namespace Utility {
             //GameSingleton.Instance.GetPlayer().goldStartLevel = GameSingleton.Instance.GetPlayer().gold;
             //GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
             //update gold inventoryUI
-            GameSingleton.Instance.GetPlayer().currentLevelArcade += 1;
+            Player player = GameSingleton.Instance.GetPlayer();
+            player.currentLevelArcade = player.currentLevelArcade + 1;
 
-            if (GameSingleton.Instance.GetPlayer().currentLevelArcade == 1) {
+            if (player.currentLevelArcade == 1) {
 
                 seed = Random.Range(Int32.MinValue, Int32.MaxValue);
-                GameSingleton.Instance.GetPlayer().currentSeed = seed;
+                player.currentSeed = seed;
             }
 
-            loadedLevel = grp.GenerateNextLevel(seed, GameSingleton.Instance.GetPlayer().currentLevelArcade);
+            Debug.Log("i="+player.currentLevelArcade);
+            loadedLevel = grp.GenerateNextLevel(seed, player.currentLevelArcade);
 
             List<EnemySpawn> enemySpawns = loadedLevel.enemySpawns;
 
             grp.setDefaultGold(loadedLevel);
             GameSingleton.Instance.levelManager = this;
             
-            loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade - 1));
+            loadedLevel = Instantiate(levelList.GetLevel(player.currentLevelArcade - 1));
             var matGradPair = gradientList.GetRandomGradient();
             loadedLevel.terrainBuilder.heightGradient = matGradPair.gradient;
             loadedLevel.terrainBuilder.waterObject.GetComponent<MeshRenderer>().material = matGradPair.material;

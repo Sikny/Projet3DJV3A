@@ -102,10 +102,16 @@ namespace LevelEditor {
                     int globalZ = (int) hit.point.z + z;
                     float heightmapOffset = amplitude * (float)Math.Exp(-1f/radiusTool*(x * x + z * z));
                     if(0 <= globalX && globalX <= _size-1 && 0 <= globalZ && globalZ <= _size-1)
-                        if(mode == 0 && MaxHeight > _mapVertices[globalX * (_size) + globalZ ].y)
-                            _mapVertices[globalX * (_size) + globalZ ].y += heightmapOffset*Time.deltaTime;
-                        else if(mode == 1 && MinHeight < _mapVertices[globalX * (_size) + globalZ ].y)
-                            _mapVertices[globalX * (_size) + globalZ ].y -= heightmapOffset*Time.deltaTime;
+                        if(mode == 0)
+                            if (MaxHeight > _mapVertices[globalX * (_size) + globalZ].y)
+                                _mapVertices[globalX * (_size) + globalZ].y += heightmapOffset * Time.deltaTime;
+                            else
+                                _mapVertices[globalX * (_size) + globalZ].y = MaxHeight;
+                        else if(mode == 1)
+                            if(MinHeight < _mapVertices[globalX * (_size) + globalZ ].y)
+                                _mapVertices[globalX * (_size) + globalZ ].y -= heightmapOffset*Time.deltaTime;
+                            else
+                                _mapVertices[globalX * (_size) + globalZ ].y = MinHeight;
                 }
             }
             _meshFilter.mesh.vertices = _mapVertices;
@@ -124,7 +130,7 @@ namespace LevelEditor {
                         int globalX = (int) hit.point.x + x;
                         int globalZ = (int) hit.point.z + z;
                         float heightmapOffset =  amplitude * (float) Math.Exp(-1f / radiusTool * (x * x + z * z));
-                        if (0 <= globalX && globalX <= _size -1 && 0 <= globalZ && globalZ <= _size -1)
+                        if (1 <= globalX && globalX <= _size -2 && 1 <= globalZ && globalZ <= _size -2)
                             if(mode==0)
                                 _localDifficulty[globalX * (_size) + globalZ].r += heightmapOffset*Time.deltaTime/255f;
                             else if(mode==1)

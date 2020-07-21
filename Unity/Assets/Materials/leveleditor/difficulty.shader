@@ -45,7 +45,17 @@
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 UNITY_TRANSFER_FOG(o,o.vertex);
-                o.col = v.col;
+                float4 couleur;
+                if(v.col.r < 1/4.0){
+                    couleur = float4(0,0,0.5,0);
+                }else if(v.col.r < 2/4.0){
+                    couleur = float4(0,0.5,0,0);
+                }else if(v.col.r < 3/4.0){
+                    couleur = float4(0.5,0,0,0);
+                }else if(v.col.r < 1){
+                    couleur = float4(0,0,0,0);
+                }
+                o.col = couleur;
                 o.global = mul(unity_ObjectToWorld, v.vertex);
                 return o;
             }
