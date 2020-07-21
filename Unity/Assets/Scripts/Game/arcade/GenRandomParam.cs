@@ -12,11 +12,14 @@ namespace Game.arcade {
         public LevelList levelList;
         public Level levelBase;
 
+        public int thisSeed;
+
     
         public Level GenerateNextLevel(int seed, int i)
         {
             //int difficulty;
             seed = seed + (seed+1) * i;
+            thisSeed = seed;
             Random rand = new Random(seed);
 
             Level levelNew = levelBase;//Instantiate(levelBase);

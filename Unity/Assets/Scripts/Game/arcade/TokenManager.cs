@@ -7,8 +7,6 @@ using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 namespace Game.arcade {
     public class TokenManager : MonoBehaviour
     {
-
-        public bool cacheValid = false;
         public string nextAction;
     
         // Start is called before the first frame update
@@ -27,7 +25,6 @@ namespace Game.arcade {
                 string result = www.downloadHandler.text;
                 if (result.Equals("OK"))
                 {
-                    cacheValid = true;
                     switch (nextAction)
                     {
                         case "scene.load.freeMode":
@@ -37,7 +34,6 @@ namespace Game.arcade {
                 }
                 else
                 {
-                    cacheValid = false;
                     GameSingleton.Instance.GetPlayer().token = "";
                     PlayerPrefs.Save();
                 }
@@ -50,8 +46,7 @@ namespace Game.arcade {
         
             GameSingleton.Instance.GetPlayer().currentScore = 0;
             GameSingleton.Instance.GetPlayer().gamemode = Player.Gamemode.ARCADE;
-            UnitySceneManager.LoadScene(5);
-            cacheValid = false;
+            GameSingleton.Instance.sceneManager.LoadScene("FreeMode");
             nextAction = "";
         }
     }

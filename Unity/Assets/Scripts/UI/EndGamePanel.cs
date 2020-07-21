@@ -84,7 +84,7 @@ namespace UI {
                             nextBtn.SetActive(true);
                             if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE) {
                                 Shop.Instance.ClearShop();
-                                GameSingleton.Instance.levelManager.GenerateLevel();
+                                //GameSingleton.Instance.levelManager.GenerateLevel();
                             }
                         }
 

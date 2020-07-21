@@ -74,7 +74,7 @@ public class EndGame : MonoBehaviour
         soundManager.StopPlayingAllMusics();
         endGamePanel.SetActive(false);
         soundManager.Play("Menu");
-        SceneManager.LoadScene("Menu");
+        GameSingleton.Instance.sceneManager.LoadScene("Menu");
         endGamePanel.SetActive(false);
 
     }

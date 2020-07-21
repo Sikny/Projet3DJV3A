@@ -33,12 +33,7 @@ namespace Utility {
 
                 GenerateLevel();
             } else if (player.gamemode == Player.Gamemode.ARCADE) {
-                GameSingleton.Instance.levelManager = this;
-                loadedLevel = Instantiate(levelList.GetLevel(GameSingleton.Instance.GetPlayer().currentLevelArcade-1<0?0:GameSingleton.Instance.GetPlayer().currentLevelArcade-1));
-                var matGradPair = gradientList.GetRandomGradient();
-                loadedLevel.terrainBuilder.heightGradient = matGradPair.gradient;
-                loadedLevel.terrainBuilder.waterObject.GetComponent<MeshRenderer>().material = matGradPair.material;
-                loadedLevel.Init();
+                GenerateLevel();
             } else if (player.gamemode == Player.Gamemode.PERSONNALIZED) {
                 String filename = GameSingleton.Instance.filename;
                 Rule r = Rule.ReadLevel(filename.Split('.')[0]);
@@ -99,6 +94,7 @@ namespace Utility {
         }
 
         public void GenerateLevel() {
+            print("GENERATE");
             //GameSingleton.Instance.GetPlayer().goldStartLevel = GameSingleton.Instance.GetPlayer().gold;
             //GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
             //update gold inventoryUI
