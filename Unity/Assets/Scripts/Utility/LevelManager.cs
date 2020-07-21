@@ -133,7 +133,6 @@ namespace Utility {
                  Debug.Log("position :" + yPosition);
                  Debug.Log(enemy.position);
              }*/
-            loadedLevel = grp.RespawnEnnemies(loadedLevel);
         }
     }
 }

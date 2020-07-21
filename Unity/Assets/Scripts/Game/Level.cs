@@ -29,7 +29,7 @@ namespace Game {
         private SystemUnit _systemUnit;
 
         public Rule rule;
-        
+
         public TerrainMeshBuilder terrainBuilder;
 
         [Header("Shop content")] public List<Consumable> consumablesList = new List<Consumable>();
@@ -52,6 +52,7 @@ namespace Game {
         private bool _mageCheck;
 
         private bool _skipCutscene;
+
         // Initializes level with terrain, a*, shop
         public void Init() {
             _systemUnit = FindObjectOfType<SystemUnit>();
@@ -62,70 +63,74 @@ namespace Game {
             StartCoroutine(terrainBuilder.Init(InitAStar, rule));
 
             if (rule != null) LoadEnnemiesRule();
-            
+
             _shop = Shop.Instance;
             _shop.ClearShop();
             _shopManager = ShopManager.instance;
-            
+
             foreach (Consumable cons in consumablesList) {
                 _shop.AddConsummable(cons);
             }
+
             foreach (Equipment equip in equipmentsList) {
                 _shop.AddEquipment(equip);
             }
+
             foreach (StoreUnit storeUnit in unitList) {
                 _shop.AddStoreUnit(storeUnit);
             }
+
             _shopManager.UpdateUi(_shop);
-            
+
             _enemySpawnsDelayedCalls = new List<Tween>();
             _spawningEnemies = new List<Tween>();
-
-     
-            ShowNextSpawns();
         }
 
         // Initializes a*, called after terrain generation
         private void InitAStar() {
             GameSingleton.Instance.aStarHandler.Init(terrainBuilder.terrainOptions);
-            
+
             var offset = Vector3.right * (TerrainGrid.Width / 2f) +
                          Vector3.forward * (TerrainGrid.Height / 2f);
             terrainBuilder.transform.position += offset;
             _systemUnit.cam.transform.position += offset;
-            
+
+            //DOVirtual.DelayedCall(1f, () => {
+            if (GameSingleton.Instance.GetPlayer().gamemode == Player.Gamemode.ARCADE)
+                RespawnEnemies();
+            //});
+
+            ShowNextSpawns();
             GameSingleton.Instance.ResumeGame();
         }
 
         // CUSTOM LEVELS
-        private void LoadEnnemiesRule()
-        {
+        private void LoadEnnemiesRule() {
             Random rando = new Random();
 
-            foreach (var spawn in rule.localSpawnDifficulty)
-            {
-                if (rand.Range(0, 4 * 128) <= spawn.Value * 128 && (int)spawn.Key.X%3==0 && (int)spawn.Key.Z%3==0 )
-                {
+            foreach (var spawn in rule.localSpawnDifficulty) {
+                if (rand.Range(0, 4 * 128) <= spawn.Value * 128 && (int) spawn.Key.X % 3 == 0 &&
+                    (int) spawn.Key.Z % 3 == 0) {
                     EnemySpawn es = new EnemySpawn();
-                    
-                    es.position = new Vector2(spawn.Key.X-rule.size/2f, spawn.Key.Z-rule.size/2f);
+
+                    es.position = new Vector2(spawn.Key.X - rule.size / 2f, spawn.Key.Z - rule.size / 2f);
                     //es.spawnTime = counter == 0 ? 0 : Random.Range(0, 60);
-                    
+
                     Array values = Enum.GetValues(typeof(EntityType));
-                    es.entityType = (EntityType)values.GetValue(rando.Next(values.Length));
-                    
-                    
+                    es.entityType = (EntityType) values.GetValue(rando.Next(values.Length));
+
+
                     es.entityType = GenRandomParam.SoftEntityType(rando, es.entityType, 0.25f);
                     enemySpawns.Add(es);
                 }
             }
         }
-        
+
         private bool _gameEnded;
 
         private void FixedUpdate() {
             if (!_levelStarted) return;
-            
+
             // getting active units, TODO refactor to events on add/remove unit
             _playerUnits.Clear();
             foreach (var unit in _systemUnit.units) {
@@ -134,19 +139,17 @@ namespace Game {
                 }
             }
 
-
-            if (enemySpawns.Count == 0 && livingEnemies.Count == 0 && !_gameEnded)
-            {
+            if (enemySpawns.Count == 0 && livingEnemies.Count == 0 && !_gameEnded) {
                 Time.timeScale = 1;
                 _gameEnded = true;
                 GameSingleton.Instance.EndGame(1); // WIN
             }
-            else if (_playerUnits.Count == 0 && !_gameEnded)
-            {
+            else if (_playerUnits.Count == 0 && !_gameEnded) {
                 Time.timeScale = 1;
                 _gameEnded = true;
                 GameSingleton.Instance.EndGame(0);
-            } 
+            }
+
             for (int i = 0; i < livingEnemies.Count; i++) {
                 if (livingEnemies[i] == null) {
                     livingEnemies.RemoveAt(i);
@@ -163,39 +166,31 @@ namespace Game {
 
             if (_skipCutscene) return;
 
-            if (!_checkForCinematic)
-            {
-                if (!_mageCheck)
-                {
+            if (!_checkForCinematic) {
+                if (!_mageCheck) {
                     _mageCheck = true;
                     bool onlyMages = true;
-                    foreach (var unit in _playerUnits)
-                    {
+                    foreach (var unit in _playerUnits) {
                         EntityType type = unit.GetEntityType();
                         if (type != EntityType.Mage && type != EntityType.Bard && type != EntityType.BlackMage &&
-                            type != EntityType.Demonist && type != EntityType.WhiteMage && type != EntityType.RedMage)
-                        {
+                            type != EntityType.Demonist && type != EntityType.WhiteMage && type != EntityType.RedMage) {
                             onlyMages = false;
                             break;
                         }
                     }
 
-                    if (onlyMages)
-                    {
+                    if (onlyMages) {
                         _skipCutscene = true;
                         return;
                     }
-
                 }
-                
-                if (enemySpawns.Count == 0 && livingEnemies.Count == 1 && !_gameEnded)
-                {
+
+                if (enemySpawns.Count == 0 && livingEnemies.Count == 1 && !_gameEnded) {
                     //Debug.Log("start checking for cinematic");
                     _lastUnit = livingEnemies[0].GetComponent<AiUnit>();
                     _lastEntity = _lastUnit.entities[0];
                     _checkForCinematic = true;
-                    if (_playerUnits.Count < 3)
-                    {
+                    if (_playerUnits.Count < 3) {
                         _isWeak = true;
                     }
                 }
@@ -203,24 +198,18 @@ namespace Game {
 
             if (_cinematicPlayed) return;
             if (!_checkForCinematic) return;
-            if (_lastUnit.GetNumberAlive() == 1)
-            {
-                if (_isWeak)
-                {
-                    if (_lastEntity.GetLife() < _lastEntity.GetMaxLife()/2)
-                    {
+            if (_lastUnit.GetNumberAlive() == 1) {
+                if (_isWeak) {
+                    if (_lastEntity.GetLife() < _lastEntity.GetMaxLife() / 2) {
                         _cinematicPlayed = true;
                         GameSingleton.Instance.cameraController.PlayCinematic(_lastEntity);
                     }
                 }
-                else
-                {
-                    if (_lastEntity.GetLife() < _lastEntity.GetMaxLife())
-                    {
+                else {
+                    if (_lastEntity.GetLife() < _lastEntity.GetMaxLife()) {
                         _cinematicPlayed = true;
                         GameSingleton.Instance.cameraController.PlayCinematic(_lastEntity);
                     }
-
                 }
             }
         }
@@ -230,6 +219,7 @@ namespace Game {
                 _waitingSpawners[i].SetAnimating(false);
                 _waitingSpawners[i].DeInit();
             }
+
             _waitingSpawners.Clear();
             _playerUnits = new List<PlayerUnit>();
             Transform newUnit;
@@ -238,7 +228,7 @@ namespace Game {
                 var offset = Vector3.right * (TerrainGrid.Width / 2f) +
                              Vector3.forward * (TerrainGrid.Height / 2f);
                 Vector3 position = new Vector3(current.position.x, SystemUnit.YPos, current.position.y) + offset;
-                
+
                 // enemy spawn (can be delayed)
                 if (current.spawnTime > 0) {
                     // todo update delayed calls when finished
@@ -247,21 +237,21 @@ namespace Game {
                             Spawner spawner = (Spawner) PoolManager.Instance().GetPoolableObject(typeof(Spawner));
                             spawner.transform.position = position;
                             spawner.Init(current.entityType);
-                            
+
                             _spawningEnemies.Add(DOVirtual.DelayedCall(Spawner.timeToSpawn, () => {
                                 spawner.DeInit();
                                 newUnit = _systemUnit.SpawnUnit(current.entityType, _systemUnit.aiUnitPrefab,
                                     position);
                                 livingEnemies.Add(newUnit);
-                            }).OnUpdate(() => {
-                                spawner.UpdateTime();
-                            }));
+                            }).OnUpdate(() => { spawner.UpdateTime(); }));
                         }));
-                } else {
+                }
+                else {
                     newUnit = _systemUnit.SpawnUnit(current.entityType, _systemUnit.aiUnitPrefab,
                         position);
                     livingEnemies.Add(newUnit);
                 }
+
                 enemySpawns.Remove(current);
 
                 yield return null;
@@ -272,6 +262,7 @@ namespace Game {
         }
 
         private List<Spawner> _waitingSpawners = new List<Spawner>();
+
         private void ShowNextSpawns() {
             for (int i = enemySpawns.Count - 1; i >= 0; --i) {
                 EnemySpawn current = enemySpawns[i];
@@ -297,14 +288,44 @@ namespace Game {
                 _spawningEnemies[i].Pause();
             }
         }
-        
+
         public void ResumeDelayedSpawns() {
             for (int i = _enemySpawnsDelayedCalls.Count - 1; i >= 0; --i) {
                 _enemySpawnsDelayedCalls[i].Play();
             }
-            
+
             for (int i = _spawningEnemies.Count - 1; i >= 0; --i) {
                 _spawningEnemies[i].Pause();
+            }
+        }
+
+        private void RespawnEnemies() {
+            rand.InitState(GameSingleton.Instance.GetPlayer().currentSeed);
+            var w = terrainBuilder.terrainOptions.width;
+            var h = terrainBuilder.terrainOptions.height;
+            Vector2 offset = new Vector2(TerrainGrid.Width / 2f, TerrainGrid.Height / 2f);
+
+            foreach (var enemy in enemySpawns) {
+                Vector3 position;
+                RaycastHit hitInfo;
+                bool isOk;
+                do {
+                    isOk = true;
+                    position = new Vector2(rand.Range(1.5f, w - 0.5f), rand.Range(1.5f, h - 0.5f)) - offset;
+
+                    for (int x = -1; x <= 1; x++) {
+                        for (int y = -1; y <= 1; y++) {
+                            Vector3 toCast = new Vector3(x+position.x, 0, y+position.y);
+                            Physics.Raycast(toCast + Vector3.up * 50f, Vector3.down, out hitInfo, 100f, 1 << 8);    // Raycast ground
+                            if (Mathf.Abs(hitInfo.point.y) > 0.2f) {
+                                isOk = false;
+                                break;
+                            }
+                        }
+                    }
+                } while (!isOk);
+
+                enemy.position = position;
             }
         }
 

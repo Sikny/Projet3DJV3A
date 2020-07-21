@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Terrain;
 using Units;
 using UnityEngine;
@@ -24,7 +23,9 @@ namespace Game.arcade {
 
             TerrainOptions options = levelNew.terrainBuilder.terrainOptions;
 
-            options.width = options.height = rand.Next(20, 40);
+            int[] sizes = {20, 30, 40};
+            var randInd = rand.Next(0, sizes.Length);
+            options.width = options.height = sizes[randInd];
             options.seed = seed;
             options.mountainCount = rand.Next(2, 8);
             options.waterCount = rand.Next(1, 5);
@@ -50,38 +51,28 @@ namespace Game.arcade {
             return levelNew;
         }
 
-        public Level RespawnEnnemies(Level l)
+        /*public Level RespawnEnnemies(Level l)
         {
+            Debug.Log("RESPAWN");
             Random rand = new Random(GameSingleton.Instance.GetPlayer().currentSeed);
             var height = l.terrainBuilder.terrainOptions.modifierHeightMap;
             var w = l.terrainBuilder.terrainOptions.width;
             var h = l.terrainBuilder.terrainOptions.height;
             var epsilon = 0.3f;
             var heightNotGround = height.Where(x => x.Value < -epsilon || epsilon < x.Value).Select(x => x.Key).ToList();
-
             
-            
-            String buffer = "";
-            for (int i = -w; i < w; i++)
+            for (int i = -w/2; i <= w/2; i++)
             {
-                
-                for (int j = -h; j < h; j++)
+                for (int j = -h/2; j <= h/2; j++)
                 {
-                    if (l.terrainBuilder.CalculateHeight(new Vector3(i,0,j)) != 0)
+                    if (Math.Abs(l.terrainBuilder.CalculateHeight(new Vector3(i,0,j))) > 0.1f)
                     {
                         GameObject go;
                         go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                        go.transform.position = new Vector3(i, 2,j) + Vector3.right * (w / 2f + 0.5f) +
-                                                Vector3.forward * (h / 2f -0.5f);
-                    }
-
-                    else
-                    {
-                        buffer += " :";
+                        go.transform.position = new Vector3(i+0.5f, 2,j+0.5f) + Vector3.right * (w / 2f) +
+                                                Vector3.forward * (h / 2f);
                     }
                 }
-
-                buffer += "\n";
 
             }
             //Debug.Log(buffer);
@@ -116,7 +107,7 @@ namespace Game.arcade {
                 }
             }
             return l;
-        }
+        }*/
 
     
         public static EntityType SoftEntityType(Random rand, EntityType type, float difficult)

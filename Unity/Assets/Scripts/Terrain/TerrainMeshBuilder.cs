@@ -83,17 +83,17 @@ namespace Terrain {
             }
             else
             {
-                applyRules(rule);
+                ApplyRules(rule);
             }
 
             BuildTerrain();
-            waterObject.transform.localScale = new Vector3(terrainOptions.width - 0.001f,
-                waterObject.localScale.y, terrainOptions.height - 0.001f);
+            waterObject.transform.localScale = new Vector3(terrainOptions.width - 0.01f,
+                waterObject.localScale.y, terrainOptions.height - 0.01f);
             yield return null;
             action();
         }
 
-        private void applyRules(Rule r)
+        private void ApplyRules(Rule r)
         {
             var heightmap = r.mapModifierHeightmap;
 
