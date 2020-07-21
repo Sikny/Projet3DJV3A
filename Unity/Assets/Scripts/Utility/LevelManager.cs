@@ -104,8 +104,9 @@ namespace Utility {
             //GameSingleton.Instance.uiManager.inventoryUi.UpdateGold();
             //update gold inventoryUI
             Player player = GameSingleton.Instance.GetPlayer();
+            Debug.Log("BEFORE current level arcade is : " + GameSingleton.Instance.GetPlayer().currentLevelArcade);
             player.currentLevelArcade = player.currentLevelArcade + 1;
-            Debug.Log("current level arcade is : " + GameSingleton.Instance.GetPlayer().currentLevelArcade);
+            Debug.Log("AFTER current level arcade is : " + GameSingleton.Instance.GetPlayer().currentLevelArcade);
 
             if (player.currentLevelArcade == 1) {
 

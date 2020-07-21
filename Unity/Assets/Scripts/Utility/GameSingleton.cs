@@ -112,6 +112,7 @@ namespace Utility {
                 //_player.storyModeInventory = _player.inventoryStartLevel;
                 _player.gold = _player.goldStartLevel;
             }*/
+            print("SAVING");
             _player.Save(); 
         }
 

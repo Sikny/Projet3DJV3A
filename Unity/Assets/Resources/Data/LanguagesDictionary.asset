@@ -155,9 +155,7 @@ MonoBehaviour:
       value: Confirmer
   - values:
     - key: 0
-      value: 'Shop (a)
-
-'
+      value: Shop (a)
     - key: 1
       value: Mag (a)
   - values:
@@ -574,7 +572,7 @@ MonoBehaviour:
     - key: 0
       value: 'Upgraded '
     - key: 1
-      value: "Am\xE9lior\xE9"
+      value: "Am\xE9lior\xE9 "
   - values:
     - key: 0
       value: ' to '
@@ -594,12 +592,12 @@ MonoBehaviour:
     - key: 0
       value: 'Bought '
     - key: 1
-      value: "Achet\xE9"
+      value: "Achet\xE9 "
   - values:
     - key: 0
       value: 'Used '
     - key: 1
-      value: "Utilis\xE9"
+      value: "Utilis\xE9 "
   - values:
     - key: 0
       value: Please select a level.

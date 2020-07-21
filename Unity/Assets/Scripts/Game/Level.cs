@@ -300,7 +300,7 @@ namespace Game {
         }
 
         private void RespawnEnemies() {
-            rand.InitState(GameSingleton.Instance.GetPlayer().currentSeed);
+            Random random = new Random(GameSingleton.Instance.GetPlayer().currentSeed);
             var w = terrainBuilder.terrainOptions.width;
             var h = terrainBuilder.terrainOptions.height;
             Vector2 offset = new Vector2(TerrainGrid.Width / 2f, TerrainGrid.Height / 2f);
@@ -311,7 +311,7 @@ namespace Game {
                 bool isOk;
                 do {
                     isOk = true;
-                    position = new Vector2(rand.Range(1.5f, w - 0.5f), rand.Range(1.5f, h - 0.5f)) - offset;
+                    position = new Vector2(random.Next(1, w-1)+0.5f, random.Next(1, h - 1)+0.5f) - offset;
 
                     for (int x = -1; x <= 1; x++) {
                         for (int y = -1; y <= 1; y++) {

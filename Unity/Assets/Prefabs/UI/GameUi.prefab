@@ -2703,7 +2703,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3095815224451256940}
   m_HandleRect: {fileID: 3095815224451256914}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3639,8 +3639,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3095815224864314555}
   m_HandleRect: {fileID: 3095815224864314553}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6045,7 +6045,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3095815224313654547
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12980,7 +12980,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6997842697677263397}
   m_HandleRect: {fileID: 2720622132746407627}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -15043,7 +15043,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4736375243347247504}
   m_HandleRect: {fileID: 903358032979649053}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
