@@ -3355,7 +3355,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'INV
 
-    (i)'
+    (e)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10310,7 +10310,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Mag (u)
+  m_text: Mag (a)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12980,7 +12980,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6997842697677263397}
   m_HandleRect: {fileID: 2720622132746407627}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -15043,7 +15043,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4736375243347247504}
   m_HandleRect: {fileID: 903358032979649053}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

@@ -155,11 +155,11 @@ MonoBehaviour:
       value: Confirmer
   - values:
     - key: 0
-      value: 'Shop (u)
+      value: 'Shop (a)
 
 '
     - key: 1
-      value: Mag (u)
+      value: Mag (a)
   - values:
     - key: 0
       value: SHOP
